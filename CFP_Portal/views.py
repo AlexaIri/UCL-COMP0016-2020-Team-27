@@ -37,6 +37,12 @@ class OrganisationListView(ListView):
     context_object_name = 'organisations'
     paginate_by = 5
     
+class ReviewsListView(ListView):
+    model = Post
+    template_name ='CFP_Portal/reviews.html'
+    context_object_name = 'posts'
+    ordering = ['date_posted']
+    paginate_by = 5
 
 class PostListView(ListView):
     model = Post

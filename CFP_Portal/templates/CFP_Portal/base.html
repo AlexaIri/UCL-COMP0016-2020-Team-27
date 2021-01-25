@@ -36,6 +36,7 @@
 
                 {% if user.is_authenticated %}
                     <a class="nav-item nav-link" href="{% url 'organisations' %}"> Organisations </a>
+                    <a class="nav-item nav-link" href="{% url 'reviews' %}"> Reviews Page </a>
                     <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
                     <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>

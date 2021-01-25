@@ -9,7 +9,8 @@ from .views import (PostListView,
                 OrganisationListView,
                 OrganisationDetailView,
                 OrganisationUpdateView,
-                OrganisationDeleteView)
+                OrganisationDeleteView,
+                ReviewsListView)
 
 
 urlpatterns = [
@@ -17,6 +18,7 @@ urlpatterns = [
     path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     path('about/', views.about, name = 'blog-about'),
     path('displayOrganisations/', OrganisationListView.as_view() , name= 'organisations'),
+    path('reviews/', ReviewsListView.as_view() , name= 'reviews'),
     path('post/<int:pk>/', PostDetailView.as_view(), name = 'post-detail'),
     path('organisation/<int:pk>/', OrganisationDetailView.as_view(), name = 'organisation-detail'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name = 'post-update'),
