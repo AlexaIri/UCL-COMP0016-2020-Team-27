@@ -89,20 +89,25 @@ class Person(models.Model):
 #     project_importance= models.CharField(max_length = 255, default = "Default title")
 #     hashtags = models.CharField(max_length = 255, default = "Default title")
 
-# class Review(models.Model):
-#     # project = models.ForeignKey(ProjectProposals, blank=True, null=True, on_delete=models.CASCADE)
-#     review_body = models.CharField(max_length = 5000, default = "Default review body")
+class Review(models.Model):
+    project = models.ForeignKey(Person, blank=True, null=True, on_delete=models.CASCADE)
+    review_body = models.CharField(max_length = 5000, default = "")
 
-#     #Enlist all the marking criteria
-#     technical_quality = models. IntegerField()
-#     usability = models.IntegerField()
-#     scalability = models.IntegerField()
-#     innovation = models.IntegerField()
+    #Enlist all the marking criteria
+    technical_quality = models. IntegerField()
+    usability = models.IntegerField()
+    scalability = models.IntegerField()
+    innovation = models.IntegerField()
 
-#     #green-amber-red boolean system
-#     green = models.BooleanField()
-#     amber = models.BooleanField()
-#     red = models.BooleanField()
+    points = models.IntegerField()
+    score = models.DecimalField(max_digits=6, decimal_places=2)
+
+    #green-amber-red boolean system
+    green = models.BooleanField()
+    amber = models.BooleanField()
+    red = models.BooleanField()
+
+    comments = models.TextField("comments", default = "")
 
 
 class Post(models.Model):
