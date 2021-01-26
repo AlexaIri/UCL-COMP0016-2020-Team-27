@@ -26,4 +26,10 @@ urlpatterns = [
     path('organisation/<int:pk>/update/', OrganisationUpdateView.as_view(), name = 'organisation-update'),
     path('organisation/<int:pk>/delete/', OrganisationDeleteView.as_view(), name = 'organisation-delete'),
     path('post/new/', PostCreateView.as_view(), name = 'post-create'),
+
+
+    path('SubmissionPortal/', views.SubmissionPortal, name= 'SubmissionPortal'),
+    path('SubmissionPortal/Step2', views.Submission2, name='step2'),
+    path('SubmissionPortal/Step3', views.Submission3, name='step3'),
+    path('SubmissionPortal/Step4', views.Submission4, name='step4'),
 ]

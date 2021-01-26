@@ -1,10 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User
-from .models import Organisation, Post
+from .models import Organisation, Post, Person
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from .forms import Proposal, Proposal2, Proposal3, Proposal4
 
 # Create your views here.
 
@@ -130,3 +131,80 @@ class UserPostListView(ListView):
     def get_queryset(self):
         user = get_object_or_404(User, username = self.kwargs.get('username'))
         return Post.objects.filter(author = user).order_by('-date_posted')
+
+
+def SubmissionPortal(request):
+    
+    if request.method == "POST":
+        
+        form = Proposal(request.POST)
+        if form.is_valid():
+            form.save()
+        item_list = Person.objects.all()
+        #template = loader.get_template('CFP_Portal/index.html')
+        
+        
+        
+        return redirect('/CFP_Portal/SubmissionPortal/Step2')
+    
+
+    form = Proposal()
+    
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
+
+def Submission2(request):
+    
+    if request.method == "POST":
+        
+        form = Proposal2(request.POST)
+        if form.is_valid():
+            form.save()
+        item_list = Person.objects.all()
+        #template = loader.get_template('CFP_Portal/index.html')
+        context =  {'item_list': item_list,}
+        
+        
+        return redirect('/CFP_Portal/SubmissionPortal/Step3')
+    
+
+    form = Proposal2()
+    
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'CFP_Portal/submission/step2.html', {"form": form})
+
+def Submission3(request):
+    
+    if request.method == "POST":
+        
+        form = Proposal3(request.POST)
+        if form.is_valid():
+            form.save()
+        item_list = Person.objects.all()
+        #template = loader.get_template('CFP_Portal/index.html')
+        context =  {'item_list': item_list,}
+        
+        return redirect('/CFP_Portal/SubmissionPortal/Step4')
+    
+    form = Proposal3()
+    
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'CFP_Portal/submission/step3.html', {"form": form})
+
+def Submission4(request):
+        
+    if request.method == "POST":
+        
+        form = Proposal4(request.POST)
+        if form.is_valid():
+            form.save()
+        item_list = Person.objects.all()
+        #template = loader.get_template('CFP_Portal/index.html')
+        context =  {'item_list': item_list,}
+        
+        return render(request, 'CFP_Portal/success.html/')
+    
+    form = Proposal4()
+    
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'CFP_Portal/submission/step4.html', {"form": form})
