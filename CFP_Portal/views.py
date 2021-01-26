@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User
-from .models import Organisation, Post, Person
+from .models import Organisation, Post, Person, Review
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import Proposal, Proposal2, Proposal3, Proposal4
@@ -45,6 +45,10 @@ class ReviewsListView(ListView):
     ordering = ['date_posted']
     paginate_by = 5
 
+class UsersListView(ListView):
+    model = Organisation
+    template_name ='CFP_Portal/users_grid.html'
+
 class PostListView(ListView):
     model = Post
     template_name ='CFP_Portal/home.html'
@@ -58,6 +62,10 @@ class PostDetailView(DetailView):
 class OrganisationDetailView(DetailView):
     model = Organisation
     context_object_name = 'organisations'
+
+class ReviewDetailView(DetailView):
+    model = Review
+    context_object_name = 'reviews'
     
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
