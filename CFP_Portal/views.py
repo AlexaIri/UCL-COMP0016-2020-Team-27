@@ -21,7 +21,7 @@ def index(request):
 def home(request):
     #return HttpResponse('<h1> Blog Home </h1>')
     context = {
-        'posts':Post.objects.all()
+        'project':Person.objects.all()
     }
     return render(request, 'CFP_Portal/home.html', context)
 
@@ -49,11 +49,15 @@ class UsersListView(ListView):
     model = Organisation
     template_name ='CFP_Portal/users_grid.html'
 
-class PostListView(ListView):
-    model = Post
+class ProjectsListView(ListView):
+    model = Person
+    template_name ='CFP_Portal/projects_grid.html'
+
+class HomeProjectListView(ListView): # this is the former PostListView
+    model = Person # for the project
     template_name ='CFP_Portal/home.html'
-    context_object_name = 'posts'
-    ordering = ['date_posted']
+    context_object_name = 'projects'
+    #ordering = ['date_posted']
     paginate_by = 5
 
 class PostDetailView(DetailView):
@@ -62,6 +66,10 @@ class PostDetailView(DetailView):
 class OrganisationDetailView(DetailView):
     model = Organisation
     context_object_name = 'organisations'
+
+class ProjectDetailView(DetailView):
+    model = Person
+    context_object_name = 'projects'
 
 class ReviewDetailView(DetailView):
     model = Review

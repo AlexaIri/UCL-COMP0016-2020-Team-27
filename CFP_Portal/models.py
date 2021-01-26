@@ -34,6 +34,9 @@ class Organisation(models.Model):
 
 class Person(models.Model):
 
+    def get_absolute_url(self):
+        return reverse("project-detail", kwargs={"pk": self.pk})
+
     name = models.CharField("name", max_length=130, default = "")
     surname = models.CharField("surname", max_length=130, default = "")
     phone_number = models.CharField("phone number", max_length=130, default = "")
@@ -74,6 +77,26 @@ class Person(models.Model):
     importance = models.TextField("why is your project important", default = "")
     hashtags = models.CharField(max_length = 255, default = "hashtags")
 
+    statusType = (
+        ('Active', 'Active'),
+        ('Suspended', 'Suspended'),
+        ('Waiting', 'Waiting'),
+        ('Paused', 'Paused'),
+
+    )
+    status = models.CharField("What is the current status of the project?", max_length=20, choices=statusType, default = "")
+
+    completionPercentage = models.IntegerField(default=0) # up to 100%
+
+    priorityStatus = (
+        ('High', 'High'),
+        ('Low', 'Low'),
+        ('Medium', 'Medium'),
+        ('No priority', 'No priority'),
+    )
+
+    priority = models.CharField("What is the priority level of the project?", max_length=20, choices=priorityStatus, default = "")
+
 # class ProjectProposals(models.Model):
 #     project_name = models.CharField(max_length = 255, default = "Default name")
 #     project_title = models.CharField(max_length = 255, default = "Default title")
@@ -90,6 +113,9 @@ class Person(models.Model):
 #     hashtags = models.CharField(max_length = 255, default = "Default title")
 
 class Review(models.Model):
+    def get_absolute_url(self):
+        return reverse("review-detail", kwargs={"pk": self.pk})
+
     project = models.ForeignKey(Person, blank=True, null=True, on_delete=models.CASCADE)
     review_body = models.CharField(max_length = 5000, default = "")
 
@@ -108,6 +134,8 @@ class Review(models.Model):
     red = models.BooleanField()
 
     comments = models.TextField("comments", default = "")
+
+
 
 
 class Post(models.Model):

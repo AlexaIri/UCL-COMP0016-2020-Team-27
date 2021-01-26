@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import (PostListView, 
+from .views import (HomeProjectListView, 
                 PostDetailView,
                 PostCreateView, 
                 PostUpdateView, 
@@ -12,11 +12,13 @@ from .views import (PostListView,
                 OrganisationDeleteView,
                 ReviewsListView, 
                 ReviewDetailView, 
-                UsersListView)
+                UsersListView,
+                ProjectsListView, 
+                ProjectDetailView)
 
 
 urlpatterns = [
-    path('', PostListView.as_view(), name = 'blog-home'),
+    path('', HomeProjectListView.as_view(), name = 'blog-home'),
     path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     path('about/', views.about, name = 'blog-about'),
     path('displayOrganisations/', OrganisationListView.as_view() , name= 'organisations'),
@@ -24,6 +26,7 @@ urlpatterns = [
     path('post/<int:pk>/', PostDetailView.as_view(), name = 'post-detail'), # feedback sheet
     path('review/<int:pk>/', ReviewDetailView.as_view(), name = 'review-detail'),
     path('organisation/<int:pk>/', OrganisationDetailView.as_view(), name = 'organisation-detail'),
+    path('project/<int:pk>/', ProjectDetailView.as_view(), name = 'project-detail'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name = 'post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name = 'post-delete'),
     path('organisation/<int:pk>/update/', OrganisationUpdateView.as_view(), name = 'organisation-update'),
@@ -31,6 +34,7 @@ urlpatterns = [
     path('post/new/', PostCreateView.as_view(), name = 'post-create'),
 
     path('users/', UsersListView.as_view(), name = 'users' ),
+    path('projects/', ProjectsListView.as_view(), name = 'projects' ),
 
 
     path('SubmissionPortal/', views.SubmissionPortal, name= 'SubmissionPortal'),
