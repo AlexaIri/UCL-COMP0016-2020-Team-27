@@ -3,6 +3,8 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
+# from phonenumber_field.modelfields import PhoneNumberField
+
 
 def user_directory_path(instance, filename): 
   
@@ -40,7 +42,9 @@ class Person(models.Model):
     name = models.CharField("name", max_length=130, default = "")
     surname = models.CharField("surname", max_length=130, default = "")
     phone_number = models.CharField("phone number", max_length=130, default = "")
+    #phone_number = PhoneNumberField(null=False, blank=False, unique=True)
     email = models.EmailField("email", max_length=130, default = "")
+
     project_title = models.CharField("title", max_length=130, default = "")
     summarised_abstract = models.CharField("summarised abstract", max_length=2000, default = "")
     full_abstract = models.TextField("full abstract", default = "")

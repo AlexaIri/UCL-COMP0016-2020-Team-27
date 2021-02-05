@@ -26,11 +26,26 @@ def home(request):
     return render(request, 'CFP_Portal/home.html', context)
 
 def about(request):
-    #return HttpResponse('<h1> Blog About </h1>')
-    context={
+    # context={
         
-    }
-    return render(request, 'CFP_Portal/about.html', "title: About", context)
+    # }
+    # return render(request, 'CFP_Portal/about.html', context)
+    if request.method == "POST":
+        
+        form = Proposal(request.POST)
+        if form.is_valid():
+            form.save()
+        item_list = Person.objects.all()        
+        
+        
+        # return redirect('/CFP_Portal/SubmissionPortal/Step2')
+        return redirect('/CFP_Portal/')
+    
+
+    form = Proposal()
+    
+    return render(request, 'CFP_Portal/about.html', {"form": form})
+
 
 class OrganisationListView(ListView):
     model = Organisation
@@ -156,18 +171,26 @@ def SubmissionPortal(request):
         form = Proposal(request.POST)
         if form.is_valid():
             form.save()
-        item_list = Person.objects.all()
-        #template = loader.get_template('CFP_Portal/index.html')
-        
+        item_list = Person.objects.all()        
         
         
         return redirect('/CFP_Portal/SubmissionPortal/Step2')
+        # return redirect('/CFP_Portal/')
     
 
     form = Proposal()
     
-    #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
+
+    # name = request. POST["name"]
+    # surname = request.POST["surname"]
+    # phone_number = request.POST["phone_number"]
+    # email = request.POST["email"]
+    # project_title = request.POST["project_title"]
+
+    # projectObject = Person(name= name, surname = surname, phone_number = phone_number, email = email, project_title = project_title)
+    # projectObject.save()
+    # return render(request, 'CFP_Portal/submission_portal.html')
 
 def Submission2(request):
     
