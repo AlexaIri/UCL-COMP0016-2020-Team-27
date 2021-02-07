@@ -53,25 +53,5 @@ class Proposal(forms.Form):
     hashtags = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Hashtags'}))
 
 
-class Proposal2(forms.ModelForm):
-    
-     class Meta:
-         model = Person
-         
-         fields = ('project_title', 'summarised_abstract', 'full_abstract', 'expertiseskills', 'devices',)
 
-
-class Proposal3(forms.ModelForm):
-        
-     class Meta:
-         model = Person
-         
-         fields = ('project_complexity', 'source_type','ethics_form', 'launching_date',)
-
-class Proposal4(forms.ModelForm):
-        
-     class Meta:
-         model = Person
-         
-         fields = ('motivations', 'importance','hashtags', )
     

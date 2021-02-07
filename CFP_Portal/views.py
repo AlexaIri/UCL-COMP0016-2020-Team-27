@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from .models import Organisation, Post, Person, Review
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import Proposal, Proposal2, Proposal3, Proposal4
+from .forms import Proposal
 
 # Create your views here.
 
@@ -34,8 +34,25 @@ def about(request):
         
         form = Proposal(request.POST)
         if form.is_valid():
-            form.save()
-        item_list = Person.objects.all()        
+            results = Person()
+            results.name = form.cleaned_data['name']
+            results.surname = form.cleaned_data['surname']
+            results.phone_number = form.cleaned_data['phone_number']
+            results.project_title = form.cleaned_data['project_title']
+            results.email = form.cleaned_data['email']
+            results.summarized_abstract = form.cleaned_data['summarized_abstract']
+            results.full_abstract = form.cleaned_data['full_abstract']
+            results.expertise_and_skills = form.cleaned_data['expertise_and_skills']
+            results.devices = form.cleaned_data['devices']
+            results.project_complexity = form.cleaned_data['project_complexity']
+            results.source_type = form.cleaned_data['source_type']
+            results.ethics_form = form.cleaned_data['ethics_form']
+            results.launching_date = form.cleaned_data['launching_date']
+            results.motivations = form.cleaned_data['motivations']
+            results.importance = form.cleaned_data['importance']
+            results.hashtags = form.cleaned_data['hashtags']
+
+            results.save()     
         
         
         # return redirect('/CFP_Portal/SubmissionPortal/Step2')
@@ -170,80 +187,33 @@ def SubmissionPortal(request):
         
         form = Proposal(request.POST)
         if form.is_valid():
-            form.save()
-        item_list = Person.objects.all()        
-        
-        
-        return redirect('/CFP_Portal/SubmissionPortal/Step2')
-        # return redirect('/CFP_Portal/')
+            results = Person()
+            results.name = form.cleaned_data['name']
+            results.surname = form.cleaned_data['surname']
+            results.phone_number = form.cleaned_data['phone_number']
+            results.project_title = form.cleaned_data['project_title']
+            results.email = form.cleaned_data['email']
+            results.summarised_abstract = form.cleaned_data['summarized_abstract']
+            results.full_abstract = form.cleaned_data['full_abstract']
+            results.expertiseskills = form.cleaned_data['expertise_and_skills']
+            results.devices = form.cleaned_data['devices']
+            results.project_complexity = form.cleaned_data['project_complexity']
+            results.source_type = form.cleaned_data['source_type']
+            results.ethics_form = form.cleaned_data['ethics_form']
+            results.launching_date = form.cleaned_data['launching_date']
+            results.motivations = form.cleaned_data['motivations']
+            results.importance = form.cleaned_data['importance']
+            results.hashtags = form.cleaned_data['hashtags']
+
+            results.save() 
+        item_list = Person.objects.all()
+        #
+        return redirect('/CFP_Portal/')
     
 
     form = Proposal()
     
     return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
 
-    # name = request. POST["name"]
-    # surname = request.POST["surname"]
-    # phone_number = request.POST["phone_number"]
-    # email = request.POST["email"]
-    # project_title = request.POST["project_title"]
+ 
 
-    # projectObject = Person(name= name, surname = surname, phone_number = phone_number, email = email, project_title = project_title)
-    # projectObject.save()
-    # return render(request, 'CFP_Portal/submission_portal.html')
-
-def Submission2(request):
-    
-    if request.method == "POST":
-        
-        form = Proposal2(request.POST)
-        if form.is_valid():
-            form.save()
-        item_list = Person.objects.all()
-        #template = loader.get_template('CFP_Portal/index.html')
-        context =  {'item_list': item_list,}
-        
-        
-        return redirect('/CFP_Portal/SubmissionPortal/Step3')
-    
-
-    form = Proposal2()
-    
-    #return HttpResponse(template.render(context, request))
-    return render(request, 'CFP_Portal/submission/step2.html', {"form": form})
-
-def Submission3(request):
-    
-    if request.method == "POST":
-        
-        form = Proposal3(request.POST)
-        if form.is_valid():
-            form.save()
-        item_list = Person.objects.all()
-        #template = loader.get_template('CFP_Portal/index.html')
-        context =  {'item_list': item_list,}
-        
-        return redirect('/CFP_Portal/SubmissionPortal/Step4')
-    
-    form = Proposal3()
-    
-    #return HttpResponse(template.render(context, request))
-    return render(request, 'CFP_Portal/submission/step3.html', {"form": form})
-
-def Submission4(request):
-        
-    if request.method == "POST":
-        
-        form = Proposal4(request.POST)
-        if form.is_valid():
-            form.save()
-        item_list = Person.objects.all()
-        #template = loader.get_template('CFP_Portal/index.html')
-        context =  {'item_list': item_list,}
-        
-        return render(request, 'CFP_Portal/success.html/')
-    
-    form = Proposal4()
-    
-    #return HttpResponse(template.render(context, request))
-    return render(request, 'CFP_Portal/submission/step4.html', {"form": form})
