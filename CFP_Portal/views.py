@@ -85,7 +85,7 @@ class ProjectsListView(ListView):
     model = Person
     template_name ='CFP_Portal/projects_grid.html'
 
-class HomeProjectListView(ListView): # this is the former PostListView
+class HomeProjectListView(ListView, ): # this is the former PostListView
     model = Person # for the project
     template_name ='CFP_Portal/home.html'
     context_object_name = 'projects'
@@ -100,8 +100,10 @@ class OrganisationDetailView(DetailView):
     context_object_name = 'organisations'
 
 class ProjectDetailView(DetailView):
+    
     model = Person
-    context_object_name = 'projects'
+    context_object_name = 'project'
+   
 
 class ReviewDetailView(DetailView):
     model = Review

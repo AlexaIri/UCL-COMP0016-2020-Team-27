@@ -16,6 +16,7 @@
 
     </style>
 </head>
+
 <body style="margin-top:100px">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="content">
@@ -25,20 +26,24 @@
                 <div class="card-box task-detail">
                     <div class="media mt-0 m-b-30"><img class="d-flex mr-3 rounded-circle" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar2.png" style="width: 48px; height: 48px;">
                         <div class="media-body">
-                            <h5 class="media-heading mb-0 mt-0">James L. Kelley</h5><span class="badge badge-danger">Urgent</span></div>
+                            <h5 class="media-heading mb-0 mt-0">{{project.name}}</h5><span class="badge badge-danger">Urgent</span></div>
                     </div>
-                    <h4 class="m-b-20">Code HTML email template for welcome email</h4>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, illo, iste itaque voluptas corrupti ratione reprehenderit magni similique? Tempore, quos delectus asperiores libero voluptas quod perferendis! Voluptate, quod illo rerum? Lorem ipsum dolor sit amet.</p>
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, illo, iste itaque voluptas corrupti ratione reprehenderit magni similique? Tempore, quos delectus asperiores libero voluptas quod perferendis! Voluptate, quod illo rerum? Lorem ipsum dolor sit amet.</p>
+                    
+                    <h4 class="m-b-20">{{project.project_title }}</h4>
+                    <p class="text-muted"> <b> Summarised Abstract: </b> {{project.summarised_abstract}}</p>
+                    <p class="text-muted"> <b>Full Abstract:</b> {{project.full_abstract}}</p>
+                    <p class="text-muted"> <b>Project Complexity </b>{{project.project_complexity}}</p>
+                    <p class="text-muted"> <b>Expertise Skills: </b>{{project.expertiseskills}}</p>
+                    <p class="text-muted"> <b>Source Type: </b>{{project.source_type}}</p>
+                    <p class="text-muted"> <b>Devices and Technologies Required: </b>{{project.devices}}</p>
+
+
                     <ul class="list-inline task-dates m-b-0 mt-5">
                         <li>
-                            <h5 class="m-b-5">Start Date</h5>
-                            <p>01 December 2017 <small class="text-muted">1:00 PM</small></p>
+                            <h5 class="m-b-5">Launching Date</h5>
+                            <p>{{project.launching_date}} <small class="text-muted"></small></p>
                         </li>
-                        <li>
-                            <h5 class="m-b-5">Due Date</h5>
-                            <p>17 February 2018 <small class="text-muted">12:00 PM</small></p>
-                        </li>
+                        
                     </ul>
                     <div class="clearfix"></div>
                     <div class="task-tags mt-4">
@@ -155,6 +160,7 @@
 <script type="text/javascript">
 	
 </script>
+
 </body>
 </html>
 
