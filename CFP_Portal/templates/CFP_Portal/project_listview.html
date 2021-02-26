@@ -58,18 +58,15 @@
                 <form method="get">
                
                               
-				
-
+			
                     
             
-		    <li><button class="btn btn-primary"name="innovation" style="margin:5px" type="submit" >Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
+		    <li><button class="btn btn-primary"name="innovation" style="margin:5px" type="submit">Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
             <br>
-            <li><button class="btn btn-primary"name="scaffolding" style="margin:5px" type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
-         <br>
-         <li><button class="btn btn-primary"name="discovery" style="margin:5px" type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{disoverynumber}}</span></a></li>
+            <li><button class="btn btn-primary"name="scaffolding"style="margin:5px"  type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
+            <br>
+            <li><button class="btn btn-primary"name="discovery"style="margin:5px"  type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{disoverynumber}}</span></a></li>
 		  </form>
-                   
-                    
                 </ul>
             </div>
             <div class="mb-4">
@@ -132,57 +129,75 @@
                 </nav>
                 <div role="toolbar" class="btn-toolbar">
                 
-                    <div role="group" class="mr-auto mr-md-2 btn-group"><a class="align-self-center btn btn-secondary" id="tooltipShowList" href="list"><i class="fa-fw fa fa-bars"></i></a><a class="align-self-center btn btn-secondary active" id="tooltipShowGrid" href="" aria-current="page"><i class="fa-fw fa fa-th-large"></i></a></div>
+                    <div role="group" class="mr-auto mr-md-2 btn-group"><a class="align-self-center btn btn-secondary" id="tooltipShowList" href="list"><i class="fa-fw fa fa-bars"></i></a><a class="align-self-center btn btn-secondary active" id="tooltipShowGrid" href="/projects" aria-current="page"><i class="fa-fw fa fa-th-large"></i></a></div>
                     
                 </div>
                 
             </div>
             
-            <div class="card-columns">
-            {% for project in projects %}
-                <div class="Card_custom-card--border_5wJKy card">
-                
-                    <div class="card-body"><span class="mb-2 badge badge-success badge-pill">Active</span>
-                        <div class="mb-2"><a href="{% url 'project-detail' project.id %}" class="mr-2"><i class="fa fa-fw fa-star-o"></i></a><a href="{% url 'project-detail' project.id %}">{{project.project_title}}</a></div><span><b>Submitter Name: </b><br>{{project.name}} <br><b> Launching date: </b> <br>{{project.launching_date}}</span></div>
-                    <div class="card-footer">
-                        <div class="mb-2 progress" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-                        </div>
-                        <div>Tasks Completed:<span class="text-inverse">36/94</span></div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="avatar-image avatar-image--loaded mr-2">
-                            <div class="avatar avatar--md avatar-image__image">
-                                <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar7.png"></div>
-                            </div>
-                        </div>
-                        <div class="avatar-image avatar-image--loaded mr-2">
-                            <div class="avatar avatar--md avatar-image__image">
-                                <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar6.png"></div>
-                            </div>
-                        </div>
-                        <div class="avatar-image avatar-image--loaded mr-2">
-                            <div class="avatar avatar--md avatar-image__image">
-                                <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar1.png"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex card-footer"><span class="align-self-center">20 Sep, Fri, 2018</span>
-                        <div class="align-self-center ml-auto btn-group">
-                            <button type="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle btn btn-link btn-sm"><i class="fa fa-gear"></i></button>
-                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-folder-open mr-2"></i>View</button>
-                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-ticket mr-2"></i>Add Task</button>
-                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-paperclip mr-2"></i>Add Files</button>
-                                <div tabindex="-1" class="dropdown-divider"></div>
-                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-trash mr-2"></i>Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-               {%endfor%}
-                </div>
+           <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive project-list">
+                        <table class="table project-table table-centered table-nowrap">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Projects</th>
+                                    <th scope="col">Launching Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Team</th>
+                                    <th scope="col">Project Complexity</th>
+                                    
+                                    <th scope="col">Progress</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for project in projects %}
+                                    <tr>
+                                    <th scope="row">{{project.id}}</th>
+                                    <td ><a href="{% url 'project-detail' project.id %}"> {{project.project_title}} </a></td>
+                                    <td>{{project.launching_date}}</td>
+                                    <td>
+                                        <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i> {{project.status}}</span>
+                                    </td>
+                                    <td>
+    
+                                        <div class="team">
+                                            <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Roger Drake">
+                                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="32" height="32" class="rounded-circle avatar-xs" alt="" />
+                                            </a>
+
+                                            <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reggie James">
+                                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" width="32" height="32"class="rounded-circle avatar-xs" alt="" />
+                                            </a>
+
+                                            <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Gerald Mayberry">
+                                                <img src="https://bootdey.com/img/Content/avatar/avatar8.png" width="32" height="32" class="rounded-circle avatar-xs" alt="" />
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td> {{project.project_complexity}}</td>
+                                    <td>
+                                        <p class="mb-0">Progress<span class="float-right">100%</span></p>
+
+                                        <div class="progress mt-2" style="height: 5px;">
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="action">
+                                            <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
+                                            <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                              {% endfor %}
                 
                
               {% comment %} add pagination {% endcomment %}

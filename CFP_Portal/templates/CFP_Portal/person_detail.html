@@ -1,6 +1,7 @@
 {% extends "CFP_Portal/base2.html" %}
 {% block content %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,8 +37,12 @@
                     <p class="text-muted"> <b>Expertise Skills: </b>{{project.expertiseskills}}</p>
                     <p class="text-muted"> <b>Source Type: </b>{{project.source_type}}</p>
                     <p class="text-muted"> <b>Devices and Technologies Required: </b>{{project.devices}}</p>
-
-
+                    <p class="text-muted"> <b>Full Name: </b>{{project.name}}  {{project.surname}}</p>
+                    
+                    <p class="text-muted"> <b>Phone Number </b>{{project.phone_number}}</p>
+                    <p class="text-muted"> <b>Email </b>{{project.email}}</p>
+                    <p class="text-muted"> <b>Completion of ethics form: </b>{{project.ethics_form}}</p>
+                    <p class="text-muted"> <b>Motivations </b>{{project.motivations}}</p>
                     <ul class="list-inline task-dates m-b-0 mt-5">
                         <li>
                             <h5 class="m-b-5">Launching Date</h5>
@@ -92,57 +97,32 @@
             <!-- end col -->
             <div class="col-lg-4">
                 <div class="card-box">
-                    <h4 class="header-title m-b-30">Comments (5)</h4>
-                    <div>
+                    <h4 class="header-title m-b-30">Comment({{project.comments.all.count}})</h4>
+                    
+                            
+                        {%for comment in project.comments.all%}
                         <div class="media m-b-20">
-                            <div class="d-flex mr-3">
-                                <a href="#"><img class="media-object rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
-                            </div>
+                            
                             <div class="media-body">
-                                <h5 class="mt-0">Maxine Kennedy</h5>
-                                <p class="font-13 text-muted mb-0"><a href="" class="text-dark">@Michael</a> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio.</p><a href="" class="text-success font-13">Reply</a></div>
-                        </div>
+                                <h5 class="mt-0">{{ comment.name}}</h5>
+                                <p>{{comment.feedback}}</p>
+                                <p class="font-13 text-muted mb-0"> Date added: {{comment.date_added}}</p>
+                            </div>
+                            </div>
+                            <hr>
+                        {%endfor%}
+                        
+                        
                         <div class="media m-b-20">
-                            <div class="d-flex mr-3">
-                                <a href="#"><img class="media-object rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar2.png"></a>
-                            </div>
+                            
+                            <form method="POST">
+                            {% csrf_token %} 
                             <div class="media-body">
-                                <h5 class="mt-0">Doyle Bell</h5>
-                                <p class="font-13 text-muted mb-0"><a href="" class="text-dark">@Michael</a> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio.</p><a href="" class="text-success font-13">Reply</a>
-                                <div class="media m-t-20 m-b-20">
-                                    <div class="d-flex mr-3">
-                                        <a href="#"><img class="media-object rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar3.png"></a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="mt-0">Elena Vancamp</h5>
-                                        <p class="font-13 text-muted mb-0"><a href="" class="text-dark">@Doyle</a> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio.</p><a href="" class="text-success font-13">Reply</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="media m-b-20">
-                            <div class="d-flex mr-3">
-                                <a href="#"><img class="media-object rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
-                            </div>
-                            <div class="media-body">
-                                <h5 class="mt-0">Maxine Kennedy</h5>
-                                <p class="font-13 text-muted mb-0">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio.</p><a href="" class="text-success font-13">Reply</a></div>
-                        </div>
-                        <div class="media m-b-20">
-                            <div class="d-flex mr-3">
-                                <a href="#"><img class="media-object rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar5.png"></a>
-                            </div>
-                            <div class="media-body">
-                                <h5 class="mt-0">Erick Loper</h5>
-                                <p class="font-13 text-muted mb-0"><a href="" class="text-dark">@Maxine</a> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio.</p><a href="" class="text-success font-13">Reply</a></div>
-                        </div>
-                        <div class="media m-b-20">
-                            <div class="d-flex mr-3">
-                                <a href="#"><img class="media-object rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar1.png"></a>
-                            </div>
-                            <div class="media-body">
-                                <input type="text" class="form-control input-sm" placeholder="Some text value...">
+                                {{ form |crispy }}
                                 <div class="mt-2 text-right">
-                                    <button type="submit" class="btn btn-sm btn-custom waves-effect waves-light">Send</button>
+                                    <button type="submit" name="comment"class="btn btn-sm btn-custom waves-effect waves-light">Send</button>
+                                </div>
+                                </form>
                                 </div>
                             </div>
                         </div>

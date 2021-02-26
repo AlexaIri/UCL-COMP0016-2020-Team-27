@@ -1,5 +1,5 @@
 from django import forms
-from CFP_Portal.models import Person
+from CFP_Portal.models import Person, Comment
 # from phonenumber_field.formfields import PhoneNumberField
 
 
@@ -24,6 +24,13 @@ class Proposal(forms.Form):
         ('N', 'No'),
 
     )
+
+    TIERS = (
+        ('1','1'),
+        ('2','2'),
+        ('3', '3'),
+        ('4', '4'),
+        )
     
     #  class Meta:
     #      model = Person
@@ -51,7 +58,12 @@ class Proposal(forms.Form):
     motivations = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'What motivated you?'}))
     importance = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Why is your project important?'}))
     hashtags = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Hashtags'}))
-
-
-
-    
+   
+class Commentform(forms.ModelForm):
+       class Meta:
+           model = Comment
+           fields = ('name','feedback',)
+           widgets = {
+                "name" : forms.TextInput(attrs ={'placeholder': 'First name'}),
+                "feedback" : forms.TextInput(attrs ={'placeholder': 'feedback'}),
+           }

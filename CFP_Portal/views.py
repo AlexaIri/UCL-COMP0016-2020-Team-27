@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User
-from .models import Organisation, Post, Person, Review
+from .models import Organisation, Post, Person, Review, Comment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import Proposal
+from .forms import Commentform
+from .filters import ProjectFilter
 
 # Create your views here.
 
@@ -18,10 +20,36 @@ def index(request):
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/index.html', context)
 
-def home(request):
-    #return HttpResponse('<h1> Blog Home </h1>')
+def projectdetail(request, pk):
+    project = get_object_or_404(Person, pk=pk)
+
+    if request.method == 'POST' and 'comment' in request.POST:
+        form = Commentform(request.POST)
+        if form.is_valid():
+            comments = Comment()
+            comments.project = project
+            comments.name = form.cleaned_data['name']
+            comments.feedback = form.cleaned_data['feedback']
+            comments.save()
+    else:
+        form = Commentform()
+        
+    
+    commentslist = Comment.objects.all()
     context = {
-        'project':Person.objects.all()
+        'project': project,
+        'comments': commentslist,
+        'form': form
+    }
+    return render(request, 'CFP_Portal/person_detail.html', context)
+
+def home(request):
+    projects = Person.objects.all()
+    #return HttpResponse('<h1> Blog Home </h1>')
+    totalnumber = Person.objects.all().count()
+    context = {
+        'projects':projects,
+        'totalnumber': totalnumber
     }
     return render(request, 'CFP_Portal/home.html', context)
 
@@ -63,6 +91,69 @@ def about(request):
     
     return render(request, 'CFP_Portal/about.html', {"form": form})
 
+def projectgrid(request):
+    #template = loader.get_template('CFP_Portal/index.html')
+    projects = Person.objects.all()
+
+    myFilter = ProjectFilter(request.GET, queryset = projects)
+    projects = myFilter.qs
+    innovationnumber = Person.objects.filter(project_complexity='Innovation').count()
+    scaffoldingnumber = Person.objects.filter(project_complexity='Scaffolding').count()
+    discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
+
+    
+    
+   
+    if request.method == 'GET' and 'innovation' in request.GET:
+        projects = Person.objects.filter(project_complexity='Innovation')
+
+    if request.method == 'GET' and 'discovery' in request.GET:
+        projects = Person.objects.filter(project_complexity='Discovery')
+
+    if request.method == 'GET' and 'scaffolding' in request.GET:
+       projects = Person.objects.filter(project_complexity='Scaffolding')
+
+    context ={
+        'projects': projects,
+        'myFilter': myFilter,
+        'innovationumber': innovationnumber,
+        'discoverynumber': discoverynumber,
+        'scaffoldingnumber': scaffoldingnumber
+    }
+    
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'CFP_Portal/projects_grid.html', context)
+
+def projectlistview(request):
+    #template = loader.get_template('CFP_Portal/index.html')
+    projects = Person.objects.all()
+
+    myFilter = ProjectFilter(request.GET, queryset = projects)
+    projects = myFilter.qs
+    innovationnumber = Person.objects.filter(project_complexity='Innovation').count()
+    scaffoldingnumber = Person.objects.filter(project_complexity='Scaffolding').count()
+    discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
+
+
+    if request.method == 'GET' and 'innovation' in request.GET:
+        projects = Person.objects.filter(project_complexity='Innovation')
+
+    if request.method == 'GET' and 'discovery' in request.GET:
+        projects = Person.objects.filter(project_complexity='Discovery')
+
+    if request.method == 'GET' and 'scaffolding' in request.GET:
+       projects = Person.objects.filter(project_complexity='Scaffolding')
+
+    context ={
+        'projects': projects,
+        'myFilter': myFilter,
+        'innovationumber': innovationnumber,
+        'discoverynumber': discoverynumber,
+        'scaffoldingnumber': scaffoldingnumber
+    }
+    
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'CFP_Portal/project_listview.html', context)
 
 class OrganisationListView(ListView):
     model = Organisation
@@ -83,7 +174,10 @@ class UsersListView(ListView):
 
 class ProjectsListView(ListView):
     model = Person
+    context_object_name = 'projects'
+    
     template_name ='CFP_Portal/projects_grid.html'
+
 
 class HomeProjectListView(ListView, ): # this is the former PostListView
     model = Person # for the project
@@ -206,6 +300,7 @@ def SubmissionPortal(request):
             results.motivations = form.cleaned_data['motivations']
             results.importance = form.cleaned_data['importance']
             results.hashtags = form.cleaned_data['hashtags']
+            results.status = 'Submitted'
 
             results.save() 
         item_list = Person.objects.all()

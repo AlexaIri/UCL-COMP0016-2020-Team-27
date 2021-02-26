@@ -57,6 +57,13 @@ class Person(models.Model):
         ('Discovery','Discovery'),
         ('Innovation', 'Innovation'),
     )
+    TIERS = (
+        ('1','1'),
+        ('2','2'),
+        ('3', '3'),
+        ('4', '4'),)
+
+    
     
     project_complexity = models.CharField("project complexity", max_length=20, choices=SHIRT_SIZES, default = "")
 
@@ -67,8 +74,8 @@ class Person(models.Model):
     )
 
     yesno = (
-        ('Y', 'Yes'),
-        ('N', 'No'),
+        ('Yes', 'Yes'),
+        ('No', 'No'),
 
     )
 
@@ -82,9 +89,10 @@ class Person(models.Model):
     hashtags = models.CharField(max_length = 255, default = "hashtags")
 
     statusType = (
-        ('Active', 'Active'),
-        ('Suspended', 'Suspended'),
+        ('Accepeted', 'Accepted'),
+        ('Rejected', 'Rejected'),
         ('Waiting', 'Waiting'),
+        ('Submitted', 'Submitted'),
         ('Paused', 'Paused'),
 
     )
@@ -139,6 +147,14 @@ class Review(models.Model):
 
     comments = models.TextField("comments", default = "")
 
+class Comment(models.Model):
+    project = models.ForeignKey(Person, related_name="comments", on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    feedback = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s' % (self.project.project_title)
 
 
 
