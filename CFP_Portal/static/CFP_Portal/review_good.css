@@ -85,9 +85,9 @@
     background: white;
 }
 
-.container {
-    position: relative;
-  }
+/* .container {
+    position: absolute;
+  } */
   
 .topright {
     position: absolute;
