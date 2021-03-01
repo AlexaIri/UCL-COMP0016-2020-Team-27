@@ -1,4 +1,4 @@
-{% extends "CFP_Portal/base2.html" %}
+{% extends "CFP_Portal/sidebar.html" %}
 {% block content %}
 {% load static%}
 
@@ -15,10 +15,11 @@
     <style type="text/css">
      </style>
 </head>
-<body style="margin-top:100px">
+<body>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div class="container">
+<div class="container-fluid p-0 m-0">
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card bg-pattern">
@@ -53,6 +54,9 @@
                 </div>
             </div>
         </div>
+
+
+        
         <div class="col-xl-3 col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -153,6 +157,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- end row -->
 </div>
