@@ -10,6 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% comment %} <link href="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"> {% endcomment %}
      <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+   <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+   <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+
    <link rel="stylesheet" href="{% static 'CFP_Portal/review_good.css' %}">
         
 
@@ -22,7 +25,7 @@
 <body oncontextmenu='return false'> 
 
 <link rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+{% comment %} <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> {% endcomment %}
  <script type="text/javascript" src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152197/smartwizard/jquery.smartWizard.min.js"></script>
 
 <div class="container">
@@ -85,6 +88,7 @@
                             <p><strong>About: </strong> Web Designer / UI. </p>
                             
                            
+                           
                         </div>
                         
                         </div></div>
@@ -143,24 +147,57 @@
                   
 
                     <div class="col-xs-12 bottom text-center">
-                        <div class="col-xs-12 emphasis">
+                        <div class="col-xs-12 emphasis mt-1 mb-1">
                             <p class="ratings">
-                                <a>4.0</a>
-                                <a href="#"><span class="fa fa-star"></span></a>
+                                
+                                 
+    
+       
+            <div class="stars">
+            <a style="color:#D7D7D7">Give a rating for the project</a>
+                <form action=""> <input class="star star-5" id="star-5" type="radio" name="star" />
+                 <label class="star star-5" for="star-5"></label> 
+                 <input class="star star-4" id="star-4" type="radio" name="star" /> 
+                 <label class="star star-4" for="star-4"></label>
+                 <input class="star star-3" id="star-3" type="radio" name="star" />
+                 <label class="star star-3" for="star-3"></label>
+                 <input class="star star-2" id="star-2" type="radio" name="star" /> 
+                 <label class="star star-2" for="star-2"></label> 
+                 <input class="star star-1" id="star-1" type="radio" name="star" /> 
+                 <label class="star star-1" for="star-1"></label> 
+                 </form>
+   
+       
+
+</div>
+                                {% comment %} <a href="#"><span class="fa fa-star"></span></a>
                                 <a href="#"><span class="fa fa-star"></span></a>
                                 <a href="#"><span class="fa fa-star"></span></a>
                                 <a href="#"><span class="fa fa-star-o"></span></a>
-                                <a href="#"><span class="fa fa-star-o"></span></a>
+                                <a href="#"><span class="fa fa-star-o"></span></a> {% endcomment %}
                             </p>
                         </div>
-                        <div class="col-xs-12  emphasis">
-                            <button type="button" class="btn btn-success btn-xs"> 
-                                <i class="fa fa-user"></i> 
-                                <i class="fa fa-comments-o"></i>  
-                            </button>
-                            <a href ="{% url 'project-detail' review.project.id %}"><button type="button" class="btn btn-primary btn-xs"> 
-                                <i class="fa fa-user"></i> View Project 
+
+                        <div class="col-xs-12  emphasis  mt-1 mb-1">
+                           <a href ="{% url 'project-detail' review.project.id %}"> <button type="button" class="btn btn-success btn-xs  mt-1 mb-1 ml-1"> 
+                              
+                                <i class="fa fa-check-circle"></i> 
+                                Approve 
+                               
+                            </button></a>
+                             
+                            <a href ="{% url 'project-detail' review.project.id %}"><button type="button" class="btn btn-light btn-xs  mt-1 mb-1"> 
+                                <i class="fa fa-tasks" style="color:#999"></i> View Project 
                            </button> </a> 
+
+                            <a href ="{% url 'project-detail' review.project.id %}"> <button type="button" class="btn btn-danger btn-xs  mt-1 mb-1 mr-1"> 
+                              
+                                <i class="fa fa-ban"></i> 
+                                Reject 
+                               
+                            </button></a>
+                             
+                          
                         </div>
                     </div>
                 </div>

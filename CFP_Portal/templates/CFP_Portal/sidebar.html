@@ -19,7 +19,7 @@
                                 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
                                 <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
                                 <script type="text/javascript" src="{% static 'CFP_Portal/sidebar.js' %}"></script>
-                                <script type='text/javascript'></script>
+                              
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
@@ -33,7 +33,8 @@
 
   <link rel="stylesheet" href="/css/styles.min.css" id="main-stylesheet">
 
-  <script src="/js/main.min.js"></script>
+  {% comment %} <script src="/js/main.min.js"></script> {% endcomment %}
+
                             </head>
                             <body oncontextmenu='return false'>
                             {% comment %} class='snippet-body'> {% endcomment %}
@@ -51,26 +52,26 @@
         <ul class="list-unstyled components">
         
             <p >MENUS</p>
-            <li> <a href="{% url 'SubmissionPortal'%}">Submission Portal</a> </li>
-            <li> <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Dashboard</a>
+            <li> <a href="{% url 'SubmissionPortal'%}" style="color:rgb(0,70,177)">Submission Portal</a> </li>
+            <li> <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Dashboard</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li><a href="{% url 'blog-home' %}" >Project Proposals</a> </li>
-                    <li> <a href="#">Dashboard2</a> </li>
-                    <li> <a href="#">Dashboard3</a> </li>
+                    <li><a href="{% url 'blog-home' %}" style="color:rgb(0,70,177)">Project Proposals</a> </li>
+                    <li> <a href="#" style="color:rgb(0,70,177)">Project Dashboard</a> </li>
+                    <li> <a href="#" style="color:rgb(0,70,177)">Reviews Dashboard</a> </li>
                 </ul>
             </li>
-            <li> <a href="{% url 'users' %}">Users</a> </li>
-            <li> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Subscribers</a>
+            <li> <a href="{% url 'users' %}" style="color:rgb(0,70,177)">Users</a> </li>
+            <li> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Subscribers</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li> <a href="#">Active</a> </li>
-                    <li> <a href="#">Idle</a> </li>
-                    <li> <a href="#">Non Active</a> </li>
+                    <li> <a href="#" style="color:rgb(0,70,177)">Active</a> </li>
+                    <li> <a href="#" style="color:rgb(0,70,177)">Idle</a> </li>
+                    <li> <a href="#" style="color:rgb(0,70,177)">Non Active</a> </li>
                 </ul>
             </li>
-            <li> <a href="#">Project Proposals</a> </li>
-            <li> <a href="{% url 'reviews' %}">Feedback and Reviewing</a> </li>
-            <li> <a href="{% url 'organisations' %}">Organisations</a> </li>
-            <li> <a href="#">Comments</a> </li>
+            <li> <a href="#" style="color:rgb(0,70,177)">Project Proposals</a> </li>
+            <li> <a href="{% url 'reviews' %}" style="color:rgb(0,70,177)">Feedback and Reviewing</a> </li>
+            <li> <a href="{% url 'organisations' %}" style="color:rgb(0,70,177)">Organisations</a> </li>
+            <li> <a href="#" style="color:rgb(0,70,177)">Comments</a> </li>
         </ul>
         <ul class="list-unstyled CTAs">
             <li> <a href="#" class="download">Subscribe</a> </li>

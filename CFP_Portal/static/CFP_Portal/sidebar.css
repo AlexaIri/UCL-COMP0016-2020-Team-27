@@ -26,7 +26,8 @@ a:focus {
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1)
+    box-shadow: 5px 1px 3px rgba(0, 0, 0, 0.1)
+    
 }
 
 .navbar-btn {
@@ -50,10 +51,11 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #0046B1 url('/media/sidebar/laptop.jpg') top left repeat-y;
-    /* color: rgb(35, 177, 0);
-    text-shadow: 1px 1px rgb(197, 68, 68); */
-   
+    
+    background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;
+    /* color: rgb(35, 177, 0)  */
+    /* text-shadow: 1px 1px rgb(255, 255, 255); */
+    box-shadow: 0px 15px 25px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s
 }
 
@@ -63,7 +65,8 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #0046B1
+    background: #0046B1;
+
 }
 
 #sidebar .sidebar-image {
@@ -93,13 +96,14 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #fff;
-    background: #0046B1
+    color: rgba(39,44,49);
+    background: rgba(0, 70, 177, 0.3);
+    
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
-    color: #0046B1;
+    color: rgb(255, 255, 255) !important;
     background: #BCBCBD
 }
 
@@ -155,7 +159,7 @@ a.download:hover {
     max-width: 3000px; 
 }
 
-@media(maz-width:768px) {
+@media(max-width:768px) {
     #sidebar {
         margin-left: -250px
     }
