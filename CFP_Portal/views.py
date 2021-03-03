@@ -115,9 +115,7 @@ def projectgrid(request):
     innovationnumber = Person.objects.filter(project_complexity='Innovation').count()
     scaffoldingnumber = Person.objects.filter(project_complexity='Scaffolding').count()
     discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
-
-    
-    
+ 
    
     if request.method == 'GET' and 'innovation' in request.GET:
         projects = Person.objects.filter(project_complexity='Innovation')
