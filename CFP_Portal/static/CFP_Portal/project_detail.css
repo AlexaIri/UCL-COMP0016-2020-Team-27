@@ -1,6 +1,6 @@
 body{
 
-    background: #90d2ff;
+    background:#eee;
 }
 .card-box {
     padding: 20px;
@@ -124,7 +124,7 @@ p {
 }
 
 .bootstrap-tagsinput .label-info {
-    background-color: #02c0ce;
+    background-color: #eee;
     display: inline-block;
     padding: 4px 8px;
     font-size: 13px;

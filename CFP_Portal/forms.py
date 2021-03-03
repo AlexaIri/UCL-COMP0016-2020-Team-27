@@ -42,7 +42,7 @@ class Proposal(forms.Form):
     email = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Email address'}))
     # phone_number = PhoneNumberField()
     phone_number =  forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Phone'}))
-
+    title = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Job Title'}))
     project_title = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Title'}))
     summarized_abstract = forms.CharField(max_length=2000, widget = forms.TextInput(attrs ={'placeholder': 'Abstract (summary)'}))
     full_abstract = forms.CharField(max_length=5000, widget = forms.TextInput(attrs ={'placeholder': 'Abstract (in full)'}))

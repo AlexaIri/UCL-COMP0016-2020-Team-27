@@ -23,8 +23,8 @@ urlpatterns = [
     path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     path('about/', views.about, name = 'blog-about'),
     path('displayOrganisations/', OrganisationListView.as_view() , name= 'organisations'),
-    path('reviews/', ReviewsListView.as_view() , name= 'reviews'),
-    path('reviewDisplay/', ReviewsDisplayListView.as_view() , name= 'review-display'), #review grid
+    path('reviewdetail/<int:pk>/', views.projectreviewdetail , name= 'reviewdetail'),
+    path('reviewDisplay/', views.reviewdisplay , name= 'review-display'), #review grid
 
     path('post/<int:pk>/', PostDetailView.as_view(), name = 'post-detail'), # feedback sheet
     path('review/<int:pk>/', ReviewDetailView.as_view(), name = 'review-detail'),
@@ -44,6 +44,8 @@ urlpatterns = [
     path('users/', UsersListView.as_view(), name = 'users' ),
     path('projects/', views.projectgrid, name = 'projects' ),
     path('projects/list', views.projectlistview, name = 'projectslist' ),
+    path('acceptedprojects', views.acceptedprojects, name = 'acceptedprojects' ),
+    path('rejectedprojects', views.rejectedprojects, name = 'rejectedprojects' ),
 
 
     path('SubmissionPortal/', views.SubmissionPortal, name= 'SubmissionPortal'),

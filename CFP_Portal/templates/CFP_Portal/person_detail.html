@@ -1,7 +1,10 @@
-{% extends "CFP_Portal/base2.html" %}
+
+{% extends "CFP_Portal/sidebar.html" %}
 {% block content %}
+
 {% load static %}
 {% load crispy_forms_tags %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,113 +12,128 @@
     <meta charset="utf-8">
     <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
     <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>bs4 task detail - Bootdey.com</title>
+    <title>bs4 project grid - Bootdey.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'CFP_Portal/project_detail.css' %}">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'CFP_Portal/projects.css' %}">
+     
+ 
     <style type="text/css">
-
-    </style>
+    
+       </style>
+       
 </head>
-
 <body style="margin-top:100px">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="card-box task-detail">
-                    <div class="media mt-0 m-b-30"><img class="d-flex mr-3 rounded-circle" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar2.png" style="width: 48px; height: 48px;">
-                        <div class="media-body">
-                            <h5 class="media-heading mb-0 mt-0">{{project.name}}</h5><span class="badge badge-danger">Urgent</span></div>
-                    </div>
-                    
-                    <h4 class="m-b-20">{{project.project_title }}</h4>
-                    <p class="text-muted"> <b> Summarised Abstract: </b> {{project.summarised_abstract}}</p>
-                    <p class="text-muted"> <b>Full Abstract:</b> {{project.full_abstract}}</p>
-                    <p class="text-muted"> <b>Project Complexity </b>{{project.project_complexity}}</p>
-                    <p class="text-muted"> <b>Expertise Skills: </b>{{project.expertiseskills}}</p>
-                    <p class="text-muted"> <b>Source Type: </b>{{project.source_type}}</p>
-                    <p class="text-muted"> <b>Devices and Technologies Required: </b>{{project.devices}}</p>
-                    <p class="text-muted"> <b>Full Name: </b>{{project.name}}  {{project.surname}}</p>
-                    
-                    <p class="text-muted"> <b>Phone Number </b>{{project.phone_number}}</p>
-                    <p class="text-muted"> <b>Email </b>{{project.email}}</p>
-                    <p class="text-muted"> <b>Completion of ethics form: </b>{{project.ethics_form}}</p>
-                    <p class="text-muted"> <b>Motivations </b>{{project.motivations}}</p>
-                    <ul class="list-inline task-dates m-b-0 mt-5">
-                        <li>
-                            <h5 class="m-b-5">Launching Date</h5>
-                            <p>{{project.launching_date}} <small class="text-muted"></small></p>
-                        </li>
-                        
-                    </ul>
-                    <div class="clearfix"></div>
-                    <div class="task-tags mt-4">
-                        <h5 class="">Tags</h5>
-                        <div class="bootstrap-tagsinput"><span class="tag label label-info">Amsterdam<span data-role="remove"></span></span> <span class="tag label label-info">Washington<span data-role="remove"></span></span> <span class="tag label label-info">Sydney<span data-role="remove"></span></span>
-                            
-                        </div>
+<div class="container">
 
-                    </div>
-                    <div class="assign-team mt-4">
-                        <h5 class="m-b-5">Assign to</h5>
-                        <div>
-                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar2.png"> </a>
-                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar3.png"> </a>
-                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar5.png"> </a>
-                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar8.png"> </a><a href="#"><span class="add-new-plus"><i class="fa fa-plus"></i></span></a></div>
-                    </div>
-                    <div class="attached-files mt-4">
-                        <h5 class="">Attached Files</h5>
-                        <div class="files-list">
-                            <div class="file-box">
-                                <a href=""><img src="/media/file.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
-                                <p class="font-13 mb-1 text-muted"><small>File one</small></p>
-                            </div>
-                            <div class="file-box">
-                                <a href=""><img src="/media/file.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
-                                <p class="font-13 mb-1 text-muted"><small>Attached-2</small></p>
-                            </div>
-                            <div class="file-box">
-                                <a href=""><img src="/media/file.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
-                                <p class="font-13 mb-1 text-muted"><small>Dribbble shot</small></p>
-                            </div>
-                            <div class="file-box ml-3"><a href="#"><span class="add-new-plus"><i class="fa fa-plus"></i></span></a></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="text-right mt-4">
-                                    <button type="submit" class="btn btn-success waves-effect waves-light">Save</button>
-                                    <button type="button" class="btn btn-light waves-effect">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="row">
+    
+        
+        <div class="col-lg-8">
+            <div class="d-flex flex-column flex-md-row mb-3 mb-md-0">
+                <nav class="mr-auto d-flex align-items-center" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        
+                        <li class="active breadcrumb-item" aria-current="page">Project {{project.id}}: {{project.project_title}} </li> &nbsp;&nbsp;
+                        <li> <b> Launching Date: {{project.launching_date}} </b> </li>
+                    </ol>
+                </nav>
+                
             </div>
-            <!-- end col -->
-            <div class="col-lg-4">
-                <div class="card-box">
-                    <h4 class="header-title m-b-30">Comment({{project.comments.all.count}})</h4>
+             
+            
+            
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive project-list">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <b>Project Details</b>
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row">Name</th>
+                        <td>{{project.name}} {{project.surname}}</td>
+                        
+                        </tr>
+                        <tr>
+                        <th scope="row">Phone Number</th>
+                        <td>{{project.phone_number}}</td>
+                        
+                        </tr>
+                        <tr>
+                        <th scope="row">Email</th>
+                        <td>{{project.email}}</td>
+                        
+                        </tr>
+
                     
-                            
-                        {%for comment in project.comments.all%}
-                        <div class="media m-b-20">
-                            
-                            <div class="media-body">
-                                <h5 class="mt-0">{{ comment.name}}</h5>
-                                <p>{{comment.feedback}}</p>
-                                <p class="font-13 text-muted mb-0"> Date added: {{comment.date_added}}</p>
-                            </div>
-                            </div>
-                            <hr>
-                        {%endfor%}
+                        <tr>
+                        <th scope="row">Project Title</th>
+                        <td>{{project.project_title }}</td>
                         
+                        </tr>
+
+                    
+                        <tr>
+                        <th scope="row">Summarised Abstract</th>
+                        <td>{{project.summarised_abstract}}</td>
                         
-                        <div class="media m-b-20">
-                            
-                            <form method="POST">
+                        </tr>
+                        
+                        <tr>
+                        <th scope="row">Full Abstract</th>
+                        <td>{{project.full_abstract}}</td>
+                        
+                        </tr>
+                        <tr>
+                        <th scope="row">Project Complexity</th>
+                        <td>{{project.project_complexity}}</td>
+                        
+                        </tr>
+                        <tr>
+                        <th scope="row">Expertise Skills</th>
+                        <td>{{project.expertiseskills}}</td>
+                        
+                        </tr>
+                        <tr>
+                        <th scope="row">Source Type</th>
+                        <td>{{project.source_type}}</td>
+                        
+                        </tr>
+                        <tr>
+                        <th scope="row">Devices and Technologies</th>
+                        <td>{{project.devices}}</td>
+                        
+                        </tr>
+                        <tr>
+                        <th scope="row">Motivation</th>
+                        <td>{{project.motivations}}</td>
+                        
+                        </tr>
+                        <tr>
+                        <th scope="row">Importance</th>
+                        <td>{{project.expertiseskills}}</td>
+                        
+                        </tr>
+
+                         
+                      
+                    </tbody>
+                    </table>
+                    </div>
+                  
+                    
+                    <div class="col-lg-4">
+                            <h3>Comments({{project.comments.all.count}})</h3>  
+                            {%for comment in project.comments.all%}
+                                 <h5>{{ comment.name}}</h5> <p>{{comment.feedback}}</p> <p class="font-13 text-muted mb-0"> Date added: {{comment.date_added}}<hr> 
+                            {%endfor%}  
+                        <form method="POST">
                             {% csrf_token %} 
                             <div class="media-body">
                                 {{ form |crispy }}
@@ -125,22 +143,23 @@
                                 </form>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
-            <!-- end col -->
-        </div>
-        <!-- end row -->
-    </div>
-    <!-- container -->
-</div>
+            </div>
+                            
+                        
+             
+
+                 
+                                    
+                                    
+           {% comment %} add pagination {% endcomment %}
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
-</script>
 
+</script>
 </body>
 </html>
 

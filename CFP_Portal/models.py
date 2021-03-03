@@ -44,7 +44,7 @@ class Person(models.Model):
     phone_number = models.CharField("phone number", max_length=130, default = "")
     #phone_number = PhoneNumberField(null=False, blank=False, unique=True)
     email = models.EmailField("email", max_length=130, default = "")
-
+    title = models.CharField("job title", max_length=130, default = "")
     project_title = models.CharField("title", max_length=130, default = "")
     summarised_abstract = models.CharField("summarised abstract", max_length=2000, default = "")
     full_abstract = models.TextField("full abstract", default = "")
@@ -170,5 +170,18 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default = timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
+class AcceptedProjects(models.Model):
+    project = models.ForeignKey(Person, related_name="accepted", on_delete=models.CASCADE)
+    date_accepted = models.DateTimeField(default = timezone.now)
+    
+    def __str__(self):
+        return '%s' % (self.project.project_title)
+
+class RejectedProjects(models.Model):
+    project = models.ForeignKey(Person, related_name="rejected", on_delete=models.CASCADE)
+    date_accepted = models.DateTimeField(default = timezone.now)
+    
+    def __str__(self):
+        return '%s' % (self.project.project_title)
    
     

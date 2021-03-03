@@ -9,6 +9,6 @@ class ProjectFilter(django_filters.FilterSet):
     class Meta:
         model = Person
         
-        fields = ['name','surname','project_title', 'project_complexity', 'source_type']
+        fields = ['name','surname','project_title', 'project_complexity', 'source_type', 'status']
 
         

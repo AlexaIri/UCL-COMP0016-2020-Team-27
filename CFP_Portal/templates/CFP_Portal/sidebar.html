@@ -66,12 +66,12 @@
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">All subsmissions</a> </li>
                     <li> <a href="#" style="color:rgb(0,70,177)"> Pending </a> </li>
-                    <li> <a href="#" style="color:rgb(0,70,177)"> Completed and Approved</a> </li>
-                     <li> <a href="#" style="color:rgb(0,70,177)"> Rejected</a> </li>
+                    <li> <a href="{% url 'acceptedprojects' %}"" style="color:rgb(0,70,177)"> Completed and Approved</a> </li>
+                     <li> <a href="{% url 'rejectedprojects' %}" style="color:rgb(0,70,177)"> Rejected</a> </li>
 
                 </ul>
             </li>
-            <li> <a href="{% url 'reviews' %}" style="color:rgb(0,70,177)">Feedback and Reviewing</a> </li>
+            
             <li> <a href="{% url 'organisations' %}" style="color:rgb(0,70,177)">Organisations</a> </li>
             <li> <a href= "#" style="color:rgb(0,70,177)">Comments</a> </li>
            
