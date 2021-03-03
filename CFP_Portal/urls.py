@@ -30,6 +30,7 @@ urlpatterns = [
     path('review/<int:pk>/', ReviewDetailView.as_view(), name = 'review-detail'),
     path('organisation/<int:pk>/', OrganisationDetailView.as_view(), name = 'organisation-detail'),
     path('project/<int:pk>/', views.projectdetail, name = 'project-detail'),
+    path('markAndReview/project/<int:pk>/', views.markprojectdetail, name = 'mark-project-detail'),
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name = 'post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name = 'post-delete'),
     path('organisation/<int:pk>/update/', OrganisationUpdateView.as_view(), name = 'organisation-update'),

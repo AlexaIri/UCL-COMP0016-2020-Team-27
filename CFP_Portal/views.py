@@ -43,6 +43,16 @@ def projectdetail(request, pk):
     }
     return render(request, 'CFP_Portal/person_detail.html', context)
 
+def markprojectdetail(request, pk):
+    review = get_object_or_404(Review, pk=pk)
+
+    context = {
+        'review': review,
+        # 'comments': commentslist,
+        # 'form': form
+    }
+    return render(request, 'CFP_Portal/mark_project_detail.html', context)
+
 def home(request):
     projects = Person.objects.all()
     #return HttpResponse('<h1> Blog Home </h1>')

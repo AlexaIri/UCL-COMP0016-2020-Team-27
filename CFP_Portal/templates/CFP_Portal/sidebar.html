@@ -52,44 +52,55 @@
         <ul class="list-unstyled components">
         
             <p >MENUS</p>
+            {% if user.is_authenticated %}
             <li> <a href="{% url 'SubmissionPortal'%}" style="color:rgb(0,70,177)">Submission Portal</a> </li>
             <li> <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Dashboard</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li><a href="{% url 'blog-home' %}" style="color:rgb(0,70,177)">Project Proposals</a> </li>
-                    <li> <a href="#" style="color:rgb(0,70,177)">Project Dashboard</a> </li>
+                    <li><a href="{% url 'blog-home' %}" style="color:rgb(0,70,177)">Projects Dashboard</a> </li>
+                    {% comment %} <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">Completed Projects Dashboard</a> </li> {% endcomment %}
                     <li> <a href="{% url 'review-display' %}" style="color:rgb(0,70,177)">Reviews Dashboard</a> </li>
                 </ul>
             </li>
             <li> <a href="{% url 'users' %}" style="color:rgb(0,70,177)">Users</a> </li>
-            <li> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Subscribers</a>
+            <li> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Project Proposals</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li> <a href="#" style="color:rgb(0,70,177)">Active</a> </li>
-                    <li> <a href="#" style="color:rgb(0,70,177)">Idle</a> </li>
-                    <li> <a href="#" style="color:rgb(0,70,177)">Non Active</a> </li>
+                    <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">All subsmissions</a> </li>
+                    <li> <a href="#" style="color:rgb(0,70,177)"> Pending </a> </li>
+                    <li> <a href="#" style="color:rgb(0,70,177)"> Completed and Approved</a> </li>
+                     <li> <a href="#" style="color:rgb(0,70,177)"> Rejected</a> </li>
+
                 </ul>
             </li>
-            <li> <a href="#" style="color:rgb(0,70,177)">Project Proposals</a> </li>
             <li> <a href="{% url 'reviews' %}" style="color:rgb(0,70,177)">Feedback and Reviewing</a> </li>
             <li> <a href="{% url 'organisations' %}" style="color:rgb(0,70,177)">Organisations</a> </li>
-            <li> <a href="#" style="color:rgb(0,70,177)">Comments</a> </li>
+            <li> <a href= "#" style="color:rgb(0,70,177)">Comments</a> </li>
+           
+
         </ul>
+
+         {% else %}
+           <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+         {% endif %}
         <ul class="list-unstyled CTAs">
             <li> <a href="#" class="download">Subscribe</a> </li>
         </ul>
     </nav>
-    <div class="content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light"> <button type="button" id="sidebarCollapse" class="btn btn-dark"> <i class="fa fa-align-justify"></i> </button> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+     
+    <div class="container-fluid" style="padding:0px">
+        <nav class="navbar navbar-expand-md navbar-light bg-light"> <button type="button" id="sidebarCollapse" class="btn btn-dark"> <i class="fa fa-align-justify"></i> </button> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"> <a class="nav-link" href="{% url 'blog-home' %}">Home <span class="sr-only">(current)</span></a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Features</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Pricing</a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Contact</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
+                    <li class="nav-item"> <a class="nav-link"href="{% url 'profile' %}">Profile</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>
                 </ul>
             </div>
         </nav>
+
         <div class="content-wrapper">
-             {% block content %}
+            {% block content %}
              {% endblock %}
             {% comment %} <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam nulla facilisi cras fermentum odio eu. Eget nulla facilisi etiam dignissim diam quis enim. Et netus et malesuada fames ac turpis egestas integer eget. Tortor at risus viverra adipiscing at in tellus. Cras adipiscing enim eu turpis. Malesuada nunc vel risus commodo viverra. Enim nulla aliquet porttitor lacus luctus accumsan tortor posuere. Ac placerat vestibulum lectus mauris ultrices eros. In arcu cursus euismod quis viverra nibh cras. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum. In fermentum posuere urna nec tincidunt praesent semper. Ultricies mi quis hendrerit dolor. Sit amet luctus venenatis lectus magna fringilla urna porttitor. Praesent tristique magna sit amet purus gravida quis. Enim nunc faucibus a pellentesque sit amet porttitor.
                 Amet justo donec enim diam vulputate. Aliquet eget sit amet tellus cras. Tincidunt arcu non sodales neque. Semper auctor neque vitae tempus quam. In massa tempor nec feugiat nisl pretium fusce id. Fames ac turpis egestas integer eget aliquet. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra. Ut sem nulla pharetra diam. Vitae tempus quam pellentesque nec nam aliquam sem. Eget duis at tellus at urna condimentum mattis. Tellus orci ac auctor augue mauris. Eget sit amet tellus cras adipiscing enim eu turpis. Nam aliquam sem et tortor. Ac tincidunt vitae semper quis lectus. Mollis nunc sed id semper risus in hendrerit. Tincidunt id aliquet risus feugiat. Massa eget egestas purus viverra accumsan in nisl.
