@@ -34,33 +34,40 @@ def projectdetail(request, pk):
             comments.save()
     else:
         form = Commentform()      
-    
+
+    common_tags = project.tags.all()
     commentslist = Comment.objects.all()
     context = {
         'project': project,
         'comments': commentslist,
-        'form': form
+        'form': form,
+        'common_tags':common_tags
     }
     return render(request, 'CFP_Portal/person_detail.html', context)
 
 def projectreviewdetail(request, pk):
     project = get_object_or_404(Person, pk=pk)
+    Display = ' '
 
     if request.method == 'GET' and 'approve' in request.GET:
         Person.objects.filter(pk=pk).update(status='Accepted')
         acceptedproject = AcceptedProjects(project=project)
         acceptedproject.save()
+        Display = 'Project has been successfully accepted'
     
     if request.method == 'GET' and 'reject' in request.GET:
-        print("hello!")
+       
         Person.objects.filter(pk=pk).update(status='Rejected')
         rejectedproject = RejectedProjects(project=project)
         rejectedproject.save()
+        Display = 'Project has been successfully rejected'
+    
 
 
         
     context = {
         'project': project,
+        'Display' : Display
     }
     return render(request, 'CFP_Portal/reviewdetail.html', context)
 
@@ -84,9 +91,14 @@ def home(request):
     projects = Person.objects.all()
     #return HttpResponse('<h1> Blog Home </h1>')
     totalnumber = Person.objects.all().count()
+    acceptednumber = AcceptedProjects.objects.all().count()
+    pending = Person.objects.filter(status='Submitted').count()
     context = {
         'projects':projects,
-        'totalnumber': totalnumber
+        'totalnumber': totalnumber,
+        'acceptednumber':acceptednumber,
+        'pending':pending
+
     }
     return render(request, 'CFP_Portal/home.html', context)
 
@@ -139,7 +151,7 @@ def projectgrid(request):
     discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
 
     
-    
+
    
     if request.method == 'GET' and 'innovation' in request.GET:
         projects = Person.objects.filter(project_complexity='Innovation')
@@ -237,6 +249,7 @@ def acceptedprojects(request):
 
     if request.method == 'GET' and 'innovation' in request.GET:
         projects = Person.objects.filter(project_complexity='Innovation')
+        
 
     if request.method == 'GET' and 'discovery' in request.GET:
         projects = Person.objects.filter(project_complexity='Discovery')
@@ -389,33 +402,26 @@ class UserPostListView(ListView):
         return Post.objects.filter(author = user).order_by('-date_posted')
 
 
+
 def SubmissionPortal(request):
     
     if request.method == "POST":
         
         form = Proposal(request.POST)
+        print("unvalid")
+        print(form.errors)
         if form.is_valid():
-            results = Person()
-            results.name = form.cleaned_data['name']
-            results.surname = form.cleaned_data['surname']
-            results.phone_number = form.cleaned_data['phone_number']
-            results.project_title = form.cleaned_data['project_title']
-            results.title = form.cleaned_data['title']
-            results.email = form.cleaned_data['email']
-            results.summarised_abstract = form.cleaned_data['summarized_abstract']
-            results.full_abstract = form.cleaned_data['full_abstract']
-            results.expertiseskills = form.cleaned_data['expertise_and_skills']
-            results.devices = form.cleaned_data['devices']
-            results.project_complexity = form.cleaned_data['project_complexity']
-            results.source_type = form.cleaned_data['source_type']
-            results.ethics_form = form.cleaned_data['ethics_form']
-            results.launching_date = form.cleaned_data['launching_date']
-            results.motivations = form.cleaned_data['motivations']
-            results.importance = form.cleaned_data['importance']
-            results.hashtags = form.cleaned_data['hashtags']
-            results.status = 'Submitted'
+            print("valid!")
+            user = User.objects.get(pk=request.user.id)
+            project = form.save(commit=False)
+            project.status = 'Submitted'
+            project.department = user.profile.department
+            project.department = user.profile.organisation
+            project.save()
+            form.save_m2m()
+                    
 
-            results.save() 
+            
         item_list = Person.objects.all()
         #
         return redirect('/CFP_Portal/')
@@ -425,5 +431,50 @@ def SubmissionPortal(request):
     
     return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
 
+# def SubmissionPortal(request):
+    
+#     if request.method == "POST":
+        
+#         form = Proposal(request.POST)
+
+#         if form.is_valid():
+           
+#             user = User.objects.get(pk=request.user.id)
+     
+#             results = Person()
+#             results.name = form.cleaned_data['name']
+#             results.surname = form.cleaned_data['surname']
+#             results.phone_number = form.cleaned_data['phone_number']
+#             results.project_title = form.cleaned_data['project_title']
+#             results.title = form.cleaned_data['title']
+#             results.email = form.cleaned_data['email']
+#             results.summarised_abstract = form.cleaned_data['summarised_abstract']
+#             results.full_abstract = form.cleaned_data['full_abstract']
+#             results.expertiseskills = form.cleaned_data['expertiseskills']
+#             results.devices = form.cleaned_data['devices']
+#             results.project_complexity = form.cleaned_data['project_complexity']
+#             results.source_type = form.cleaned_data['source_type']
+#             results.ethics_form = form.cleaned_data['ethics_form']
+#             results.launching_date = form.cleaned_data['launching_date']
+#             results.motivations = form.cleaned_data['motivations']
+#             results.importance = form.cleaned_data['importance']
+#             results.hashtags = form.cleaned_data['hashtags']
+#             results.department = user.profile.department
+#             results.organisation = user.profile.organisation
+            
+#             results.status = 'Submitted'
+
+#             results.save() 
+            
+            
+       
+#         #
+#         return redirect('/CFP_Portal/')
+
+#     else:
+
+#         form = Proposal()
+        
+#     return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
  
 

@@ -17,8 +17,14 @@
         
 
     <style type="text/css">
+
     	
     </style>
+    <style> 
+    #myDIV {
+    color: white;
+    visibility: hidden;
+}</style>
 
    
 </head>
@@ -150,9 +156,7 @@
                         <div class="col-xs-12 emphasis mt-1 mb-1">
                             <p class="ratings">
                                 
-                                 
-    
-       
+                 
             <div class="stars">
             <a style="color:#D7D7D7">Give a rating for the project</a>
                 <form action=""> <input class="star star-5" id="star-5" type="radio" name="star" />
@@ -170,19 +174,20 @@
        
 
 </div>
-                                {% comment %} <a href="#"><span class="fa fa-star"></span></a>
+                                {% comment %} <a href="#"><span class="fa fa-star"></span></a><a style="color:#D7D7D7">Give a rating for the project</a><a style="color:#D7D7D7">Give a rating for the project</a>d
                                 <a href="#"><span class="fa fa-star"></span></a>
                                 <a href="#"><span class="fa fa-star"></span></a>
                                 <a href="#"><span class="fa fa-star-o"></span></a>
                                 <a href="#"><span class="fa fa-star-o"></span></a> {% endcomment %}
                             </p>
                         </div>
-
+            <a style="color:#D7D7D7">{{Display}}</a>
                         <div class="col-xs-12  emphasis  mt-1 mb-1">
                             <form method="GET">
+                            
                             {% csrf_token %} 
-                             <button type="submit" name="approve"class="btn btn-success btn-xs  mt-1 mb-1 ml-1"><i class="fa fa-check-circle"></i> Approve</button>
-                                
+                             <button type="submit"onclick="myFunction()"name="approve"class="btn btn-success btn-xs  mt-1 mb-1 ml-1"><i class="fa fa-check-circle"></i> Approve</button>
+                            
                             </form> 
                             
                             <form method="GET">
@@ -195,7 +200,20 @@
                             <a href ="{% url 'project-detail' project.id %}"><button type="button" class="btn btn-light btn-xs  mt-1 mb-1"> 
                                 <i class="fa fa-tasks" style="color:#999"></i> View Project 
                            </button> </a> 
+                           
+                           
 
+                    
+
+                        
+
+
+                        <script>
+                        function myFunction() {
+                        var x = document.getElementById('myDIV');
+                        x.style.visibility = 'visible';
+                        }
+                        </script>
                             
                              
                           
@@ -203,7 +221,7 @@
                     </div>
                 </div>
             </div>
-            {{Display}}
+          
          
 
 

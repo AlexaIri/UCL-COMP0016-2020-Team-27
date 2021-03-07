@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
+from taggit.managers import TaggableManager
 # from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -47,6 +48,10 @@ class Person(models.Model):
     title = models.CharField("job title", max_length=130, default = "")
     project_title = models.CharField("title", max_length=130, default = "")
     summarised_abstract = models.CharField("summarised abstract", max_length=2000, default = "")
+    department = models.CharField("department", max_length=2000, default = "",blank=True)
+    organisation = models.CharField("organisation", max_length=2000, default = "",blank=True)
+    challenge = models.CharField("challenge", max_length=2000, default = "", blank=True)
+
     full_abstract = models.TextField("full abstract", default = "")
     expertiseskills = models.TextField("expertise skills", default = "")
     devices = models.TextField("devices", default = "")
@@ -86,14 +91,13 @@ class Person(models.Model):
     launching_date = models.DateField("launching date:", default = "2021-01-25")
     motivations = models.TextField("motivations", default = "")
     importance = models.TextField("why is your project important", default = "")
-    hashtags = models.CharField(max_length = 255, default = "hashtags")
-
+    
+    tags = TaggableManager()
     statusType = (
-        ('Accepeted', 'Accepted'),
+        ('Accepted', 'Accepted'),
         ('Rejected', 'Rejected'),
-        ('Waiting', 'Waiting'),
         ('Submitted', 'Submitted'),
-        ('Paused', 'Paused'),
+        
 
     )
     status = models.CharField("What is the current status of the project?", max_length=20, choices=statusType, default = "")
@@ -109,6 +113,8 @@ class Person(models.Model):
 
     priority = models.CharField("What is the priority level of the project?", max_length=20, choices=priorityStatus, default = "")
 
+    def __str__(self):
+        return '%s' % (self.project_title)
 # class ProjectProposals(models.Model):
 #     project_name = models.CharField(max_length = 255, default = "Default name")
 #     project_title = models.CharField(max_length = 255, default = "Default title")
@@ -171,14 +177,22 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class AcceptedProjects(models.Model):
-    project = models.ForeignKey(Person, related_name="accepted", on_delete=models.CASCADE)
+    project = models.OneToOneField(
+        Person,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
     date_accepted = models.DateTimeField(default = timezone.now)
     
     def __str__(self):
         return '%s' % (self.project.project_title)
 
 class RejectedProjects(models.Model):
-    project = models.ForeignKey(Person, related_name="rejected", on_delete=models.CASCADE)
+    project = models.OneToOneField(
+        Person,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
     date_accepted = models.DateTimeField(default = timezone.now)
     
     def __str__(self):

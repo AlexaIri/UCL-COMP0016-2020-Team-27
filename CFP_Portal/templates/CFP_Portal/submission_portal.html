@@ -17,13 +17,17 @@
 
             <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'CFP_Portal/about.css' %}">
+    <link rel="stylesheet" href="{% static 'CFP_Portal/bootstrap-tagsinput.css' %}">
+    
     <style type="text/css">
      </style>
+     
                                 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
                                 <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
                     
 
                                 <script type="text/javascript" src="{% static 'CFP_Portal/scripts.js' %}"></script>
+                                 <script type="text/javascript" src="{% static 'CFP_Portal/bootstrap-tagsinput.js' %}"></script>
                                 
                             </head>
                             <body oncontextmenu='return false' class='snippet-body'>
@@ -122,13 +126,13 @@
                                  
                                      
                                      {% comment %} <input name = "summarized_abstract" type="text" class="form-control" placeholder="Summarized abstract" required>  {% endcomment %}
-                                     {{ form.summarized_abstract|as_crispy_field}}
+                                     {{ form.summarised_abstract|as_crispy_field}}
                                      
                                      {% comment %} <input name = "full_abstract" type="text" class="form-control" placeholder="Full abstract" required>  {% endcomment %}
                                      {{ form.full_abstract|as_crispy_field}}
                                      
                                      {% comment %} <input name = "expertiseskills" type="text" class="form-control" placeholder="Expertise and Skills" required> {% endcomment %}
-                                     {{ form.expertise_and_skills|as_crispy_field}}
+                                     {{ form.expertiseskills|as_crispy_field}}
                                       
                                      {% comment %} <input name = "devices" type="text" class="form-control" placeholder="Devices" required>  {% endcomment %}
                                      {{ form.devices|as_crispy_field}}
@@ -195,10 +199,22 @@
                                       {{ form.importance|as_crispy_field}}
                                      
                                      {% comment %} <input name = "phone_number" type="text" class="form-control" placeholder="Phone number" required>  {% endcomment %}
-                                     {{ form.hashtags|as_crispy_field}}
+                                     
+
+                                      <div class="form-group">
+                    <label>Tags</label>
+                    <input type="text" data-role="tagsinput" class="form-control" name="tags">
+                </div>
+                <script> $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
+                                        if(e.keyCode == 13) {
+                                            e.preventDefault();
+                                            return false;
+                                        }
+                                        });</script> 
+                                    
                                     
                              </div>
-
+                                
                              <div id="step-5" class="">
                                  <div class="row">
                                      <div class="col-md-12"> <span>Thank you for submitting your project! We will send you a confirmation email. We will review your details and reach you back.</span>

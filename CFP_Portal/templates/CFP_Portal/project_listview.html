@@ -21,6 +21,75 @@
     <style type="text/css">
     
        </style>
+       <style>
+        .switch {
+        position: relative;
+        display: inline-block;
+        width: 35px;
+        height: 17px;
+        }
+
+        .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+
+        .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        .slider:before {
+        position: absolute;
+        content: "";
+        height: 13px;
+        width: 13px;
+        left: 2px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        input:checked + .slider {
+        background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+        border-radius: 17px;
+        }
+
+        .slider.round:before {
+        border-radius: 50%;
+        }
+        
+        #myDIV {
+        color: black;
+        display: none;
+        font-size: 14px;
+       
+        }
+        
+</style>
        
 </head>
 <body style="margin-top:100px">
@@ -37,15 +106,45 @@
 
 			<form method="get">
                
-               Name:  {{ myFilter.form.name}}     
-               Surname:  {{ myFilter.form.surname}}      
-               Project title:  {{ myFilter.form.project_title}}   
-              Open or closed source:  {{ myFilter.form.source_type}}                
-				
+            
+               Project title:  {{ myFilter.form.project_title}}   </p>
+               Status:      {{ myFilter.form.status}}   </p>   
+               Project ID:      {{ myFilter.form.id}}   </p>     
+				Advanced Search
+                <label class="switch"> 
+                <input type="checkbox" id="myCheck" onclick="myFunction()">
+                <span class="slider round"></span>
+                </label>
+                <div id="myDIV" class="form-group">
+                
+
+                  <p style="color:black;"> Department: {{ myFilter.form.department}}   
+                  Organisation: {{ myFilter.form.organisation}} 
+                  Open or closed source:  {{ myFilter.form.source_type}}
+                   <br>Area of Expertise {{myFilter.form.expertiseskills}}
+                  Name {{myFilter.form.name}}  </p>       </p>
+                </div>
+                
+                <script>
+                
+                function myFunction() {
+                
+                var checkBox = document.getElementById("myCheck");
+               
+                var x = document.getElementById("myDIV");
+
+                if (checkBox.checked == true){
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+                }
+                </script>
 
                     
-
-		    <button class="btn btn-primary" type="submit">Search</button>
+           <button class="btn btn-primary"name="allprojects" style="margin:5px"type="submit">Search</button>
+		    
+           
 		  </form>
             
 

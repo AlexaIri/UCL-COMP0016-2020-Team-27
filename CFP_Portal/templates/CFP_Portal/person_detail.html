@@ -1,165 +1,374 @@
-
 {% extends "CFP_Portal/sidebar.html" %}
 {% block content %}
-
 {% load static %}
 {% load crispy_forms_tags %}
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>bs4 project grid - Bootdey.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'CFP_Portal/projects.css' %}">
-     
- 
+                                <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet'>
+                                <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
+                                <link rel="stylesheet" href="{% static 'CFP_Portal/review_display.css' %}">
+
+                                <style type='text/css'></style>
+                                <script type='text/javascript' src=''></script>
+                                <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
+                                <script type='text/javascript'></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'CFP_Portal/project_detail.css' %}">
     <style type="text/css">
-    
-       </style>
-       
+
+    </style>
 </head>
-<body style="margin-top:100px">
+
+<body style="margin-top:-4px;  background:#fff;   background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, black 0%, #0046B1 100%);">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container">
 
-    <div class="row">
-    
-        
-        <div class="col-lg-8">
-            <div class="d-flex flex-column flex-md-row mb-3 mb-md-0">
-                <nav class="mr-auto d-flex align-items-center" aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        
-                        <li class="active breadcrumb-item" aria-current="page">Project {{project.id}}: {{project.project_title}} </li> &nbsp;&nbsp;
-                        <li> <b> Launching Date: {{project.launching_date}} </b> </li>
-                    </ol>
-                </nav>
-                
-            </div>
-             
-            
-            
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive project-list">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                        <b>Project Details</b>
-                        
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <th scope="row">Name</th>
-                        <td>{{project.name}} {{project.surname}}</td>
-                        
-                        </tr>
-                        <tr>
-                        <th scope="row">Phone Number</th>
-                        <td>{{project.phone_number}}</td>
-                        
-                        </tr>
-                        <tr>
-                        <th scope="row">Email</th>
-                        <td>{{project.email}}</td>
-                        
-                        </tr>
 
-                    
-                        <tr>
-                        <th scope="row">Project Title</th>
-                        <td>{{project.project_title }}</td>
-                        
-                        </tr>
+         
+          
+     <div class="container"> 
+                   <div class="container-fluid p-0 m-0" >
+        <div class="row" >
+            <div class="col-lg-8" >
+                <div class="card-box task-detail" style=" background: rgb(250, 251, 252) bottom right repeat-y;">
+                                <h6 class="media-heading mb-0 mt-0" style="text-align:right">  Project {{project.id}}</h6><br>
 
-                    
-                        <tr>
-                        <th scope="row">Summarised Abstract</th>
-                        <td>{{project.summarised_abstract}}</td>
-                        
-                        </tr>
-                        
-                        <tr>
-                        <th scope="row">Full Abstract</th>
-                        <td>{{project.full_abstract}}</td>
-                        
-                        </tr>
-                        <tr>
-                        <th scope="row">Project Complexity</th>
-                        <td>{{project.project_complexity}}</td>
-                        
-                        </tr>
-                        <tr>
-                        <th scope="row">Expertise Skills</th>
-                        <td>{{project.expertiseskills}}</td>
-                        
-                        </tr>
-                        <tr>
-                        <th scope="row">Source Type</th>
-                        <td>{{project.source_type}}</td>
-                        
-                        </tr>
-                        <tr>
-                        <th scope="row">Devices and Technologies</th>
-                        <td>{{project.devices}}</td>
-                        
-                        </tr>
-                        <tr>
-                        <th scope="row">Motivation</th>
-                        <td>{{project.motivations}}</td>
-                        
-                        </tr>
-                        <tr>
-                        <th scope="row">Importance</th>
-                        <td>{{project.expertiseskills}}</td>
-                        
-                        </tr>
+                    <div class="media mt-0 m-b-30" > 
 
-                         
-                      
-                    </tbody>
-                    </table>
-                    </div>
-                  
-                    
-                    <div class="col-lg-4">
-                            <h3>Comments({{project.comments.all.count}})</h3>  
-                            {%for comment in project.comments.all%}
-                                 <h5>{{ comment.name}}</h5> <p>{{comment.feedback}}</p> <p class="font-13 text-muted mb-0"> Date added: {{comment.date_added}}<hr> 
-                            {%endfor%}  
-                        <form method="POST">
-                            {% csrf_token %} 
-                            <div class="media-body">
-                                {{ form |crispy }}
-                                <div class="mt-2 text-right">
-                                    <button type="submit" name="comment"class="btn btn-sm btn-custom waves-effect waves-light">Send</button>
-                                </div>
-                                </form>
-                                </div>
-                            </div>
+                        <div class="media-body" style="margin-left:10px">
+                            {% comment %} <h5 class="media-heading mb-0 mt-0" style="text-align:right">  {{project.name}}  {{project.surname}}</h5><br> {% endcomment %}
+                             <h3 class="m-b-20" style="text-align:left">{{project.project_title }}</h3>
+                             {% if project.status == "Rejected"%}
+                               <span class="badge badge-danger"  style="text-align:justify">{{project.status}} </span></div>
 
-            </div>
-            </div>
                             
-                        
-             
+                            {% elif project.status == "Submitted"%}
+                             <span class="badge badge-warning"  style="text-align:justify">{{project.status}} </span></div>
 
+                            {% elif project.status == "Accepted"%}
+                            <span class="badge badge-success"  style="text-align:justify">{{project.status}}  </span></div>
+
+                           {% else %}
+                           <span class="badge badge-secondary"  style="text-align:justify"> No Priority</span></div>
+
+                            {% endif %}
+                           
+                            {% comment %} <div class="m-b-20" style="vertical-align: text-bottom">
+                           <a href ="#"> <button type="button" class="btn btn-success btn-xs  ">    Edit   </button></a>
+                            <a href ="#"> <button type="button" class="btn btn-danger btn-xs  ">  Delete    </button></a>
+                           </div> {% endcomment %}
+                
+                               
+                           
+                            <br>
+                   
+                              <div class="col-md-6" style="text-align:left">
+                            <h5>Badges & Tags</h5>
+                            {% for mt in project.tags.all %}
+                    <a href="#" class="badge badge-success">{{mt}}</a>
+                            {%endfor%}
+                            <span class="badge badge-primary"><i class="fa fa-user"></i> 90 Subscriptions</span>
+                            <span class="badge badge-info"><i class="fa fa-cog"></i> {{project.comments.all.count}} Comments</span>
+                            <span class="badge badge-danger"><i class="fa fa-eye"></i> 2 Views</span>
+                        </div>
+
+                        
+                    </div>
+                     </div>
+                    <br>
+                    
+
+                    {% comment %} Hashtags {% endcomment %}
+                    
+                                   <div class="card-box task-detail" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') bottom right repeat-y;">
+
+                    <table class="table table-hover table-striped">
+                                <tbody> 
+                                <tr style="background:#DBDCE0">
+                                        <td>
+                                        <div class="p-5" style="margin-left:0em; align:right">
+                        <h5 class="h5" style="color:#0530A2"> Submitter Details </h5>
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
+                    
+                        
+                         {% comment %} <div class="card" style="width:100%">
+             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
+                        <p style="color:black"> <b>Submitter Name:</b> {{project.name}} {{project.surname}} </p>
+                        <p style="color:black"> <b>Submitter Email:</b> {{project.email}} </p>
+                        <p style="color:black"> <b>Submitter Phone Number:</b> {{project.phone_number}} </p>
+                        <p style="color:black"> <b>Submitter Department:</b> {{project.department}} </p>
+                        <p style="color:black"> <b>Submitter Organisation:</b> {{project.organisation}} </p>
+                                        </div>
+                                    </td>
+                                    </tr>                                   
+                                   
+                                    <tr style="background:white">
+                                        <td>
+                                        <div class="p-5" style="margin-left:0em; align:right">
+                        <h5 class="h5" style="color:#0530A2"> Summarised Abstract </h5>
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
+                    
+                        
+                         {% comment %} <div class="card" style="width:100%">
+             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
+                        <p style="color:black"> {{project.summarised_abstract}} </p>
+                        
+                                        </div>
+                                    </td>
+                                    </tr>
+    
+                                   <tr style="background:#DBDCE0">
+                                        <td>
+
+                                        
+                                        <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
+                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                          <h5 class="h5" style="color:#0530A2"> Full Abstract </h5>
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        <p style="color: black; text-align:justify"> {{project.full_abstract}} </p>
+                                        </div>
+                                    </td>
+                                    </tr>
+                                    
+                                  <tr style="background:white">
+                                        <td>
+
+                                        
+                                        <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
+                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                          <h5 class="h5" style="color:#0530A2"> Project Complexity </h5>
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        <p style="color: black; text-align:justify"> {{project.project_complexity}} </p>
+                                        </div>
+                                    </td>
+                                    </tr>
+
+                                                <tr style="background:#DBDCE0">
+                                        <td>
+
+                                        
+                                        <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
+                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                          <h5 class="h5" style="color:#0530A2"> Expertise and Skills </h5>
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        <p style="color: black; text-align:justify"> {{project.expertiseskills}} </p>
+                                        </div>
+                                    </td>
+                                    </tr>
+
+                                        {% comment %} <td>
+                                            <h6 style="text-align:right;" ><b style= "background-color:#A2A2A1; color:#071E5E;">Expertise and Skills </b> </h6>
+                                            <h6 style="color:black" ><p>{{project.expertiseskills}}</p></h6>
+                                        </td> {% endcomment %}
+                                     <tr style="background:white">
+                                        <td>
+
+                                        
+                                        <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
+                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                          <h5 class="h5" style="color:#0530A2"> Motivations </h5>
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        <p style="color: black; text-align:justify"> {{project.motivations}} </p>
+                                        </div>
+                                    </td>
+                                    </tr>
+
+                                       <tr style="background:#DBDCE0">
+                                        <td>
+
+                                        
+                                        <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
+                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                          <h5 class="h5" style="color:#0530A2"> Devices and Technologies Required </h5>
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        <p style="color: black; text-align:justify"> {{project.devices}} </p>
+                                        </div>
+                                    </td>
+                                    </tr>
+
+                                   
+                                </tbody>
+                            </table>
+                            </div>
+<br>
+{% comment %} LAST PART {% endcomment %}
+                                   <div class="card-box task-detail" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') bottom right repeat-y;">
+
+ <div class="container">
+    <div class="row">
+        <div class="col-md-4 Services-tab item" >
+            <div class="folded-corner service_tab_1" style=" -webkit-box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06), 0 1px 0 0 rgba(0, 0, 0, .02); box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06), 0 1px 0 0 rgba(0, 0, 0, .02);">
+                <div class="text" > <i class="fa fa-pencil-square-o fa-5x fa-icon-image"></i>
+                    <p class="item-title">
+                        <h5> Completion of the ethics form</h5>
+                    </p><!-- /.item-title -->
+                    {% if project.ethics_form == "Yes"%}
+                   <p style="font-size:120%">  Yes</p>
+                   {% else %}
+                   <p style="font-size:120%">  No </p>
+
+                   {% endif %}
+                         
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 Services-tab item">
+            <div class="folded-corner service_tab_1">
+                <div class="text"> <i class="fa fa-calendar fa-5x fa-icon-image"></i>
+                    <p class="item-title">
+                        <h5> Launching date </h5>
+                    </p><!-- /.item-title -->
+                   <p style="font-size:120%"> {{project.launching_date}}</p>
+                        
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 Services-tab item">
+            <div class="folded-corner service_tab_1">
+                <div class="text"> <i class="fa fa-file-code-o fa-5x fa-icon-image"></i>
+                    <p class="item-title">
+                        <h5> Source type </h5>
+                    </p>
+                    <p style="font-size:120%"> {{project.source_type}}</p>
+                       
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% comment %} LAST PART ENDS {% endcomment %}
+
+                    {% comment %} <p class="text-muted"> <b> Summarised Abstract: </b> {{project.summarised_abstract}}</p>
+                    <p class="text-muted"> <b>Full Abstract:</b> {{project.full_abstract}}</p>
+                    <p class="text-muted"> <b>Project Complexity </b>{{project.project_complexity}}</p>
+                    <p class="text-muted"> <b>Expertise Skills: </b>{{project.expertiseskills}}</p>
+                    <p class="text-muted"> <b>Source Type: </b>{{project.source_type}}</p>
+                    <p class="text-muted"> <b>Devices and Technologies Required: </b>{{project.devices}}</p>
+                    <p class="text-muted"> <b>Full Name: </b>{{project.name}}  {{project.surname}}</p>
+                    
+                    <p class="text-muted"> <b>Phone Number </b>{{project.phone_number}}</p>
+                    <p class="text-muted"> <b>Email </b>{{project.email}}</p>
+                    <p class="text-muted"> <b>Completion of ethics form: </b>{{project.ethics_form}}</p>
+                    <p class="text-muted"> <b>Motivations </b>{{project.motivations}}</p>
+                    <ul class="list-inline task-dates m-b-0 mt-5">
+                        <li>
+                            <h5 class="m-b-5">Launching Date</h5>
+                            <p>{{project.launching_date}} <small class="text-muted"></small></p>
+                        </li>
+                        
+                    </ul> {% endcomment %}
+                    <div class="clearfix"></div>
+                    {% comment %} <div class="task-tags mt-4">
+                        <h5 class="">Tags</h5>
+                        <div class="bootstrap-tagsinput"><span class="tag label label-info">Amsterdam<span data-role="remove"></span></span> <span class="tag label label-info">Washington<span data-role="remove"></span></span> <span class="tag label label-info">Sydney<span data-role="remove"></span></span>
+                            
+                        </div>
+
+                    </div> {% endcomment %}
+                    <div class="row">
+                          
+                       <div class="card" style="background-color:#DBDCE0">
+             <div class="card-body">
+                    <div class="assign-team mt-4">
+                        <h5 class="m-b-5" style="color:black;text-align:center">Assign to</h5>
+                        <div>
+                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar2.png"> </a>
+                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar3.png"> </a>
+                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar5.png"> </a>
+                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar8.png"> </a>
+                            <a href="#"><span class="add-new-plus"><i class="fa fa-plus"></i></span></a></div>
+             
+                    </div></div>
+                    </div>
+
+                    <div class="card" style="background-color:#DBDCE0;" text-center>
+             <div class="card-body" >
+                    <div class="attached-files mt-4">
+                        <h5 class="" style="color:black; text-align:center">Attached Files</h5>
+                        <div class="files-list" style="text-align:center">
+                            <div class="file-box">
+                                <a href=""><img src="/media/excel.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                <p class="font-13 mb-1 text-muted"><small>Attachment 1</small></p>
+                            </div>
+                            <div class="file-box">
+                                <a href=""><img src="/media/word.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                <p class="font-13 mb-1 text-muted"><small>Attachment 2</small></p>
+                            </div>
+                            <div class="file-box">
+                                <a href=""><img src="/media/pptx.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                <p class="font-13 mb-1 text-muted"><small>Attachment 3</small></p>
+                            </div>
+                            <div class="file-box ml-3"><a href="#"><span class="add-new-plus"><i class="fa fa-plus"></i></span></a></div>
                  
-                                    
-                                    
-           {% comment %} add pagination {% endcomment %}
+                        </div></div>
+                        </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+            <div class="col-lg-4">
+                <div class="card-box" style=" background: rgb(250, 251, 252)  top left repeat-y;">
+                    <h4 class="header-title m-b-30">Comments ({{project.comments.all.count}})</h4>
+                    
+                            
+                        {%for comment in project.comments.all%}
+                        <div class="media m-b-20">
+                            
+                            <div class="media-body">
+                                <h5 class="mt-0">{{ comment.name}}</h5>
+                                <p style="color:#071E5E">{{comment.feedback}}</p>
+                                <p class="font-13 text-muted mb-0"> Date added: {{comment.date_added}}</p>
+                            </div>
+                            </div>
+                            <hr>
+                        {%endfor%}
+                        
+                        
+                        {% comment %} <div class="media m-b-20"> {% endcomment %}
+                             <div class="align-self-start mr-3">
+                            <form method="POST">
+                            {% csrf_token %} 
+                          
+                            <div class="media-body">
+                             
+                                {{ form |crispy }}
+                         
+                                 <div class="ml-0 mb-1">
+                                    <button type="submit" name="comment"class="btn btn-dark btn-sm btn-custom waves-effect waves-light btn-block">Send</button>
+                                </div>  
+
+                              
+                                  </div>
+                               
+                                </form>
+                                   </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- container -->
+</div>
+</div>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	
-
 </script>
+
 </body>
 </html>
 
