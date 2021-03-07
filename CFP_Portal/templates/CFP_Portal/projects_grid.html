@@ -242,8 +242,20 @@
             <div class="card-columns">
             {% for project in projects %}
                 <div class="Card_custom-card--border_5wJKy card">
-                
-                    <div class="card-body"><span class="badge badge-info">{{project.status}}</span>
+                    
+                    <div class="card-body"><span class=""/span>
+                    {% if project.status == "Rejected"%}
+                            <span class="badge badge-danger">{{project.status}} </span>
+
+                            
+                            {% elif project.status == "Submitted"%}
+                             <span class="badge badge-warning">{{project.status}} </span>
+
+                            {% elif project.status == "Accepted"%}
+                            <span class="badge badge-success">{{project.status}}  </span>
+
+
+                    {% endif %}
                         <div class="mb-2"><a href="{% url 'project-detail' project.id %}" class="mr-2"><i class="fa fa-fw fa-star-o"></i></a><a href="{% url 'project-detail' project.id %}">{{project.project_title}}</a></div><span><b>Submitter Name: </b><br>{{project.name}} <br><b> Launching date: </b> <br>{{project.launching_date}} <hr> <b>Tags:</b> {% for mt in project.tags.all %}
                     <a href="#" class="badge badge-success">{{mt}}</a>
                      {% endfor %}</span></div>
