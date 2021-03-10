@@ -8,23 +8,22 @@
         <head>
             <meta charset='utf-8'>
             <meta name='viewport' content='width=device-width, initial-scale=1'>
-            <title> Progress Bar </title>
             <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
-            {% comment %} <link href='' rel='stylesheet'>
-            <style>
-
-            }</style> {% endcomment %}
+           
 
             <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'CFP_Portal/about.css' %}">
+    <link rel="stylesheet" href="{% static 'CFP_Portal/submission.css' %}">
+    <link rel="stylesheet" href="{% static 'CFP_Portal/bootstrap-tagsinput.css' %}">
     <style type="text/css">
      </style>
-                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+                                  <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
                                 <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
                     
 
                                 <script type="text/javascript" src="{% static 'CFP_Portal/scripts.js' %}"></script>
+                                 <script type="text/javascript" src="{% static 'CFP_Portal/bootstrap-tagsinput.js' %}"></script>
                                 
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                             </head>
                             <body oncontextmenu='return false' class='snippet-body'>
                              <link href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152092/smartwizard/smart_wizard.min.css" rel="stylesheet" type="text/css" />
@@ -39,8 +38,18 @@
          
 
 
- <div class="container">
-     <div class="row d-flex justify-content-center mt-200"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Start New Application </button> </div> <!-- Modal -->
+                            <circle>
+                            <div class="container" >
+                            </circle>
+
+     <div class="row d-flex justify-content-center mt-200" > <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal"> Start New Application </button> </div> <!-- Modal -->
+       <div class="col-xs-12  emphasis  mt-1 mb-1">
+      <div class="row d-flex justify-content-center mt-200" ><a href ="{% url 'blog-home' %}"> <button type="button" class="btn btn-dark btn-xs  mt-1 mb-1 ml-1"> 
+                              
+                                <i class="fa fa-home fa-2x"></i> <h4 style="font-size:15px">Home</h4>
+                                 
+                               
+                            </button></a></div></div>
      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         
@@ -53,7 +62,7 @@
                  <div class="modal-body">
                      <div id="smartwizard">
                          <ul>
-                             <li><a href="#step-1">Step 1<br /><small>Personal Information</small></a></li>
+                             <li ><a href="#step-1">Step 1<br /><small>Personal Information</small></a></li>
                              <li><a href="#step-2">Step 2<br /><small>Project Title and Abstract</small></a></li>
                              <li><a href="#step-3">Step 3<br /><small>Project Type</small></a></li>
                              <li><a href="#step-4">Step 4<br /><small>Motivations</small></a></li>
@@ -67,7 +76,7 @@
                              <hr style="width:50%;text-align:center;margin-left:10"> 
                             <p>
              
-                             <h6 style="text-align:center; color:#A3D9AD"><i> Provide your personal information below. It is mandatory to provide accurate data.  </i></h6>
+                             <h6 style="text-align:center; color:#0046B1"><i> Provide your personal information below. It is mandatory to provide accurate data.  </i></h6>
                             
                              <hr style="width:50%;text-align:center;margin-left:10"> 
                               <br>
@@ -106,7 +115,7 @@
                              <hr style="width:50%;text-align:center;margin-left:10"> 
                             <p>
              
-                             <h6 style="text-align:center; color:#A3D9AD"><i> Provide below information about the project. Mention your full project title which will be published, if need be; a summarized as well as a full version of the abstract. Include your background, skills and expertise, and the devices and technologies employed. </i></h6>
+                             <h6 style="text-align:center; color:#0046B1"><i> Provide below information about the project. Mention your full project title which will be published, if need be; a summarized as well as a full version of the abstract. Include your background, skills and expertise, and the devices and technologies employed. </i></h6>
                             
                              <hr style="width:50%;text-align:center;margin-left:10"> 
                               <br>
@@ -142,7 +151,7 @@
                              <hr style="width:50%;text-align:center;margin-left:10"> 
                             <p>
              
-                             <h6 style="text-align:center; color:#A3D9AD"><i> Provide details about the project complexity, what type of project yours is, if you have already filled in the ethics form and the data the project is expected for lauching.  </i></h6>
+                             <h6 style="text-align:center; color:#0046B1"><i> Provide details about the project complexity, what type of project yours is, if you have already filled in the ethics form and the data the project is expected for lauching.  </i></h6>
                             
                              <hr style="width:50%;text-align:center;margin-left:10"> 
                               <br>
@@ -176,7 +185,7 @@
                              <hr style="width:50%;text-align:center;margin-left:10"> 
                             <p>
              
-                             <h6 style="text-align:center; color:#A3D9AD"><i> Present below the significance of the project, the steps which led you to this idea, the motivations behind your field of expertise and in which areas your project fits.  </i></h6>
+                             <h6 style="text-align:center; color:#0046B1"><i> Present below the significance of the project, the steps which led you to this idea, the motivations behind your field of expertise and in which areas your project fits.  </i></h6>
                             
                              <hr style="width:50%;text-align:center;margin-left:10"> 
                               <br>
@@ -188,19 +197,32 @@
                              {% comment %} {{ form|crispy }} {% endcomment %}
                                  
                                      {% comment %} <input name = "name" type="text" class="form-control" placeholder="First name" required>  {% endcomment %}
-                                     {{ form.motivations|as_crispy_field}}
+                                  {{ form.motivations|as_crispy_field}}
                                     
                                      {% comment %} <input name = "surname" type="text" class="form-control" placeholder="Surname" required>  {% endcomment %}
                                       {{ form.importance|as_crispy_field}}
+
+                                      {{form.challenge|as_crispy_field}}
                                      
                                      {% comment %} <input name = "phone_number" type="text" class="form-control" placeholder="Phone number" required>  {% endcomment %}
-                                     {{ form.hashtags|as_crispy_field}}
+                                     
+
+                                      <div class="form-group">
+                    <label>Tags</label>
+                    <input type="text" data-role="tagsinput" class="form-control" name="tags">
+                </div>
+                <script> $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
+                                        if(e.keyCode == 13) {
+                                            e.preventDefault();
+                                            return false;
+                                        }
+                                        });</script> 
                                     
                              </div>
 
                              <div id="step-5" class="">
                                  <div class="row">
-                                     <div class="col-md-12"> <span>Thank you for submitting your project! We will send you a confirmation email. We will review your details and reach you back.</span>
+                                     <div class="col-md-12"> <span>Thank you for submitting your project! We will send you a confirmation email. We will review your details and reach you back soon.</span>
                                      <button type="submit" class="btn btn-outline-success "> Submit</button> </div>
                                  </div>
                              </div>

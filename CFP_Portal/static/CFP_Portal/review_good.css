@@ -14,6 +14,126 @@
     padding: 10px 0 0;
 }
 
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+
+    font-family: 'Poppins', sans-serif
+}
+
+body {
+    background-color: #161623;
+    min-height: 100vh
+}
+
+/* body::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#0046B1,#0046B1, #cf4f4f, #3abcf8);
+    clip-path: circle(25% at right)
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    left: 100;
+    top: 0;
+    width: 100%;
+    min-height: 10vh;
+    height: 100%;
+    background: linear-gradient( rgb(89, 130, 192), #110675, #aa1370) !important;
+    clip-path: circle(10% at 370px 170px) !important
+    
+    
+} */
+
+
+.btn-raised {
+    transition: box-shadow .4s cubic-bezier(.25, .8, .25, 1), transform .4s cubic-bezier(.25, .8, .25, 1);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26)
+}
+
+.btn-raised:not([disabled]):active,
+.btn-raised:not([disabled]):focus,
+.btn-raised:not([disabled]):hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .4);
+    transform: translate3d(0, -1px, 0)
+}
+
+.shadow {
+    overflow: hidden;
+    position: relative;
+    transform: translate3d(0, 0, 0)
+}
+
+.shadow:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .5s, opacity 1.5s
+}
+
+.shadow:active:before {
+    transform: scale(0, 0);
+    opacity: .1;
+    transition: 0s
+}
+
+.my-button,
+.my-2 {
+    margin-bottom: .5rem !important
+}
+
+circle::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#0046B1,#0046B1, #cf4f4f, #3abcf8);
+    clip-path: circle(25% at right)
+}
+
+circle::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    background: linear-gradient( rgb(89, 130, 192), #110675, #aa1370) !important;
+    /* clip-path: circle(10% at 370px 170px) !important */
+    clip-path: circle(30% at 0% 15%);
+    
+}
+.container {
+    margin-top: 80px;
+    margin-bottom: 80px;
+    position: relative;
+    z-index: 100;
+   
+
+}
+
 .well.profile_view .divider {
     border-top: 1px solid #e5e5e5;
     padding-top: 5px;
@@ -758,6 +878,146 @@ body {
   .panel>.list-group .list-group-item {
     border-top: 0;
   }
+
+/* versus */
+.versus{
+    position: absolute;
+    background: #f7f8f9;
+    border-radius: 100%;
+    border: 1px solid #9361D4;
+    color: #A788D1;
+    font-size: 1.25em;
+    height: 78px;
+    left: 50%;
+    margin-left: -39px;
+    padding-top: 22px;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 78px;
+    z-index: 4;
+ }
+.divided {
+    position: relative;
+    background: #f7f8f9;
+}
+.divided::after {
+    background: linear-gradient(#f0f7fd 0, #813FD9 50%, #f0f7fd 100%);
+    width: 1px;
+    top: 100px;
+    bottom: 100px;
+    left: 50%;
+    height: auto;
+    right: auto;
+    position: absolute;
+}
+
+@media (max-width: 768px) {
+    .divided::after {
+        background: linear-gradient(90deg, #f0f7fd 0, #813FD9 50%, #f0f7fd 100%);
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        right: 20px;
+        height: 1px;
+        width: 100%;
+    }   
+}
+
+
+.border-top-0 {
+     border-top:0!important;
+}
+ .border-right-0 {
+     border-right: 0!important;
+}
+ .border-left-0 {
+     border-left: 0!important;
+}
+ .border-bottom-0 {
+     border-bottom: 0!important;
+}
+ @media (min-width: 576px) {
+     .border-sm-top {
+         border-top: 1px solid #dee2e6!important;
+    }
+     .border-sm-right {
+         border-right: 1px solid #dee2e6!important;
+    }
+     .border-sm-left {
+         border-left: 1px solid #dee2e6!important;
+    }
+     .border-sm-bottom {
+         border-bottom: 1px solid #dee2e6!important;
+    }
+     .border-sm-top-0 {
+         border-top:0!important;
+    }
+     .border-sm-right-0 {
+         border-right: 0!important;
+    }
+     .border-sm-left-0 {
+         border-left: 0!important;
+    }
+     .border-sm-bottom-0 {
+         border-bottom: 0!important;
+    }
+}
+ @media (min-width: 768px) {
+     .border-md-top {
+         border-top: 1px solid #dee2e6!important;
+    }
+     .border-md-right {
+         border-right: 1px solid #dee2e6!important;
+    }
+     .border-md-left {
+         border-left: 1px solid #dee2e6!important;
+    }
+     .border-md-bottom {
+         border-bottom: 1px solid #dee2e6!important;
+    }
+     .border-md-top-0 {
+         border-top:0!important;
+    }
+     .border-md-right-0 {
+         border-right: 0!important;
+    }
+     .border-md-left-0 {
+         border-left: 0!important;
+    }
+     .border-md-bottom-0 {
+         border-bottom: 0!important;
+    }
+}
+ @media (min-width: 992px) {
+     .border-lg-top {
+         border-top: 1px solid #dee2e6!important;
+    }
+     .border-lg-right {
+         border-right: 1px solid #dee2e6!important;
+    }
+     .border-lg-left {
+         border-left: 1px solid #dee2e6!important;
+    }
+     .border-lg-bottom {
+         border-bottom: 1px solid #dee2e6!important;
+    }
+     .border-lg-top-0 {
+         border-top:0!important;
+    }
+     .border-lg-right-0 {
+         border-right: 0!important;
+    }
+     .border-lg-left-0 {
+         border-left: 0!important;
+    }
+     .border-lg-bottom-0 {
+         border-bottom: 0!important;
+    }
+}
+ @media (min-width: 1200px) {
+}
   
 /* stars */
 
@@ -776,8 +1036,9 @@ label.star {
     float: right;
     padding: 10px;
     font-size: 18px;
-    color: #fff;
-    transition: all .2s
+    color: black;
+    transition: all .2s;
+    border-color: white;
 }
 
 input.star:checked~label.star:before {

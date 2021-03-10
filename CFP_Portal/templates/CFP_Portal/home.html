@@ -15,7 +15,7 @@
     <style type="text/css">
      </style>
 </head>
-<body style="margin-top:-4px">
+<body style="margin-top:-4px;  background:#fff;   background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, black 0%, #0046B1 100%);">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div class="container">
@@ -23,20 +23,31 @@
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card bg-pattern">
-                <div class="card-body">
+                <div class="card-body" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
                     <div class="float-right">
-                        <i class="fa fa-archive text-primary h4 ml-3"></i>
+                    <a href ="{% url 'projects' %}"> <button type="button" class="btn btn-primary btn-xs  mt-1 mb-1 ml-1"> 
+                              
+                                <i class="fa fa-archive fa-xs"></i> 
+                                View 
+                               </button></a>
                     </div>
-                    <h5 class="font-size-20 mt-0 pt-1"> {{totalnumber}} </h5>
-                    <p class="text-muted mb-0">Total Projects</p>
+                     <div class="row">
+                     <div class="col">  <h5 class="font-size-20 mt-0 pt-1"> {{totalnumber}} </h5></div>
+                    
+                     <div class="col">   <p class="text-muted">All the Project Proposals </p></div>
+                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-3 col-md-6">
-            <div class="card bg-pattern">
+            <div class="card bg-pattern" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
                 <div class="card-body">
                     <div class="float-right">
-                        <i class="fa fa-th text-primary h4 ml-3"></i>
+                         <a href ="{% url 'acceptedprojects' %}"> <button type="button" class="btn btn-primary btn-xs  mt-1 mb-1 ml-1"> 
+                              
+                                <i class="fa fa-archive fa-xs"></i> 
+                                View 
+                               </button></a>
                     </div>
                     <h5 class="font-size-20 mt-0 pt-1">0</h5>
                     <p class="text-muted mb-0">Accepted Projects</p>
@@ -45,12 +56,16 @@
         </div>
         <div class="col-xl-3 col-md-6">
             <div class="card bg-pattern">
-                <div class="card-body">
+                <div class="card-body" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
                     <div class="float-right">
-                        <i class="fa fa-file text-primary h4 ml-3"></i>
+                         <a href ="#"> <button type="button" class="btn btn-primary btn-xs  mt-1 mb-1 ml-1"> 
+                              
+                                <i class="fa fa-archive fa-xs"></i> 
+                                View 
+                               </button></a>
                     </div>
                     <h5 class="font-size-20 mt-0 pt-1">5</h5>
-                    <p class="text-muted mb-0">Pending Projects</p>
+                    <p class="text-muted mb-0"> Projects Under Review</p>
                 </div>
             </div>
         </div>
@@ -142,6 +157,7 @@
                     <!-- end project-list -->
 
                     <div class="pt-3">
+                    
                         <ul class="pagination justify-content-end mb-0">
                             <li class="page-item disabled">
                                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -154,11 +170,32 @@
                             </li>
                         </ul>
                     </div>
+                   
                 </div>
             </div>
         </div>
     </div>
-    
+     {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
     <!-- end row -->
 </div>
 

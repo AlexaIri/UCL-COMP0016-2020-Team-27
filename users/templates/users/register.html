@@ -1,12 +1,118 @@
 {% extends "CFP_Portal/sidebar.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% load static %}
+
+<!doctype html>
+
+
+                        <html>
+                            <head>
+                                <meta charset='utf-8'>
+                                <meta name='viewport' content='width=device-width, initial-scale=1'>
+                                <title>Snippet - BBBootstrap</title>
+                                <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet'>
+                                <link href='' rel='stylesheet'>
+                                 <link rel="stylesheet" href="#">
+    <style>
+         .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        }
+
+        .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+
+        .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        input:checked + .slider {
+        background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+        border-radius: 34px;
+        }
+
+        .slider.round:before {
+        border-radius: 50%;
+        }
+        
+        #myDIV {
+        color: black;
+        display: none;
+       
+        }
+     </style>
+                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+                                <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
+                                <script type='text/javascript'></script>
+                            </head>
+                            <body oncontextmenu='return false' class='snippet-body' style="height:100%;  ">
+<div class="row" style="align:center">
+ <div class="card" style="width:70%;align:center; margin-left:180px;padding:50px; border-color:white; margin-top:0px">
+                <div class="card-body text-justify" style="width:100%;  background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y; box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)">
+  
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Join Today</legend>
-                {{ form|crispy }}
+                {% csrf_token %}
+                {{ p_reg_form.full_name|as_crispy_field}}
+                {{ form.username|as_crispy_field}}
+                {{ form.email|as_crispy_field}}
+                {{ form.password1|as_crispy_field}}
+                {{ form.password2|as_crispy_field}}
+               
+                
+                Do you have permission to submit further information from your i.g?
+                <label class="switch"> 
+                <input type="checkbox" id="myCheck" onclick="myFunction()">
+                <span class="slider round"></span>
+                </label>
+                <div id="myDIV" class="form-group">
+
+                  <p style="color:black;"> {{ p_reg_form.department|as_crispy_field}}</p>
+                   {{ p_reg_form.organisation|as_crispy_field}}
+                </div>
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Sign Up</button>
@@ -18,4 +124,28 @@
             </small>
         </div>
     </div>
-{% endblock content %}
+
+
+
+ </div></div></div>
+  <script>
+                
+                function myFunction() {
+                // Get the checkbox
+                var checkBox = document.getElementById("myCheck");
+                // Get the output text
+                var x = document.getElementById("myDIV");
+
+                // If the checkbox is checked, display the output text
+                if (checkBox.checked == true){
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+                }
+                </script>
+
+     </body>
+                        </html>
+
+{% endblock %}

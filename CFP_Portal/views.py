@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User
-from .models import Organisation, Post, Person, Review, Comment
+from .models import Organisation, Post, Person, Review, Comment, RejectedProjects, AcceptedProjects
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import Proposal
+from .forms import Proposal, ReviewForm
 from .forms import Commentform
 from .filters import ProjectFilter
 
@@ -60,12 +60,14 @@ def markprojectdetail(request, pk):
 
 def home(request):
     projects = Person.objects.all()
+    paginate_by = 5
     #return HttpResponse('<h1> Blog Home </h1>')
     totalnumber = Person.objects.all().count()
     context = {
         'projects':projects,
         'totalnumber': totalnumber
     }
+  
     return render(request, 'CFP_Portal/home.html', context)
 
 def about(request):
@@ -107,7 +109,7 @@ def about(request):
     return render(request, 'CFP_Portal/about.html', {"form": form})
 
 def projectgrid(request):
-    #template = loader.get_template('CFP_Portal/index.html')
+      #template = loader.get_template('CFP_Portal/index.html')
     projects = Person.objects.all()
 
     myFilter = ProjectFilter(request.GET, queryset = projects)
@@ -115,8 +117,7 @@ def projectgrid(request):
     innovationnumber = Person.objects.filter(project_complexity='Innovation').count()
     scaffoldingnumber = Person.objects.filter(project_complexity='Scaffolding').count()
     discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
- 
-   
+
     if request.method == 'GET' and 'innovation' in request.GET:
         projects = Person.objects.filter(project_complexity='Innovation')
 
@@ -136,6 +137,40 @@ def projectgrid(request):
     
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/projects_grid.html', context)
+
+
+def detail(request, project_id, review_id):
+    project = get_object_or_404(Person, pk=project_id)
+    review = get_object_or_404(Review, pk = review_id)
+    return render(request, 'CFP_Portal/detail.html', {'project': project, 'review':review, 'reviews': Review.objects.filter(project_id=project_id)})
+
+def review(request, review_id):
+    # project = get_object_or_404(Person, pk=project_id)
+    review = get_object_or_404(Review, pk = review_id)
+    return render(request, 'CFP_Portal/review.html', {'review': review})
+
+
+def projectreviewdetail(request, project_id):
+    project = get_object_or_404(Person, pk=project_id)
+
+    if request.method == 'GET' and 'approve' in request.GET:
+        Person.objects.filter(id=project_id).update(status='Accepted')
+        acceptedproject = AcceptedProjects(project=project)
+        acceptedproject.save()
+    
+    if request.method == 'GET' and 'reject' in request.GET:
+        print("hello!")
+        Person.objects.filter(id=project_id).update(status='Rejected')
+        rejectedproject = RejectedProjects(project=project)
+        rejectedproject.save()
+        
+    context = {
+        'project': project,
+        'reviews': Review.objects.filter(project_id=project_id)
+    }
+
+    return render(request, 'CFP_Portal/reviewdetail.html', context)
+
 
 def projectlistview(request):
     #template = loader.get_template('CFP_Portal/index.html')
@@ -168,6 +203,70 @@ def projectlistview(request):
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/project_listview.html', context)
 
+
+def rejectedprojects(request):
+    #template = loader.get_template('CFP_Portal/index.html')
+    rejectedprojects = RejectedProjects.objects.all()
+
+    myFilter = ProjectFilter(request.GET, queryset = rejectedprojects)
+    projects = myFilter.qs
+    innovationnumber = Person.objects.filter(project_complexity='Innovation').count()
+    scaffoldingnumber = Person.objects.filter(project_complexity='Scaffolding').count()
+    discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
+
+
+    if request.method == 'GET' and 'innovation' in request.GET:
+        projects = Person.objects.filter(project_complexity='Innovation')
+
+    if request.method == 'GET' and 'discovery' in request.GET:
+        projects = Person.objects.filter(project_complexity='Discovery')
+
+    if request.method == 'GET' and 'scaffolding' in request.GET:
+       projects = Person.objects.filter(project_complexity='Scaffolding')
+
+    context ={
+        'rejectedprojects': rejectedprojects,
+        'myFilter': myFilter,
+        'innovationumber': innovationnumber,
+        'discoverynumber': discoverynumber,
+        'scaffoldingnumber': scaffoldingnumber
+    }
+    
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'CFP_Portal/rejectedprojects.html', context)
+
+
+def acceptedprojects(request):
+    #template = loader.get_template('CFP_Portal/index.html')
+    acceptedprojects = AcceptedProjects.objects.all()
+
+    myFilter = ProjectFilter(request.GET, queryset = acceptedprojects)
+    projects = myFilter.qs
+    innovationnumber = Person.objects.filter(project_complexity='Innovation').count()
+    scaffoldingnumber = Person.objects.filter(project_complexity='Scaffolding').count()
+    discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
+
+
+    if request.method == 'GET' and 'innovation' in request.GET:
+        projects = Person.objects.filter(project_complexity='Innovation')
+
+    if request.method == 'GET' and 'discovery' in request.GET:
+        projects = Person.objects.filter(project_complexity='Discovery')
+
+    if request.method == 'GET' and 'scaffolding' in request.GET:
+       projects = Person.objects.filter(project_complexity='Scaffolding')
+
+    context ={
+        'acceptedprojects': acceptedprojects,
+        'myFilter': myFilter,
+        'innovationumber': innovationnumber,
+        'discoverynumber': discoverynumber,
+        'scaffoldingnumber': scaffoldingnumber
+    }
+    
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'CFP_Portal/acceptedprojects.html', context)
+
 class OrganisationListView(ListView):
     model = Organisation
     template_name ='CFP_Portal/organisation_list.html'
@@ -182,6 +281,11 @@ class ReviewsListView(ListView):
 class  ReviewsDisplayListView(ListView):
     model = Person
     template_name = 'CFP_Portal/review_display.html'
+    context_object_name = 'projects'
+
+class  Trial(ListView):
+    model = Person
+    template_name = 'CFP_Portal/trial.html'
     context_object_name = 'projects'
 
 
@@ -295,30 +399,55 @@ class UserPostListView(ListView):
 
 def SubmissionPortal(request):
     
+    # if request.method == "POST":
+        
+    #     form = Proposal(request.POST)
+    #     if form.is_valid():
+    #         results = Person()
+    #         results.name = form.cleaned_data['name']
+    #         results.surname = form.cleaned_data['surname']
+    #         results.phone_number = form.cleaned_data['phone_number']
+    #         results.project_title = form.cleaned_data['project_title']
+    #         results.email = form.cleaned_data['email']
+    #         results.summarised_abstract = form.cleaned_data['summarized_abstract']
+    #         results.full_abstract = form.cleaned_data['full_abstract']
+    #         results.expertiseskills = form.cleaned_data['expertise_and_skills']
+    #         results.devices = form.cleaned_data['devices']
+    #         results.project_complexity = form.cleaned_data['project_complexity']
+    #         results.source_type = form.cleaned_data['source_type']
+    #         results.ethics_form = form.cleaned_data['ethics_form']
+    #         results.launching_date = form.cleaned_data['launching_date']
+    #         results.motivations = form.cleaned_data['motivations']
+    #         results.importance = form.cleaned_data['importance']
+    #         results.hashtags = form.cleaned_data['hashtags']
+    #         results.status = 'Submitted'
+
+    #         results.save() 
+    #     item_list = Person.objects.all()
+        
+    #     return redirect('/CFP_Portal/')
+    
+
+    # form = Proposal()
+    
+    # return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
     if request.method == "POST":
         
         form = Proposal(request.POST)
+        print("unvalid")
+        print(form.errors)
         if form.is_valid():
-            results = Person()
-            results.name = form.cleaned_data['name']
-            results.surname = form.cleaned_data['surname']
-            results.phone_number = form.cleaned_data['phone_number']
-            results.project_title = form.cleaned_data['project_title']
-            results.email = form.cleaned_data['email']
-            results.summarised_abstract = form.cleaned_data['summarized_abstract']
-            results.full_abstract = form.cleaned_data['full_abstract']
-            results.expertiseskills = form.cleaned_data['expertise_and_skills']
-            results.devices = form.cleaned_data['devices']
-            results.project_complexity = form.cleaned_data['project_complexity']
-            results.source_type = form.cleaned_data['source_type']
-            results.ethics_form = form.cleaned_data['ethics_form']
-            results.launching_date = form.cleaned_data['launching_date']
-            results.motivations = form.cleaned_data['motivations']
-            results.importance = form.cleaned_data['importance']
-            results.hashtags = form.cleaned_data['hashtags']
-            results.status = 'Submitted'
+            print("valid!")
+            user = User.objects.get(pk=request.user.id)
+            project = form.save(commit=False)
+            project.status = 'Submitted'
+            project.department = user.profile.department
+            project.department = user.profile.organisation
+            project.save()
+            form.save_m2m()
+                    
 
-            results.save() 
+            
         item_list = Person.objects.all()
         #
         return redirect('/CFP_Portal/')
@@ -327,6 +456,92 @@ def SubmissionPortal(request):
     form = Proposal()
     
     return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
+
+ 
+
+def ReviewPortal(request, project_id):
+
+    if request.method == "POST":
+
+        # project =  get_object_or_404(Person, pk=project_id)
+        data = {
+        'id': project_id,
+        'project': Person.objects.all(),
+    }
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            results = Review()
+            model = Person
+            context_object_name = 'project'
+
+            # project = Person.objects.get(pk=**kwargs['intervention_pk'])
+
+            # results2 = Person()
+            results.project = form.cleaned_data['project']
+            results.project.status = "Reviewed"
+            results.reviewer_name = form.cleaned_data['reviewer_name']
+            results.reviewer_surname = form.cleaned_data['reviewer_surname']
+            results.reviewer_phone_number = form.cleaned_data['reviewer_phone_number']
+            results.reviewer_email = form.cleaned_data['reviewer_email']
+            results.comments = form.cleaned_data['comments']
+
+            results.interoperabilityComments = form.cleaned_data['standards_and_interoperability_comments']
+            results.technical_strengthComments = form.cleaned_data['technical_and_scientific_strength_comments']
+            results.user_designComments = form.cleaned_data['user_centred_design_comments']
+            results.usabilityTestingComments = form.cleaned_data['usability_testing_comments']
+            results.researchQualityComments = form.cleaned_data['research_quality_comments']
+            results.scalabilityComments = form.cleaned_data['scalability_comments']
+            results.resilienceComments = form.cleaned_data['resilience_comments']
+
+            results.interoperabilityPoints = form.cleaned_data['standards_and_interoperability_points']
+            results.technical_strengthPoints = form.cleaned_data['technical_and_scientific_strength_points']
+            results.user_designPoints = form.cleaned_data['user_centred_design_points']
+            results.scalabilityPoints = form.cleaned_data['scalability_points']
+            results.resiliencePoints = form.cleaned_data['resilience_points']
+            results.usabilityTestingPoints = form.cleaned_data['usability_testing_points']
+            results.researchQualityPoints = form.cleaned_data['research_quality_points']
+             
+            # results2.status = 'Reviewed'
+
+            results.save() 
+            item_list = Review.objects.all()
+            return redirect('/CFP_Portal/reviewDisplay')
+    else:
+        form = ReviewForm()
+
+    model = Review
+    context_object_name = 'review'
+    # review = get_object_or_404(Review, project_id=project_id)
+   
+    context = {
+        'review': review,
+        'form': form,        
+        # 'project': Person.objects.filter(pk=project_id) # there will be exactly one project with that project_id 
+
+    }
+    
+    return render(request, 'CFP_Portal/review_portal.html', context)
+
+# def markprojectdetail(request, pk):
+#     model = Review
+#     review = get_object_or_404(Review, pk=pk)
+#     context_object_name = 'review'
+#     context = {
+#         'review': review,
+#         # 'comments': commentslist,
+#         # 'form': form
+#     }
+#     return render(request, 'CFP_Portal/mark_project_detail.html', context)
+
+# def projectreviewdetail(request, project_id):
+#     project = get_object_or_404(Person, pk=project_id)
+        
+#     context = {
+#         'project': project,
+#         'reviews': Review.objects.filter(project_id=project_id)
+#     }
+#     return render(request, 'CFP_Portal/reviewdetail.html', context)
+
 
  
 

@@ -13,6 +13,8 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
 
+       {% comment %} <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css' rel='stylesheet'> {% endcomment %}
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'CFP_Portal/review.css' %}">
        <style type="text/css">
     	body {
@@ -21,6 +23,94 @@
    
 }
 
+.profile .panel-profile {
+    border: none;
+    margin-bottom: 0;
+    box-shadow: none;
+  }
+  
+  .profile .panel-heading {
+    color: #585f69;
+    background: #fff;
+    padding: 7px 15px;
+    border-bottom: solid 3px #f7f7f7;
+  }
+  
+  .overflow-h {
+    overflow: hidden;
+  }
+  
+  .panel-heading {
+    color: #fff;
+    padding: 5px 15px;
+  }
+  
+  .profile .panel-title {
+    font-size: 16px;
+  }
+  
+  .profile .profile-blog {
+    padding: 20px;
+    background: #fff;
+  }
+  
+  .profile .blog-border {
+    border: 1px solid #f0f0f0;
+  }
+  
+  .profile .profile-blog img {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+  }
+  
+  .rounded-x {
+    border-radius: 50% !important;
+  }
+  
+  .profile .name-location {
+    overflow: hidden;
+  }
+  
+  .profile .name-location strong {
+    color: #555;
+    display: block;
+    font-size: 16px;
+  }
+  
+  .profile .name-location span a {
+    color: #555;
+  }
+  
+  .margin-bottom-20 {
+    margin-bottom: 20px;
+  }
+  
+  .share-list {
+    margin-bottom: 0;
+  }
+  
+  
+  .list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+  }
+  
+  .list-inline li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size:11px;
+  }
+  
+  .share-list li i {
+    color: #72c02c;
+    margin-right: 5px;
+  }  
+  
+  
 
 /*timeline*/
 
@@ -1103,6 +1193,41 @@ a {
 
 
 /*end timeline*/
+
+.mt-20 {
+    margin-top: 100px
+}
+
+.progress {
+    height: 31px;
+    margin-bottom: 10px
+}
+
+.progress .skill {
+    font: normal 12px "Open Sans Web";
+    line-height: 32px;
+    padding: 0;
+    margin: 0 0 0 20px;
+    text-transform: uppercase
+}
+
+.progress .skill .val {
+    float: right;
+    font-style: normal;
+    margin: 0 20px 0 0
+}
+
+.progress-bar {
+    text-align: left;
+    transition-duration: 3s
+}
+
+.bsp_big-image {
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    margin-top: 0px
+}
+
     </style>
 </head>
 <body>
@@ -1333,53 +1458,190 @@ a {
 					 <i class="icon-info"></i>
 				    </div>
 				    <div class="alert-message">
-				      <span><strong>Info!</strong> Please press one of the buttons below to review the project. </span>
+				      <span><strong>Info!</strong> The feedback sheet and the comments are read-only. </span>
 				    </div>
                   </div>
-                  <div class="container">
-      
-        <div class="row">
-            <div class="col-md-12">
-                <div class="main-timeline3">
-                   <div class="timeline">
-                        <div class="timeline-icon">
-                         {% comment %} <button class="btn btn-lg btn-raised btn-wave btn-icon btn-rounded mb-2 green"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-            
-        </svg> </button>  {% endcomment %}
-                        <span class="year">2017</span></div>
-                        <div class="timeline-content">
-                            <h3 class="title">Web Developer</h3>
-                            <p class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia mi ultrices, luctus nunc ut, commodo enim. Vivamus sem erat.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="timeline">
-                        <div class="timeline-icon"><span class="year">2017</span></div>
-                        <div class="timeline-content">
-                            <h3 class="title">Web Developer</h3>
-                            <p class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia mi ultrices, luctus nunc ut, commodo enim. Vivamus sem erat.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="timeline">
-                        <div class="timeline-icon"><span class="year">2016</span></div>
-                        <div class="timeline-content">
-                            <h3 class="title">Web Desginer</h3>
-                            <p class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia mi ultrices, luctus nunc ut, commodo enim. Vivamus sem erat.
-                            </p>
-                        </div>
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-    </div>
+
+                  
 
 {% comment %} divider {% endcomment %}
-<b> <h1 align="center">
+
+   {% comment %} green {% endcomment %}
+    {% comment %} <span class="badge badge-danger"  style="text-align:justify">{{review.green}} Priority</span></div>  {% endcomment %}
+
+
+  <br>
+    
+{% comment %} divider {% endcomment %}
+ <h1 align="center">   <p style="color:black;display:inline"> Scores and Marking Criteria </p> </h1>
+<br>          
+
+<div class="container">
+<script type='text/javascript'>$(document).ready(function() {
+$('.progress .progress-bar').css("width",
+function() {
+return $(this).attr("aria-valuenow") + "%";
+}
+)
+});</script>
+     <div class="row mt-15">
+         <div class="col-md-12">
+             <div class="progress skill-bar " style="background:black">
+                <div class="progress-bar progress-bar-striped " role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Criterion #1 <i class="val">Score: </i></span> </div>
+             </div>
+             <div class="progress skill-bar">
+                 <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Criterion #2<i class="val">Score:</i></span> </div>
+             </div>
+             <div class="progress skill-bar">
+                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> <span class="skill">Criterion #3 <i class="val">Score:</i></span> </div>
+             </div>
+            <div class="progress skill-bar ">
+                 <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Criterion #4 <i class="val">Score:</i></span> </div>
+             </div>
+             <div class="progress skill-bar">
+                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Criterion #5<i class="val">Score:</i></span> </div>
+             </div>
+             <div class="progress skill-bar ">
+                 <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> <span class="skill">Criterion #6 <i class="val">Score:</i></span> </div>
+             </div>
+             <div class="progress skill-bar ">
+                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> <span class="skill">Criterion #7<i class="val">SCORE:</i></span> </div>
+             </div>
+         </div>
+     </div>
+ </div>
+<br><br>
+<table class="table table-hover table-striped">
+                                <tbody>                                    
+                                    <tr>
+                                        <td>
+                                        <div class="p-5" style="margin-left:0em; align:right">
+                                       <h5> <span class="badge badge-primary">Criterion #1: Standards and Interoperability </span></h5>
+                        {% comment %} <h5 class="h5" style="color:#005EFF"> Criterion #1: Standards and Interoperability </h5> {% endcomment %}
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
+                    
+                        
+                         {% comment %} <div class="card" style="width:100%">
+             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
+                        <p style="color:black"> {{review.interoperabilityComments}}  </p>
+                        
+                                        </div>
+                                            {% comment %} <strong>Criterion #1: Standards and Interoperability</strong> joined ACME Project Team in <strong>`Collaboration`</strong> {% endcomment %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="p-5" style="margin-left:0em; align:right">
+                                       <h5> <span class="badge badge-dark">Criterion #2: Technical and Scientific Strength </span></h5>
+                        {% comment %} <h5 class="h5" style="color:#005EFF"> Criterion #1: Standards and Interoperability </h5> {% endcomment %}
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
+                    
+                        
+                         {% comment %} <div class="card" style="width:100%">
+             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
+                        <p style="color:black"> {{review.technical_strengthComments}}  </p>
+                        
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                             <div class="p-5" style="margin-left:0em; align:right">
+                                       <h5> <span class="badge badge-primary">Criterion #3: User-centred Design </span></h5>
+                        {% comment %} <h5 class="h5" style="color:#005EFF"> Criterion #1: Standards and Interoperability </h5> {% endcomment %}
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
+                    
+                        
+                         {% comment %} <div class="card" style="width:100%">
+             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
+                        <p style="color:black"> {{review.user_designComments}} </p>
+                        
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                          <div class="p-5" style="margin-left:0em; align:right">
+                                       <h5> <span class="badge badge-dark">Criterion #4: Usability Testing </span></h5>
+                        {% comment %} <h5 class="h5" style="color:#005EFF"> Criterion #1: Standards and Interoperability </h5> {% endcomment %}
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
+                    
+                        
+                         {% comment %} <div class="card" style="width:100%">
+             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
+                        <p style="color:black"> {{review.usabilityTestingComments}} </p>
+                        
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+ <div class="p-5" style="margin-left:0em; align:right">
+                                       <h5> <span class="badge badge-primary"> Criterion #5: Research Quality and Documentation </span></h5>
+                        {% comment %} <h5 class="h5" style="color:#005EFF"> Criterion #1: Standards and Interoperability </h5> {% endcomment %}
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
+                    
+                        
+                         {% comment %} <div class="card" style="width:100%">
+             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
+                        <p style="color:black">{{review.researchQualityComments}} </p>
+                        
+                                        </div>                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                          <div class="p-5" style="margin-left:0em; align:right">
+                                       <h5> <span class="badge badge-dark">Criterion #6: Resilience </span></h5>
+                        {% comment %} <h5 class="h5" style="color:#005EFF"> Criterion #1: Standards and Interoperability </h5> {% endcomment %}
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
+                    
+                        
+                         {% comment %} <div class="card" style="width:100%">
+             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
+                        <p style="color:black"> {{review.resilienceComments}} </p>
+                        
+                                        </div>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>
+                                          <div class="p-5" style="margin-left:0em; align:right">
+                                       <h5> <span class="badge badge-primary">Criterion #7: Scalability </span></h5>
+                        {% comment %} <h5 class="h5" style="color:#005EFF"> Criterion #1: Standards and Interoperability </h5> {% endcomment %}
+                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
+                    
+                        
+                         {% comment %} <div class="card" style="width:100%">
+             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
+                        <p style="color:black"> {{review.scalabilityComments}} </p>
+                        
+                                        </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                                 
+
+
+
+            </div>
+
+
+
+{% comment %} here {% endcomment %}
+
+{% comment %} boxes {% endcomment %}
+                
+                <div class="tab-pane" id="edit">
+                  <b> <h1 align="center">
                        <p style="color:#009933; display:inline; font-size=30px align:center"> Green </p> 
                        <p style="color:black;display:inline"> - </p>
                        <p style="color:#FFBF00; display:inline"> Amber </p>
@@ -1388,20 +1650,9 @@ a {
                        </b>
                        <p style="color:black;display:inline"> Marking System </p>
                        </h1>
-                    
-   {% comment %} green {% endcomment %}
-     <div class="col-xs-4 bottom text-center">
-                           <div class="col-xs-4 emphasis mt-1 mb-1">
-   <button class="btn btn-lg btn-raised btn-wave btn-icon btn-rounded mb-2 green"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-            {% comment %} <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line> {% endcomment %}
-        </svg> </button> 
-       <button class="btn btn-lg btn-raised btn-wave btn-icon btn-rounded mb-2 amber"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-            
-        </svg> </button>  
-   </div></div>
-        
-    <section class="divided clearfix"  >
+                                               {% if review.green == True %}
+                               {% comment %} <span class="badge badge-danger"  style="text-align:justify">{{project.priority}} Priority</span></div> {% endcomment %}
+ <section class="divided clearfix" style="background:#EAEAEA; height:500px; margin-top:0px; margin-left:0px">
        
             <div class="row py-5">
                 <div class="col ">
@@ -1410,30 +1661,24 @@ a {
                 <div class="versus">
 
                  <button class="btn btn-lg btn-raised btn-wave btn-icon btn-rounded mb-2 green"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-            {% comment %} <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line> {% endcomment %}
-        </svg> </button> 
-       
+            
+        </svg> </button>  
    
                 </div>
-                <div class="versus">
-
-                
-   
-                </div>
-                <div class="col col-12 col-sm-12 col-md-6 p-lg-5">
+                <div class="col col-12 col-sm-12 col-md-6 p-lg-5" >
                     <div class="p-5" style="margin-left:-15em; align:left">
-                        <h5 class="h5 text-muted"> Successful </h5>
-                        <h1 class="h1 mb-5"> <span class=" font-weight-bold " style ="background-color:#009933; color:#EFEFEF;" >  Green Button </h1> </span>
-                        <p> The project is approved for further consideration. </p>
+                        <h5 class="h5 text-muted"> Satisfactory </h5>
+                        <h1 class="h1 mb-5"> <span class="font-weight-bold" style ="background-color:#009933; color:#EFEFEF;">  Green Button </h1> </span>
+                        <p> The project is approved for further consideration. You should expect it being next sent to university students who have the necessary skills, expertise, knowledge and show interest towards the topic and the project idea. </p>
                     </div>
                 </div>
             
         </div>
     </section>
-
-{% comment %} amber {% endcomment %}
-       <section class="divided clearfix" style="background:#EAEAEA; height:500px; margin-top:0px; margin-left:0px">
+                            
+                            {% elif review.amber == True %}
+                             {% comment %} <span class="badge badge-warning"  style="text-align:justify">{{project.priority}} Priority</span></div> {% endcomment %}
+<section class="divided clearfix" style="background:#EAEAEA; height:500px; margin-top:0px; margin-left:0px">
        
             <div class="row py-5">
                 <div class="col ">
@@ -1450,14 +1695,16 @@ a {
                     <div class="p-5" style="margin-left:-15em; align:left">
                         <h5 class="h5 text-muted"> Satisfactory </h5>
                         <h1 class="h1 mb-5"> <span class="font-weight-bold" style ="background-color:#FFBF00; color:#EFEFEF;">  Amber Button </h1> </span>
-                        <p> The project is satisfactory enough, but lacks consistency. </p>
+                        <p> Your project has been marked with AMBER.The project is satisfactory enough, but lacks consistency and might need several improvements in some areas which were addressed partially or were not cohesive enough. The project showed potential, therefore it will be taken into consideration by further reviewers.</p>
                     </div>
                 </div>
             
         </div>
     </section>
-{% comment %} red {% endcomment %}
-     <section class="divided clearfix"  style=" height:500px; margin-top:0px; margin-left:0px">
+                            {% elif review.red == True %}
+                            {% comment %} <span class="badge badge-info"  style="text-align:justify">{{project.priority}} Priority </span></div> {% endcomment %}
+
+                           <section class="divided clearfix"  style=" height:500px; margin-top:0px; margin-left:0px">
        
             <div class="row py-5">
                 <div class="col ">
@@ -1475,308 +1722,35 @@ a {
                     <div class="p-5" style="margin-left:-15em; align:left">
                         <h5 class="h5 text-muted"> Unsuccessful </h5>
                         <h1 class="h1 mb-5">   <span class=" font-weight-bold " style ="background-color:#e60000; color:#EFEFEF;" >  Red Button </h1> </span>
-                        <p> The project is not considered successful because it does not comply with the required guidelines and it does not tick the necessary criteria. </p>
+                        <p> Your project has been marked with RED. The project is not considered successful because it does not comply with the required guidelines and it does not tick the necessary criteria. </p>
                     </div>
                 </div>
             
         </div>
     </section>
+                            {% endif %}
 
-  
-    
-{% comment %} divider {% endcomment %}
-
-
-                    <table class="table table-hover table-striped">
-                        <tbody>                                    
-                            <tr>
-                         
-
-                                    
-        <td>
-                         <span class="align-middle">
-                         
-                                 <button class="btn btn-lg btn-raised btn-wave btn-icon btn-rounded mb-2 green"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-            
-        </svg> </button> 
- 
-                    <div class="p-5" style="margin-left:0em; align:right">
-                        <h5 class="h5 text-muted"> Unsuccessful </h5>
-                        <h1 class="h1 mb-5">   <span class=" font-weight-bold " style ="background-color:#e60000; color:#EFEFEF;" >  Red Button </h1> </span>
-                        <p> The project is not considered successful because it does not comply with the required guidelines and it does not tick the necessary criteria. </p>
-                    </div>
-            
-                 {% comment %} <span class="float-right font-weight-bold " style ="background-color:#009933; color:#EFEFEF;" >    GREEN</span> &emsp;&emsp; The project is approved for further consideration.  {% endcomment %}
-                     </span> 
-                                </td>
-                            </tr>
-
-
-
-
-
-                            <tr>
-                                <td>
-
-                          
-         <button class="btn btn-lg btn-raised btn-wave btn-icon btn-rounded mb-2 amber"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-            
-        </svg> </button>  
-                                   <span class="float-right font-weight-bold" style ="background-color:#FFBF00; color:#EFEFEF;" >AMBER</span> &emsp;&emsp; The project is satisfactory enough, but lacks consistency.
-                                </td>
-                            </tr>
-
-
-
-
-
-
-
-                            <tr>
-                                <td>
-                              
-         <button class="btn btn-lg btn-raised btn-wave btn-icon btn-rounded mb-2 red"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-          
-        </svg> </button>  
-
-                                   <span class="float-right font-weight-bold " style ="background-color:#e60000; color:#EFEFEF;">RED</span> &emsp;&emsp; The project is not considered successful. 
-                                </td>
-                            </tr>
-                            
-                        </tbody> 
-                    </table> 
-
-
-  <div class="member-entry"> 
-   
-    <div class="member-details"> 
-   
- <section class="divided2 clearfix">
-   
-            <div class="row text-center py-5">
-                <div class="col col-12 border-bottom border-sm-bottom border-md-bottom-0 border-md-right col-sm-12 col-md-6 ">
+                            <br>
+                               <section class="divided clearfix"  style=" height:500px; margin-top:0px; margin-left:0px">
+       
+            <div class="row py-5">
+                <div class="col ">
                     
-                      <h6 style="color:#AEB1AF"> Technical and Scientific Quality </h6> 
-                       
                 </div>
-                <div class="col col-12 col-sm-12 col-md-6 p-5">
-                    <h6 style="color:#AEB1AF"> Press on one of the scores below: </h6> 
-                          <input type="radio" class="option-input radio" size="30" name="example" checked /> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                   <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
-                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
+                <div class="versus">
 
+                   
+   
                 </div>
-           
+                <div class="col col-12 col-sm-12 col-md-6 p-lg-5">
+                    <div class="p-5" style="margin-left:-15em; align:left">
+                        <h5 class="h5 text-muted"> Final Comments </h5>
+                       <p>  {{review.comments}} </p>
+                  </div>
+                </div>
+            
+        </div>
     </section>
-    </div> 
-</div>
-
-<div class="member-entry"> 
-   
-    <div class="member-details"> 
-   
- <section class="divided2 clearfix">
-   
-            <div class="row text-center py-5">
-                <div class="col col-12 border-bottom border-sm-bottom border-md-bottom-0 border-md-right col-sm-12 col-md-6 ">
-                    
-                      <h6 style="color:#AEB1AF"> Usability </h6> 
-                       
-                </div>
-                <div class="col col-12 col-sm-12 col-md-6 p-5">
-                    <h6 style="color:#AEB1AF"> Press on one of the scores below: </h6> 
-                          <input type="radio" class="option-input radio" size="30" name="example" checked /> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                   <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
-                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
-
-                </div>
-           
-    </section>
-    </div> 
-</div>
-
-
-
-  <div class="member-entry"> 
-   
-    <div class="member-details"> 
-        <h6 style="color:#AEB1AF"> Scalability </h6> 
-
-
-<div class="row justify-content-center">
-     
-         <div class="card">
-             <div class="card-body">
-                 
-                   <input type="radio" class="option-input radio" size="30" name="example" checked /> 
-                 <input type="radio" class="option-input radio" name="example" />  
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                   <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
-                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
-
-                
-             </div>
-      
-     </div>
- </div>
-
-       
-    </div> 
-</div>
-
-  <div class="member-entry"> 
-   
-    <div class="member-details"> 
-        <h6 style="color:#AEB1AF"> Insert Other Criterion </h6> 
-
-
-<div class="row justify-content-center">
-     
-         <div class="card">
-             <div class="card-body">
-                 
-                   <input type="radio" class="option-input radio" size="30" name="example" checked /> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                   <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
-                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
-
-                
-             </div>
-      
-     </div>
- </div>
-
-       
-    </div> 
-</div>
-
-  <div class="member-entry"> 
-   
-    <div class="member-details"> 
-        <h6 style="color:#AEB1AF"> Criterion </h6> 
-
-
-<div class="row justify-content-center">
-     
-         <div class="card">
-             <div class="card-body">
-                 
-                   <input type="radio" class="option-input radio" size="30" name="example" checked /> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                   <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
-                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
-
-                
-             </div>
-      
-     </div>
- </div>
-
-       
-    </div> 
-</div>
-
-
-
-    
-                </div>
-
-                
-                <div class="tab-pane" id="edit">
-                    <form>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">First name</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="Mark">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Last name</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="Jhonsan">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="email" value="mark@example.com">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="file">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Website</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="url" value="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Address</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="Street">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label"></label>
-                            <div class="col-lg-6">
-                                <input class="form-control" type="text" value="" placeholder="City">
-                            </div>
-                            <div class="col-lg-3">
-                                <input class="form-control" type="text" value="" placeholder="State">
-                            </div>
-                        </div>
-                       
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="jhonsanmark">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="password" value="11111122333">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="password" value="11111122333">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label"></label>
-                            <div class="col-lg-9">
-                                <input type="reset" class="btn btn-secondary" value="Cancel">
-                                <input type="button" class="btn btn-primary" value="Save Changes">
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -1788,7 +1762,7 @@ a {
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript"></script>
+<script type="text/javascript" src="{% static 'CFP_Portal/rev.js' %}"></script>
 
 </body>
 </html>
