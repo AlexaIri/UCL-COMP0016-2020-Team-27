@@ -8,9 +8,37 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import Proposal, ReviewForm
 from .forms import Commentform
 from .filters import ProjectFilter
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django import template
+
+register = template.Library()
 
 # Create your views here.
+@register.filter(name='has_group')
+def has_group(user, group_name): 
+    group = Group.objects.get(name=group_name) 
+    return True if group in user.groups.all() else False
 
+def is_user(user):
+    
+    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Submitters','Reviewers','Lead']).exists()
+    # print(user.groups)
+
+def is_reviewer(user):
+    
+    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Reviewers','Lead']).exists()
+
+def is_submitter(user):
+    return user.groups.filter(name__in=['Submitters']).exists()
+    # print(user.groups)
+   
+
+def is_lead(user):  
+    # print(user.groups)
+    return  user.is_superuser or user.is_staff or user.groups.filter(name__in=['Lead']).exists()
+
+@login_required
+@user_passes_test(is_reviewer)
 def index(request):
     item_list = Organisation.objects.all()
     #template = loader.get_template('CFP_Portal/index.html')
@@ -20,11 +48,18 @@ def index(request):
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/index.html', context)
 
+@login_required
+@user_passes_test(is_user)
 def projectdetail(request, pk):
     project = get_object_or_404(Person, pk=pk)
 
+    group = ''
+    if request.user.groups.filter(name__in=['Submitters']).exists():
+        print("yes!!")
+        group = 'Submitters'
+
     if request.method == 'POST' and 'comment' in request.POST:
-        print("post!")
+        
         form = Commentform(request.POST)
         if form.is_valid():
             user = User.objects.get(pk=request.user.id)
@@ -42,10 +77,13 @@ def projectdetail(request, pk):
         'project': project,
         'comments': commentslist,
         'form': form,
-        'common_tags':common_tags
+        'common_tags':common_tags,
+        'group': group
     }
     return render(request, 'CFP_Portal/person_detail.html', context)
 
+@login_required
+@user_passes_test(is_reviewer)
 def markprojectdetail(request, pk):
     model = Review
     review = get_object_or_404(Review, pk=pk)
@@ -61,11 +99,23 @@ def markprojectdetail(request, pk):
 #     model = Review
 #     context_object_name = 'review'
 
+
+    
+@login_required
+@user_passes_test(is_user)
 def home(request):
     projects = Person.objects.all()
     paginate_by = 5
     acceptednumber = AcceptedProjects.objects.all().count()
     pending = Person.objects.filter(status='Submitted').count()
+    
+    group =''
+    if request.user.groups.filter(name__in=['Submitters']).exists():
+        group = 'Submitters'
+
+    individualprojects = Person.objects.filter(user=request.user)
+    
+    
     if 'search' in request.GET:
         print(request.GET['search'])
         search_term = request.GET['search']
@@ -81,11 +131,15 @@ def home(request):
         'projects':projects,
         'totalnumber': totalnumber,
         'acceptednumber':acceptednumber,
-        'pending': pending
+        'pending': pending,
+        'individualprojects': individualprojects,
+        'group' : group
     }
   
     return render(request, 'CFP_Portal/home.html', context)
 
+@login_required
+@user_passes_test(is_reviewer)
 def about(request):
     # context={
         
@@ -124,6 +178,10 @@ def about(request):
     
     return render(request, 'CFP_Portal/about.html', {"form": form})
 
+
+
+@login_required
+@user_passes_test(is_reviewer)
 def projectgrid(request):
       #template = loader.get_template('CFP_Portal/index.html')
     projects = Person.objects.all()
@@ -154,18 +212,22 @@ def projectgrid(request):
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/projects_grid.html', context)
 
-
+@login_required
+@user_passes_test(is_reviewer)
 def detail(request, project_id, review_id):
     project = get_object_or_404(Person, pk=project_id)
     review = get_object_or_404(Review, pk = review_id)
     return render(request, 'CFP_Portal/detail.html', {'project': project, 'review':review, 'reviews': Review.objects.filter(project_id=project_id)})
 
+@login_required
+@user_passes_test(is_reviewer)
 def review(request, review_id):
     # project = get_object_or_404(Person, pk=project_id)
     review = get_object_or_404(Review, pk = review_id)
     return render(request, 'CFP_Portal/review.html', {'review': review})
 
-
+@login_required
+@user_passes_test(is_reviewer)
 def projectreviewdetail(request, project_id):
     project = get_object_or_404(Person, pk=project_id)
     Display = ' '
@@ -192,7 +254,8 @@ def projectreviewdetail(request, project_id):
 
     return render(request, 'CFP_Portal/reviewdetail.html', context)
 
-
+@login_required
+@user_passes_test(is_reviewer)
 def projectlistview(request):
     #template = loader.get_template('CFP_Portal/index.html')
     projects = Person.objects.all()
@@ -224,7 +287,8 @@ def projectlistview(request):
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/project_listview.html', context)
 
-
+@login_required
+@user_passes_test(is_reviewer)
 def rejectedprojects(request):
     #template = loader.get_template('CFP_Portal/index.html')
     rejectedprojects = RejectedProjects.objects.all()
@@ -256,7 +320,8 @@ def rejectedprojects(request):
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/rejectedprojects.html', context)
 
-
+@login_required
+@user_passes_test(is_reviewer)
 def acceptedprojects(request):
     #template = loader.get_template('CFP_Portal/index.html')
     acceptedprojects = AcceptedProjects.objects.all()
@@ -288,23 +353,30 @@ def acceptedprojects(request):
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/acceptedprojects.html', context)
 
+@login_required
+@user_passes_test(is_reviewer)  
 class OrganisationListView(ListView):
     model = Organisation
     template_name ='CFP_Portal/organisation_list.html'
     context_object_name = 'organisations'
     paginate_by = 5
-    
+
+@login_required
+@user_passes_test(is_reviewer)  
 class ReviewsListView(ListView):
     model = Review
     template_name = 'CFP_Portal/reviews.html'
     context_object_name = 'reviews'
 
-
+@login_required
+@user_passes_test(is_reviewer)
 class  ReviewsDisplayListView(ListView):
     model = Person
     template_name = 'CFP_Portal/review_display.html'
     context_object_name = 'projects'
 
+@login_required
+@user_passes_test(is_reviewer)
 def reviewdisplay(request):
     projects = Person.objects.all()
    
@@ -324,47 +396,56 @@ def reviewdisplay(request):
     }
    
     return render(request, 'CFP_Portal/review_display.html', context)
-
+@login_required
+@user_passes_test(is_reviewer)
 class  Trial(ListView):
     model = Person
     template_name = 'CFP_Portal/trial.html'
     context_object_name = 'projects'
 
-
+@login_required
+@user_passes_test(is_reviewer)
 class UsersListView(ListView):
     model = Organisation
     template_name ='CFP_Portal/users_grid.html'
-
+@login_required
+@user_passes_test(is_reviewer)
 class ProjectsListView(ListView):
     model = Person
     context_object_name = 'projects'
     
     template_name ='CFP_Portal/projects_grid.html'
 
-
+@login_required
+@user_passes_test(is_reviewer)
 class HomeProjectListView(ListView, ): # this is the former PostListView
     model = Person # for the project
     template_name ='CFP_Portal/home.html'
     context_object_name = 'projects'
     #ordering = ['date_posted']
     paginate_by = 5
-
+@login_required
+@user_passes_test(is_reviewer)
 class PostDetailView(DetailView):
     model = Post
-
+@login_required
+@user_passes_test(is_reviewer)
 class OrganisationDetailView(DetailView):
     model = Organisation
     context_object_name = 'organisations'
-
+@login_required
+@user_passes_test(is_reviewer)
 class ProjectDetailView(DetailView):
     
     model = Person
     context_object_name = 'project'
-   
+@login_required
+@user_passes_test(is_reviewer)  
 class ReviewDetailView(DetailView):
     model = Review
     context_object_name = 'review'
-    
+@login_required
+@user_passes_test(is_reviewer)    
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
@@ -372,7 +453,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
+@login_required
+@user_passes_test(is_reviewer)
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ['title', 'content']
@@ -387,7 +469,8 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
         #return super().test_func()
-
+@login_required
+@user_passes_test(is_reviewer)
 class OrganisationUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Organisation
     fields = ['organisation_name', 'overview', 'organisation_address']
@@ -404,7 +487,8 @@ class OrganisationUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView
         # return False
         return True
         #return super().test_func()
-
+@login_required
+@user_passes_test(is_reviewer)
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     success_url ='/'
@@ -415,7 +499,8 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
         #return super().test_func()
-
+@login_required
+@user_passes_test(is_reviewer)
 class OrganisationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Organisation
     success_url ='/'
@@ -428,6 +513,8 @@ class OrganisationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView
         return True
         #return super().test_func()
 
+@login_required
+@user_passes_test(is_reviewer)  
 class UserPostListView(ListView):
     model = Post
     template_name ='CFP_Portal/user_posts.html'
@@ -456,6 +543,7 @@ def SubmissionPortal(request):
             project.status = 'Submitted'
             project.department = user.profile.department
             project.department = user.profile.organisation
+            project.user = user
             project.save()
             form.save_m2m()
                     
@@ -471,7 +559,8 @@ def SubmissionPortal(request):
     return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
 
  
-
+@login_required
+@user_passes_test(is_reviewer)
 def ReviewPortal(request, project_id):
     projects= get_object_or_404(Person, pk=project_id)
     

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import Group
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileRegisterForm
 
 # Create your views here.
@@ -12,8 +13,10 @@ def register(request):
         if form.is_valid() and p_reg_form.is_valid():
           
             username = form.cleaned_data.get('username')
-           
+            
             user = form.save()
+            group = Group.objects.get(name=form.cleaned_data.get('group'))
+            user.groups.add(group)
             user.refresh_from_db()
             p_reg_form = ProfileRegisterForm(request.POST, instance=user.profile)
             p_reg_form.full_clean()
