@@ -7,6 +7,13 @@ class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     department = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Department you work in'}), required=False)
     organisation = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Organisation or Trust '}), required=False)
+    
+    Users = [('Submitters','Submitters'),
+         ('Reviewers','Reviewers'),
+         ('Lead','Lead')]
+         
+    group = forms.ChoiceField(choices=Users, widget=forms.RadioSelect)
+
 
     class Meta:
         model = User

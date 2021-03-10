@@ -54,7 +54,9 @@
             <p >MENUS</p>
             {% if user.is_authenticated %}
             <li> <a href="{% url 'SubmissionPortal' %}" style="color:rgb(0,70,177)">Submission Portal</a> </li>
+            {%if  group != "Submitters"%}
             <li> <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Dashboard</a>
+            
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li><a href="{% url 'blog-home' %}" style="color:rgb(0,70,177)">Projects Dashboard</a> </li>
                     {% comment %} <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">Completed Projects Dashboard</a> </li> {% endcomment %}
@@ -77,10 +79,12 @@
            
 
         </ul>
+            {%endif%}
 
          {% else %}
            <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                     <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+         
          {% endif %}
         <ul class="list-unstyled CTAs">
             <li> <a href="#" class="download">Subscribe</a> </li>

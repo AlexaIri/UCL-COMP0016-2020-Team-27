@@ -19,11 +19,15 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div class="container">
+
 <div class="container-fluid p-0 m-0">
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card bg-pattern">
+            {%if  group != "Submitters"%}
+                
                 <div class="card-body" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
+                
                     <div class="float-right">
                     <a href ="{% url 'projects' %}"> <button type="button" class="btn btn-primary btn-xs  mt-1 mb-1 ml-1"> 
                               
@@ -173,10 +177,47 @@
                             </li>
                         </ul>
                     </div>
+                    {% endif %}
                    
-                </div>
-            </div>
+                {%if  group == "Submitters"%}
+            <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive project-list">
+                        <table class="table project-table table-centered table-nowrap">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Projects</th>
+                                    <th scope="col">Launching Date</th>
+        
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                              {% for project in individualprojects %}
+                                    <tr>
+                                    <th scope="row">{{project.id}}</th>
+                                    <td ><a href="{% url 'project-detail' project.id %}"> {{project.project_title}} </a></td>
+                                    <td>{{project.launching_date}}</td>
+                                    <td>
+                                        <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i> {{project.status}}</span>
+                                    </td>
+                                    
+                                 
+                                </tr>
+
+
+                              {% endfor %}
+                              {%endif%}
+                               
+                </div>   
         </div>
+        </div>
+                
+            </div>
+        
     </div>
      {% if is_paginated %}
 
@@ -197,8 +238,14 @@
         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
       {% endif %}
-
     {% endif %}
+
+    
+
+  
+    
+     
+    
     <!-- end row -->
 </div>
 

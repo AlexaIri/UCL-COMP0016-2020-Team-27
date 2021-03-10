@@ -344,6 +344,7 @@
                 </div>
             </div>
             <!-- end col -->
+        {%if group != "Submitters"%}
             <div class="col-lg-4">
                 <div class="card-box" style=" background: rgb(250, 251, 252)  top left repeat-y;">
                     <h4 class="header-title m-b-30">Comments ({{project.comments.all.count}})</h4>
@@ -382,7 +383,10 @@
                                    </div>
                             
                             </div>
+                            
                         </div>
+                        
+                        {%endif%}
                     </div>
                 </div>
             </div>

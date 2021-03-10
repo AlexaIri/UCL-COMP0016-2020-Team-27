@@ -10,7 +10,7 @@ class Proposal(forms.ModelForm):
     class Meta:
         model = Person
         # fields = ['name','surname','email','phone_number','title','project_title','summarised_abstract','full_abstract','expertiseskills','devices','launching_date','motivations','importance','hashtags','tags','project_complexity','source_type','ethics_form']
-        exclude = ['priority','status','department','organisation','completionPercentage','submission_date']
+        exclude = ['priority','status','department','organisation','completionPercentage','submission_date','user']
         widgets = {
             "name" : forms.TextInput(attrs ={'placeholder': 'First name'}),
             "surname" : forms.TextInput(attrs ={'placeholder': 'Family name'}),
