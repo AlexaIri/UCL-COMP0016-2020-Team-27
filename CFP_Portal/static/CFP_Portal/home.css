@@ -1,5 +1,7 @@
 body{
-    background:#f3f3f3;
+ 
+    background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, black 0%, #0046B1 100%);
+
 
     color: #616f80;
 }

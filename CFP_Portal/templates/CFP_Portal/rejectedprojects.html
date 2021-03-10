@@ -23,7 +23,7 @@
        </style>
        
 </head>
-<body style="margin-top:100px">
+<body style="margin-top:-4px">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
 
@@ -31,23 +31,7 @@
     
         <div class="col-lg-3">
         <div class="mb-4">
-                <div class="small mb-3">Search</div>
-                <div class="card card-body">
                 
-
-			<form method="get">
-               
-               Name:  {{ myFilter.form.name}} 
-               Surname:  {{ myFilter.form.surname}}      
-               Project title:  {{ myFilter.form.project_title}}   
-               Open or closed source:  {{ myFilter.form.source_type}}      
-               Status:  {{ myFilter.form.status}}          
-			
-		    <button class="btn btn-primary"style="margin:5px" type="submit">Search</button>
-		  </form>
-            
-
-		</div>
             </div>
             
             <div class="mb-4">
@@ -63,7 +47,7 @@
             <br>
             <li><button class="btn btn-primary"name="scaffolding"style="margin:5px"  type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
             <br>
-            <li><button class="btn btn-primary"name="discovery"style="margin:5px"  type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{disoverynumber}}</span></a></li>
+            <li><button class="btn btn-primary"name="discovery"style="margin:5px"  type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{discoverynumber}}</span></a></li>
 		  </form>
                 </ul>
             </div>

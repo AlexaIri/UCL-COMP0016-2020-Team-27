@@ -22,26 +22,60 @@
                             <div class="container" >
                             </circle>
     <div class="row">
+    <form method="get">
+               
+                              
+				
 
+                    
+            
+		    <button class="btn btn-light"name="projects" style="margin:5px" type="submit" >Projects to Review</button>
+             <button class="btn btn-light"name="allprojects" style="margin:5px" type="submit" > All Projects </button>
+            
+		  </form>
       {% for project in projects %}
   {% comment %} <a href ="#"> <button type="button" class="btn btn-success btn-xs  mt-1 mb-1 ml-1"> {{project.review.id}} View the feedback and review  {% endcomment %}
                                      {% comment %} <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="#">  Review this project </a> {% endcomment %}
 
-                            </button></a>
+                            {% comment %} </button></a> {% endcomment %}
          <div class="col-lg-4 d-flex justify-content-center">
             <div class="card">
                 <div class="card-body text-center">
-                    <div class="card-img pt-2 pb-3"> <img src="https://techprorepair.com/wp-content/uploads/2020/05/photo-1517694712202-14dd9538aa97.jpg" alt=""> </div>
+                {% if project.status == "Rejected"%}
+                            <span class="badge badge-danger">{{project.status}} </span>
+
+                            
+                            {% elif project.status == "Submitted"%}
+                             <span class="badge badge-warning">{{project.status}} </span>
+
+                            {% elif project.status == "Accepted"%}
+                            <span class="badge badge-success">{{project.status}}  </span>
+
+
+                    {% endif %}
+                    
                     <div class="name h5"> {{project.project_title}} </div>
                              <div class="testimonial"> 
                           <div class="col-xs-4 bottom text-center">
                            <div class="col-xs-4 emphasis mt-1 mb-1">
-                                     <p style="color:#fff"><i><b> Name: </b></i>{{project.name}} {{project.surname}}</p>
+                       
+                                     {% comment %} <p style="color:#fff"><i><b> Abstract: </b></i>{{project.summarised_abstract}}</p> {% endcomment %}
                                      {% comment %} <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="{% url 'review-detail' project.id %}">  Review this project </a>
                                      <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'view-review' project.id %}">  View the feedback and review </a> {% endcomment %}
-   
-                                     <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="#">  Review this project </a>
+                                    {% if project.status == "Submitted"%}
+                                     <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
+                                     {%endif%}
+                                     {% if project.status == "Under Review"%}
+                                     <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
+                                     {%endif%}
+                                     {% if project.status == "Accepted"%}
+                                     <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="">  Project has been accepted </a>
+                                     {%endif%}
+                                     {% if project.status == "Rejected"%}
+                                     <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="">  Project has been rejected </a>
+                                     {%endif%}
                                      <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'reviewdetail' project.id %}">  View the feedback and review </a>
+                                     <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'project-detail' project.id %}">  View this project </a>
                             {% comment %} <button type="button" class="btn btn-dark">  <a href ="{% url 'project-detail' project.id %}"> Primary </a> </button> {% endcomment %}
                           
                              </div>
@@ -58,52 +92,10 @@
       {% endfor %}
 
 
-        <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card">
-                <div class="card-body text-center">
-                    <div class="card-img pt-2 pb-3"> <img src="https://images.pexels.com/photos/6625914/pexels-photo-6625914.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""> </div>
-                    <div class="name h5">Lisa Stephen</div>
-                    <div class="testimonial"> I made bacck the purchase price in just 48 hours ! Thank you for making pain less, pleasant. The service was execellent. I will refer everyone I know </div>
-                </div>
-            </div>
-        </div>
-         <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card">
-                <div class="card-body text-center">
-                    <div class="card-img pt-2 pb-3"> <img src="https://images.pexels.com/photos/6625914/pexels-photo-6625914.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""> </div>
-                    <div class="name h5">Lisa Stephen</div>
-                    <div class="testimonial"> I made bacck the purchase price in just 48 hours ! Thank you for making pain less, pleasant. The service was execellent. I will refer everyone I know </div>
-                </div>
-            </div>
-        </div>
-         <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card">
-                <div class="card-body text-center">
-                    <div class="card-img pt-2 pb-3"> <img src="https://images.pexels.com/photos/6625914/pexels-photo-6625914.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""> </div>
-                    <div class="name h5">Lisa Stephen</div>
-                    <div class="testimonial"> I made bacck the purchase price in just 48 hours ! Thank you for making pain less, pleasant. The service was execellent. I will refer everyone I know </div>
-                </div>
-            </div>
-        </div>
-         <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card">
-                <div class="card-body text-center">
-                    <div class="card-img pt-2 pb-3"> <img src="https://images.pexels.com/photos/6625914/pexels-photo-6625914.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""> </div>
-                    <div class="name h5">Lisa Stephen</div>
-                    <div class="testimonial"> I made bacck the purchase price in just 48 hours ! Thank you for making pain less, pleasant. The service was execellent. I will refer everyone I know </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 d-flex justify-content-center">
-            <div class="card">
-                <div class="card-body text-center">
-                    <div class="card-img pt-2 pb-3"> <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt=""> </div>
-                    <div class="name h5">Hermione Granger</div>
-                    <div class="testimonial"> I made bacck the purchase price in just 48 hours ! Thank you for making pain less, pleasant. The service was execellent. I will refer everyone I know </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 d-flex justify-content-center">
+     
+       
+       
+        {% comment %} <div class="col-lg-4 d-flex justify-content-center">
             <div class="card">
                 <div class="card-body text-center">
                     <div class="card-img pt-2 pb-3"> <img src="https://images.pexels.com/photos/4946604/pexels-photo-4946604.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" /> </div>
@@ -111,7 +103,7 @@
                     <div class="testimonial"> I made bacck the purchase price in just 48 hours ! Thank you for making pain less, pleasant. The service was execellent. I will refer everyone I know </div>
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
     </div>
 </div>
                             </body>

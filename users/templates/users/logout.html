@@ -1,11 +1,50 @@
 {% extends "CFP_Portal/sidebar.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
-    
-    <h2> You have been logged out of the system </h2>
+{% load static %}
+
+<!doctype html>
+
+
+                         <html lang="en">
+        <head>
+            <meta charset='utf-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1'>
+            <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+           
+
+            <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="#">
+    <style type="text/css">
+
+
+     </style>
+                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+                                <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+                    
+
+                                <script type="text/javascript" src="{% static 'CFP_Portal/scripts.js' %}"></script>
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                            </head>
+                            <body oncontextmenu='return false' class='snippet-body'>
+                             <link href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152092/smartwizard/smart_wizard.min.css" rel="stylesheet" type="text/css" />
+ <link href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152091/smartwizard/smart_wizard_theme_arrows.min.css" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152197/smartwizard/jquery.smartWizard.min.js"></script>
+  
+  
+                         
+                       
+              
+                 
+                        
+ <h2> You have been logged out of the system </h2>
     <div class="border-top pt-3">
         <small class="text-muted">
           <a href="{% url 'login' %}">Log In Again</a>
         </small>
-    </div>
+    </div> 
+</div>
+    </body>
+    </html>
 
-{% endblock content %}
+{% endblock %}

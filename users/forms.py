@@ -32,3 +32,16 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+
+class Login(forms.Form):
+    
+    username = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
+    password = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
+    # reviewer_email = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
+    # phone_number = PhoneNumberField()
+    # reviewer_phone_number =  forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
+
+    # comments = forms.CharField(widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Write your final feedback in here...'}))
+    # widget=forms.Textarea(attrs={"rows":5, "cols":20}
+
+  

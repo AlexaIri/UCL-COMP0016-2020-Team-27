@@ -44,7 +44,7 @@
         <div class="sidebar-header">
          
              
-           <h4 style="color:#fff"> IXN Portal Engine</h4>
+           <h4 style="color:#fff"> CFP Portal Engine</h4>
             
             <hr>
 
@@ -53,7 +53,7 @@
         
             <p >MENUS</p>
             {% if user.is_authenticated %}
-            <li> <a href="{% url 'SubmissionPortal'%}" style="color:rgb(0,70,177)">Submission Portal</a> </li>
+            <li> <a href="{% url 'SubmissionPortal' %}" style="color:rgb(0,70,177)">Submission Portal</a> </li>
             <li> <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Dashboard</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li><a href="{% url 'blog-home' %}" style="color:rgb(0,70,177)">Projects Dashboard</a> </li>
@@ -64,16 +64,16 @@
             <li> <a href="{% url 'users' %}" style="color:rgb(0,70,177)">Users</a> </li>
             <li> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Project Proposals</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">All subsmissions</a> </li>
-                    <li> <a href="#" style="color:rgb(0,70,177)"> Pending </a> </li>
-                    <li> <a href="{% url 'acceptedprojects' %}"" style="color:rgb(0,70,177)"> Completed and Approved</a> </li>
+                    <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">All submissions</a> </li>
+                    <li> <a href="#" style="color:rgb(0,70,177)"> Under Review </a> </li>
+                    <li> <a href="{% url 'acceptedprojects' %}" style="color:rgb(0,70,177)"> Completed and Approved</a> </li>
                      <li> <a href="{% url 'rejectedprojects' %}" style="color:rgb(0,70,177)"> Rejected</a> </li>
 
                 </ul>
             </li>
             
             <li> <a href="{% url 'organisations' %}" style="color:rgb(0,70,177)">Organisations</a> </li>
-            <li> <a href= "#" style="color:rgb(0,70,177)">Comments</a> </li>
+            <li> <a href= "{% url 'trial' %}" style="color:rgb(0,70,177)">Comments</a> </li>
            
 
         </ul>
@@ -106,7 +106,7 @@
                 Amet justo donec enim diam vulputate. Aliquet eget sit amet tellus cras. Tincidunt arcu non sodales neque. Semper auctor neque vitae tempus quam. In massa tempor nec feugiat nisl pretium fusce id. Fames ac turpis egestas integer eget aliquet. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra. Ut sem nulla pharetra diam. Vitae tempus quam pellentesque nec nam aliquam sem. Eget duis at tellus at urna condimentum mattis. Tellus orci ac auctor augue mauris. Eget sit amet tellus cras adipiscing enim eu turpis. Nam aliquam sem et tortor. Ac tincidunt vitae semper quis lectus. Mollis nunc sed id semper risus in hendrerit. Tincidunt id aliquet risus feugiat. Massa eget egestas purus viverra accumsan in nisl.
                 Quis enim lobortis scelerisque fermentum. Ut diam quam nulla porttitor massa. Nunc sed id semper risus in. Mattis pellentesque id nibh tortor. Ac orci phasellus egestas tellus rutrum. Congue nisi vitae suscipit tellus mauris a diam. Facilisis volutpat est velit egestas. Quam viverra orci sagittis eu volutpat odio. Etiam dignissim diam quis enim lobortis. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Sit amet luctus venenatis lectus. Mi eget mauris pharetra et ultrices neque. Sit amet cursus sit amet dictum sit amet. Eget lorem dolor sed viverra. Neque egestas congue quisque egestas diam. Vestibulum lectus mauris ultrices eros in cursus turpis. Et leo duis ut diam quam nulla. Egestas sed tempus urna et pharetra. Aliquam sem et tortor consequat id. Sollicitudin tempor id eu nisl nunc mi.
                 .</p> {% endcomment %}
-            <div class="line"></div>
+         
         </div>
     </div>
 </div>

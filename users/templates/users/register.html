@@ -1,8 +1,21 @@
 {% extends "CFP_Portal/sidebar.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<style>
-        .switch {
+{% load static %}
+
+<!doctype html>
+
+
+                        <html>
+                            <head>
+                                <meta charset='utf-8'>
+                                <meta name='viewport' content='width=device-width, initial-scale=1'>
+                                <title>Snippet - BBBootstrap</title>
+                                <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet'>
+                                <link href='' rel='stylesheet'>
+                                 <link rel="stylesheet" href="#">
+    <style>
+         .switch {
         position: relative;
         display: inline-block;
         width: 60px;
@@ -67,8 +80,16 @@
         display: none;
        
         }
-        
-</style>
+     </style>
+                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+                                <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js'></script>
+                                <script type='text/javascript'></script>
+                            </head>
+                            <body oncontextmenu='return false' class='snippet-body' style="height:100%;  ">
+<div class="row" style="align:center">
+ <div class="card" style="width:70%;align:center; margin-left:180px;padding:50px; border-color:white; margin-top:0px">
+                <div class="card-body text-justify" style="width:100%;  background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y; box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)">
+  
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -103,7 +124,11 @@
             </small>
         </div>
     </div>
-                <script>
+
+
+
+ </div></div></div>
+  <script>
                 
                 function myFunction() {
                 // Get the checkbox
@@ -120,5 +145,7 @@
                 }
                 </script>
 
-                
-{% endblock content %}
+     </body>
+                        </html>
+
+{% endblock %}
