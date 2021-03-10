@@ -1339,18 +1339,10 @@ a {
 
                         <div class="col-md-6">
                             <h5>Badges & Hashtags</h5>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">html5</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">react</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">codeply</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">angularjs</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">css3</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">jquery</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">bootstrap</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">responsive-design</a>
-                            <hr>
-                            <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
-                            <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
-                            <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                            {% for mt in review.project.tags.all %}
+                        <a href="#" class="badge badge-success">{{mt}}</a>
+                            {%endfor%}
+                            
                         </div>
                       
 
