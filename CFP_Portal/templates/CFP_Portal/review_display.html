@@ -27,11 +27,12 @@
                               
 				
 
-                    
+                  <div class="text-center">  
             
-		    <button class="btn btn-light"name="projects" style="margin:5px" type="submit" >Projects to Review</button>
-             <button class="btn btn-light"name="allprojects" style="margin:5px" type="submit" > All Projects </button>
-            
+		    <button class="btn btn-light"name="projects" style="margin:5px" type="submit" > View the projects to review</button>
+             <button class="btn btn-light"name="allprojects" style="margin:5px" type="submit" > View all the projects </button>
+            </div>
+            <br><br>
 		  </form>
       {% for project in projects %}
   {% comment %} <a href ="#"> <button type="button" class="btn btn-success btn-xs  mt-1 mb-1 ml-1"> {{project.review.id}} View the feedback and review  {% endcomment %}
@@ -65,6 +66,7 @@
                                      {% comment %} <p style="color:#fff"><i><b> Abstract: </b></i>{{project.summarised_abstract}}</p> {% endcomment %}
                                      {% comment %} <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="{% url 'review-detail' project.id %}">  Review this project </a>
                                      <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'view-review' project.id %}">  View the feedback and review </a> {% endcomment %}
+                                    <br>
                                     {% if project.status == "Submitted"%}
                                      <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
                                      {%endif%}
@@ -72,10 +74,10 @@
                                      <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
                                      {%endif%}
                                      {% if project.status == "Accepted"%}
-                                     <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="">  Project has been accepted </a>
+                                     <a class ="btn btn-success btn-sm mt-1 mb-1 ml-auto" href ="">  The project has been accepted </a>
                                      {%endif%}
                                      {% if project.status == "Rejected"%}
-                                     <a class ="btn btn-light btn-sm mt-1 mb-1 ml-auto" href ="">  Project has been rejected </a>
+                                     <a class ="btn btn-danger btn-sm mt-1 mb-1 ml-auto" href ="">  The project has been rejected </a>
                                      {%endif%}
                                      <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'reviewdetail' project.id %}">  View the feedback and review </a>
                                      <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'project-detail' project.id %}">  View this project </a>

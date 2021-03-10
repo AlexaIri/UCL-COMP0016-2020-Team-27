@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from .models import Organisation, Post, Person, Review, Comment, RejectedProjects, AcceptedProjects
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -584,6 +584,7 @@ def ReviewPortal(request, project_id):
             # results2 = Person()
             
             results.project = projects
+            # results.project = form.cleaned_data['project']
             
             results.project.status = "Reviewed"
             results.reviewer_name = form.cleaned_data['reviewer_name']
