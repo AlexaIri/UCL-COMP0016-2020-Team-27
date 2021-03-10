@@ -51,6 +51,9 @@
                             {% elif project.status == "Accepted"%}
                             <span class="badge badge-success">{{project.status}}  </span>
 
+                            {% elif project.status == "Under Review"%}
+                            <span class="badge badge-info">{{project.status}}  </span>
+
 
                     {% endif %}
                     

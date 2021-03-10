@@ -170,7 +170,7 @@ img {
                                 <i class="fa fa-tasks" style="color:#999"></i> Visit the Project's Page
                            </button> </a>  {% endcomment %}
                            <br><br>
-                        {{ form.project|as_crispy_field}}
+                        {% comment %} {{ form.project|as_crispy_field}} {% endcomment %}
                            {% comment %} href ="{% url 'project-detail' review.project.id %}" {% endcomment %}
             </div>
             <div class="col-lg-5">
