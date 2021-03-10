@@ -16,7 +16,7 @@ class ProfileRegisterForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['image', 'department', 'organisation']
+        fields = ['image', 'department', 'organisation','full_name']
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
@@ -26,6 +26,7 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['username', 'email']
 
 class ProfileUpdateForm(forms.ModelForm):
+    fullname = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Full name'}))
     department = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Department you work in'}), required=False)
     organisation = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Organisation or Trust '}), required=False)
     class Meta:

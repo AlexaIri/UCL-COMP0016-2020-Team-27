@@ -7,6 +7,7 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     department = models.CharField(max_length = 255, default = "", blank=True)
     organisation = models.CharField(max_length = 255, default = "", blank=True)
+    full_name = models.CharField(max_length = 255, default = "")
     
 
     def __str__(self):

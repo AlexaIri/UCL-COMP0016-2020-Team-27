@@ -109,7 +109,8 @@
             
                Project title:  {{ myFilter.form.project_title}}   </p>
                Status:      {{ myFilter.form.status}}   </p>   
-               Project ID:      {{ myFilter.form.id}}   </p>     
+               Project ID:      {{ myFilter.form.id}}   </p> 
+               NICE tier  {{myFilter.form.NICEtier}}   </p>    
 				Advanced Search
                 <label class="switch"> 
                 <input type="checkbox" id="myCheck" onclick="myFunction()">
@@ -119,11 +120,12 @@
                 
 
                   <p style="color:black;"> Department: {{ myFilter.form.department}}   
-                  Organisation: {{ myFilter.form.organisation}} 
-                  Open or closed source:  {{ myFilter.form.source_type}}
-                   <br>Area of Expertise {{myFilter.form.expertiseskills}}
-                  Name {{myFilter.form.name}}  </p>   
-                  Tags  {{myFilter.form.tags__name}}   </p>
+                  <p style="color:black;">Organisation: {{ myFilter.form.organisation}} 
+                  <p style="color:black;">Open or closed source:  {{ myFilter.form.source_type}}
+                  <p style="color:black;">  Area of Expertise {{myFilter.form.expertiseskills}}
+                  <p style="color:black;">Name: {{myFilter.form.name}}  </p>   
+                  <p style="color:black;">Tags:  {{myFilter.form.tags__name}}   </p>
+                  <p style="color:black;">Challenge: {{myFilter.form.challenge}}   </p>    
                 </div>
                 
                 <script>

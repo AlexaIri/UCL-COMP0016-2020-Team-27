@@ -137,6 +137,8 @@
                                      {% comment %} <input name = "devices" type="text" class="form-control" placeholder="Devices" required>  {% endcomment %}
                                      {{ form.devices|as_crispy_field}}
 
+                                     {{form.NICEtier|as_crispy_field}}
+
                                       
 
                                  
@@ -197,6 +199,8 @@
                                     
                                      {% comment %} <input name = "surname" type="text" class="form-control" placeholder="Surname" required>  {% endcomment %}
                                       {{ form.importance|as_crispy_field}}
+
+                                      {{form.challenge|as_crispy_field}}
                                      
                                      {% comment %} <input name = "phone_number" type="text" class="form-control" placeholder="Phone number" required>  {% endcomment %}
                                      

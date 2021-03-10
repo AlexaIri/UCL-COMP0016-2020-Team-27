@@ -24,6 +24,7 @@ class Proposal(forms.ModelForm):
             "launching_date" : forms.TextInput(attrs ={'placeholder': 'Date'}),
             "motivations" : forms.TextInput(attrs ={'placeholder': 'What motivated you?'}),
             "importance" : forms.TextInput(attrs ={'placeholder': 'Why is your project important?'}),
+            "challenge" : forms.TextInput(attrs ={'placeholder': 'Is this project a response to a challenge?'}),
         
            }
     
@@ -92,8 +93,7 @@ class Proposal(forms.ModelForm):
 class Commentform(forms.ModelForm):
        class Meta:
            model = Comment
-           fields = ('name','feedback',)
+           fields = ('feedback',)
            widgets = {
-                "name" : forms.TextInput(attrs ={'placeholder': 'First name'}),
                 "feedback" : forms.TextInput(attrs ={'placeholder': 'feedback'}),
            }

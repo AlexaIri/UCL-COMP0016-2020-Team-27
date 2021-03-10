@@ -111,6 +111,13 @@ class Person(models.Model):
         ('No priority', 'No priority'),
     )
 
+    tier = (
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+    )
+    NICEtier = models.CharField("What is the NICE tier of the project?", max_length=20, choices=tier, default = "")
+    challenge = models.TextField("Is this project from a challenge?", default = "", blank= True)
     priority = models.CharField("What is the priority level of the project?", max_length=20, choices=priorityStatus, default = "")
 
     def __str__(self):
@@ -179,6 +186,7 @@ class Post(models.Model):
 class AcceptedProjects(models.Model):
     project = models.OneToOneField(
         Person,
+        related_name="project",
         on_delete=models.CASCADE,
         primary_key=True,
     )

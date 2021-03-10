@@ -75,6 +75,7 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Join Today</legend>
                 {% csrf_token %}
+                {{ p_reg_form.full_name|as_crispy_field}}
                 {{ form.username|as_crispy_field}}
                 {{ form.email|as_crispy_field}}
                 {{ form.password1|as_crispy_field}}

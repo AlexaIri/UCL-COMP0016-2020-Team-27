@@ -27,9 +27,10 @@ def projectdetail(request, pk):
         print("post!")
         form = Commentform(request.POST)
         if form.is_valid():
+            user = User.objects.get(pk=request.user.id)
             comments = Comment()
             comments.project = project
-            comments.name = form.cleaned_data['name']
+            comments.name = user.profile.full_name
             comments.feedback = form.cleaned_data['feedback']
             comments.save()
     else:
@@ -238,24 +239,25 @@ def rejectedprojects(request):
 
 def acceptedprojects(request):
     #template = loader.get_template('CFP_Portal/index.html')
-    acceptedprojects = AcceptedProjects.objects.all()
+    acceptedprojects = Person.objects.all()
+   
 
     myFilter = ProjectFilter(request.GET, queryset = acceptedprojects)
-    projects = myFilter.qs
-    innovationnumber = Person.objects.filter(project_complexity='Innovation').count()
-    scaffoldingnumber = Person.objects.filter(project_complexity='Scaffolding').count()
-    discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
+    acceptedprojects = myFilter.qs
+    innovationnumber = AcceptedProjects.objects.filter(project__project_complexity='Innovation').count()
+    scaffoldingnumber = AcceptedProjects.objects.filter(project__project_complexity='Scaffolding').count()
+    discoverynumber = AcceptedProjects.objects.filter(project__project_complexity='Discovery').count()
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation')
+        acceptedprojects = AcceptedProjects.objects.filter(project__project_complexity='Innovation')
         
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery')
+        acceptedprojects = AcceptedProjects.objects.filter(project__project_complexity='Discovery')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding')
+       acceptedprojects = AcceptedProjects.objects.filter(project__project_complexity='Scaffolding')
 
     context ={
         'acceptedprojects': acceptedprojects,
