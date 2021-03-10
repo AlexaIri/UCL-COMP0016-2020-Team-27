@@ -473,6 +473,8 @@ def SubmissionPortal(request):
  
 
 def ReviewPortal(request, project_id):
+    projects= get_object_or_404(Person, pk=project_id)
+    
 
     if request.method == "POST":
 
@@ -491,7 +493,9 @@ def ReviewPortal(request, project_id):
             # project = Person.objects.get(pk=**kwargs['intervention_pk'])
 
             # results2 = Person()
-            results.project = form.cleaned_data['project']
+            
+            results.project = projects
+            
             results.project.status = "Reviewed"
             results.reviewer_name = form.cleaned_data['reviewer_name']
             results.reviewer_surname = form.cleaned_data['reviewer_surname']
@@ -515,6 +519,7 @@ def ReviewPortal(request, project_id):
             results.usabilityTestingPoints = form.cleaned_data['usability_testing_points']
             results.researchQualityPoints = form.cleaned_data['research_quality_points']
             results.RAGlevel = request.POST.get('options')
+            Person.objects.filter(id=project_id).update(status='Under Review')
             
              
             # results2.status = 'Reviewed'
