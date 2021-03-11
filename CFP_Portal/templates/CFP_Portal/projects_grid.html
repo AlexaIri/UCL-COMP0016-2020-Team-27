@@ -10,9 +10,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>bs4 project grid - Bootdey.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'CFP_Portal/projects.css' %}">
@@ -22,6 +19,7 @@
     
        </style>
        <style>
+       
         .switch {
         position: relative;
         display: inline-block;
@@ -107,25 +105,25 @@
 			<form method="get">
                
             
-               Project title:  {{ myFilter.form.project_title}}   </p>
-               Status:      {{ myFilter.form.status}}   </p>   
-               Project ID:      {{ myFilter.form.id}}   </p> 
-               NICE tier  {{myFilter.form.NICEtier}}   </p>    
+              <p style="font-size:15px;color:black"> Project title:  {{ myFilter.form.project_title}}   </p>
+              <p style="font-size:15px;color:black"> Status:      {{ myFilter.form.status}}   </p>   
+              <p style="font-size:15px;color:black"> Project ID:      {{ myFilter.form.id}}   </p> 
+               <p style="font-size:15px;color:black">NICE tier  {{myFilter.form.NICEtier}}   </p>  
 				Advanced Search
                 <label class="switch"> 
                 <input type="checkbox" id="myCheck" onclick="myFunction()">
                 <span class="slider round"></span>
-                </label>
+                </label><br><br>
                 <div id="myDIV" class="form-group">
                 
 
-                  <p style="color:black;"> Department: {{ myFilter.form.department}}   
-                  <p style="color:black;">Organisation: {{ myFilter.form.organisation}} 
-                  <p style="color:black;">Open or closed source:  {{ myFilter.form.source_type}}
-                  <p style="color:black;">  Area of Expertise {{myFilter.form.expertiseskills}}
+                 <p style="font-size:15px;color:black;">  Department: {{ myFilter.form.department}}   </p>
+                <p style="font-size:15px;color:black;"> Organisation: {{ myFilter.form.organisation}}  </p>
+                  <p style="font-size:15px;color:black;">Open or closed source:  {{ myFilter.form.source_type}} </p>
+                <p style="font-size:15px;color:black;"> Area of Expertise {{myFilter.form.expertiseskills}} </p>
                   <p style="color:black;">Name: {{myFilter.form.name}}  </p>   
                   <p style="color:black;">Tags:  {{myFilter.form.tags__name}}   </p>
-                  <p style="color:black;">Challenge: {{myFilter.form.challenge}}   </p>    
+                  <p style="font-size:15px;color:black;">Challenge: {{myFilter.form.challenge}}   </p>    
                 </div>
                 
                 <script>
@@ -144,8 +142,8 @@
                 }
                 </script>
 
-                    
-           <button class="btn btn-primary"name="allprojects" style="margin:5px"type="submit">Search</button>
+                    <div class="text-center">
+           <button class="btn btn-dark"name="allprojects" style="margin:5px"type="submit">Search</button></div>
 		    
            
 		  </form>
@@ -165,17 +163,17 @@
 
                     
             
-		    <li><button class="btn btn-primary"name="innovation" style="margin:5px" type="submit" >Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
+		    <li><button class="btn btn-dark"name="innovation" style="margin:5px" type="submit" >Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
             <br>
-            <li><button class="btn btn-primary"name="scaffolding" style="margin:5px" type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
+            <li><button class="btn btn-secondary"name="scaffolding" style="margin:5px" type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
          <br>
-         <li><button class="btn btn-primary"name="discovery" style="margin:5px" type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{discoverynumber}}</span></a></li>
+         <li><button class="btn btn-light"name="discovery" style="margin:5px" type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{discoverynumber}}</span></a></li>
 		  </form>
                    
                     
                 </ul>
             </div>
-            <div class="mb-4">
+            {% comment %} <div class="mb-4">
                 <div class="small mb-3">People</div>
                 <ul class="nav flex-column nav-pills">
                     <li class="nav-item">
@@ -189,7 +187,7 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <div class="mt-0">Alva Kuhic</div><span class="small">Florida, AR</span></div>
+                                    <div class="mt-0">Submitters of project proposals</div><span class="small"</span></div>
                             </div><i class="fa fa-fw fa-circle text-success ml-auto align-self-center ml-2"></i></a>
                     </li>
                     <li class="nav-item">
@@ -203,7 +201,7 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <div class="mt-0">Jeramy Gleason</div><span class="small">Indiana, AZ</span></div>
+                                    <div class="mt-0">Reviewers</div><span class="small"></span></div>
                             </div><i class="fa fa-fw fa-circle text-warning ml-auto align-self-center ml-2"></i></a>
                     </li>
                     <li class="nav-item">
@@ -217,19 +215,19 @@
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <div class="mt-0">Travis Koch</div><span class="small">Tennessee, AZ</span></div>
+                                    <div class="mt-0">Project leads</div><span class="small"></span></div>
                             </div><i class="fa fa-fw fa-circle text-danger ml-auto align-self-center ml-2"></i></a>
                     </li>
-                    <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-fw fa-plus mr-2"></i>Add New People</a></li>
+                     <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-fw fa-plus mr-2"></i>Add New People</a></li> 
                 </ul>
-            </div>
-        </div>
+            </div>{% endcomment %}
+        </div> 
         
         <div class="col-lg-9">
             <div class="d-flex flex-column flex-md-row mb-3 mb-md-0">
                 <nav class="mr-auto d-flex align-items-center" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="active breadcrumb-item" aria-current="page"><a href="#"><i class="fa fa-home"></i></a></li>
+                        <li class="active breadcrumb-item" aria-current="page"><a href="{% url 'blog-home' %}"><i class="fa fa-home"></i></a></li>
                         <li class="active breadcrumb-item" aria-current="page">Projects Grid</li>
                     </ol>
                 </nav>
@@ -261,16 +259,67 @@
 
 
                     {% endif %}
-                        <div class="mb-2"><a href="{% url 'project-detail' project.id %}" class="mr-2"><i class="fa fa-fw fa-star-o"></i></a><a href="{% url 'project-detail' project.id %}">{{project.project_title}}</a></div><span><b>Submitter Name: </b><br>{{project.name}} <br><b> Launching date: </b> <br>{{project.launching_date}} <hr> <b>Tags:</b> {% for mt in project.tags.all %}
-                    <a href="#" class="badge badge-success">{{mt}}</a>
+                        <div class="mb-2"><a href="{% url 'project-detail' project.id %}" class="mr-2">
+                        
+                         <div class="align-self-center ml-auto btn-group">
+                            <button type="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle btn btn-link btn-sm"><i class="fa fa-gear"></i></button>
+                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-folder-open mr-2"></i>View</button>
+                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-ticket mr-2"></i>Add Task</button>
+                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-paperclip mr-2"></i>Add Files</button>
+                                <div tabindex="-1" class="dropdown-divider"></div>
+                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-trash mr-2"></i>Delete</button>
+                            </div>
+                        </div>
+
+                        </a><a href="{% url 'project-detail' project.id %}">{{project.project_title}}</a></div><span><b>Submitter Name: </b><br>{{project.name}} <br> <hr><b> Submission date: </b> <br>{{project.submission_date}} <br> <b> Launching date: </b> <br>{{project.launching_date}} <hr> <b>Tags:</b> {% for mt in project.tags.all %}
+                    <a href="#" class="badge badge-primary">{{mt}}</a>
                      {% endfor %}</span></div>
                     <div class="card-footer">
-                        <div class="mb-2 progress" style="height: 5px;">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-                        </div>
-                        Tags: 
+                        
+                                 <script type='text/javascript'>$(document).ready(function() {
+                                    $('.progress .progress-bar').css("width",
+                                    function() {
+                                    return $(this).attr("aria-valuenow") + "%";
+                                    }
+                                    )
+                                    });</script>
+                                           {% if project.status == "Rejected"%}
+                     
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                             <div>Tasks Completed: <span class="text-inverse">100/100</span></div>
+
+                            
+                            {% elif project.status == "Submitted"%}
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                             <div>Tasks Completed: <span class="text-inverse">25/100</span></div>
+
+                            {% elif project.status == "Accepted"%}
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                             <div>Tasks Completed: <span class="text-inverse">100/100</span></div>
+                            
+                            {% elif project.status == "Under Review"%}
+                           <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                             <div>Tasks Completed: <span class="text-inverse">50/100</span></div>
+
+                              {% elif project.status == " Reviewed"%}
+                           <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                             <div>Tasks Completed: <span class="text-inverse">75/100</span></div>
+
+                    {% endif %}
+                        
                     
-                        <div>Tasks Completed:<span class="text-inverse">36/94</span></div>
+                       
                     </div>
                     <div class="card-footer">
                         <div class="avatar-image avatar-image--loaded mr-2">
@@ -289,7 +338,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex card-footer"><span class="align-self-center">20 Sep, Fri, 2018</span>
+                    {% comment %} <div class="d-flex card-footer">
                         <div class="align-self-center ml-auto btn-group">
                             <button type="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle btn btn-link btn-sm"><i class="fa fa-gear"></i></button>
                             <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
@@ -300,9 +349,10 @@
                                 <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-trash mr-2"></i>Delete</button>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     
                 </div>
+                <br>
                {%endfor%}
                 </div>
                 

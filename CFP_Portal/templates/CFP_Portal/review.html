@@ -1280,7 +1280,7 @@ a {
                 <div class="row text-center mt-4">
                   <div class="col p-2">
                    <h4 class="mb-1 line-height-5">154</h4>
-                    <small class="mb-0 font-weight-bold">Project Proposals</small>
+                    <small class="mb-0 font-weight-bold">Projects Reviewed</small>
                    </div>
 
 
@@ -1378,15 +1378,58 @@ a {
                     <a href="#" class="timeline">
                         <div class="timeline-icon"><i class="fa fa-cogs"></i></div>
                         <div class="timeline-content">
-                            <h3 class="title">2015</h3>
+                            <h3 class="title">Under review period</h3>
                             <p class="description">
                                 The project has been recently sent and assigned to an advised IXN reviewer.
-                                It is currently under reviewing and you will receive the feedback soon.
+                                It is currently under review and you will receive the feedback soon.
                             </p>
                         </div>
                     </a>
 
-                    {% if review.project.status == "Reviewed" %}
+                   
+               
+
+                {% if review.project.status == "Accepted" %}
+                <a href="#" class="timeline">
+                        <div class="timeline-icon"><i class="fa fa-comments-o"></i></div>
+                        <div class="timeline-content">
+                            <h3 class="title"> Review date</h3>
+                            <p class="description">
+                            The reviewing stage is completed and a read-only feedback is now released. Your project is now pending for approval or rejection.
+                                
+                            </p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="timeline">
+                        <div class="timeline-icon"><i class="fa fa-paper-plane-o"></i></div>
+                        <div class="timeline-content">
+                            <h3 class="title">Approval date</h3>
+                            <p class="description"> Congratulations! The project proposal has been approved and it will be sent to the IXN partner university students. You will be announced soon about the next stages.
+                            </p>
+                        </div>
+                    </a>
+                {% elif review.project.status == "Rejected" %}
+                 <a href="#" class="timeline">
+                        <div class="timeline-icon"><i class="fa fa-comments-o"></i></div>
+                        <div class="timeline-content">
+                            <h3 class="title"> Review date</h3>
+                            <p class="description">
+                            The reviewing stage is completed and a read-only feedback is now released. Your project is now pending for approval or rejection.
+                                
+                            </p>
+                        </div>
+                    </a>
+
+                 <a href="#" class="timeline">
+                        <div class="timeline-icon"><i class="fa fa-paper-plane-o"></i></div>
+                        <div class="timeline-content">
+                            <h3 class="title">2009</h3>
+                            <p class="description"> Unfortunately, the project proposal has been rejected and it will not be sent to the IXN partner university students. 
+                            </p>
+                        </div>
+                    </a>
+                {% elif review.project.status == "Reviewed" %}
                     <a href="#" class="timeline">
                         <div class="timeline-icon"><i class="fa fa-comments-o"></i></div>
                         <div class="timeline-content">
@@ -1397,37 +1440,7 @@ a {
                             </p>
                         </div>
                     </a>
-                    {% elif review.project.status == "Under Review" %}
-                      <a href="#" class="timeline">
-                        <div class="timeline-icon"><i class="fa fa-comments-o"></i></div>
-                        <div class="timeline-content">
-                            <h3 class="title">{{review.review_date}}</h3>
-                            <p class="description">
-                            The reviewing stage is incomplete and a read-only feedback is now released. Your project is now pending for approval or rejection.
-                                
-                            </p>
-                        </div>
-                    </a>
-                    {% endif %}
-
-                {% if review.project.status == "Accepted" %}
-                    <a href="#" class="timeline">
-                        <div class="timeline-icon"><i class="fa fa-paper-plane-o"></i></div>
-                        <div class="timeline-content">
-                            <h3 class="title">2009</h3>
-                            <p class="description"> Congratulations! The project proposal has been approved and it will be sent to the IXN partner university students. You will be announced soon about the next stages.
-                            </p>
-                        </div>
-                    </a>
-                {% elif review.project.status == "Rejected" %}
-                 <a href="#" class="timeline">
-                        <div class="timeline-icon"><i class="fa fa-paper-plane-o"></i></div>
-                        <div class="timeline-content">
-                            <h3 class="title">2009</h3>
-                            <p class="description"> Unfortunately, the project proposal has been rejected and it will not be sent to the IXN partner university students. 
-                            </p>
-                        </div>
-                    </a>
+                  
                 {% endif %}
         </div>
          </div></div></div>
@@ -1505,9 +1518,32 @@ a {
 <br>
 <div class="container">  
 
-<h5> <span class="badge badge-dark"> Total Points: {{review.points}} (out of 35)</span></h5><br>
-
-<h5> <span class="badge badge-dark"> Score: {{review.score}} (out of 100.00)</span></h5><br>
+<h5> <span class="badge badge-dark"> Total Points: {{review.points}} (out of 35)</span></h5>
+<h5> <span class="badge badge-dark"> Score: {{review.score}} (out of 100.00)</span></h5><br><br>
+<div class="row">
+<div class="col">
+<h5> <span class="badge badge-light"> Criterion #1 | Score: {{review.interoperabilityPoints100}} </span></h5>
+</div>
+<div class="col">
+<h5> <span class="badge badge-light"> Criterion #2 | Score: {{review.technical_strengthPoints100}} </span></h5>
+</div>
+<div class="col">
+<h5> <span class="badge badge-light"> Criterion #3 | Score: {{review.user_designPoints100}} </span></h5>
+</div>
+<div class="col">
+<h5> <span class="badge badge-light"> Criterion #4 | Score: {{review.usabilityTestingPoints100}} </span></h5>
+</div>
+<div class="col">
+<h5> <span class="badge badge-light"> Criterion #5 | Score: {{review.researchQualityPoints100}} </span></h5>
+</div>
+<div class="col">
+<h5> <span class="badge badge-light"> Criterion #6 | Score: {{review.resiliencePoints100}} </span></h5>
+</div>
+<div class="col">
+<h5> <span class="badge badge-light"> Criterion #7 | Score: {{review.scalabilityPoints100}} </span></h5>
+</div>
+</div>
+<br><br><br>
 
 
 <script type='text/javascript'>$(document).ready(function() {
@@ -1519,26 +1555,26 @@ return $(this).attr("aria-valuenow") + "%";
 });</script>
      <div class="row mt-15">
          <div class="col-md-12">
-             <div class="progress skill-bar " style="background:black">
-                <div class="progress-bar progress-bar-striped " role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Criterion #1 <i class="val">Score: </i></span> </div>
+             <div class="progress skill-bar " >
+                <div class="progress-bar progress-bar-striped " role="progressbar" aria-valuenow="{{review.interoperabilityPoints100}}" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Crit. #1 <i class="val">{{review.interoperabilityPoints100}} </i></span> </div>
              </div>
              <div class="progress skill-bar">
-                 <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Criterion #2<i class="val">Score:</i></span> </div>
+                 <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="{{review.technical_strengthPoints100}}" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Crit. #2<i class="val"> {{review.technical_strengthPoints100}}</i></span> </div>
              </div>
              <div class="progress skill-bar">
-                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> <span class="skill">Criterion #3 <i class="val">Score:</i></span> </div>
+                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="{{review.user_designPoints100}}" aria-valuemin="0" aria-valuemax="100"> <span class="skill">Crit. #3 <i class="val">{{review.user_designPoints100}}</i></span> </div>
              </div>
             <div class="progress skill-bar ">
-                 <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Criterion #4 <i class="val">Score:</i></span> </div>
+                 <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="{{review.usabilityTestingPoints100}}" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Crit. #4 <i class="val"> {{review.usabilityTestingPoints100}}</i></span> </div>
              </div>
              <div class="progress skill-bar">
-                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Criterion #5<i class="val">Score:</i></span> </div>
+                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="{{review.researchQualityPoints100}}" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Crit. #5<i class="val"> {{review.researchQualityPoints100}}</i></span> </div>
+             </div>
+              <div class="progress skill-bar ">
+                 <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="{{review.resiliencePoints100}}" aria-valuemin="0" aria-valuemax="100"> <span class="skill"> Crit. #6 <i class="val"> {{review.resiliencePoints100}}</i></span> </div>
              </div>
              <div class="progress skill-bar ">
-                 <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> <span class="skill">Criterion #6 <i class="val">Score:</i></span> </div>
-             </div>
-             <div class="progress skill-bar ">
-                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> <span class="skill">Criterion #7<i class="val">SCORE:</i></span> </div>
+                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="{{review.scalabilityPoints100}}" aria-valuemin="0" aria-valuemax="100"> <span class="skill">Crit. #7<i class="val"> {{review.scalabilityPoints100}}</i></span> </div>
              </div>
          </div>
      </div>
@@ -1683,7 +1719,7 @@ return $(this).attr("aria-valuenow") + "%";
                        </b>
                        <p style="color:black;display:inline"> Marking System </p>
                        </h1>
-                                               {% if review.green == True %}
+                                               {% if review.RAGlevel == "green" %}
                                {% comment %} <span class="badge badge-danger"  style="text-align:justify">{{project.priority}} Priority</span></div> {% endcomment %}
  <section class="divided clearfix" style="background:#EAEAEA; height:500px; margin-top:0px; margin-left:0px">
        
@@ -1709,7 +1745,7 @@ return $(this).attr("aria-valuenow") + "%";
         </div>
     </section>
                             
-                            {% elif review.amber == True %}
+                            {% elif review.RAGlevel == "amber" %}
                              {% comment %} <span class="badge badge-warning"  style="text-align:justify">{{project.priority}} Priority</span></div> {% endcomment %}
 <section class="divided clearfix" style="background:#EAEAEA; height:500px; margin-top:0px; margin-left:0px">
        
@@ -1734,7 +1770,7 @@ return $(this).attr("aria-valuenow") + "%";
             
         </div>
     </section>
-                            {% elif review.red == True %}
+                            {% elif review.RAGlevel == "red" %}
                             {% comment %} <span class="badge badge-info"  style="text-align:justify">{{project.priority}} Priority </span></div> {% endcomment %}
 
                            <section class="divided clearfix"  style=" height:500px; margin-top:0px; margin-left:0px">

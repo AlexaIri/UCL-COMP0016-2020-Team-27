@@ -10,9 +10,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>bs4 project grid - Bootdey.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'CFP_Portal/projects.css' %}">
@@ -43,11 +40,11 @@
 			
                     
             
-		    <li><button class="btn btn-primary"name="innovation" style="margin:5px" type="submit">Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
+		    <li><button class="btn btn-dark"name="innovation" style="margin:5px" type="submit">Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
             <br>
-            <li><button class="btn btn-primary"name="scaffolding"style="margin:5px"  type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
+            <li><button class="btn btn-secondary"name="scaffolding"style="margin:5px"  type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
             <br>
-            <li><button class="btn btn-primary"name="discovery"style="margin:5px"  type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{discoverynumber}}</span></a></li>
+            <li><button class="btn btn-light"name="discovery"style="margin:5px"  type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{discoverynumber}}</span></a></li>
 		  </form>
                 </ul>
             </div>
@@ -63,22 +60,22 @@
         <div class="col-lg-9">
             <div class="d-flex flex-column flex-md-row mb-3 mb-md-0">
                 <nav class="mr-auto d-flex align-items-center" aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="active breadcrumb-item" aria-current="page"><a href="#"><i class="fa fa-home"></i></a></li>
-                        <li class="active breadcrumb-item" aria-current="page">Accepted Projects</li>
+                    <ol class="breadcrumb" style="margin-left:-130px">
+                        <li class="active breadcrumb-item" aria-current="page"><a href="{% url 'blog-home' %}"><i class="fa fa-home"></i></a></li>
+                        <li class="active breadcrumb-item" aria-current="page">Rejected Projects</li>
                     </ol>
                 </nav>
-                <div role="toolbar" class="btn-toolbar">
+                {% comment %} <div role="toolbar" class="btn-toolbar">
                 
                     <div role="group" class="mr-auto mr-md-2 btn-group"><a class="align-self-center btn btn-secondary" id="tooltipShowList" href="list"><i class="fa-fw fa fa-bars"></i></a><a class="align-self-center btn btn-secondary active" id="tooltipShowGrid" href="/projects" aria-current="page"><i class="fa-fw fa fa-th-large"></i></a></div>
                     
-                </div>
+                </div> {% endcomment %}
                 
             </div>
             
            <div class="row">
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card" style="margin-left:-120px; margin-right:-20px">
                 <div class="card-body">
                     <div class="table-responsive project-list">
                         <table class="table project-table table-centered table-nowrap">
@@ -88,7 +85,7 @@
                                     <th scope="col">Projects</th>
                                     <th scope="col">Launching Date</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Team</th>
+                                    {% comment %} <th scope="col">Team</th> {% endcomment %}
                                     <th scope="col">Project Complexity</th>
                                     <th scope="col">Acceptance Date</th>
                                     <th scope="col">Progress</th>
@@ -102,9 +99,9 @@
                                     <td ><a href="{% url 'project-detail' project.project.id %}"> {{project.project.project_title}} </a></td>
                                     <td>{{project.project.launching_date}}</td>
                                     <td>
-                                        <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i> {{project.project.status}}</span>
+                                        <span class="text-danger font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i> Rejected</span>
                                     </td>
-                                    <td>
+                                    {% comment %} <td>
     
                                         <div class="team">
                                             <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Roger Drake">
@@ -119,22 +116,49 @@
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar8.png" width="32" height="32" class="rounded-circle avatar-xs" alt="" />
                                             </a>
                                         </div>
+                                    </td> {% endcomment %}
+                                    <td> 
+                                      {% if project.project.project_complexity == "Innovation" %}
+                            <span class="badge badge-dark"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{project.project.project_complexity}} </span>
+
+                            
+                            {% elif project.project.project_complexity == "Scaffolding" %}
+                             <span class="badge badge-secondary"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{project.project.project_complexity}} </span>
+
+                            {% elif project.project.project_complexity == "Discovery" %}
+                            <span class="badge badge-light"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{project.project.project_complexity}}  </span>
+                            {% endif %}
+                                    
                                     </td>
-                                    <td> {{project.project.project_complexity}}</td>
                                     <td> {{project.date_accepted}}
                                     <td>
-                                        <p class="mb-0">Progress<span class="float-right">100%</span></p>
+                                        {% comment %} <p class="mb-0"><span class="float-right">100%</span></p>
 
                                         <div class="progress mt-2" style="height: 5px;">
                                             <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                                        </div> {% endcomment %}
+                                          <script type='text/javascript'>$(document).ready(function() {
+                                    $('.progress .progress-bar').css("width",
+                                    function() {
+                                    return $(this).attr("aria-valuenow") + "%";
+                                    }
+                                    )
+                                    });</script>
+                                         
+                                           <div class="text-center">  <p class="mb-0" style="font-size:15px">100%<span class="float-right"></span></p></div>
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
                                     </td>
 
                                     <td>
                                         <div class="action">
+                                        
+                                        <div class= "row" style="margin-left:8px" >
                                             <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
                                             <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
-                                        </div>
+                                        </div></div>
                                     </td>
                                 </tr>
 

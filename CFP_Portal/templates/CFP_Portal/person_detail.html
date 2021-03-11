@@ -33,7 +33,7 @@
                    <div class="container-fluid p-0 m-0" >
         <div class="row" >
             <div class="col-lg-8" >
-                <div class="card-box task-detail" style=" background: rgb(250, 251, 252) bottom right repeat-y;">
+                <div class="card-box task-detail" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') bottom left repeat-y;">
                                 <h6 class="media-heading mb-0 mt-0" style="text-align:right">  Project {{project.id}}</h6><br>
 
                     <div class="media mt-0 m-b-30" > 
@@ -75,6 +75,7 @@
                             {% for mt in project.tags.all %}
                     <a href="#" class="badge badge-success">{{mt}}</a>
                             {%endfor%}
+                            <hr style="height:50%">
                             <span class="badge badge-primary"><i class="fa fa-user"></i> 90 Subscriptions</span>
                             <span class="badge badge-info"><i class="fa fa-cog"></i> {{project.comments.all.count}} Comments</span>
                             <span class="badge badge-danger"><i class="fa fa-eye"></i> 2 Views</span>
@@ -95,18 +96,18 @@
                                 <tr style="background:#DBDCE0">
                                         <td>
                                         <div class="p-5" style="margin-left:0em; align:right">
-                        <h5 class="h5" style="color:#0530A2"> Submitter Details </h5>
+                        <h5 class="h5" style="color:#0530A2"> Submitter's Details </h5>
                         {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
                         
                     
                         
                          {% comment %} <div class="card" style="width:100%">
              <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
-                        <p style="color:black"> <b>Submitter Name:</b> {{project.name}} {{project.surname}} </p>
-                        <p style="color:black"> <b>Submitter Email:</b> {{project.email}} </p>
-                        <p style="color:black"> <b>Submitter Phone Number:</b> {{project.phone_number}} </p>
-                        <p style="color:black"> <b>Submitter Department:</b> {{project.department}} </p>
-                        <p style="color:black"> <b>Submitter Organisation:</b> {{project.organisation}} </p>
+                        <p style="color:black"> <b>Submitter's Full Name:</b> {{project.name}} {{project.surname}} </p>
+                        <p style="color:black"> <b>Submitter's Email:</b> {{project.email}} </p>
+                        <p style="color:black"> <b>Submitter's Phone Number:</b> {{project.phone_number}} </p>
+                        <p style="color:black"> <b>Submitter's Department:</b> {{project.department}} </p>
+                        <p style="color:black"> <b>Submitter's Organisation:</b> {{project.organisation}} </p>
                                         </div>
                                     </td>
                                     </tr>                                   

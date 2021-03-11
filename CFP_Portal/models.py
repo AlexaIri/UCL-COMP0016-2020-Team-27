@@ -146,8 +146,8 @@ class Person(models.Model):
 class Review(models.Model):
     def get_absolute_url(self):
         return reverse("reviewdetail", kwargs={"pk": self.pk})
-
-    review_date= models.DateField(default=timezone.now)
+    
+    # review_date= models.DateTimeField(auto_now_add=True)
     project = models.ForeignKey(Person, related_name='reviews',blank=True, null=True, on_delete=models.CASCADE)
     review_body = models.CharField(max_length = 5000, default = "",  null=True)
     reviewer_name = models.CharField("reviewer name", max_length=130, default = "",  null=True)
@@ -199,6 +199,13 @@ class Review(models.Model):
     def save(self, *args, **kwargs):
         self.points = int(self.interoperabilityPoints) + int(self.technical_strengthPoints) + int(self.user_designPoints) + int(self.scalabilityPoints) + int(self.resiliencePoints) + int(self.usabilityTestingPoints) + int(self.researchQualityPoints)
         self.score = int(self.points) * 100/35
+        self.interoperabilityPoints100 = int(self.interoperabilityPoints)*20
+        self.technical_strengthPoints100 = int(self.technical_strengthPoints)*20
+        self.user_designPoints100 = int(self.user_designPoints)*20
+        self.scalabilityPoints100 = int(self.scalabilityPoints)*20
+        self.resiliencePoints100 = int(self.resiliencePoints)*20
+        self.usabilityTestingPoints100 = int(self.usabilityTestingPoints)*20
+        self.researchQualityPoints100 = int(self.researchQualityPoints)*20
         # self.interoperabilityPoints100  = int(self.points) * 100/35
         super(Review, self).save(*args, **kwargs)
     # @property

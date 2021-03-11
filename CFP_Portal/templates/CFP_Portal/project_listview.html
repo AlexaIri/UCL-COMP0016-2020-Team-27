@@ -10,9 +10,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>bs4 project grid - Bootdey.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'CFP_Portal/projects.css' %}">
@@ -92,7 +89,7 @@
 </style>
        
 </head>
-<body style="margin-top:100px">
+<body style="margin-top:-4px">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
 
@@ -107,23 +104,27 @@
 			<form method="get">
                
             
-               Project title:  {{ myFilter.form.project_title}}   </p>
-               Status:      {{ myFilter.form.status}}   </p>   
-               Project ID:      {{ myFilter.form.id}}   </p>     
+                 <p style="font-size:15px;color:black"> Project title:  {{ myFilter.form.project_title}}   </p>
+              <p style="font-size:15px;color:black"> Status:      {{ myFilter.form.status}}   </p>   
+              <p style="font-size:15px;color:black"> Project ID:      {{ myFilter.form.id}}   </p> 
+                 
 				Advanced Search
                 <label class="switch"> 
                 <input type="checkbox" id="myCheck" onclick="myFunction()">
                 <span class="slider round"></span>
-                </label>
+                </label><br><br>
                 <div id="myDIV" class="form-group">
                 
 
-                  <p style="color:black;"> Department: {{ myFilter.form.department}}   
-                  Organisation: {{ myFilter.form.organisation}} 
-                  Open or closed source:  {{ myFilter.form.source_type}}
-                   <br>Area of Expertise {{myFilter.form.expertiseskills}}
-                  Name {{myFilter.form.name}}  </p>       </p>
+                 <p style="font-size:15px;color:black;">  Department: {{ myFilter.form.department}}   </p>
+                <p style="font-size:15px;color:black;"> Organisation: {{ myFilter.form.organisation}}  </p>
+                  <p style="font-size:15px;color:black;">Open or closed source:  {{ myFilter.form.source_type}} </p>
+                <p style="font-size:15px;color:black;"> Area of Expertise {{myFilter.form.expertiseskills}} </p>
+                  <p style="color:black;">Name: {{myFilter.form.name}}  </p>   
+                  
                 </div>
+
+
                 
                 <script>
                 
@@ -141,9 +142,9 @@
                 }
                 </script>
 
-                    
-           <button class="btn btn-primary"name="allprojects" style="margin:5px"type="submit">Search</button>
-		    
+                    <div class="text-center">
+           <button class="btn btn-dark"name="allprojects" style="margin:5px"type="submit">Search</button>
+		    </div>
            
 		  </form>
             
@@ -160,15 +161,15 @@
 			
                     
             
-		    <li><button class="btn btn-primary"name="innovation" style="margin:5px" type="submit">Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
+		    <li><button class="btn btn-dark"name="innovation" style="margin:5px" type="submit">Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
             <br>
-            <li><button class="btn btn-primary"name="scaffolding"style="margin:5px"  type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
+            <li><button class="btn btn-secondary"name="scaffolding"style="margin:5px"  type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
             <br>
-            <li><button class="btn btn-primary"name="discovery"style="margin:5px"  type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{disoverynumber}}</span></a></li>
+            <li><button class="btn btn-light"name="discovery"style="margin:5px"  type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{disoverynumber}}</span></a></li>
 		  </form>
                 </ul>
             </div>
-            <div class="mb-4">
+            {% comment %} <div class="mb-4">
                 <div class="small mb-3">People</div>
                 <ul class="nav flex-column nav-pills">
                     <li class="nav-item">
@@ -215,15 +216,15 @@
                     </li>
                     <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-fw fa-plus mr-2"></i>Add New People</a></li>
                 </ul>
-            </div>
-        </div>
+            </div>{% endcomment %}
+        </div> 
         
         <div class="col-lg-9">
             <div class="d-flex flex-column flex-md-row mb-3 mb-md-0">
                 <nav class="mr-auto d-flex align-items-center" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="active breadcrumb-item" aria-current="page"><a href="#"><i class="fa fa-home"></i></a></li>
-                        <li class="active breadcrumb-item" aria-current="page">Projects Grid</li>
+                        <li class="active breadcrumb-item" aria-current="page"><a href="{% url 'blog-home' %}"><i class="fa fa-home"></i></a></li>
+                        <li class="active breadcrumb-item" aria-current="page">Projects List</li>
                     </ol>
                 </nav>
                 <div role="toolbar" class="btn-toolbar">
@@ -246,11 +247,11 @@
                                     <th scope="col">Projects</th>
                                     <th scope="col">Launching Date</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Team</th>
+                                
                                     <th scope="col">Project Complexity</th>
                                     
                                     <th scope="col">Progress</th>
-                                    <th scope="col">Action</th>
+                                    {% comment %} <th scope="col">Action</th> {% endcomment %}
                                 </tr>
                             </thead>
                             <tbody>
@@ -260,9 +261,28 @@
                                     <td ><a href="{% url 'project-detail' project.id %}"> {{project.project_title}} </a></td>
                                     <td>{{project.launching_date}}</td>
                                     <td>
-                                        <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i> {{project.status}}</span>
+                                       {% if project.status == "Rejected"%}
+                            <span class="badge badge-danger"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{project.status}} </span>
+
+                            
+                            {% elif project.status == "Submitted"%}
+                             <span class="badge badge-warning"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{project.status}} </span>
+
+                            {% elif project.status == "Accepted"%}
+                            <span class="badge badge-success"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{project.status}}  </span>
+
+                            {% elif project.status == "Under Review"%}
+                            <span class="badge badge-info">{{project.status}}  </span>
+
+
+                             {% elif project.status == " Reviewed"%}
+                            <span class="badge badge-primary">{{project.status}}  </span>
+
+
+                    {% endif %}
+                                        {% comment %} <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i> {{project.status}}</span> {% endcomment %}
                                     </td>
-                                    <td>
+                                    {% comment %} <td>
     
                                         <div class="team">
                                             <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Roger Drake">
@@ -277,22 +297,72 @@
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar8.png" width="32" height="32" class="rounded-circle avatar-xs" alt="" />
                                             </a>
                                         </div>
-                                    </td>
+                                    </td> {% endcomment %}
                                     <td> {{project.project_complexity}}</td>
                                     <td>
-                                        <p class="mb-0">Progress<span class="float-right">100%</span></p>
+                                        {% comment %} <p class="mb-0">Progress<span class="float-right">100%</span></p>
 
                                         <div class="progress mt-2" style="height: 5px;">
                                             <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                                        </div> {% endcomment %}
+                                        
+                                        <script type='text/javascript'>$(document).ready(function() {
+                                    $('.progress .progress-bar').css("width",
+                                    function() {
+                                    return $(this).attr("aria-valuenow") + "%";
+                                    }
+                                    )
+                                    });</script>
+                                           {% if project.status == "Rejected"%}
+                                           <div class="text-center">  <p class="mb-0" style="font-size:15px">100%<span class="float-right"></span></p></div>
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                            
+                            {% elif project.status == "Submitted"%}
+                            <div class="text-center">  <p class="mb-0" style="font-size:15px">25%<span class="float-right"></span></p></div>
+
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                            {% elif project.status == "Accepted"%}
+                             <div class="text-center">  <p class="mb-0" style="font-size:15px">100%<span class="float-right"></span></p></div>
+
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            
+                            {% elif project.status == "Under Review"%}
+                                <div class="text-center">  <p class="mb-0" style="font-size:15px">50%<span class="float-right"></span></p></div>
+
+                           <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                             {% elif project.status == " Reviewed"%}
+                             <div class="text-center">  <p class="mb-0" style="font-size:15px">75%<span class="float-right"></span></p></div>
+
+                           <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            
+                           {% endif %}
                                     </td>
 
-                                    <td>
+                                    {% comment %} <td>
                                         <div class="action">
+                                        <div class="row">
+                                        <div class="col">
                                             <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
+                                            </div>
+                                            <div class ="col">
                                             <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
+                                            </div>
+                                            </div>
                                         </div>
-                                    </td>
+                                    </td> {% endcomment %}
                                 </tr>
 
 
