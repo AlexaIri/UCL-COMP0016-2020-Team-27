@@ -12,8 +12,7 @@ class Proposal(forms.ModelForm):
         # fields = ['name','surname','email','phone_number','title','project_title','summarised_abstract','full_abstract','expertiseskills','devices','launching_date','motivations','importance','hashtags','tags','project_complexity','source_type','ethics_form']
         exclude = ['priority','status','department','organisation','completionPercentage','submission_date','user']
         widgets = {
-            "name" : forms.TextInput(attrs ={'placeholder': 'First name'}),
-            "surname" : forms.TextInput(attrs ={'placeholder': 'Family name'}),
+            "name" : forms.TextInput(attrs ={'placeholder': 'full name'}),
             "email" : forms.TextInput(attrs ={'placeholder': 'Email address'}),
             # phone_number = PhoneNumberField()
             "phone_number" : forms.TextInput(attrs ={'placeholder': 'Phone'}),
@@ -57,11 +56,9 @@ class ReviewForm(forms.Form):
     id = forms.IntegerField(required=False, widget=forms.HiddenInput())
     # project = ProjectModelChoiceField(queryset=Person.objects.all())
     
-    reviewer_name = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
-    reviewer_surname = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
-    reviewer_email = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
+    
     # phone_number = PhoneNumberField()
-    reviewer_phone_number =  forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
+   
 
     comments = forms.CharField(widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Write your final feedback in here...'}))
     # widget=forms.Textarea(attrs={"rows":5, "cols":20}
