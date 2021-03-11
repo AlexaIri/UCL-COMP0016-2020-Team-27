@@ -44,7 +44,7 @@ class AnnotationManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().annotate(**self.annotations)
 class Person(models.Model):
-
+    
     def get_absolute_url(self):
         return reverse("project-detail", kwargs={"pk": self.pk})
 

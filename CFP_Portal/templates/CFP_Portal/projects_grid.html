@@ -173,54 +173,7 @@
                     
                 </ul>
             </div>
-            {% comment %} <div class="mb-4">
-                <div class="small mb-3">People</div>
-                <ul class="nav flex-column nav-pills">
-                    <li class="nav-item">
-                        <a href="#" class="d-flex nav-link">
-                            <div class="media">
-                                <div class="mr-3 align-self-center media-left media-middle">
-                                    <div class="avatar-image avatar-image--loaded">
-                                        <div class="avatar avatar--md avatar-image__image">
-                                            <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar1.png"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <div class="mt-0">Submitters of project proposals</div><span class="small"</span></div>
-                            </div><i class="fa fa-fw fa-circle text-success ml-auto align-self-center ml-2"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="d-flex nav-link">
-                            <div class="media">
-                                <div class="mr-3 align-self-center media-left media-middle">
-                                    <div class="avatar-image avatar-image--loaded">
-                                        <div class="avatar avatar--md avatar-image__image">
-                                            <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar2.png"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <div class="mt-0">Reviewers</div><span class="small"></span></div>
-                            </div><i class="fa fa-fw fa-circle text-warning ml-auto align-self-center ml-2"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="d-flex nav-link">
-                            <div class="media">
-                                <div class="mr-3 align-self-center media-left media-middle">
-                                    <div class="avatar-image avatar-image--loaded">
-                                        <div class="avatar avatar--md avatar-image__image">
-                                            <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar3.png"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <div class="mt-0">Project leads</div><span class="small"></span></div>
-                            </div><i class="fa fa-fw fa-circle text-danger ml-auto align-self-center ml-2"></i></a>
-                    </li>
-                     <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-fw fa-plus mr-2"></i>Add New People</a></li> 
-                </ul>
-            </div>{% endcomment %}
+            
         </div> 
         
         <div class="col-lg-9">
@@ -230,6 +183,7 @@
                         <li class="active breadcrumb-item" aria-current="page"><a href="{% url 'blog-home' %}"><i class="fa fa-home"></i></a></li>
                         <li class="active breadcrumb-item" aria-current="page">Projects Grid</li>
                     </ol>
+                    <a href="{% url 'export'  %}"><button type="button" class="btn btn-info">Export Data</button>
                 </nav>
                 <div role="toolbar" class="btn-toolbar">
                 

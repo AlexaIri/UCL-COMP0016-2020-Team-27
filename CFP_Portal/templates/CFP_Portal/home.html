@@ -117,7 +117,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <a href="{% url 'export'  %}"><button type="button" class="btn btn-info">Export Data</button>
                               {% for project in projects %}
+                              
                                     <tr>
                                     <th scope="row">{{project.id}}</th>
                                     <td ><a href="{% url 'project-detail' project.id %}"> {{project.project_title}} </a></td>
@@ -139,6 +141,7 @@
 
                              {% elif project.status == " Reviewed"%}
                             <span class="badge badge-primary">{{project.status}}  </span>
+                            
 
 
                     {% endif %}

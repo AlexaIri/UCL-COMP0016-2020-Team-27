@@ -57,6 +57,7 @@ urlpatterns = [
 
     path('SubmissionPortal/', views.SubmissionPortal, name= 'SubmissionPortal'),
     path('ReviewPortal/<int:project_id>/', views.ReviewPortal, name= 'ReviewPortal'),
+    path('export/', views.export, name='export')
     # path('ReviewPortal/', views.ReviewPortal, name= 'ReviewPortal'),
 
     

@@ -10,6 +10,7 @@ from .forms import Commentform
 from .filters import ProjectFilter
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django import template
+import csv
 
 register = template.Library()
 
@@ -37,6 +38,17 @@ def is_lead(user):
     # print(user.groups)
     return  user.is_superuser or user.is_staff or user.groups.filter(name__in=['Lead']).exists()
 
+def export(request):
+    response = HttpResponse(content_type ='text/csv')
+    writer = csv.writer(response)
+    writer.writerow(['Name', 'Phone Number', 'Email', 'Title', 'Project Title', 'Summarised Abstract', 'Full Abstract', 'Department', 'Organisation', 'Expertise Skills', 'Devices and Technologies', 'Project Complexity', 'Completion of form', 'Source type', 'Launching date', 'Motivations', 'Tags', 'Status', 'NICEtier'])
+
+
+    for project in Person.objects.all().values_list('name', 'phone_number', 'email', 'title', 'project_title', 'summarised_abstract', 'full_abstract', 'department', 'organisation', 'expertiseskills', 'devices', 'project_complexity', 'ethics_form','source_type', 'launching_date', 'motivations', 'tags__name', 'status', 'NICEtier'):
+        writer.writerow(project)
+    response['Content-Disposition'] = 'attachment; filename ="projects.csv"'
+
+    return response
 @login_required
 @user_passes_test(is_reviewer)
 def index(request):
@@ -341,6 +353,15 @@ def acceptedprojects(request):
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
        projects = Person.objects.filter(project_complexity='Scaffolding')
+
+    if request.method == 'GET' and 'approve' in request.GET:
+        response = HttpResponse(content_type ='text/csv')
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Phone Number', 'Email', 'Title', 'Project Title', 'Summarised Abstract', 'Full Abstract', 'Department', 'Organisation', 'Expertise Skills', 'Devices and Technologies', 'Project Complexity', 'Completion of form', 'Source type', 'Launching date', 'Motivations', 'Tags', 'Status', 'NICEtier'])
+        for project in Person.objects.all().values_list('name', 'phone_number', 'email', 'title', 'project_title', 'summarised_abstract', 'full_abstract', 'department', 'organisation', 'expertiseskills', 'devices', 'project_complexity', 'ethics_form','source_type', 'launching_date', 'motivations', 'tags__name', 'status', 'NICEtier'):
+             writer.writerow(project)
+        response['Content-Disposition'] = 'attachment; filename ="acceptedprojects.csv"'
+        return response
 
     context ={
         'acceptedprojects': acceptedprojects,
