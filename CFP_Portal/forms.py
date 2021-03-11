@@ -71,12 +71,6 @@ class ReviewForm(forms.Form):
     scalability_comments = forms.CharField(max_length=2000, widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Type in your comment...'}))
     resilience_comments = forms.CharField(max_length=2000, widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Type in your comment...'}))
 
-    # CHOICES=[('0',' 0 - Extremely Low'),
-    #      ('1','     1 - Low'),
-    #      ('2',' 2 - Moderate'),
-    #      ('3','Score: 3 - Good'),
-    #      ('4','Score: 4 - Very good'),
-    #      ('5','Score: 5 - Excellent')]
 
     CHOICES=[('0','0'),
          ('1','1'),
