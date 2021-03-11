@@ -55,7 +55,7 @@ class ReviewForm(forms.Form):
         )
 
     id = forms.IntegerField(required=False, widget=forms.HiddenInput())
-    # roject = ProjectModelChoiceField(queryset=Person.objects.all())
+    # project = ProjectModelChoiceField(queryset=Person.objects.all())
     
     reviewer_name = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
     reviewer_surname = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
