@@ -57,11 +57,9 @@ class ReviewForm(forms.Form):
     id = forms.IntegerField(required=False, widget=forms.HiddenInput())
     # project = ProjectModelChoiceField(queryset=Person.objects.all())
     
-    reviewer_name = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
-    reviewer_surname = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
-    reviewer_email = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
+    
     # phone_number = PhoneNumberField()
-    reviewer_phone_number =  forms.CharField(widget = forms.TextInput(attrs ={'placeholder': ''}))
+   
 
     comments = forms.CharField(widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Write your final feedback in here...'}))
     # widget=forms.Textarea(attrs={"rows":5, "cols":20}

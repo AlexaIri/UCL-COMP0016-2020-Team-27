@@ -381,8 +381,8 @@ def reviewdisplay(request):
     projects = Person.objects.all()
    
     if request.method == 'GET' and 'projects' in request.GET:
-        
-        projects = Person.objects.filter(status='Submitted')
+        projects = Person.objects.filter(status__in=['Submitted','Under Review'])
+      
 
     if request.method == 'GET' and 'allprojects' in request.GET:
         
@@ -587,10 +587,9 @@ def ReviewPortal(request, project_id):
             # results.project = form.cleaned_data['project']
             
             results.project.status = "Reviewed"
-            results.reviewer_name = form.cleaned_data['reviewer_name']
-            results.reviewer_surname = form.cleaned_data['reviewer_surname']
-            results.reviewer_phone_number = form.cleaned_data['reviewer_phone_number']
-            results.reviewer_email = form.cleaned_data['reviewer_email']
+            results.reviewer_name = request.user.profile.full_name
+            
+            results.reviewer_email = request.user.email
             results.comments = form.cleaned_data['comments']
 
             results.interoperabilityComments = form.cleaned_data['standards_and_interoperability_comments']

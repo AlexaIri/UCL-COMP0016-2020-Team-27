@@ -152,7 +152,7 @@ class Review(models.Model):
     review_body = models.CharField(max_length = 5000, default = "",  null=True)
     reviewer_name = models.CharField("reviewer name", max_length=130, default = "",  null=True)
     reviewer_surname = models.CharField("reviewer surname", max_length=130, default = "",  null=True)
-    reviewer_phone_number = models.CharField("reviwer phone number", max_length=130, default = "",  null=True)
+   
     #phone_number = PhoneNumberField(null=False, blank=False, unique=True)
     reviewer_email = models.EmailField("reviewer email", max_length=130, default = "",  null=True)
 
