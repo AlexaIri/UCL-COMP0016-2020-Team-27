@@ -122,7 +122,7 @@ def home(request):
     projects = Person.objects.all()
 
     
-    paginator = Paginator(projects, 5)
+    paginator = Paginator(projects, 2)
     page = request.GET.get('page', 1)
     try:
         projects = paginator.page(page)

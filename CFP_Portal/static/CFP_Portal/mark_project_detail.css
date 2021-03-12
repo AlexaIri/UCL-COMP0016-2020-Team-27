@@ -328,7 +328,7 @@ h3 {
   width: 210px;
   height: 210px;
   border-radius: 50%;
-  border: 25px solid transparent;
+  border: 23px solid transparent;
   border-top-color: #AEAFB2;
   border-right-color: #AEAFB2;
   z-index: 1;
@@ -390,7 +390,11 @@ h3 {
 .main-timeline3 .timeline:nth-child(2n) .timeline-icon {
   transform: rotate(-135deg);
   border-top-color: #AEAFB2;
-  border-right-color: #AEAFB2
+  border-right-color: #AEAFB2;
+  /* width: 10px;
+  height: 210px; */
+  border-radius: 50% !important;
+  border: 23px solid transparent;
 }
 
 .main-timeline3 .timeline:nth-child(2n) .year {
@@ -416,7 +420,11 @@ h3 {
 
 .main-timeline3 .timeline:nth-child(3n) .timeline-icon {
   border-top-color: #AEAFB2;
-  border-right-color: #AEAFB2
+  border-right-color: #AEAFB2;
+  border-radius: 50% !important;
+  border: 23px solid transparent;
+  
+
 }
 
 .main-timeline3 .timeline:nth-child(3n) .year {
