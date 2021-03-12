@@ -11,6 +11,8 @@ from .filters import ProjectFilter
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django import template
 import csv
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models.functions import Lower
 
 register = template.Library()
 
@@ -116,8 +118,19 @@ def markprojectdetail(request, pk):
 @login_required
 @user_passes_test(is_user)
 def home(request):
+    order_by = request.GET.get('order_by')
     projects = Person.objects.all()
-    paginate_by = 5
+
+    
+    paginator = Paginator(projects, 5)
+    page = request.GET.get('page', 1)
+    try:
+        projects = paginator.page(page)
+    except PageNotAnInteger:
+        projects = paginator.page(1)
+    except EmptyPage:
+        projects = paginator.page(paginator.num_pages)
+
     acceptednumber = AcceptedProjects.objects.all().count()
     pending = Person.objects.filter(status='Submitted').count()
     
@@ -139,15 +152,20 @@ def home(request):
     
     #return HttpResponse('<h1> Blog Home </h1>')
     totalnumber = Person.objects.all().count()
+    
     context = {
         'projects':projects,
         'totalnumber': totalnumber,
         'acceptednumber':acceptednumber,
         'pending': pending,
         'individualprojects': individualprojects,
-        'group' : group
+        'group' : group, 
+        # 'all_projects':all_projects,
+        # 'order_by': order_by
     }
-  
+    # table = PeopleTable(projects)
+    # table.paginate(page=request.GET.get("page", 1), per_page=5)
+   
     return render(request, 'CFP_Portal/home.html', context)
 
 @login_required

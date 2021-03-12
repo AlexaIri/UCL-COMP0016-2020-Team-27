@@ -12,21 +12,21 @@ class Proposal(forms.ModelForm):
         # fields = ['name','surname','email','phone_number','title','project_title','summarised_abstract','full_abstract','expertiseskills','devices','launching_date','motivations','importance','hashtags','tags','project_complexity','source_type','ethics_form']
         exclude = ['priority','status','department','organisation','completionPercentage','submission_date','user']
         widgets = {
-            "name" : forms.TextInput(attrs ={'placeholder': 'full name'}),
+            "name" : forms.TextInput(attrs ={'placeholder': 'Full name'}),
             "email" : forms.TextInput(attrs ={'placeholder': 'Email address'}),
             # phone_number = PhoneNumberField()
             "phone_number" : forms.TextInput(attrs ={'placeholder': 'Phone'}),
             "title" : forms.TextInput(attrs ={'placeholder': 'Job Title'}),
             "project_title" : forms.TextInput(attrs ={'placeholder': 'Title'}),
-            "summarised_abstract" : forms.TextInput(attrs ={'placeholder': 'Abstract (summary)'}),
-            "full_abstract" : forms.TextInput(attrs ={'placeholder': 'Abstract (in full)'}),
-            "expertiseskills" : forms.TextInput(attrs ={'placeholder': 'Skills & Knowledge'}),
-            "devices" : forms.TextInput(attrs ={'placeholder': 'Devices'}),
+            "summarised_abstract" :  forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Provide a summary of your abstract...'}),
+            "full_abstract" : forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Provide the full version of your abstract...'}),
+            "expertiseskills" : forms.Textarea(attrs ={"rows":3, "cols":20, 'placeholder': 'Skills and Knowledge'}),
+            "devices" : forms.Textarea(attrs ={"rows":3, "cols":20, 'placeholder': 'Devices and Technologies'}),
             
             
             "launching_date" : forms.TextInput(attrs ={'placeholder': 'Date'}),
-            "motivations" : forms.TextInput(attrs ={'placeholder': 'What motivated you?'}),
-            "importance" : forms.TextInput(attrs ={'placeholder': 'Why is your project important?'}),
+            "motivations" : forms.Textarea(attrs ={"rows":3, "cols":20, 'placeholder': 'What motivated you?'}),
+            "importance" : forms.Textarea(attrs ={"rows":3, "cols":20, 'placeholder': 'Why is your project important?'}),
             "challenge" : forms.TextInput(attrs ={'placeholder': 'Is this project a response to a challenge?'}),
         
            }
