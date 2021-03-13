@@ -28,6 +28,7 @@ class Proposal(forms.ModelForm):
             "motivations" : forms.Textarea(attrs ={"rows":3, "cols":20, 'placeholder': 'What motivated you?'}),
             "importance" : forms.Textarea(attrs ={"rows":3, "cols":20, 'placeholder': 'Why is your project important?'}),
             "challenge" : forms.TextInput(attrs ={'placeholder': 'Is this project a response to a challenge?'}),
+            "evidence" : forms.ClearableFileInput(attrs={'multiple': True})
         
            }
     

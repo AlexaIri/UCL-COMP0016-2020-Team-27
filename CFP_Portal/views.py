@@ -572,7 +572,7 @@ def SubmissionPortal(request):
   
     if request.method == "POST":
         
-        form = Proposal(request.POST)
+        form = Proposal(request.POST, request.FILES)
         print(form.errors)
         if form.is_valid():
 

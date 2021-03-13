@@ -56,7 +56,7 @@ circle::after {
   
   
   {% comment %} <form method = "post" action = "/CFP_Portal/SubmissionPortal/"> {% endcomment %}
-  <form method = "post" action = "/CFP_Portal/SubmissionPortal/">
+  <form method = "post" action = "/CFP_Portal/SubmissionPortal/" enctype="multipart/form-data">
   {% csrf_token %}
 
          
@@ -230,6 +230,8 @@ circle::after {
                                       {{ form.importance|as_crispy_field}}
 
                                       {{form.challenge|as_crispy_field}}
+                                      {{form.evidence|as_crispy_field}}
+                                      {{form.github|as_crispy_field}}
                                      
                                      {% comment %} <input name = "phone_number" type="text" class="form-control" placeholder="Phone number" required>  {% endcomment %}
                                      
