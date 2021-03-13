@@ -132,7 +132,6 @@ class Person(models.Model):
     challenge = models.TextField("Is this project from a challenge?", default = "", blank= True)
     priority = models.CharField("What is the priority level of the project?", max_length=20, choices=priorityStatus, default = "")
     submission_date = models.DateTimeField(auto_now_add=True)
-    git = models.URLField(default="")
     user  = models.ForeignKey(User, related_name="user", on_delete=models.CASCADE, null=True)
     evidence = models.FileField(upload_to ='uploads/', blank=True) 
     github = models.URLField("github link",max_length = 200, blank=True) 
