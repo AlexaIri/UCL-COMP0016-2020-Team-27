@@ -1,6 +1,6 @@
 from django import forms
 from CFP_Portal.models import Person, Comment, Review
-from django.forms import ModelChoiceField
+from django.forms import ModelChoiceField, URLField
 # from phonenumber_field.formfields import PhoneNumberField
 
 
@@ -22,6 +22,7 @@ class Proposal(forms.ModelForm):
             "full_abstract" : forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Provide the full version of your abstract...'}),
             "expertiseskills" : forms.Textarea(attrs ={"rows":3, "cols":20, 'placeholder': 'Skills and Knowledge'}),
             "devices" : forms.Textarea(attrs ={"rows":3, "cols":20, 'placeholder': 'Devices and Technologies'}),
+            "git" : forms.URLInput(attrs ={'placeholder': 'GIT link'}),
             
             
             "launching_date" : forms.TextInput(attrs ={'placeholder': 'Date'}),

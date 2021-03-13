@@ -118,7 +118,7 @@
                             </thead>
                             <tbody>
                             <div class = "text-center">
-                            <a href="{% url 'export'  %}"><button type="button" class="btn btn-danger">   <i class="fa fa-upload fa-xs"> </i> Export Data
+                            <a href="{% url 'export'  %}"><button type="button" class="btn btn-info">   <i class="fa fa-upload fa-xs"> </i> Export Data
                                  </button></a></div><br>
                               {% for project in projects %}
                               
@@ -282,40 +282,40 @@
 <div class = "text-right">
     {% if projects.has_other_pages %}
     <div class="btn-group" role="group">
-        <a class="btn btn-dark mb-4" href="?page=1">First</a>
+        <a class="btn btn-info mb-4" href="?page=1">First</a>
 
   {% if projects.has_previous %}
-        <a class="btn btn-secondary mb-4" href="?page={{ projects.previous_page_number }}">Previous</a>
+        <a class="btn btn-info mb-4" href="?page={{ projects.previous_page_number }}">Previous</a>
     {% comment %} <li><a href="?page={{ projects.previous_page_number }}">&laquo;</a></li> {% endcomment %}
   {% else %}
-    <div class="disabled"> <a class="btn btn-secondary mb-4 disabled"  >Previous</a></div>
+    <div class="disabled"> <a class="btn btn-info mb-4 disabled"  >Previous</a></div>
 
   {% endif %}
 
   {% for i in projects.paginator.page_range %}
     {% if projects.number == i %}
        {% comment %} <li class="active"><span>{{ i }} <span class="sr-only">(current)</span>  </span></li> {% endcomment %}
-       <a class="btn btn-secondary mb-4" href="?page={{ i }}">{{ i }}</a>
+       <a class="btn btn-info mb-4" href="?page={{ i }}">{{ i }}</a>
 
     
      {% comment %} {% else %} {% endcomment %}
     {% comment %} <li><a href="?page={{ i }}">{{ i }}</a></li>  {% endcomment %}
      {% elif i > projects.number|add:'-3' and i < projects.number|add:'3' %}
-          <a class="btn btn-outline-secondary mb-4" href="?page={{ i }}">{{ i }}</a>
+          <a class="btn btn-outline-info mb-4" href="?page={{ i }}">{{ i }}</a>
   {% endif %}
 {% endfor %}
 
 {% if projects.has_next %}
   {% comment %} <li><a href="?page={{ projects.next_page_number }}">&raquo;</a></li> {% endcomment %}
-          <a class="btn btn-secondary mb-4" href="?page={{ projects.next_page_number }}">Next</a>
+          <a class="btn btn-info mb-4" href="?page={{ projects.next_page_number }}">Next</a>
      {% else %}
      {% comment %} <li class="disabled"><span>&raquo;</span></li> {% endcomment %}
     <div class="disabled">
-            <a class="btn btn-secondary mb-4 disabled" >Next</a></div>
+            <a class="btn btn-info mb-4 disabled" >Next</a></div>
     {% endif %}
     
     
-     <a class="btn btn-dark mb-4" href="?page={{ projects.paginator.num_pages }}">Last</a>
+     <a class="btn btn-info mb-4" href="?page={{ projects.paginator.num_pages }}">Last</a>
 </div>
 
  {% endif %}

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User, Group
 from .models import Organisation, Post, Person, Review, Comment, RejectedProjects, AcceptedProjects
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import Proposal, ReviewForm
 from .forms import Commentform
@@ -13,6 +13,8 @@ from django import template
 import csv
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models.functions import Lower
+from django.urls import reverse
+from django.shortcuts import redirect
 
 register = template.Library()
 
@@ -122,7 +124,7 @@ def home(request):
     projects = Person.objects.all()
 
     
-    paginator = Paginator(projects, 2)
+    paginator = Paginator(projects, 10)
     page = request.GET.get('page', 1)
     try:
         projects = paginator.page(page)
@@ -566,10 +568,7 @@ class UserPostListView(ListView):
 
 
 def SubmissionPortal(request):
-    
 
-    
-  
     if request.method == "POST":
         
         form = Proposal(request.POST)
@@ -585,17 +584,58 @@ def SubmissionPortal(request):
             project.user = user
             project.save()
             form.save_m2m()
+            # item_list = Person.objects.all()
+            # return redirect("/CFP_Portal/project/", pk=project.id)
                     
 
             
         item_list = Person.objects.all()
-        #
+        
         return redirect('/CFP_Portal/')
     
 
     form = Proposal()
     
     return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
+    
+    # def get_redirect_url(self, pk):
+    #     # article = Article.objects.get(pk=pk)
+    #     # slug = article.slug
+    #     return reverse('project', args=(pk))
+
+    # my_id_project = 0
+  
+    # if request.method == "POST":
+        
+    #     form = Proposal(request.POST)
+        
+    #     print(form.errors)
+    #     if form.is_valid():
+
+           
+    #         user = User.objects.get(pk=request.user.id)
+    #         project = form.save(commit=False)
+    #         project.status = 'Submitted'
+    #         project.department = user.profile.department
+    #         project.department = user.profile.organisation
+    #         project.user = user
+    #         project.save()
+    #         form.save_m2m()
+    #         my_id_project = project.id
+    #         print("heeeereee", project.id)
+                    
+
+            
+    #         item_list = Person.objects.all()
+    #         return redirect('CFP_Portal/')
+    #         # return get_redirect_url(project.id)
+    #         # return redirect("project", pk=project.id)
+       
+    # form = Proposal()
+    
+    # return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
+
+    
 
  
 @login_required
