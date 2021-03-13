@@ -230,8 +230,13 @@ circle::after {
                                       {{ form.importance|as_crispy_field}}
 
                                       {{form.challenge|as_crispy_field}}
+<<<<<<< HEAD
                                       {{form.evidence|as_crispy_field}}
                                       {{form.github|as_crispy_field}}
+=======
+
+                                       {{form.git|as_crispy_field}}
+>>>>>>> 45b939782b86538f3d8cef5a03618b55b4a189d1
                                      
                                      {% comment %} <input name = "phone_number" type="text" class="form-control" placeholder="Phone number" required>  {% endcomment %}
                                      
@@ -251,8 +256,13 @@ circle::after {
 
                              <div id="step-5" class="">
                                  <div class="row">
-                                     <div class="col-md-12"> <span>Thank you for submitting your project! We will send you a confirmation email. We will review your details and reach you back soon.</span>
-                                     <button type="submit" class="btn btn-outline-success "> Submit</button> </div>
+                                
+                                     <div class="col-md-12" >  <div class = "text-center">
+                                     <span style="width:100%;text-align:center;align:center">  Submit your project proposal after you have ensured that all the mandatory fields are filled out.</span>
+                                     </div></div>
+                                       <div class="col-md-12"> 
+                                     {% comment %} <span>Thank you for submitting your project! We will send you a confirmation email. We will review your details and reach you back soon.</span> {% endcomment %}
+                                   <div class ="text-center"> <a href=""{% url 'blog-home' %}"> <button type="submit" class="btn btn-outline-success" > Submit</button> </a></div></div>
                                  </div>
                              </div>
                          </div>

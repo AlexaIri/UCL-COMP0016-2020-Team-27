@@ -183,7 +183,7 @@
                         <li class="active breadcrumb-item" aria-current="page"><a href="{% url 'blog-home' %}"><i class="fa fa-home"></i></a></li>
                         <li class="active breadcrumb-item" aria-current="page">Projects Grid</li>
                     </ol>
-                    <a href="{% url 'export'  %}"><button type="button" class="btn btn-info">Export Data</button>
+                   
                 </nav>
                 <div role="toolbar" class="btn-toolbar">
                 
@@ -192,7 +192,9 @@
                 </div>
                 
             </div>
-            
+            <div class="text-right">
+             <a href="{% url 'export'  %}"><button type="button" class="btn btn-danger"> <i class="fa fa-upload fa-xs"> </i> Export Data</button></a></div>
+            <br>
             <div class="card-columns">
             {% for project in projects %}
                 <div class="Card_custom-card--border_5wJKy card">
