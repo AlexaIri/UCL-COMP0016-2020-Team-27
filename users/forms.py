@@ -33,12 +33,10 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['username', 'email']
 
 class ProfileUpdateForm(forms.ModelForm):
-    fullname = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Full name'}))
-    department = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Department you work in'}), required=False)
-    organisation = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Organisation or Trust '}), required=False)
+    
     class Meta:
         model = Profile
-        fields = ['image']
+        fields = ['image', 'department', 'full_name', 'organisation']
 
 class Login(forms.Form):
     

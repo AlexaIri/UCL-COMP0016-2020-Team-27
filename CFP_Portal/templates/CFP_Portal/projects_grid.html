@@ -218,7 +218,7 @@
 
                     {% endif %}
 
-                    {% if project.status == "Submitted"%}
+                                    {% if project.status == "Submitted"%}
                                      <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
                                      {%endif%}
                                      {% if project.status == "Under Review"%}
