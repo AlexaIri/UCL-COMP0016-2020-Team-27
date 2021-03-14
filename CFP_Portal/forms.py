@@ -1,6 +1,7 @@
 from django import forms
-from CFP_Portal.models import Person, Comment, Review
+from CFP_Portal.models import Person, Comment, Review, User
 from django.forms import ModelChoiceField, URLField
+
 # from phonenumber_field.formfields import PhoneNumberField
 
 
@@ -10,7 +11,7 @@ class Proposal(forms.ModelForm):
     class Meta:
         model = Person
         # fields = ['name','surname','email','phone_number','title','project_title','summarised_abstract','full_abstract','expertiseskills','devices','launching_date','motivations','importance','hashtags','tags','project_complexity','source_type','ethics_form']
-        exclude = ['priority','status','department','organisation','completionPercentage','submission_date','user']
+        exclude = ['priority','status','department','organisation','completionPercentage','submission_date','user', 'reviewers']
         widgets = {
             "name" : forms.TextInput(attrs ={'placeholder': 'Full name'}),
             "email" : forms.TextInput(attrs ={'placeholder': 'Email address'}),
@@ -32,6 +33,8 @@ class Proposal(forms.ModelForm):
             "evidence" : forms.ClearableFileInput(attrs={'multiple': True})
         
            }
+
+
     
    
 class Commentform(forms.ModelForm):

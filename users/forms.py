@@ -10,7 +10,7 @@ class UserRegisterForm(UserCreationForm):
     
     Users = [('Submitters','Submitters'),
          ('Reviewers','Reviewers'),
-         ('Lead','Lead')]
+         ('Leads','Leads')]
          
     group = forms.ChoiceField(choices=Users, widget=forms.RadioSelect)
 

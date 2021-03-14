@@ -156,6 +156,9 @@
                 <div class="small mb-3">Projects</div>
                 <ul class="nav flex-column nav-pills">
                 <form method="get">
+                <button type="submit" name ="assigned" class="btn btn-info"> Projects Assigned to You </button>
+                               
+            <br>
                
                               
 			
@@ -169,54 +172,7 @@
 		  </form>
                 </ul>
             </div>
-            {% comment %} <div class="mb-4">
-                <div class="small mb-3">People</div>
-                <ul class="nav flex-column nav-pills">
-                    <li class="nav-item">
-                        <a href="#" class="d-flex nav-link">
-                            <div class="media">
-                                <div class="mr-3 align-self-center media-left media-middle">
-                                    <div class="avatar-image avatar-image--loaded">
-                                        <div class="avatar avatar--md avatar-image__image">
-                                            <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar1.png"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <div class="mt-0">Alva Kuhic</div><span class="small">Florida, AR</span></div>
-                            </div><i class="fa fa-fw fa-circle text-success ml-auto align-self-center ml-2"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="d-flex nav-link">
-                            <div class="media">
-                                <div class="mr-3 align-self-center media-left media-middle">
-                                    <div class="avatar-image avatar-image--loaded">
-                                        <div class="avatar avatar--md avatar-image__image">
-                                            <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar2.png"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <div class="mt-0">Jeramy Gleason</div><span class="small">Indiana, AZ</span></div>
-                            </div><i class="fa fa-fw fa-circle text-warning ml-auto align-self-center ml-2"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="d-flex nav-link">
-                            <div class="media">
-                                <div class="mr-3 align-self-center media-left media-middle">
-                                    <div class="avatar-image avatar-image--loaded">
-                                        <div class="avatar avatar--md avatar-image__image">
-                                            <div class="avatar__content"><img src="https://bootdey.com/img/Content/avatar/avatar3.png"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="media-body">
-                                    <div class="mt-0">Travis Koch</div><span class="small">Tennessee, AZ</span></div>
-                            </div><i class="fa fa-fw fa-circle text-danger ml-auto align-self-center ml-2"></i></a>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link"><i class="fa fa-fw fa-plus mr-2"></i>Add New People</a></li>
-                </ul>
-            </div>{% endcomment %}
+            
         </div> 
         
         <div class="col-lg-9">
@@ -256,7 +212,7 @@
                                     <th scope="col">Project Complexity</th>
                                     
                                     <th scope="col">Progress</th>
-                                    {% comment %} <th scope="col">Action</th> {% endcomment %}
+                                  
                                 </tr>
                             </thead>
                             <tbody>
@@ -285,31 +241,12 @@
 
 
                     {% endif %}
-                                        {% comment %} <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i> {{project.status}}</span> {% endcomment %}
+                                       
                                     </td>
-                                    {% comment %} <td>
-    
-                                        <div class="team">
-                                            <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Roger Drake">
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" width="32" height="32" class="rounded-circle avatar-xs" alt="" />
-                                            </a>
-
-                                            <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reggie James">
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" width="32" height="32"class="rounded-circle avatar-xs" alt="" />
-                                            </a>
-
-                                            <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Gerald Mayberry">
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar8.png" width="32" height="32" class="rounded-circle avatar-xs" alt="" />
-                                            </a>
-                                        </div>
-                                    </td> {% endcomment %}
+                                   
                                     <td> {{project.project_complexity}}</td>
                                     <td>
-                                        {% comment %} <p class="mb-0">Progress<span class="float-right">100%</span></p>
-
-                                        <div class="progress mt-2" style="height: 5px;">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div> {% endcomment %}
+                                        
                                         
                                         <script type='text/javascript'>$(document).ready(function() {
                                     $('.progress .progress-bar').css("width",
@@ -356,18 +293,7 @@
                            {% endif %}
                                     </td>
 
-                                    {% comment %} <td>
-                                        <div class="action">
-                                        <div class="row">
-                                        <div class="col">
-                                            <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
-                                            </div>
-                                            <div class ="col">
-                                            <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </td> {% endcomment %}
+                                   
                                 </tr>
 
 

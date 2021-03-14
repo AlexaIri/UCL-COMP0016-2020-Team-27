@@ -118,6 +118,9 @@
                             </thead>
                             <tbody>
                             <div class = "text-center">
+                            <form method = "get">
+                            <button type="submit" name ="assigned" class="btn btn-info"> Projects Assigned to You </button>
+                            </form>
                             <a href="{% url 'export'  %}"><button type="button" class="btn btn-info">   <i class="fa fa-upload fa-xs"> </i> Export Data
                                  </button></a></div><br>
                               {% for project in projects %}
