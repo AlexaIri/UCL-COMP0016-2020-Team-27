@@ -163,9 +163,16 @@ def home(request):
     if request.method == 'GET' and 'allprojects' in request.GET:
         
         projects = Person.objects.all()
+    
 
     if request.method == 'GET' and 'assigned' in request.GET:
         projects = Person.objects.filter(reviewers=request.user)
+    
+   
+       
+
+
+    
 
     
     #return HttpResponse('<h1> Blog Home </h1>')
@@ -449,7 +456,6 @@ def reviewdisplay(request):
     if request.method == 'GET' and 'allprojects' in request.GET:
         
         projects = Person.objects.all()
-        
     if request.method == 'GET' and 'assigned' in request.GET:
         projects = Person.objects.filter(reviewers=request.user)
         
