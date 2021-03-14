@@ -111,6 +111,7 @@ circle::after {
                                  <div class="row">
                                      
                                  </div>
+                                 <!-- section 1 details -->
                                   {{ form.name|as_crispy_field}}
                                      
                                      
@@ -141,7 +142,7 @@ circle::after {
                              </p>
                              </hr> </hr>
 
-                             {% 
+                             <!-- section 2 details -->
                                      {{ form.project_title|as_crispy_field}}
                                  
                                      
@@ -178,6 +179,7 @@ circle::after {
 
                                  <div class="row">
                                      <div class="col-md-6"> 
+                                     <!-- section 3 details -->
                                      
                                       {{ form.project_complexity|as_crispy_field}}
                                       </div>
@@ -211,7 +213,7 @@ circle::after {
                              </hr> </hr>
 
 
-
+                                <!-- section 4 details -->
                              
                                   {{ form.motivations|as_crispy_field}}
                                     
@@ -222,7 +224,7 @@ circle::after {
                                       {{form.evidence|as_crispy_field}}
                                       {{form.github|as_crispy_field}}
                                       
-
+                        {% comment %} javascript for tags {% endcomment %}
                                       <div class="form-group">
                     <label>Tags</label>
                     <input type="text" data-role="tagsinput" class="form-control" name="tags">

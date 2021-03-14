@@ -52,14 +52,14 @@
         <ul class="list-unstyled components">
         
             <p >MENUS</p>
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated %} {% comment %} only users can see{% endcomment %}
             <li> <a href="{% url 'SubmissionPortal' %}" style="color:rgb(0,70,177)">Submission Portal</a> </li>
             {%if  group != "Submitters"%}
             <li> <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Dashboard</a>
-            
+            {% comment %} dashboard for different links {% endcomment %}
                 <ul class="collapse list-unstyled" id="homeSubmenu">
                     <li><a href="{% url 'blog-home' %}" style="color:rgb(0,70,177)">Projects Dashboard</a> </li>
-                    {% comment %} <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">Completed Projects Dashboard</a> </li> {% endcomment %}
+                    
                     <li> <a href="{% url 'review-display' %}" style="color:rgb(0,70,177)">Reviews Dashboard</a> </li>
                 </ul>
             </li>
