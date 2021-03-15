@@ -1,0 +1,267 @@
+{% extends "CFP_Portal/sidebar.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+
+
+ <!doctype html>
+                        <html>
+                            <head>
+                                <meta charset='utf-8'>
+                                <meta name='viewport' content='width=device-width, initial-scale=1'>
+                                <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
+                                <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+                              <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+                                <style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+
+.my_card {
+    width: 350px;
+    border-radius: 50px;
+    background: #eeeeee;
+    box-shadow: 20px 20px 60px #cacaca, -20px -20px 60px #ffffff;
+    border: none
+}
+
+.neo-button {
+    width: 40px;
+    height: 40px;
+    outline: 0 !important;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #d6d6d6, #ffffff);
+    box-shadow: 20px 20px 60px #cacaca, -20px -20px 60px #ffffff
+}
+
+.neo-button:active {
+    border-radius: 50%;
+    background: linear-gradient(145deg, #d6d6d6, #ffffff);
+    box-shadow: inset 20px 20px 60px #cacaca, inset -20px -20px 60px #ffffff
+}
+
+.fa-facebook {
+    color: #3b5998
+}
+
+.fa-linkedin {
+    color: #0077b5
+}
+
+.fa-google {
+    color: #dc4e41
+}
+
+.fa-youtube {
+    color: #cd201f
+}
+
+.fa-twitter {
+    color: #55acee
+}</style>
+                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+                                <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
+                                <script type='text/javascript'></script>
+                            </head>
+                            <body oncontextmenu='return false' class='snippet-body' style="margin-top:-4px">
+
+          {% comment %} <nav aria-label="breadcrumb" class="main-breadcrumb" style="margin-top:-60px; width:100%;">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+              <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+          </nav>
+                           <br><br> {% endcomment %}
+ <div class="container d-flex justify-content-left">
+
+                            
+       <div class="row">
+                          <div class="col">  
+    <div class="my_card p-3 py-4" >
+        <div class="text-center"> <img src="{{ user.profile.image.url }}" width="100" height="100" class="rounded-circle">
+            <h3 class="mt-2">{{ user.username }}</h3> <span class="mt-1 clearfix"><p class="text-secondary"> {{ user.profile.full_name }}</p></span> <small class="mt-4">
+          <p class="text-secondary">Department: {{ user.profile.department }}</p>
+
+          <p class="text-secondary">Organisation: {{ user.profile.organisation }}</p></small>
+            <div class="social-buttons mt-5">
+             <button class="neo-button"><i class="fa fa-facebook fa-1x"></i> </button>
+            <button class="neo-button"><i class="fa fa-linkedin fa-1x"></i></button> 
+            <button class="neo-button"><i class="fa fa-github fa-1x" style="color:black"></i> 
+            </button> <button class="neo-button"><i class="fa fa-wordpress fa-1x" style="color:gray"></i> 
+            </button> <button class="neo-button"><i class="fa fa-twitter fa-1x"></i> </button> </div>
+        </div>
+        <hr>
+         <div class="profile-nav ">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical"  >
+  <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">View Profile</a>
+  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"> Update Profile</a>
+  <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-pass" role="tab" aria-controls="v-pills-pass" aria-selected="false">Change Password</a>
+ 
+  <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+  <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+</div>
+</div>
+</div>
+    </div>
+    <br>
+{% comment %} <div class="container d-flex justify-content-left col-md-9"> {% endcomment %}
+<div class="col" style="width:1000px; margin-left:-300px;margin-top:5px">
+<div class="tab-content" id="v-pills-tabContent" style="width:100%">
+  <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" >
+  
+  
+
+               <div class="card" >
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Full Name:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ user.profile.full_name }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ user.profile.email }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Phone:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ user.profile.phone }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Website:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                     {{ user.profile.website }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Department:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ user.profile.department }}
+                    </div>
+                  </div><hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Organisation:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ user.profile.organisation }}
+                    </div>
+                  </div><hr>
+                   <div class="row">
+                    <div class="col-sm-5">
+                      <h6 class="mb-0">Organisation Address:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ user.profile.address }}
+                    </div>
+                  </div><hr>
+                   <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Organisation:</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                    {{ user.profile.organisation }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+             
+               
+               
+   
+  
+  
+  </div>
+
+  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><h3> 
+<div class="col" style="width:700px; margin-left:300px;margin-top:5px">
+ <div class="card" style="width:100%;  border-color:white; margin-top:0px">
+                <div class="card-body text-justify" style="width:100%;  background: #EAEAEA; box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19)">
+  
+ <form method="POST" enctype ="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom " style="font-size:20px; border:1px; text-align:center; color:#001798">Profile Information</legend>
+                <br>
+                {% comment %} {{ u_form|crispy }} {% endcomment %}
+               <h6> {{ u_form.username|as_crispy_field}} </h6>
+                 <h6>  {{ u_form.email|as_crispy_field}}  <h6>
+<br>
+                  <legend class="border-bottom " style="font-size:20px; border-left:1px;text-align:center; color:#001798">Social Connections (Optional fields)</legend>
+                <br>
+                  <h6> {{p_form.twitter|as_crispy_field}}</h6>
+                   <h6> {{p_form.linkedin|as_crispy_field}}</h6>
+                    <h6> {{p_form.wordpress|as_crispy_field}}</h6>
+                     <h6> {{p_form.facebook|as_crispy_field}}</h6>
+                      <h6> {{p_form.git|as_crispy_field}}</h6> 
+<br>
+            <legend class="border-bottom " style="font-size:20px; border-left:1px; text-align:center; color:#001798">Profile Image Upload</legend>
+                <br>
+                 <h6> {{p_form.image|as_crispy_field}}</h6><br>
+
+                  <legend class="border-bottom " style="font-size:20px; border-left:1px; text-align:center; color:#001798">Further Information</legend>
+                <br>
+                  <h6> {{p_form.fullname|as_crispy_field}}</h6>
+                    <h6> {{p_form.department|as_crispy_field}}</h6>
+                      <h6> {{p_form.organisation|as_crispy_field}}</h6> 
+                 <h6> {{p_form.organisation_address|as_crispy_field}}</h6>
+                   <h6> {{p_form.about|as_crispy_field}}</h6>
+                {% comment %} {{ p_form|crispy }} {% endcomment %}
+            </fieldset>
+            <div class="form-group">
+            <div class="text-center">
+                <button class="btn btn-outline-primary" type="submit">Update Profile</button>
+                </div>
+            </div>
+        </form>
+</div></div></div>
+
+   {% comment %} <form method="POST" enctype ="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile Information</legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Update Profile</button>
+            </div>
+        </form> {% endcomment %}
+  
+  </h3></div>
+  <div class="tab-pane fade" id="v-pills-pass" role="tabpanel" aria-labelledby="v-pills-pass-tab"><p>pass</p></div>
+  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+  <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+</div></div>
+
+
+</div></div>
+                            </body>
+                        </html>
+
+
+
+{% endblock %}

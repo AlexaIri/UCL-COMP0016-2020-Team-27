@@ -1,0 +1,307 @@
+
+{% extends "CFP_Portal/sidebar.html" %}
+{% block content %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'CFP_Portal/projects.css' %}">
+     
+ 
+    <style type="text/css">
+    
+       </style>
+       <style>
+       
+        .switch {
+        position: relative;
+        display: inline-block;
+        width: 35px;
+        height: 17px;
+        }
+
+        .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+        }
+
+        .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        .slider:before {
+        position: absolute;
+        content: "";
+        height: 13px;
+        width: 13px;
+        left: 2px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        }
+
+        input:checked + .slider {
+        background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+        border-radius: 17px;
+        }
+
+        .slider.round:before {
+        border-radius: 50%;
+        }
+        
+        #myDIV {
+        color: black;
+        display: none;
+        font-size: 14px;
+       
+        }
+        
+</style>
+       
+</head>
+<body style="margin-top:-4px">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+
+    <div class="row">
+    
+        <div class="col-lg-3">
+        <div class="mb-4">
+                <div class="small mb-3">Search</div>
+                <div class="card card-body">
+                
+
+			<form method="get">
+               
+            
+              <p style="font-size:15px;color:black"> Project title:  {{ myFilter.form.project_title}}   </p>
+              <p style="font-size:15px;color:black"> Status:      {{ myFilter.form.status}}   </p>   
+              <p style="font-size:15px;color:black"> Project ID:      {{ myFilter.form.id}}   </p> 
+               <p style="font-size:15px;color:black">NICE tier  {{myFilter.form.NICEtier}}   </p>  
+				Advanced Search
+                <label class="switch"> 
+                <input type="checkbox" id="myCheck" onclick="myFunction()">
+                <span class="slider round"></span>
+                </label><br><br>
+                <div id="myDIV" class="form-group">
+                
+
+                 <p style="font-size:15px;color:black;">  Department: {{ myFilter.form.department}}   </p>
+                <p style="font-size:15px;color:black;"> Organisation: {{ myFilter.form.organisation}}  </p>
+                  <p style="font-size:15px;color:black;">Open or closed source:  {{ myFilter.form.source_type}} </p>
+                <p style="font-size:15px;color:black;"> Area of Expertise {{myFilter.form.expertiseskills}} </p>
+                  <p style="color:black;">Name: {{myFilter.form.name}}  </p>   
+                  <p style="color:black;">Tags:  {{myFilter.form.tags__name}}   </p>
+                  <p style="font-size:15px;color:black;">Challenge: {{myFilter.form.challenge}}   </p>    
+                </div>
+                
+                <script>
+                
+                function myFunction() {
+                
+                var checkBox = document.getElementById("myCheck");
+               
+                var x = document.getElementById("myDIV");
+
+                if (checkBox.checked == true){
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+                }
+                </script>
+
+                    <div class="text-center">
+           <button class="btn btn-dark"name="allprojects" style="margin:5px"type="submit">Search</button></div>
+		    
+           
+		  </form>
+           
+            
+
+		</div>
+            </div>
+            
+            <div class="mb-4">
+                <div class="small mb-3">Projects</div>
+                <ul class="nav flex-column nav-pills">
+                <form method="get">
+               
+                              
+				
+
+            
+            <button type="submit" name ="assigned" class="btn btn-info"> Projects Assigned to You </button>
+                               
+            <br>
+		    <li><button class="btn btn-dark"name="innovation" style="margin:5px" type="submit" >Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
+            <br>
+            <li><button class="btn btn-secondary"name="scaffolding" style="margin:5px" type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
+         <br>
+         <li><button class="btn btn-light"name="discovery" style="margin:5px" type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{discoverynumber}}</span></a></li>
+		  </form>
+                   
+                    
+                </ul>
+            </div>
+            
+        </div> 
+        
+        <div class="col-lg-9">
+            <div class="d-flex flex-column flex-md-row mb-3 mb-md-0">
+                <nav class="mr-auto d-flex align-items-center" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="active breadcrumb-item" aria-current="page"><a href="{% url 'blog-home' %}"><i class="fa fa-home"></i></a></li>
+                        <li class="active breadcrumb-item" aria-current="page">Projects Grid</li>
+                    </ol>
+                   
+                </nav>
+                <div role="toolbar" class="btn-toolbar">
+                
+                    <div role="group" class="mr-auto mr-md-2 btn-group"><a class="align-self-center btn btn-secondary" id="tooltipShowList" href="list"><i class="fa-fw fa fa-bars"></i></a><a class="align-self-center btn btn-secondary active" id="tooltipShowGrid" href="" aria-current="page"><i class="fa-fw fa fa-th-large"></i></a></div>
+                    
+                </div>
+                
+            </div>
+            <div class="text-right">
+             <a href="{% url 'export'  %}"><button type="button" class="btn btn-danger"> <i class="fa fa-upload fa-xs"> </i> Export Data</button></a></div>
+            <br>
+            <div class="card-columns">
+            {% for project in projects %}
+                <div class="Card_custom-card--border_5wJKy card">
+                    
+                    <div class="card-body"><span class=""/span>
+                    {% if project.status == "Rejected"%}
+                            <span class="badge badge-danger">{{project.status}} </span>
+
+                            
+                            {% elif project.status == "Submitted"%}
+                             <span class="badge badge-warning">{{project.status}} </span>
+
+                            {% elif project.status == "Accepted"%}
+                            <span class="badge badge-success">{{project.status}}  </span>
+
+                            {% elif project.status == "Under Review"%}
+                            <span class="badge badge-info">{{project.status}}  </span>
+
+
+                    {% endif %}
+
+                                    {% if project.status == "Submitted"%}
+                                     <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
+                                     {%endif%}
+                                     {% if project.status == "Under Review"%}
+                                     <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
+                                     {%endif%}
+                        <div class="mb-2"><a href="{% url 'project-detail' project.id %}" class="mr-2">
+                        
+                         <div class="align-self-center ml-auto btn-group">
+                            <button type="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle btn btn-link btn-sm"><i class="fa fa-gear"></i></button>
+                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-folder-open mr-2"></i>View</button>
+                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-ticket mr-2"></i>Add Task</button>
+                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-paperclip mr-2"></i>Add Files</button>
+                                <div tabindex="-1" class="dropdown-divider"></div>
+                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-trash mr-2"></i>Delete</button>
+                            </div>
+                        </div>
+
+                        </a><a href="{% url 'project-detail' project.id %}">{{project.project_title}}</a></div><span><b>Submitter Name: </b><br>{{project.name}} <br> <hr><b> Submission date: </b> <br>{{project.submission_date}} <br> <b> Launching date: </b> <br>{{project.launching_date}} <hr> <b>Tags:</b> {% for mt in project.tags.all %}
+                    <a href="#" class="badge badge-primary">{{mt}}</a>
+                     {% endfor %}</span></div>
+                    <div class="card-footer">
+                        
+                                 <script type='text/javascript'>$(document).ready(function() {
+                                    $('.progress .progress-bar').css("width",
+                                    function() {
+                                    return $(this).attr("aria-valuenow") + "%";
+                                    }
+                                    )
+                                    });</script>
+                                           {% if project.status == "Rejected"%}
+                     
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                             <div>Tasks Completed: <span class="text-inverse">100/100</span></div>
+
+                            
+                            {% elif project.status == "Submitted"%}
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                             <div>Tasks Completed: <span class="text-inverse">25/100</span></div>
+
+                            {% elif project.status == "Accepted"%}
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                             <div>Tasks Completed: <span class="text-inverse">100/100</span></div>
+                            
+                            {% elif project.status == "Under Review"%}
+                           <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                             <div>Tasks Completed: <span class="text-inverse">50/100</span></div>
+
+                              {% elif project.status == " Reviewed"%}
+                           <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                             <div>Tasks Completed: <span class="text-inverse">75/100</span></div>
+
+                    {% endif %}
+                        
+                    
+                       
+                    </div>
+                    
+                    
+                </div>
+                <br>
+               {%endfor%}
+                </div>
+                
+               
+              {% comment %} add pagination {% endcomment %}
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+
+</script>
+</body>
+</html>
+
+{% endblock %}
