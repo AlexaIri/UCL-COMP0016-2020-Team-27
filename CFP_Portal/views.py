@@ -132,7 +132,7 @@ def markprojectdetail(request, pk):
 @user_passes_test(is_user)
 def home(request):
     order_by = request.GET.get('order_by')
-    projects = Person.objects.all()
+    projects = Person.objects.order_by('-submission_date')
 
     
     paginator = Paginator(projects, 10)
@@ -160,7 +160,7 @@ def home(request):
     if 'search' in request.GET:
         
         search_term = request.GET['search']
-        projects = Person.objects.all().filter(project_title__icontains=search_term)
+        projects = Person.objects.all().filter(project_title__icontains=search_term).order_by('-submission_date')
     
     
          
