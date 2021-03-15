@@ -90,7 +90,7 @@ def projectdetail(request, pk):
         form = Commentform()     
 
     if request.method == 'POST' and 'reviewers' in request.POST:
-        print(User.objects.filter(groups__name='Reviewers'))
+        
         for item in request.POST.getlist('options'):
             project.reviewers.add(item)
         #Person.objects.filter(id=pk).update(reviewers=request.POST.getlist('options'))
@@ -453,9 +453,37 @@ class  Trial(ListView):
 
 @login_required
 @user_passes_test(is_reviewer)
-class UsersListView(ListView):
-    model = Organisation
-    template_name ='CFP_Portal/users_grid.html'
+def UserDisplay(request):
+    users = User.objects.all()
+    title = 'All Users'
+
+    if request.method == 'GET' and 'reviewers' in request.GET:
+        users = User.objects.filter(groups__name='Reviewers')
+        title = 'Reviewers'
+    
+    if request.method == 'GET' and 'submitters' in request.GET:
+        users = User.objects.filter(groups__name='Submitters')
+        title = 'Submitters'
+    
+    if request.method == 'GET' and 'leads' in request.GET:
+        users = User.objects.filter(groups__name='Leads')
+        title = 'Leads'
+   
+    if request.method == 'GET' and 'allusers' in request.GET:
+        users = User.objects.all()
+        title = 'All users'
+    
+        
+    context = {
+        'users' : users,
+        'title' : title
+
+        # 'comments': commentslist,
+        # 'form': form
+    }
+   
+    return render(request, 'CFP_Portal/users.html', context)
+
 @login_required
 @user_passes_test(is_reviewer)
 class ProjectsListView(ListView):

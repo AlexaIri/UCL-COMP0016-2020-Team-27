@@ -1,0 +1,92 @@
+{% extends "CFP_Portal/sidebar.html" %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>Users</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'CFP_Portal/users.css' %}">
+    <style type="text/css">
+     </style>
+</head>
+<body style="margin-top:-4px;">
+<div class="container">
+    <div class="container-fluid p-0 m-0">
+		<h1 class="h3 mb-3">{{title}}</h1>
+		<div class="row">
+			<div class="col-xl-25">
+				<div class="card">
+					<div class="card-header pb-0">
+						<div class="card-actions float-right">
+							<div class="dropdown show">
+								<a href="#" data-toggle="dropdown" data-display="static">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+								</a>
+
+								
+							</div>
+						</div>
+                        <form method = 'get'>
+                        <button type="submit" name ="submitters" style="margin:5px"class="btn btn-primary"> Submitters </button>
+                        <button type="submit" name ="reviewers"style="margin:5px" class="btn btn-primary"> Reviewers </button>
+                        <button type="submit" name ="leads"style="margin:5px" class="btn btn-primary"> Leads </button>
+                        <button type="submit" name ="allusers"style="margin:5px" class="btn btn-primary"> All Users </button>
+						
+                        <hr>
+                        <h5 class="card-title mb-0">Users</h5>
+					</div>
+					<div class="card-body">
+						<table class="table table-striped" style="width:100%">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Name</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+									<th>Organisation</th>
+                                    <th>About</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+
+                            {%for user in users%}
+
+								<tr>
+									<td>{{user.id}}</td>
+									<td>{{user.profile.full_name}}</td>
+									<td>{{user.email}}</td>
+                                    <td>{{user.profile.department}}</td>
+                                    <td>{{user.profile.organisation}}</td>
+                                    <td>{{user.profile.about}}</td>
+									
+								</tr>
+							 {%endfor%}	
+								
+								
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			
+
+	</div>
+</div>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
+
+{% endblock %}
