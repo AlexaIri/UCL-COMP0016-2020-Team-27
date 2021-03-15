@@ -24,7 +24,8 @@
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card bg-pattern">
-            {%if  group != "Submitters"%}
+             {%if  group != "Submitters"%}
+            
                 
                 <div class="card-body" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
                 
@@ -36,6 +37,7 @@
                                </button></a>
                     </div>
                      <div class="row">
+                     
                      <div class="col">  <h5 class="font-size-20 mt-0 pt-1"> {{totalnumber}} </h5></div>
                     
                      <div class="col">   <p class="text-muted">All the Project Proposals </p></div>
@@ -43,7 +45,10 @@
                 </div>
             </div>
         </div>
+        
         <div class="col-xl-3 col-md-6">
+        
+        
             <div class="card bg-pattern" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
                 <div class="card-body">
                     <div class="float-right">
@@ -75,7 +80,7 @@
         </div>
 
 
-        
+       
         <div class="col-xl-3 col-md-6">
             <div class="card">
                 <div class="card-body" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
@@ -236,6 +241,51 @@
                     {% endif %}
                    
                 {%if  group == "Submitters"%}
+                <div class="card-body" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
+                
+                    
+                     <div class="row">
+                     
+                     <div class="col">  <h5 class="font-size-20 mt-0 pt-1"> {{individualprojects.count}} </h5></div>
+                    
+                     <div class="col">   <p class="text-muted">All the Project Proposals </p></div>
+                     </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+        
+        
+            <div class="card bg-pattern" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
+                <div class="card-body">
+                   
+                    <h5 class="font-size-20 mt-0 pt-1">{{individualaccepted}}</h5>
+                    <p class="text-muted mb-0">Accepted Projects</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-pattern">
+                <div class="card-body" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
+                    
+                    <h5 class="font-size-20 mt-0 pt-1">{{individualpending}}</h5>
+                    <p class="text-muted mb-0"> Projects Under Review</p>
+                </div>
+            </div>
+        </div>
+
+
+       
+        <div class="col-xl-3 col-md-6">
+            <div class="card">
+                
+            </div>
+        
+    
+          </div>
+
+    </div>
             <div class="row">
         <div class="col-lg-12">
             <div class="card">

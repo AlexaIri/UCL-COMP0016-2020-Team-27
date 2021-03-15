@@ -146,19 +146,24 @@ def home(request):
         projects = paginator.page(paginator.num_pages)
 
     acceptednumber = AcceptedProjects.objects.all().count()
-    pending = Person.objects.filter(status='Submitted').count()
+    pending = Person.objects.filter(status__in =['Submitted', 'Under Review']).count()
     
     group =''
     if request.user.groups.filter(name__in=['Submitters']).exists():
         group = 'Submitters'
 
     individualprojects = Person.objects.filter(user=request.user)
+    individualaccepted= Person.objects.filter(user=request.user, status='Accepted').count()
+    individualrejected= Person.objects.filter(user=request.user, status='Rejected').count()
+    individualpending = Person.objects.filter(user=request.user, status__in =['Submitted', 'Under Review']).count()
     
     
     if 'search' in request.GET:
-        print(request.GET['search'])
+        
         search_term = request.GET['search']
         projects = Person.objects.all().filter(project_title__icontains=search_term)
+    
+    
          
     if request.method == 'GET' and 'allprojects' in request.GET:
         
@@ -169,11 +174,6 @@ def home(request):
         projects = Person.objects.filter(reviewers=request.user)
     
    
-       
-
-
-    
-
     
     #return HttpResponse('<h1> Blog Home </h1>')
     totalnumber = Person.objects.all().count()
@@ -185,6 +185,8 @@ def home(request):
         'pending': pending,
         'individualprojects': individualprojects,
         'group' : group, 
+        'individualaccepted' : individualaccepted,
+        'individualpending' : individualpending
         # 'all_projects':all_projects,
         # 'order_by': order_by
     }
