@@ -474,26 +474,6 @@ class  Trial(ListView):
     template_name = 'CFP_Portal/trial.html'
     context_object_name = 'projects'
 
-def trial(request):
-    projects = Person.objects.all()
-    context_object_name = 'projects'
-    # if request.method == 'GET' and 'projects' in request.GET:
-    #     projects = Person.objects.filter(status__in=['Submitted','Under Review'])
-      
-
-    # if request.method == 'GET' and 'allprojects' in request.GET:
-        
-    #     projects = Person.objects.all()
-        
-    context = {
-        'projects' : projects
-
-        # 'comments': commentslist,
-        # 'form': form
-    }
-   
-    return render(request, 'CFP_Portal/trial.html', context)
-
 @login_required
 @user_passes_test(is_reviewer)
 class UsersListView(ListView):

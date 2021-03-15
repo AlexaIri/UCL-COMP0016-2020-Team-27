@@ -28,7 +28,7 @@ urlpatterns = [
     path('about/', views.about, name = 'blog-about'),
     path('displayOrganisations/', views.OrganisationListView , name= 'organisations'),
     path('reviews/', views.ReviewsListView , name= 'reviews'),
-    path('trial/', views.trial , name= 'trial'),
+    path('trial/', views.Trial , name= 'trial'),
     path('reviewDisplay/', views.reviewdisplay , name= 'review-display'), #review grid
 
     path('post/<int:pk>/', views.PostDetailView, name = 'post-detail'), # feedback sheet
