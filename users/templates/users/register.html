@@ -95,7 +95,10 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Join Today</legend>
+                
                 {% csrf_token %}
+                 This system is a prototype and a Proof of Concept so you should submit any confidential details as the it may not necessarily be secure. 
+                 <hr>
                 {{form.group|as_crispy_field}}
                 {{ p_reg_form.full_name|as_crispy_field}}
                 {{ form.username|as_crispy_field}}

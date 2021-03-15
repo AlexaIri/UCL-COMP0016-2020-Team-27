@@ -26,12 +26,12 @@ def has_group(user, group_name):
 
 def is_user(user):
     
-    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Submitters','Reviewers','Leads']).exists()
+    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Submitters','Reviewers','Approvers']).exists()
     # print(user.groups)
 
 def is_reviewer(user):
     
-    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Reviewers','Leads']).exists()
+    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Reviewers','Approvers']).exists()
 
 def is_submitter(user):
     return user.groups.filter(name__in=['Submitters']).exists()
@@ -40,7 +40,7 @@ def is_submitter(user):
 
 def is_lead(user):  
     # print(user.groups)
-    return  user.is_superuser or user.is_staff or user.groups.filter(name__in=['Leads']).exists()
+    return  user.is_superuser or user.is_staff or user.groups.filter(name__in=['Approvers']).exists()
 
 def export(request):
     response = HttpResponse(content_type ='text/csv')
@@ -73,7 +73,7 @@ def projectdetail(request, pk):
     if request.user.groups.filter(name__in=['Submitters']).exists():
         group = 'Submitters'
     
-    reviewers = User.objects.filter(groups__name__in=['Reviewers','Leads',])
+    reviewers = User.objects.filter(groups__name__in=['Reviewers','Approvers',])
     #reviewers = User.objects.filter(groups__name='Reviewers')
 
     if request.method == 'POST' and 'comment' in request.POST:
@@ -263,8 +263,8 @@ def review(request, review_id):
 def projectreviewdetail(request, project_id):
     project = get_object_or_404(Person, pk=project_id)
     Display = ' '
-    if request.user.groups.filter(name__in=['Leads']).exists():
-        group = 'Leads'
+    if request.user.groups.filter(name__in=['Approvers']).exists():
+        group = 'Approvers'
 
     if request.method == 'GET' and 'approve' in request.GET:
         Person.objects.filter(id=project_id).update(status='Accepted')
@@ -467,8 +467,8 @@ def UserDisplay(request):
         title = 'Submitters'
     
     if request.method == 'GET' and 'leads' in request.GET:
-        users = User.objects.filter(groups__name='Leads')
-        title = 'Leads'
+        users = User.objects.filter(groups__name='Approvers')
+        title = 'Approvers'
    
     if request.method == 'GET' and 'allusers' in request.GET:
         users = User.objects.all()
