@@ -36,6 +36,17 @@ class ProfileUpdateForm(forms.ModelForm):
     fullname = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Full name'}))
     department = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Department you work in'}), required=False)
     organisation = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Organisation or Trust '}), required=False)
+    organisation_address = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Organisation Address '}), required=False)
+
+    about = forms.CharField(max_length=2000, widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Type in your bio description...'}))
+  
+    wordpress = forms.URLField(widget = forms.URLInput(attrs ={'placeholder': 'Wordpress Link '}), required=False)
+    twitter = forms.URLField(widget = forms.URLInput(attrs ={'placeholder': 'Twitter Link '}), required=False)
+    linkedin = forms.URLField(widget = forms.URLInput(attrs ={'placeholder': 'Linkedin Link '}), required=False)
+    facebook = forms.URLField(widget = forms.URLInput(attrs ={'placeholder': 'Facebook Link '}), required=False)
+    git = forms.URLField(widget = forms.URLInput(attrs ={'placeholder': 'Github Link '}), required=False)
+ 
+
     class Meta:
         model = Profile
         fields = ['image']

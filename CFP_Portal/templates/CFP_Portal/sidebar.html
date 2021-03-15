@@ -51,20 +51,19 @@
         </div>
         <ul class="list-unstyled components">
         
-            <p >MENUS</p>
+            <p style="font-size: 0.9em;"  >MAIN PORTAL</p>
             {% if user.is_authenticated %}
-            <li> <a href="{% url 'SubmissionPortal' %}" style="color:rgb(0,70,177)">Submission Portal</a> </li>
+            <li> <a href="{% url 'SubmissionPortal' %}" style="color:rgb(0,70,177)"><i class="fa fa-laptop" style="color:light gray"></i>  &nbsp; Submission Portal</a> </li>
             {%if  group != "Submitters"%}
-            <li> <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Dashboard</a>
+            {% comment %} <li> <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Dashboard</a> {% endcomment %}
             
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li><a href="{% url 'blog-home' %}" style="color:rgb(0,70,177)">Projects Dashboard</a> </li>
+                {% comment %} <ul class="collapse list-unstyled" id="homeSubmenu"> {% endcomment %}
+                   <br> <p style="font-size: 0.9em;" > DASHBOARDS</p>
+                    <li><a href="{% url 'blog-home' %}" style="color:rgb(0,70,177)"><i class="fa fa-file-text" style="color:light gray"></i>  &nbsp; Projects Dashboard</a> </li>
                     {% comment %} <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">Completed Projects Dashboard</a> </li> {% endcomment %}
-                    <li> <a href="{% url 'review-display' %}" style="color:rgb(0,70,177)">Reviews Dashboard</a> </li>
-                </ul>
-            </li>
-            <li> <a href="{% url 'users' %}" style="color:rgb(0,70,177)">Users</a> </li>
-            <li> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Project Proposals</a>
+                    <li> <a href="{% url 'review-display' %}" style="color:rgb(0,70,177)"><i class="fa fa-pencil-square-o" style="color:light gray"></i>  &nbsp; Reviews Dashboard</a> </li>
+
+                     <li> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)"><i class="fa fa-folder-open" style="color:light gray"></i>  &nbsp;Project Proposals</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">All submissions</a> </li>
                     <li> <a href="#" style="color:rgb(0,70,177)"> Under Review </a> </li>
@@ -73,9 +72,19 @@
 
                 </ul>
             </li>
-            
-            <li> <a href="{% url 'organisations' %}" style="color:rgb(0,70,177)">Organisations</a> </li>
-            <li> <a href= "{% url 'trial' %}" style="color:rgb(0,70,177)">Comments</a> </li>
+                {% comment %} </ul> {% endcomment %}
+            {% comment %} </li> {% endcomment %}
+
+             <br> <p style="font-size: 0.9em;" >ENTITIES</p>
+              <li> <a href="{% url 'users' %}" style="color:rgb(0,70,177)"><i class="fa fa-users" style="color:light gray"></i>  &nbsp;Users</a> </li>
+            <li> <a href="{% url 'organisations' %}" style="color:rgb(0,70,177)"><i class="fa fa-institution" style="color:light gray"></i>  &nbsp;Organisations</a> </li>
+
+
+            <br> <p style="font-size: 0.9em;" >MENUS</p>
+
+            <li> <a href= "{% url 'profile' %}" style="color:rgb(0,70,177)"><i class="fa fa-user-circle-o" style="color:light gray"></i>  &nbsp;User Profile</a> </li>
+           
+            <li> <a href= "{% url 'trial' %}" style="color:rgb(0,70,177)"><i class="fa fa-wpforms" style="color:light gray"></i>  &nbsp;Leave Feedback</a> </li>
            
 
         </ul>

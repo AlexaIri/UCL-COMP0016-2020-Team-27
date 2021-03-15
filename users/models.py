@@ -7,7 +7,16 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     department = models.CharField(max_length = 255, default = "", blank=True)
     organisation = models.CharField(max_length = 255, default = "", blank=True)
+    organisation_address = models.CharField(max_length = 255, default = "", blank=True)
     full_name = models.CharField(max_length = 255, default = "")
+
+    about = models.TextField(default="")
+    linkedin = models.URLField("linkedin link",max_length = 200, blank=True) 
+    twitter = models.URLField("twitter link",max_length = 200, blank=True) 
+    facebook = models.URLField("facebook link",max_length = 200, blank=True) 
+    git = models.URLField("git link",max_length = 200, blank=True) 
+    wordpress = models.URLField("wordpress link",max_length = 200, blank=True) 
+
     
 
     def __str__(self):
