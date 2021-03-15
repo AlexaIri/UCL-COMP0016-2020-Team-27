@@ -250,12 +250,13 @@ def review(request, review_id):
     if request.user.groups.filter(name__in=['Submitters']).exists():
         group = 'Submitters'
     
+    review = get_object_or_404(Review, pk = review_id)
     context = {
         'review': review,
         'group': group
     }
         
-    review = get_object_or_404(Review, pk = review_id)
+    
     return render(request, 'CFP_Portal/review.html', context)
 
 @login_required
