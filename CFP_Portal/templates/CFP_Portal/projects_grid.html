@@ -161,8 +161,10 @@
                               
 				
 
-                    
             
+            <button type="submit" name ="assigned" class="btn btn-info"> Projects Assigned to You </button>
+                               
+            <br>
 		    <li><button class="btn btn-dark"name="innovation" style="margin:5px" type="submit" >Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
             <br>
             <li><button class="btn btn-secondary"name="scaffolding" style="margin:5px" type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
@@ -215,6 +217,13 @@
 
 
                     {% endif %}
+
+                                    {% if project.status == "Submitted"%}
+                                     <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
+                                     {%endif%}
+                                     {% if project.status == "Under Review"%}
+                                     <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
+                                     {%endif%}
                         <div class="mb-2"><a href="{% url 'project-detail' project.id %}" class="mr-2">
                         
                          <div class="align-self-center ml-auto btn-group">

@@ -51,6 +51,7 @@
         </div>
         <ul class="list-unstyled components">
         
+<<<<<<< HEAD
             <p style="font-size: 0.9em;"  >MAIN PORTAL</p>
             {% if user.is_authenticated %}
             <li> <a href="{% url 'SubmissionPortal' %}" style="color:rgb(0,70,177)"><i class="fa fa-laptop" style="color:light gray"></i>  &nbsp; Submission Portal</a> </li>
@@ -64,6 +65,22 @@
                     <li> <a href="{% url 'review-display' %}" style="color:rgb(0,70,177)"><i class="fa fa-pencil-square-o" style="color:light gray"></i>  &nbsp; Reviews Dashboard</a> </li>
 
                      <li> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)"><i class="fa fa-folder-open" style="color:light gray"></i>  &nbsp;Project Proposals</a>
+=======
+            <p >MENUS</p>
+            {% if user.is_authenticated %} {% comment %} only users can see{% endcomment %}
+            <li> <a href="{% url 'SubmissionPortal' %}" style="color:rgb(0,70,177)">Submission Portal</a> </li>
+            {%if  group != "Submitters"%}
+            <li> <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Dashboard</a>
+            {% comment %} dashboard for different links {% endcomment %}
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li><a href="{% url 'blog-home' %}" style="color:rgb(0,70,177)">Projects Dashboard</a> </li>
+                    
+                    <li> <a href="{% url 'review-display' %}" style="color:rgb(0,70,177)">Reviews Dashboard</a> </li>
+                </ul>
+            </li>
+            <li> <a href="{% url 'users' %}" style="color:rgb(0,70,177)">Users</a> </li>
+            <li> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)">Project Proposals</a>
+>>>>>>> 5d420dc0d4b82d294b77033da74dff59dc868db4
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">All submissions</a> </li>
                     <li> <a href="#" style="color:rgb(0,70,177)"> Under Review </a> </li>

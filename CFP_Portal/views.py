@@ -26,12 +26,12 @@ def has_group(user, group_name):
 
 def is_user(user):
     
-    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Submitters','Reviewers','Lead']).exists()
+    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Submitters','Reviewers','Leads']).exists()
     # print(user.groups)
 
 def is_reviewer(user):
     
-    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Reviewers','Lead']).exists()
+    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Reviewers','Leads']).exists()
 
 def is_submitter(user):
     return user.groups.filter(name__in=['Submitters']).exists()
@@ -40,7 +40,7 @@ def is_submitter(user):
 
 def is_lead(user):  
     # print(user.groups)
-    return  user.is_superuser or user.is_staff or user.groups.filter(name__in=['Lead']).exists()
+    return  user.is_superuser or user.is_staff or user.groups.filter(name__in=['Leads']).exists()
 
 def export(request):
     response = HttpResponse(content_type ='text/csv')
@@ -73,6 +73,9 @@ def projectdetail(request, pk):
     if request.user.groups.filter(name__in=['Submitters']).exists():
         print("yes!!")
         group = 'Submitters'
+    
+    reviewers = User.objects.filter(groups__name__in=['Reviewers','Leads',])
+    #reviewers = User.objects.filter(groups__name='Reviewers')
 
     if request.method == 'POST' and 'comment' in request.POST:
         
@@ -85,7 +88,15 @@ def projectdetail(request, pk):
             comments.feedback = form.cleaned_data['feedback']
             comments.save()
     else:
-        form = Commentform()      
+        form = Commentform()     
+
+    if request.method == 'POST' and 'reviewers' in request.POST:
+        print(User.objects.filter(groups__name='Reviewers'))
+        for item in request.POST.getlist('options'):
+            project.reviewers.add(item)
+        #Person.objects.filter(id=pk).update(reviewers=request.POST.getlist('options'))
+        
+    
 
     common_tags = project.tags.all()
     commentslist = Comment.objects.all()
@@ -94,7 +105,8 @@ def projectdetail(request, pk):
         'comments': commentslist,
         'form': form,
         'common_tags':common_tags,
-        'group': group
+        'group': group,
+        'reviewers' : reviewers
     }
     return render(request, 'CFP_Portal/person_detail.html', context)
 
@@ -151,6 +163,17 @@ def home(request):
     if request.method == 'GET' and 'allprojects' in request.GET:
         
         projects = Person.objects.all()
+    
+
+    if request.method == 'GET' and 'assigned' in request.GET:
+        projects = Person.objects.filter(reviewers=request.user)
+    
+   
+       
+
+
+    
+
     
     #return HttpResponse('<h1> Blog Home </h1>')
     totalnumber = Person.objects.all().count()
@@ -232,6 +255,9 @@ def projectgrid(request):
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
        projects = Person.objects.filter(project_complexity='Scaffolding')
+    
+    if request.method == 'GET' and 'assigned' in request.GET:
+        projects = Person.objects.filter(reviewers=request.user)
 
     context ={
         'projects': projects,
@@ -263,6 +289,8 @@ def review(request, review_id):
 def projectreviewdetail(request, project_id):
     project = get_object_or_404(Person, pk=project_id)
     Display = ' '
+    if request.user.groups.filter(name__in=['Leads']).exists():
+        group = 'Leads'
 
     if request.method == 'GET' and 'approve' in request.GET:
         Person.objects.filter(id=project_id).update(status='Accepted')
@@ -428,6 +456,8 @@ def reviewdisplay(request):
     if request.method == 'GET' and 'allprojects' in request.GET:
         
         projects = Person.objects.all()
+    if request.method == 'GET' and 'assigned' in request.GET:
+        projects = Person.objects.filter(reviewers=request.user)
         
     context = {
         'projects' : projects

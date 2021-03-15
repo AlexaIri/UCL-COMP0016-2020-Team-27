@@ -118,6 +118,10 @@
                             </thead>
                             <tbody>
                             <div class = "text-center">
+                            <form method = "get">
+                            <button type="submit" name ="assigned" class="btn btn-info"> Projects Assigned to You </button>
+                            </form>
+                            
                             <a href="{% url 'export'  %}"><button type="button" class="btn btn-info">   <i class="fa fa-upload fa-xs"> </i> Export Data
                                  </button></a></div><br>
                               {% for project in projects %}
@@ -197,8 +201,13 @@
 
                                     <td>
                                         <div class="action">
-                                            <a href="#" class="text-dark mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
-                                            <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
+                                            {% if project.status == "Submitted"%}
+                                     <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
+                                     {%endif%}
+                                     {% if project.status == "Under Review"%}
+                                     <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
+                                     {%endif%}
+                                            
                                         </div>
                                     </td>
                                 </tr>

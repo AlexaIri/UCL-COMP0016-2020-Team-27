@@ -133,6 +133,7 @@
             <div class="row text-center py-5">
                 <div class="col ">
                     <div class="p-5">
+                    {%if group == "Leads"%}
                     
                     <p style="color:black">{{Display}}</p>
                         <h5 class="h5 text-muted">   <form method="GET">
@@ -141,7 +142,7 @@
                                 
                             </form> 
                              </h5>
-                        {% comment %} <h4>Approve This Project Proposal </h4> {% endcomment %}
+                        {% comment %} Approving projects {% endcomment %}
                         <div class="card" style="background-color:white;width:100%;height:100%;margin-left:0px; border-radius:0%; margin-top:0px;margin-bottom:0px; width:500px ">
              <div class="card-body" >
                                      <p style="color:black"> By approving this project, you acknowledge that it has successfully acquired all the mandatory and/or optional requirements. The sender of this project proposal will be soon notified via email and the matching process with university students for them to implement it will start.</p>
@@ -158,11 +159,13 @@
                                 
                             </form> 
                              </h5>
-                        {% comment %} <h4>Reject This Project Proposal </h4> {% endcomment %}
+                        {% comment %} Rejecting projects {% endcomment %}
                          <div class="card" style="background-color:white;width:95%;height:100%;margin-left:15px; border-radius:0%; margin-top:0px;margin-bottom:0px ">
              <div class="card-body" >
                         <p style="color:black">By rejecting this project, you acknowledge that it cannot move forward given the amount of missing data, inconsistent, incoherent and/or unaddressed parts and features, fact which has therefore diminished the overall quality of the project. The project proposal will be temporarily stored in a recycling container.</p>
-                    </div></div>
+                    </div>
+                    </div>
+                    {%endif%}
                     
                     </div>
                 </div>
@@ -181,6 +184,7 @@
                         x.style.visibility = 'visible';
                         }
                         </script>
+                        
                                   
 
                                           {% comment %} <div class="card-box task-detail" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') bottom right repeat-y;"> {% endcomment %}

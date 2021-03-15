@@ -55,7 +55,7 @@ circle::after {
  <script type="text/javascript" src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152197/smartwizard/jquery.smartWizard.min.js"></script>
   
   
-  {% comment %} <form method = "post" action = "/CFP_Portal/SubmissionPortal/"> {% endcomment %}
+
   <form method = "post" action = "/CFP_Portal/SubmissionPortal/" enctype="multipart/form-data">
   {% csrf_token %}
 
@@ -107,29 +107,24 @@ circle::after {
                              </p>
                              </hr> </hr>
 
-                             {% comment %} {{ form|crispy }} {% endcomment %}
+                             
                                  <div class="row">
                                      
-                                     {% comment %} <input name = "name" type="text" class="form-control" placeholder="First name" required>  {% endcomment %}
-                                     {% comment %} {{ form.name|as_crispy_field}}
-                                     
-                                     
-                                      {{ form.surname|as_crispy_field}} {% endcomment %}
-                                    
                                  </div>
+                                 <!-- section 1 details -->
                                   {{ form.name|as_crispy_field}}
                                      
                                      
-                                     {% comment %} <input name = "surname" type="text" class="form-control" placeholder="Surname" required>  {% endcomment %}
+                                   
                                       
                                       {{ form.title|as_crispy_field}}
                                  <div class="row mt-3">
                                      <div class="col-md-6"> 
-                                     {% comment %} <input name = "phone_number" type="text" class="form-control" placeholder="Phone number" required>  {% endcomment %}
+                                    
                                      {{ form.phone_number|as_crispy_field}}
                                      </div>
                                      <div class="col-md-6"> 
-                                     {% comment %} <input name = "email" type="text" class="form-control" placeholder="Email" required>  {% endcomment %}
+                                    
                                      {{ form.email|as_crispy_field}}
                                      </div>
                                  </div>
@@ -147,23 +142,20 @@ circle::after {
                              </p>
                              </hr> </hr>
 
-                             {% comment %} {{ form|crispy }} {% endcomment %}
-                                 
-                                    
-                                     {% comment %} <input name = "project_title" type="text" class="form-control" placeholder=" Project Title" required>  {% endcomment %}
+                             <!-- section 2 details -->
                                      {{ form.project_title|as_crispy_field}}
                                  
                                      
-                                     {% comment %} <input name = "summarized_abstract" type="text" class="form-control" placeholder="Summarized abstract" required>  {% endcomment %}
+                                     
                                      {{ form.summarised_abstract|as_crispy_field}}
                                      
-                                     {% comment %} <input name = "full_abstract" type="text" class="form-control" placeholder="Full abstract" required>  {% endcomment %}
+                                     
                                      {{ form.full_abstract|as_crispy_field}}
                                      
-                                     {% comment %} <input name = "expertiseskills" type="text" class="form-control" placeholder="Expertise and Skills" required> {% endcomment %}
+                                    
                                      {{ form.expertiseskills|as_crispy_field}}
                                       
-                                     {% comment %} <input name = "devices" type="text" class="form-control" placeholder="Devices" required>  {% endcomment %}
+                                    
                                      {{ form.devices|as_crispy_field}}
                                      {{form.NICEtier|as_crispy_field}}
 
@@ -187,21 +179,22 @@ circle::after {
 
                                  <div class="row">
                                      <div class="col-md-6"> 
-                                     {% comment %} <input type="text" class="form-control" placeholder="Card Number" required> {% endcomment %}
+                                     <!-- section 3 details -->
+                                     
                                       {{ form.project_complexity|as_crispy_field}}
                                       </div>
                                      <div class="col-md-6"> 
-                                     {% comment %} <input type="text" class="form-control" placeholder="Card Holder Name" required> {% endcomment %}
+                                    
                                       {{ form.source_type|as_crispy_field}}
                                       </div>
                                  </div>
                                  <div class="row mt-3">
                                      <div class="col-md-6"> 
-                                     {% comment %} <input type="text" class="form-control" placeholder="CVV" required>  {% endcomment %}
+                                     
                                       {{ form.ethics_form|as_crispy_field}}
                                      </div>
                                      <div class="col-md-6"> 
-                                     {% comment %} <input type="text" class="form-control" placeholder="Mobile Number" required>  {% endcomment %}
+                                     
                                       {{ form.launching_date|as_crispy_field}}
                                      </div>
                                  </div>
@@ -220,22 +213,18 @@ circle::after {
                              </hr> </hr>
 
 
-
-                             {% comment %} {{ form|crispy }} {% endcomment %}
-                                 
-                                     {% comment %} <input name = "name" type="text" class="form-control" placeholder="First name" required>  {% endcomment %}
+                                <!-- section 4 details -->
+                             
                                   {{ form.motivations|as_crispy_field}}
                                     
-                                     {% comment %} <input name = "surname" type="text" class="form-control" placeholder="Surname" required>  {% endcomment %}
+                                   
                                       {{ form.importance|as_crispy_field}}
 
                                       {{form.challenge|as_crispy_field}}
                                       {{form.evidence|as_crispy_field}}
                                       {{form.github|as_crispy_field}}
-                                     
-                                     {% comment %} <input name = "phone_number" type="text" class="form-control" placeholder="Phone number" required>  {% endcomment %}
-                                     
-
+                                      
+                        {% comment %} javascript for tags {% endcomment %}
                                       <div class="form-group">
                     <label>Tags</label>
                     <input type="text" data-role="tagsinput" class="form-control" name="tags">

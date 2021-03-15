@@ -21,6 +21,8 @@
     <style type="text/css">
 
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 </head>
 
 <body style="margin-top:-4px;  background:#fff;   background-image: url(https://startbootstrap.com/assets/img/overlay.svg), linear-gradient(45deg, black 0%, #0046B1 100%);">
@@ -243,9 +245,44 @@
                           <h5 class="h5" style="color:#0530A2"> GIT Link  </h5>
                         {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
                         <p style="color: black; text-align:justify"> {{project.git}} </p>
+                        
+
                                         </div>
                                     </td>
                                     </tr>
+                                    {%if group != "Submitters"%}
+                                    <tr style="background:#DBDCE0">
+                                        <td>
+
+                                        
+                                        <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
+                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                          <h5 class="h5" style="color:#0530A2"> Assign Reviewers </h5>
+                          {% for user in project.reviewers.all %}
+                            {{user.profile.full_name}}: {{user.email}}<br/>
+                        
+                            {% endfor %}
+                          <p style="color: black; text-align:justify"> </p>
+                        <form method ="post">
+                        {% csrf_token %}
+                        <select class="select_field_class" multiple="multiple" name="options" id="options">
+      <option value="">Enter the option</option>
+      {% for user in reviewers %}
+         <option value="{{ user.id}}"> {{user.profile.full_name}}: {{ user.email }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn btn-dark"name="reviewers" style="margin:5px"type="submit">Submit</button></div>
+
+    </form>
+
+
+<script> $('.select_field_class').select2( { placeholder: "Select here", maximumSelectionSize: 100  } ); </script>
+                        
+
+                                        </div>
+                                    </td>
+                                    </tr>
+                                    {%endif%}
 
                                    
                                 </tbody>

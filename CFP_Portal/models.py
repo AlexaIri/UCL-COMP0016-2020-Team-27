@@ -135,6 +135,7 @@ class Person(models.Model):
     user  = models.ForeignKey(User, related_name="user", on_delete=models.CASCADE, null=True)
     evidence = models.FileField(upload_to ='uploads/', blank=True) 
     github = models.URLField("github link",max_length = 200, blank=True) 
+    reviewers = models.ManyToManyField(User, unique=False, related_name='reviewers', blank=True)
 
     
     def __str__(self):
