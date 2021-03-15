@@ -195,45 +195,7 @@ def home(request):
    
     return render(request, 'CFP_Portal/home.html', context)
 
-@login_required
-@user_passes_test(is_reviewer)
-def about(request):
-    # context={
-        
-    # }
-    # return render(request, 'CFP_Portal/about.html', context)
-    if request.method == "POST":
-        
-        form = Proposal(request.POST)
-        if form.is_valid():
-            results = Person()
-            results.name = form.cleaned_data['name']
-            results.surname = form.cleaned_data['surname']
-            results.phone_number = form.cleaned_data['phone_number']
-            results.project_title = form.cleaned_data['project_title']
-            results.email = form.cleaned_data['email']
-            results.summarized_abstract = form.cleaned_data['summarized_abstract']
-            results.full_abstract = form.cleaned_data['full_abstract']
-            results.expertise_and_skills = form.cleaned_data['expertise_and_skills']
-            results.devices = form.cleaned_data['devices']
-            results.project_complexity = form.cleaned_data['project_complexity']
-            results.source_type = form.cleaned_data['source_type']
-            results.ethics_form = form.cleaned_data['ethics_form']
-            results.launching_date = form.cleaned_data['launching_date']
-            results.motivations = form.cleaned_data['motivations']
-            results.importance = form.cleaned_data['importance']
-            results.hashtags = form.cleaned_data['hashtags']
 
-            results.save()     
-        
-        
-        # return redirect('/CFP_Portal/SubmissionPortal/Step2')
-        return redirect('/CFP_Portal/')
-    
-
-    form = Proposal()
-    
-    return render(request, 'CFP_Portal/about.html', {"form": form})
 
 
 
@@ -612,7 +574,7 @@ def SubmissionPortal(request):
             project = form.save(commit=False)
             project.status = 'Submitted'
             project.department = user.profile.department
-            project.department = user.profile.organisation
+            project.organisation = user.profile.organisation
             project.user = user
             project.save()
             form.save_m2m()

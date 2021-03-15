@@ -25,7 +25,6 @@ from .views import (HomeProjectListView,
 urlpatterns = [
     path('', views.home, name = 'blog-home'),
     path('user/<str:username>', views.UserPostListView, name='user-posts'),
-    path('about/', views.about, name = 'blog-about'),
     path('displayOrganisations/', views.OrganisationListView , name= 'organisations'),
     path('reviews/', views.ReviewsListView , name= 'reviews'),
     path('trial/', views.Trial , name= 'trial'),
