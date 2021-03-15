@@ -297,6 +297,8 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Projects</th>
                                     <th scope="col">Launching Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Review Feedback</th>
         
                                 </tr>
                             </thead>
@@ -309,6 +311,17 @@
                                     <td>{{project.launching_date}}</td>
                                     <td>
                                         <span class="text-danger font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i> {{project.status}}</span>
+                                    </td>
+                                    <td>
+                                        <div class="action">
+                                            {% if project.status == "Submitted"%}
+                                     <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'reviewdetail' project.id %}">  Review Feedback </a>
+                                     {%endif%}
+                                     {% if project.status == "Under Review"%}
+                                     <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'reviewdetail' project.id %}">  Review Feedback </a>
+                                     {%endif%}
+                                            
+                                        </div>
                                     </td>
                                     
                                  

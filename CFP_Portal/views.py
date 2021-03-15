@@ -71,7 +71,6 @@ def projectdetail(request, pk):
 
     group = ''
     if request.user.groups.filter(name__in=['Submitters']).exists():
-        print("yes!!")
         group = 'Submitters'
     
     reviewers = User.objects.filter(groups__name__in=['Reviewers','Leads',])
@@ -242,14 +241,23 @@ def detail(request, project_id, review_id):
     return render(request, 'CFP_Portal/detail.html', {'project': project, 'review':review, 'reviews': Review.objects.filter(project_id=project_id)})
 
 @login_required
-@user_passes_test(is_reviewer)
+@user_passes_test(is_user)
 def review(request, review_id):
     # project = get_object_or_404(Person, pk=project_id)
+    group = ''
+    if request.user.groups.filter(name__in=['Submitters']).exists():
+        group = 'Submitters'
+    
+    context = {
+        'review': review,
+        'group': group
+    }
+        
     review = get_object_or_404(Review, pk = review_id)
-    return render(request, 'CFP_Portal/review.html', {'review': review})
+    return render(request, 'CFP_Portal/review.html', context)
 
 @login_required
-@user_passes_test(is_reviewer)
+@user_passes_test(is_user)
 def projectreviewdetail(request, project_id):
     project = get_object_or_404(Person, pk=project_id)
     Display = ' '
@@ -263,17 +271,22 @@ def projectreviewdetail(request, project_id):
         Display = 'Project has been successfully accepeted'
     
     if request.method == 'GET' and 'reject' in request.GET:
-        print("hello!")
+        
         Person.objects.filter(id=project_id).update(status='Rejected')
         rejectedproject = RejectedProjects(project=project)
         rejectedproject.save()
         Display = 'Project has been successfully rejected'
+    
+    group = ''
+    if request.user.groups.filter(name__in=['Submitters']).exists():
+        group = 'Submitters'
         
         
     context = {
         'project': project,
         'reviews': Review.objects.filter(project_id=project_id),
-        'Display' : Display
+        'Display' : Display,
+        'group' : group
     }
 
     return render(request, 'CFP_Portal/reviewdetail.html', context)
