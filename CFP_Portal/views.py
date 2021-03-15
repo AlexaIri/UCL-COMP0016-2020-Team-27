@@ -202,7 +202,9 @@ def home(request):
 @user_passes_test(is_reviewer)
 def projectgrid(request):
       #template = loader.get_template('CFP_Portal/index.html')
-    projects = Person.objects.all()
+    projects = Person.objects.order_by('-submission_date')
+   
+    
 
     myFilter = ProjectFilter(request.GET, queryset = projects)
     projects = myFilter.qs
@@ -211,16 +213,16 @@ def projectgrid(request):
     discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation')
+        projects = Person.objects.filter(project_complexity='Innovation').order_by('-submission_date')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery')
+        projects = Person.objects.filter(project_complexity='Discovery').order_by('-submission_date')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding')
+       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-submission_date')
     
     if request.method == 'GET' and 'assigned' in request.GET:
-        projects = Person.objects.filter(reviewers=request.user)
+        projects = Person.objects.filter(reviewers=request.user).order_by('-submission_date')
 
     context ={
         'projects': projects,
@@ -295,7 +297,7 @@ def projectreviewdetail(request, project_id):
 @user_passes_test(is_reviewer)
 def projectlistview(request):
     #template = loader.get_template('CFP_Portal/index.html')
-    projects = Person.objects.all()
+    projects = Person.objects.order_by('-submission_date')
 
     myFilter = ProjectFilter(request.GET, queryset = projects)
     projects = myFilter.qs
@@ -305,13 +307,13 @@ def projectlistview(request):
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation')
+        projects = Person.objects.filter(project_complexity='Innovation').order_by('-submission_date')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery')
+        projects = Person.objects.filter(project_complexity='Discovery').order_by('-submission_date')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding')
+       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-submission_date')
 
     context ={
         'projects': projects,
@@ -328,7 +330,7 @@ def projectlistview(request):
 @user_passes_test(is_reviewer)
 def rejectedprojects(request):
     #template = loader.get_template('CFP_Portal/index.html')
-    rejectedprojects = RejectedProjects.objects.all()
+    rejectedprojects = RejectedProjects.objects.order_by('-date_accepted')
 
     myFilter = ProjectFilter(request.GET, queryset = rejectedprojects)
     projects = myFilter.qs
@@ -338,13 +340,13 @@ def rejectedprojects(request):
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation')
+        projects = Person.objects.filter(project_complexity='Innovation').order_by('-date_accepted')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery')
+        projects = Person.objects.filter(project_complexity='Discovery').order_by('-date_accepted')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding')
+       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_accepted')
 
     context ={
         'rejectedprojects': rejectedprojects,
@@ -361,7 +363,7 @@ def rejectedprojects(request):
 @user_passes_test(is_reviewer)
 def acceptedprojects(request):
     #template = loader.get_template('CFP_Portal/index.html')
-    acceptedprojects = AcceptedProjects.objects.all()
+    acceptedprojects = AcceptedProjects.objects.order_by('-date_accepted')
 
     myFilter = ProjectFilter(request.GET, queryset = acceptedprojects)
     projects = myFilter.qs
@@ -371,13 +373,13 @@ def acceptedprojects(request):
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation')
+        projects = Person.objects.filter(project_complexity='Innovation').order_by('-date_accepted')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery')
+        projects = Person.objects.filter(project_complexity='Discovery').order_by('-date_accepted')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding')
+       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_accepted')
 
     if request.method == 'GET' and 'approve' in request.GET:
         response = HttpResponse(content_type ='text/csv')
@@ -424,17 +426,16 @@ class  ReviewsDisplayListView(ListView):
 @login_required
 @user_passes_test(is_reviewer)
 def reviewdisplay(request):
-    projects = Person.objects.all()
+    projects = Person.objects.filter(reviewers=request.user).order_by('-submission_date')
    
     if request.method == 'GET' and 'projects' in request.GET:
-        projects = Person.objects.filter(status__in=['Submitted','Under Review'])
-      
-
+        projects = Person.objects.filter(reviewers=request.user, status__in=['Submitted','Under Review']).order_by('-submission_date')
+ 
     if request.method == 'GET' and 'allprojects' in request.GET:
-        
-        projects = Person.objects.all()
+        projects = Person.objects.order_by('-submission_date')
+
     if request.method == 'GET' and 'assigned' in request.GET:
-        projects = Person.objects.filter(reviewers=request.user)
+        projects = Person.objects.filter(reviewers=request.user).order_by('-submission_date')
         
     context = {
         'projects' : projects
