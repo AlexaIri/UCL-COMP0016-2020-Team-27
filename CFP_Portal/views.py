@@ -295,7 +295,20 @@ def projectreviewdetail(request, project_id):
 @user_passes_test(is_reviewer)
 def projectlistview(request):
     #template = loader.get_template('CFP_Portal/index.html')
+
+    
     projects = Person.objects.all()
+    page_projects = Person.objects.all()
+
+    # paginator = Paginator(page_projects, 10)
+    # page = request.GET.get('page', 1)
+    # try:
+    #     page_projects = paginator.page(page)
+    # except PageNotAnInteger:
+    #     page_projects = paginator.page(1)
+    # except EmptyPage:
+    #     page_projects = paginator.page(paginator.num_pages)
+
 
     myFilter = ProjectFilter(request.GET, queryset = projects)
     projects = myFilter.qs
@@ -363,6 +376,18 @@ def acceptedprojects(request):
     #template = loader.get_template('CFP_Portal/index.html')
     acceptedprojects = AcceptedProjects.objects.all()
 
+
+    paginator = Paginator(acceptedprojects, 10)
+    page = request.GET.get('page', 1)
+    try:
+        acceptedprojects_page = paginator.get_page(page)
+    except PageNotAnInteger:
+        acceptedprojects_page = paginator.get_page(1)
+    except EmptyPage:
+        acceptedprojects_page = paginator.get_page(paginator.num_pages)
+
+
+
     myFilter = ProjectFilter(request.GET, queryset = acceptedprojects)
     projects = myFilter.qs
     innovationnumber = AcceptedProjects.objects.filter(project__project_complexity='Innovation').count()
@@ -393,7 +418,8 @@ def acceptedprojects(request):
         'myFilter': myFilter,
         'innovationumber': innovationnumber,
         'discoverynumber': discoverynumber,
-        'scaffoldingnumber': scaffoldingnumber
+        'scaffoldingnumber': scaffoldingnumber,
+        'acceptedprojects_page': acceptedprojects_page
     }
     
     #return HttpResponse(template.render(context, request))

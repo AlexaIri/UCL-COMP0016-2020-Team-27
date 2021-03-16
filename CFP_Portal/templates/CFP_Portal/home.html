@@ -94,6 +94,8 @@
                     <form method="get">
             
 		    <button class="btn btn-primary" name="allprojects" style="margin:0px" type="submit" > All projects </button>
+
+            
               </form>
                 </div>
             </div>
@@ -118,7 +120,7 @@
                                     <th scope="col">Status</th>
                                     
                                     <th scope="col">Progress</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col"style="text-align:center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -205,6 +207,7 @@
                                     </td>
 
                                     <td>
+                                    <div class="text-center">
                                         <div class="action">
                                             {% if project.status == "Submitted"%}
                                      <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
@@ -213,7 +216,7 @@
                                      <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
                                      {%endif%}
                                             
-                                        </div>
+                                        </div></div>
                                     </td>
                                 </tr>
 
@@ -340,17 +343,7 @@
         
     </div>
    
-  {% comment %} <ul class="pagination">
-
   
-    {% if all_projects.has_previous %}
-    <li><a href="?page={{ all_projects.previous_page_number }}&order_by={{ order_by }}">previous</a></li>
-    {% endif %}
-    <li class="disabled"><a>Page {{ all_projects.number }} of {{ all_projects.paginator.num_pages }}</a></li>
-    {% if all_projects.has_next %}
-    <li><a href="?page={{ all_projects.next_page_number }}&order_by={{ order_by }}">next</a>next</a></li>
-    {% endif %}
-</ul> {% endcomment %}
 <div class = "text-right">
     {% if projects.has_other_pages %}
     <div class="btn-group" role="group">
@@ -366,22 +359,17 @@
 
   {% for i in projects.paginator.page_range %}
     {% if projects.number == i %}
-       {% comment %} <li class="active"><span>{{ i }} <span class="sr-only">(current)</span>  </span></li> {% endcomment %}
        <a class="btn btn-info mb-4" href="?page={{ i }}">{{ i }}</a>
 
     
-     {% comment %} {% else %} {% endcomment %}
-    {% comment %} <li><a href="?page={{ i }}">{{ i }}</a></li>  {% endcomment %}
      {% elif i > projects.number|add:'-3' and i < projects.number|add:'3' %}
           <a class="btn btn-outline-info mb-4" href="?page={{ i }}">{{ i }}</a>
   {% endif %}
 {% endfor %}
 
 {% if projects.has_next %}
-  {% comment %} <li><a href="?page={{ projects.next_page_number }}">&raquo;</a></li> {% endcomment %}
           <a class="btn btn-info mb-4" href="?page={{ projects.next_page_number }}">Next</a>
      {% else %}
-     {% comment %} <li class="disabled"><span>&raquo;</span></li> {% endcomment %}
     <div class="disabled">
             <a class="btn btn-info mb-4 disabled" >Next</a></div>
     {% endif %}
@@ -396,28 +384,7 @@
     <!-- end row -->
 </div>
 
-   {% comment %} {% if is_paginated %}
-
-      {% if page_obj.has_previous %}
-        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
-      {% endif %}
-
-      {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
-      {% endfor %}
-
-      {% if page_obj.has_next %}
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
-        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-      {% endif %}
-
-    {% endif %} {% endcomment %}
-
+   
 
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

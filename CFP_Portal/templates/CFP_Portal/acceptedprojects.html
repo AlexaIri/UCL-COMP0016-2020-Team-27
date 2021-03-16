@@ -149,6 +149,46 @@
                               {% endfor %}
                 
                
+<div class = "text-right">
+    {% if acceptedprojects_page.has_other_pages %}
+    <div class="btn-group" role="group">
+        <a class="btn btn-info mb-4" href="?page=1">First</a>
+
+  {% if acceptedprojects_page.has_previous %}
+        <a class="btn btn-info mb-4" href="?page={{ acceptedprojects_page.previous_page_number }}">Previous</a>
+    {% comment %} <li><a href="?page={{ projects.previous_page_number }}">&laquo;</a></li> {% endcomment %}
+  {% else %}
+    <div class="disabled"> <a class="btn btn-info mb-4 disabled"  >Previous</a></div>
+
+  {% endif %}
+
+  {% for i in acceptedprojects_page.paginator.page_range %}
+    {% if acceptedprojects_page.number == i %}
+       <a class="btn btn-info mb-4" href="?page={{ i }}">{{ i }}</a>
+
+    
+     {% elif i > acceptedprojects_page.number|add:'-3' and i < acceptedprojects_page.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ i }}">{{ i }}</a>
+  {% endif %}
+{% endfor %}
+
+{% if acceptedprojects_page.has_next %}
+          <a class="btn btn-info mb-4" href="?page={{ acceptedprojects_page.next_page_number }}">Next</a>
+     {% else %}
+    <div class="disabled">
+            <a class="btn btn-info mb-4 disabled" >Next</a></div>
+    {% endif %}
+    
+    
+     <a class="btn btn-info mb-4" href="?page={{ acceptedprojects_page.paginator.num_pages }}">Last</a>
+</div>
+
+ {% endif %}
+     </div>
+    
+ 
+
+
              
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
