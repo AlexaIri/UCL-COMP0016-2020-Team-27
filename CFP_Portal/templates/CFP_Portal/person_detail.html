@@ -248,6 +248,7 @@
                                         <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
                          {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
                           <h5 class="h5" style="color:#0530A2"> Assign Reviewers </h5>
+                           <p class='text-muted'>Do not assign the same reviewer multiple times. Otherwise, you will get an error.</p>
                           {% for user in project.reviewers.all %}
                             {{user.profile.full_name}}: {{user.email}}<br/>
                         
