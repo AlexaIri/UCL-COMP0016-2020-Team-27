@@ -270,17 +270,7 @@ class RejectedProjects(models.Model):
     def __str__(self):
         return '%s' % (self.project.project_title)
     
-# class UnderReviewProjects(models.Model):
-#     project = models.OneToOneField(
-#         Person,
-#         related_name="project",
-#         on_delete=models.CASCADE,
-#         primary_key=True,
-#     )
-#     date_underreview = models.DateTimeField(default = timezone.now)
-    
-#     def __str__(self):
-#         return '%s' % (self.project.project_title)
+
 
 class UnderReviewProjects(models.Model):
     project = models.OneToOneField(
