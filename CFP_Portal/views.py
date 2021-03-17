@@ -78,7 +78,7 @@ def about(request):
 
 
 @login_required
-@user_passes_test(is_reviewer)
+@user_passes_test(is_user)
 def viewdetailsproject(request):
 
     project = Person.objects.latest('id')
@@ -287,6 +287,8 @@ def review(request, review_id):
 def projectreviewdetail(request, project_id):
     project = get_object_or_404(Person, pk=project_id)
     Display = ' '
+    group = ''
+  
     if request.user.groups.filter(name__in=['Approvers']).exists():
         group = 'Approvers'
 
@@ -303,7 +305,7 @@ def projectreviewdetail(request, project_id):
         rejectedproject.save()
         Display = 'Project has been successfully rejected'
     
-    group = ''
+   
     if request.user.groups.filter(name__in=['Submitters']).exists():
         group = 'Submitters'
         
