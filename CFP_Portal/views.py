@@ -26,12 +26,12 @@ def has_group(user, group_name):
 
 def is_user(user):
     
-    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Submitters','Reviewers','Leads']).exists()
+    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Submitters','Reviewers','Approvers']).exists()
     # print(user.groups)
 
 def is_reviewer(user):
     
-    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Reviewers','Leads']).exists()
+    return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Reviewers','Approvers']).exists()
 
 def is_submitter(user):
     return user.groups.filter(name__in=['Submitters']).exists()
@@ -40,7 +40,7 @@ def is_submitter(user):
 
 def is_lead(user):  
     # print(user.groups)
-    return  user.is_superuser or user.is_staff or user.groups.filter(name__in=['Leads']).exists()
+    return  user.is_superuser or user.is_staff or user.groups.filter(name__in=['Approvers']).exists()
 
 def export(request):
     response = HttpResponse(content_type ='text/csv')
@@ -73,7 +73,7 @@ def projectdetail(request, pk):
     if request.user.groups.filter(name__in=['Submitters']).exists():
         group = 'Submitters'
     
-    reviewers = User.objects.filter(groups__name__in=['Reviewers','Leads',])
+    reviewers = User.objects.filter(groups__name__in=['Reviewers','Approvers',])
     #reviewers = User.objects.filter(groups__name='Reviewers')
 
     if request.method == 'POST' and 'comment' in request.POST:
@@ -132,7 +132,7 @@ def markprojectdetail(request, pk):
 @user_passes_test(is_user)
 def home(request):
     order_by = request.GET.get('order_by')
-    projects = Person.objects.all()
+    projects = Person.objects.order_by('-submission_date')
 
     
     paginator = Paginator(projects, 10)
@@ -160,7 +160,7 @@ def home(request):
     if 'search' in request.GET:
         
         search_term = request.GET['search']
-        projects = Person.objects.all().filter(project_title__icontains=search_term)
+        projects = Person.objects.all().filter(project_title__icontains=search_term).order_by('-submission_date')
     
     
          
@@ -202,7 +202,9 @@ def home(request):
 @user_passes_test(is_reviewer)
 def projectgrid(request):
       #template = loader.get_template('CFP_Portal/index.html')
-    projects = Person.objects.all()
+    projects = Person.objects.order_by('-submission_date')
+   
+    
 
     myFilter = ProjectFilter(request.GET, queryset = projects)
     projects = myFilter.qs
@@ -211,16 +213,16 @@ def projectgrid(request):
     discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation')
+        projects = Person.objects.filter(project_complexity='Innovation').order_by('-submission_date')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery')
+        projects = Person.objects.filter(project_complexity='Discovery').order_by('-submission_date')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding')
+       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-submission_date')
     
     if request.method == 'GET' and 'assigned' in request.GET:
-        projects = Person.objects.filter(reviewers=request.user)
+        projects = Person.objects.filter(reviewers=request.user).order_by('-submission_date')
 
     context ={
         'projects': projects,
@@ -248,12 +250,13 @@ def review(request, review_id):
     if request.user.groups.filter(name__in=['Submitters']).exists():
         group = 'Submitters'
     
+    review = get_object_or_404(Review, pk = review_id)
     context = {
         'review': review,
         'group': group
     }
         
-    review = get_object_or_404(Review, pk = review_id)
+    
     return render(request, 'CFP_Portal/review.html', context)
 
 @login_required
@@ -261,8 +264,8 @@ def review(request, review_id):
 def projectreviewdetail(request, project_id):
     project = get_object_or_404(Person, pk=project_id)
     Display = ' '
-    if request.user.groups.filter(name__in=['Leads']).exists():
-        group = 'Leads'
+    if request.user.groups.filter(name__in=['Approvers']).exists():
+        group = 'Approvers'
 
     if request.method == 'GET' and 'approve' in request.GET:
         Person.objects.filter(id=project_id).update(status='Accepted')
@@ -295,6 +298,7 @@ def projectreviewdetail(request, project_id):
 @user_passes_test(is_reviewer)
 def projectlistview(request):
     #template = loader.get_template('CFP_Portal/index.html')
+<<<<<<< HEAD
 
     
     projects = Person.objects.all()
@@ -309,6 +313,9 @@ def projectlistview(request):
     # except EmptyPage:
     #     page_projects = paginator.page(paginator.num_pages)
 
+=======
+    projects = Person.objects.order_by('-submission_date')
+>>>>>>> 086ac1ce38e6170c54dc6e7de2d05a85a2baa4b8
 
     myFilter = ProjectFilter(request.GET, queryset = projects)
     projects = myFilter.qs
@@ -318,13 +325,13 @@ def projectlistview(request):
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation')
+        projects = Person.objects.filter(project_complexity='Innovation').order_by('-submission_date')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery')
+        projects = Person.objects.filter(project_complexity='Discovery').order_by('-submission_date')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding')
+       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-submission_date')
 
     context ={
         'projects': projects,
@@ -341,7 +348,7 @@ def projectlistview(request):
 @user_passes_test(is_reviewer)
 def rejectedprojects(request):
     #template = loader.get_template('CFP_Portal/index.html')
-    rejectedprojects = RejectedProjects.objects.all()
+    rejectedprojects = RejectedProjects.objects.order_by('-date_accepted')
 
     myFilter = ProjectFilter(request.GET, queryset = rejectedprojects)
     projects = myFilter.qs
@@ -351,13 +358,13 @@ def rejectedprojects(request):
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation')
+        projects = Person.objects.filter(project_complexity='Innovation').order_by('-date_accepted')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery')
+        projects = Person.objects.filter(project_complexity='Discovery').order_by('-date_accepted')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding')
+       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_accepted')
 
     context ={
         'rejectedprojects': rejectedprojects,
@@ -374,7 +381,7 @@ def rejectedprojects(request):
 @user_passes_test(is_reviewer)
 def acceptedprojects(request):
     #template = loader.get_template('CFP_Portal/index.html')
-    acceptedprojects = AcceptedProjects.objects.all()
+    acceptedprojects = AcceptedProjects.objects.order_by('-date_accepted')
 
 
     paginator = Paginator(acceptedprojects, 10)
@@ -396,13 +403,13 @@ def acceptedprojects(request):
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation')
+        projects = Person.objects.filter(project_complexity='Innovation').order_by('-date_accepted')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery')
+        projects = Person.objects.filter(project_complexity='Discovery').order_by('-date_accepted')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding')
+       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_accepted')
 
     if request.method == 'GET' and 'approve' in request.GET:
         response = HttpResponse(content_type ='text/csv')
@@ -450,17 +457,16 @@ class  ReviewsDisplayListView(ListView):
 @login_required
 @user_passes_test(is_reviewer)
 def reviewdisplay(request):
-    projects = Person.objects.all()
+    projects = Person.objects.filter(reviewers=request.user).order_by('-submission_date')
    
     if request.method == 'GET' and 'projects' in request.GET:
-        projects = Person.objects.filter(status__in=['Submitted','Under Review'])
-      
-
+        projects = Person.objects.filter(reviewers=request.user, status__in=['Submitted','Under Review']).order_by('-submission_date')
+ 
     if request.method == 'GET' and 'allprojects' in request.GET:
-        
-        projects = Person.objects.all()
+        projects = Person.objects.order_by('-submission_date')
+
     if request.method == 'GET' and 'assigned' in request.GET:
-        projects = Person.objects.filter(reviewers=request.user)
+        projects = Person.objects.filter(reviewers=request.user).order_by('-submission_date')
         
     context = {
         'projects' : projects
@@ -492,8 +498,8 @@ def UserDisplay(request):
         title = 'Submitters'
     
     if request.method == 'GET' and 'leads' in request.GET:
-        users = User.objects.filter(groups__name='Leads')
-        title = 'Leads'
+        users = User.objects.filter(groups__name='Approvers')
+        title = 'Approvers'
    
     if request.method == 'GET' and 'allusers' in request.GET:
         users = User.objects.all()

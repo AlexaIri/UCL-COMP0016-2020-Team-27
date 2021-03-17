@@ -107,8 +107,7 @@ class Person(models.Model):
         ('Rejected', 'Rejected'),
         ('Under Review', 'Under Review'),
         ('Submitted', 'Submitted'),
-        ('Paused', 'Paused'),
-        ('Reviewed', 'Reviewed')
+        ('Resubmit', 'Resubmit'),
 
     )
 

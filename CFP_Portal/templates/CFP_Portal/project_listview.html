@@ -210,7 +210,7 @@
                                 <tr>
                                     <th scope="col">Id</th>
                                     <th scope="col">Projects</th>
-                                    <th scope="col">Launching Date</th>
+                                    <th scope="col">Submission Date</th>
                                     <th scope="col">Status</th>
                                 
                                     <th scope="col">Project Complexity</th>
@@ -225,7 +225,7 @@
                                     <tr>
                                     <th scope="row">{{project.id}}</th>
                                     <td ><a href="{% url 'project-detail' project.id %}"> {{project.project_title}} </a></td>
-                                    <td>{{project.launching_date}}</td>
+                                    <td>{{project.submission_date}}</td>
                                     <td>
                                        {% if project.status == "Rejected"%}
                             <span class="badge badge-danger"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{project.status}} </span>
