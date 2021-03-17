@@ -351,12 +351,20 @@
                         <p> You can click below on each attachment to view the content of the evidence uploaded. </p>
                         
                         <div class="files-list" style="text-align:center">
-                            <div class="file-box">
+                            
                             {% comment %} <h6> {{ project.evidence.url|slice:":-5"}}</h6> {% endcomment %}
-
+                            {% if project.evidence %}
+                            <div class="file-box">
                                <a href="{{ project.evidence.url }}"><img src="/media/attaching.jpg" class="img-responsive img-thumbnail" width="80px" height="80px" alt="attached-img"></a>
                                 <p class="font-13 mb-1 text-muted"><small>{{project.evidence}}</small></p>
-                            </div>
+                                </div>
+                            {%else%}
+                            <div class="file-box">
+                               <a href="#"><img src="/media/attaching.jpg" class="img-responsive img-thumbnail" width="80px" height="80px" alt="attached-img"></a>
+                                <p class="font-13 mb-1 text-muted"><small>{{project.evidence}}</small></p>
+                                </div>
+                            {% endif %}
+                            
                             {% comment %} <div class="file-box">
                                 <a href=""><img src="/media/word.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
                                 <p class="font-13 mb-1 text-muted"><small>Attachment 2</small></p>
