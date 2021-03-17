@@ -97,3 +97,17 @@ class ReviewForm(forms.Form):
     scalability_points = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
     resilience_points = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
     #RAGlevel = forms.ChoiceField(choices=RAG, widget=forms.RadioSelect)
+
+class Feedback(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'first'}))
+    # first_name = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Wendy '}), required=False)
+    
+    # surname = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Appleseed '}), required=False)
+    
+    # phone = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': '(021) 456 987'}), required=False)
+    
+    # message = forms.CharField(max_length=2000, widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Type in your comment...'}))
+
+
+    def __str__(self):
+        return self.email

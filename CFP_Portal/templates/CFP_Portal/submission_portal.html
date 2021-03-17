@@ -7,6 +7,7 @@
     <html lang="en">
         <head>
             <meta charset='utf-8'>
+            <title> Submission Portal </title>
             <meta name='viewport' content='width=device-width, initial-scale=1'>
             <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' rel='stylesheet'>
            
@@ -66,7 +67,7 @@ circle::after {
                             <div class="container" >
                             </circle>
 
-     <div class="row d-flex justify-content-center mt-200" > <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal"> Start New Application </button> </div> <!-- Modal -->
+     <div class="row d-flex justify-content-center mt-200" > <button type="button" class="btn btn-dark btn-lg" data-toggle="modal" data-target="#exampleModal"> Start the Process <br><br>(Send a new application for a project proposal) </button> </div> <!-- Modal -->
        <div class="col-xs-12  emphasis  mt-1 mb-1">
       <div class="row d-flex justify-content-center mt-200" ><a href ="{% url 'blog-home' %}"> <button type="button" class="btn btn-dark btn-xs  mt-1 mb-1 ml-1"> 
                               
@@ -243,13 +244,22 @@ circle::after {
 
                              <div id="step-5" class="">
                                  <div class="row">
-                                
+                                    {% if message %}
+
+                                <center>
+                                <h2>Thank you for your submission! </h2>
+                                <p> We received your project proposal and sent you a confirmation email! </p>
+                                </center>
+
+                                {% else %}
                                      <div class="col-md-12" >  <div class = "text-center">
-                                     <span style="width:100%;text-align:center;align:center">  Submit your project proposal after you have ensured that all the mandatory fields are filled out.</span>
+                                     <span style="width:100%;text-align:center;align:center">  Submit your project proposal after you have ensured that all the mandatory fields are filled out. </span>
+                                     <span style="width:100%;text-align:center;align:center"> After you have submitted it, you will be automatically redirected towards the home page. You will also receive a confirmation email. </span>
                                      </div></div>
                                        <div class="col-md-12"> 
                                      {% comment %} <span>Thank you for submitting your project! We will send you a confirmation email. We will review your details and reach you back soon.</span> {% endcomment %}
-                                   <div class ="text-center"> <a href=""{% url 'blog-home' %}"> <button type="submit" class="btn btn-outline-success" > Submit</button> </a></div></div>
+                                   <div class ="text-center"> <a href="{% url 'viewdetailsproject' %}"> <button type="submit" class="btn btn-outline-success" > Submit</button> </a></div></div>
+                                 {% endif %}
                                  </div>
                              </div>
                          </div>

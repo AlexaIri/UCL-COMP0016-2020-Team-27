@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.conf import settings
+# from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 
 from .views import (HomeProjectListView, 
@@ -26,7 +27,10 @@ urlpatterns = [
     path('user/<str:username>', views.UserPostListView, name='user-posts'),
     path('displayOrganisations/', views.OrganisationListView , name= 'organisations'),
     path('reviews/', views.ReviewsListView , name= 'reviews'),
-    path('trial/', views.Trial , name= 'trial'),
+    path('trial/', views.trial , name= 'trial'),
+    path('viewdetailsproject/', views.viewdetailsproject , name= 'viewdetailsproject'),
+    path('about/', views.about , name= 'about'),
+    path('leave/feedback/', views.feedback , name= 'feedback'),
     path('reviewDisplay/', views.reviewdisplay , name= 'review-display'), #review grid
 
     path('post/<int:pk>/', views.PostDetailView, name = 'post-detail'), # feedback sheet
@@ -53,6 +57,7 @@ urlpatterns = [
     path('projects/', views.projectgrid, name = 'projects' ),
     path('projects/list', views.projectlistview, name = 'projectslist' ),
     path('acceptedprojects', views.acceptedprojects, name = 'acceptedprojects' ),
+    path('underreviewprojects', views.underreviewprojects, name = 'underreviewprojects' ),
     path('rejectedprojects', views.rejectedprojects, name = 'rejectedprojects' ),
 
 
@@ -64,3 +69,7 @@ urlpatterns = [
     
    
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+# urlpatterns = patterns('',
+#     (r'^', include('CFP_Portal.urls')),
+# ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

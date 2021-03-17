@@ -151,11 +151,11 @@ class Review(models.Model):
         return reverse("reviewdetail", kwargs={"pk": self.pk})
     
     # review_date= models.DateTimeField(auto_now_add=True)
+    # reviewDate = models.DateTimeField(auto_now_add=True)
     project = models.ForeignKey(Person, related_name='reviews',blank=True, null=True, on_delete=models.CASCADE)
     review_body = models.CharField(max_length = 5000, default = "",  null=True)
     reviewer_name = models.CharField("reviewer name", max_length=130, default = "",  null=True)
     reviewer_surname = models.CharField("reviewer surname", max_length=130, default = "",  null=True)
-   
     #phone_number = PhoneNumberField(null=False, blank=False, unique=True)
     reviewer_email = models.EmailField("reviewer email", max_length=130, default = "",  null=True)
 
@@ -235,8 +235,6 @@ class Comment(models.Model):
     def __str__(self):
         return '%s' % (self.project.project_title)
 
-
-
 class Post(models.Model):
     def __str__(self):
         return self.title
@@ -248,8 +246,6 @@ class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default = timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
 
 class AcceptedProjects(models.Model):
     project = models.OneToOneField(
@@ -274,3 +270,24 @@ class RejectedProjects(models.Model):
     def __str__(self):
         return '%s' % (self.project.project_title)
     
+# class UnderReviewProjects(models.Model):
+#     project = models.OneToOneField(
+#         Person,
+#         related_name="project",
+#         on_delete=models.CASCADE,
+#         primary_key=True,
+#     )
+#     date_underreview = models.DateTimeField(default = timezone.now)
+    
+#     def __str__(self):
+#         return '%s' % (self.project.project_title)
+
+class UnderReviewProjects(models.Model):
+    project = models.OneToOneField(
+        Person, 
+        on_delete= models.CASCADE,
+        primary_key = True,
+    )
+    date_under_review = models.DateTimeField(default = timezone.now)
+    def __str__(self):
+        return '%s' % (self.project.project_title)

@@ -31,6 +31,9 @@
                 <legend class="border-bottom mb-4">Log In</legend><br><br>
                 {{ form|crispy }}
             </fieldset>
+             <small class="text-muted">
+               <a class="ml-2" href="{% url 'password_reset' %}">Forgot Your Password? </a>
+            </small>
             <div class ="text-center">
             <div class="form-group"><br><br>
                 <button class="btn btn-outline-dark " style="width:30%;align:center" type="submit">Login</button>
@@ -41,6 +44,8 @@
             <small class="text-muted">
                 Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up</a>
             </small>
+            <br>
+            
         </div>
     </div>
     </div></div></div>

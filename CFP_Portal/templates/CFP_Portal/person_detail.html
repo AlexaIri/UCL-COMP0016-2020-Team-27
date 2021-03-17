@@ -211,7 +211,7 @@
                                     </td>
                                     </tr>
 
-                                    <tr style="background:white">
+                                    <tr style="background:#DBDCE0">
                                         <td>
 
                                         
@@ -219,12 +219,12 @@
                          {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
                           <h5 class="h5" style="color:#0530A2"> Github </h5>
                         {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
-                        <p style="color: black; text-align:justify"> <a href="url">{{project.github}}</a> </p>
+                        <p style="color: black; text-align:justify"> <a href="{{ project.github }}">{{project.github}}</a> </p>
                                         </div>
                                     </td>
                                     </tr>
 
-                                    <tr style="background:#DBDCE0">
+                                    <tr style="background:white">
                                         <td>
 
                                         
@@ -236,20 +236,10 @@
                                         </div>
                                     </td>
                                     </tr>
-                                     <tr style="background:white">
-                                        <td>
 
-                                        
-                                        <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
-                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
-                          <h5 class="h5" style="color:#0530A2"> GIT Link  </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
-                        <p style="color: black; text-align:justify"> {{project.git}} </p>
-                        
-
-                                        </div>
-                                    </td>
-                                    </tr>
+                      
+                          
+                               
                                     {%if group != "Submitters"%}
                                     <tr style="background:#DBDCE0">
                                         <td>
@@ -340,7 +330,7 @@
                     
                     <div class="row">
                           
-                       <div class="card" style="background-color:#DBDCE0">
+                       {% comment %} <div class="card" style="background-color:#DBDCE0">
              <div class="card-body">
                     <div class="assign-team mt-4">
                         <h5 class="m-b-5" style="color:black;text-align:center">Assign to</h5>
@@ -352,32 +342,35 @@
                             <a href="#"><span class="add-new-plus"><i class="fa fa-plus"></i></span></a></div>
              
                     </div></div>
-                    </div>
-
+                    </div> {% endcomment %}
+<center>
                     <div class="card" style="background-color:#DBDCE0;" text-center>
              <div class="card-body" >
                     <div class="attached-files mt-4">
-                        <h5 class="" style="color:black; text-align:center">Attached Files</h5>
+                        <h5 class="" style="color:black; text-align:center">Attached Files</h5><br>
+                        <p> You can click below on each attachment to view the content of the evidence uploaded. </p>
                         
                         <div class="files-list" style="text-align:center">
                             <div class="file-box">
-                                <a href=""><img src="/media/excel.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
-                                <p class="font-13 mb-1 text-muted"><small>Attachment 1</small></p>
+                            {% comment %} <h6> {{ project.evidence.url|slice:":-5"}}</h6> {% endcomment %}
+
+                               <a href="{{ project.evidence.url }}"><img src="/media/attaching.jpg" class="img-responsive img-thumbnail" width="80px" height="80px" alt="attached-img"></a>
+                                <p class="font-13 mb-1 text-muted"><small>{{project.evidence}}</small></p>
                             </div>
-                            <div class="file-box">
+                            {% comment %} <div class="file-box">
                                 <a href=""><img src="/media/word.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
                                 <p class="font-13 mb-1 text-muted"><small>Attachment 2</small></p>
                             </div>
                             <div class="file-box">
                                 <a href=""><img src="/media/pptx.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
                                 <p class="font-13 mb-1 text-muted"><small>Attachment 3</small></p>
-                            </div>
-                            <div class="file-box ml-3"><a href="#"><span class="add-new-plus"><i class="fa fa-plus"></i></span></a></div>
+                            </div> {% endcomment %}
+                            {% comment %} <div class="file-box ml-3"><a href="#"><span class="add-new-plus"><i class="fa fa-plus"></i></span></a></div> {% endcomment %}
                  
                         </div></div>
                         </div>
                         </div>
-                       
+                       </center>
                     </div>
                 </div>
             </div>

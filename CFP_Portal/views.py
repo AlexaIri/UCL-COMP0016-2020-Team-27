@@ -2,19 +2,22 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User, Group
-from .models import Organisation, Post, Person, Review, Comment, RejectedProjects, AcceptedProjects
+from .models import Organisation, Post, Person, Review, Comment, RejectedProjects, AcceptedProjects, UnderReviewProjects
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .forms import Proposal, ReviewForm
+from .forms import Proposal, ReviewForm, Feedback
 from .forms import Commentform
 from .filters import ProjectFilter
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django import template
 import csv
+from . import forms
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models.functions import Lower
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.core.mail import send_mail
+from django.conf import settings
 
 register = template.Library()
 
@@ -63,6 +66,26 @@ def index(request):
     }
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/index.html', context)
+
+@login_required
+@user_passes_test(is_reviewer)
+def about(request):
+    
+    #template = loader.get_template('CFP_Portal/index.html')
+
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'CFP_Portal/about.html')
+
+
+@login_required
+@user_passes_test(is_reviewer)
+def viewdetailsproject(request):
+
+    project = Person.objects.latest('id')
+    context ={
+        'project': project,
+    }
+    return render(request, 'CFP_Portal/viewdetailsproject.html', context)
 
 @login_required
 @user_passes_test(is_user)
@@ -298,24 +321,7 @@ def projectreviewdetail(request, project_id):
 @user_passes_test(is_reviewer)
 def projectlistview(request):
     #template = loader.get_template('CFP_Portal/index.html')
-<<<<<<< HEAD
-
-    
-    projects = Person.objects.all()
-    page_projects = Person.objects.all()
-
-    # paginator = Paginator(page_projects, 10)
-    # page = request.GET.get('page', 1)
-    # try:
-    #     page_projects = paginator.page(page)
-    # except PageNotAnInteger:
-    #     page_projects = paginator.page(1)
-    # except EmptyPage:
-    #     page_projects = paginator.page(paginator.num_pages)
-
-=======
     projects = Person.objects.order_by('-submission_date')
->>>>>>> 086ac1ce38e6170c54dc6e7de2d05a85a2baa4b8
 
     myFilter = ProjectFilter(request.GET, queryset = projects)
     projects = myFilter.qs
@@ -432,6 +438,44 @@ def acceptedprojects(request):
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/acceptedprojects.html', context)
 
+
+@login_required
+@user_passes_test(is_reviewer)
+def underreviewprojects(request):
+    #template = loader.get_template('CFP_Portal/index.html')
+    underreviewprojects = UnderReviewProjects.objects.order_by('-date_under_review')
+
+
+
+    myFilter = ProjectFilter(request.GET, queryset = underreviewprojects)
+    projects = myFilter.qs
+    innovationnumber = UnderReviewProjects.objects.filter(project__project_complexity='Innovation').count()
+    scaffoldingnumber = UnderReviewProjects.objects.filter(project__project_complexity='Scaffolding').count()
+    discoverynumber = UnderReviewProjects.objects.filter(project__project_complexity='Discovery').count()
+
+
+    if request.method == 'GET' and 'innovation' in request.GET:
+        projects = Person.objects.filter(project_complexity='Innovation').order_by('-date_under_review')
+
+    if request.method == 'GET' and 'discovery' in request.GET:
+        projects = Person.objects.filter(project_complexity='Discovery').order_by('-date_under_review')
+
+    if request.method == 'GET' and 'scaffolding' in request.GET:
+       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_under_review')
+
+    context ={
+        'underreviewprojects': rejectedprojects,
+        'myFilter': myFilter,
+        'innovationumber': innovationnumber,
+        'discoverynumber': discoverynumber,
+        'scaffoldingnumber': scaffoldingnumber
+    }
+    
+    #return HttpResponse(template.render(context, request))
+    return render(request, 'CFP_Portal/underreviewprojects.html', context)
+
+
+
 @login_required
 @user_passes_test(is_reviewer)  
 class OrganisationListView(ListView):
@@ -476,12 +520,69 @@ def reviewdisplay(request):
     }
    
     return render(request, 'CFP_Portal/review_display.html', context)
+    
 @login_required
 @user_passes_test(is_reviewer)
 class  Trial(ListView):
     model = Person
     template_name = 'CFP_Portal/trial.html'
     context_object_name = 'projects'
+
+@login_required
+@user_passes_test(is_reviewer)
+def  trial(request):
+    model = Person
+    projects = Person.objects.all()
+    # template_name = 'CFP_Portal/trial.html'
+    context_object_name = 'projects'
+    context={
+        'projects': projects
+
+    }
+    return render(request, 'CFP_Portal/trial.html', context)
+
+
+@login_required
+@user_passes_test(is_reviewer)
+def  feedback(request):
+
+    if request.method == 'POST' and 'feedback' in request.POST:
+        form = Feedback(request.POST)
+        
+        if form.is_valid:
+        #    save_it = form.save(commit = False)
+        #    save_it.save()
+
+           message_firstname = request.POST['message-firstname']
+           message_surname = request.POST['message-surname']
+           # message_email = request.POST['message-email']
+           message_phone = request.POST['message-phone']
+           # message = request.POST['message']
+           message = request.POST.get('message', '')
+           message_email = request.POST.get('message-email', '')
+        #    from_email = save_it.email
+        
+        send_mail(
+            'Get in touch - Leave us a feeback',   #subject line
+            message,    #message
+            message_email,    #from
+            [settings.EMAIL_HOST_USER,'alexairimia43@gmail.com'],    #to
+            fail_silently=True
+        )
+
+
+        return render(request, 'CFP_Portal/feedback.html', {'message_firstname':message_firstname,'form':form, 'message_surname':message_surname, 'message_email':message_email, 'message_phone':message_phone, 'message':message})
+    else:
+        form = Feedback()
+        return render(request, 'CFP_Portal/feedback.html')
+    # model = Person
+    # projects = Person.objects.all()
+    # context_object_name = 'projects'
+    # context={
+    #     'projects': projects
+
+    # }
+   
 
 @login_required
 @user_passes_test(is_reviewer)
@@ -654,11 +755,28 @@ def SubmissionPortal(request):
             # item_list = Person.objects.all()
             # return redirect("/CFP_Portal/project/", pk=project.id)
                     
+           
+            # message_firstname = request.POST['message-firstname']
+            # message_surname = request.POST['message-surname']
+            # # message_email = request.POST['message-email']
+            # message_phone = request.POST['message-phone']
+            # message = request.POST['message']
+            # message = request.POST.get('message', '')
+            message_email = request.POST.get('message-email', '')
+            #    from_email = save_it.email
+        
+            send_mail(
+                'Thank you! We successfully received your project proposal!',   #subject line
+                'Congratulations upon your most recent successful submission of the project proposal.\nYou will soon be informed and contacted in regards to the next steps.\n Best wishes, \n Call-for-projects Portal Team ',    #message
+                settings.EMAIL_HOST_USER,    #from
+                [project.email],    #to
+                fail_silently=True
+            )
 
             
         item_list = Person.objects.all()
         
-        return redirect('/CFP_Portal/')
+        return redirect('/CFP_Portal/viewdetailsproject')
     
 
     form = Proposal()
@@ -777,26 +895,6 @@ def ReviewPortal(request, project_id):
     }
     
     return render(request, 'CFP_Portal/review_portal.html', context)
-
-# def markprojectdetail(request, pk):
-#     model = Review
-#     review = get_object_or_404(Review, pk=pk)
-#     context_object_name = 'review'
-#     context = {
-#         'review': review,
-#         # 'comments': commentslist,
-#         # 'form': form
-#     }
-#     return render(request, 'CFP_Portal/mark_project_detail.html', context)
-
-# def projectreviewdetail(request, project_id):
-#     project = get_object_or_404(Person, pk=project_id)
-        
-#     context = {
-#         'project': project,
-#         'reviews': Review.objects.filter(project_id=project_id)
-#     }
-#     return render(request, 'CFP_Portal/reviewdetail.html', context)
 
 
  

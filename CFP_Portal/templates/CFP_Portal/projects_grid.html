@@ -152,7 +152,7 @@
 
 		</div>
             </div>
-            
+            <br>
             <div class="mb-4">
                 <div class="small mb-3">Projects</div>
                 <ul class="nav flex-column nav-pills">
@@ -162,7 +162,7 @@
 				
 
             
-            <button type="submit" name ="assigned" class="btn btn-info"> Projects Assigned to You </button>
+            {% comment %} <button type="submit" name ="assigned" class="btn btn-info"> Projects Assigned to You </button> {% endcomment %}
                                
             <br>
 		    <li><button class="btn btn-dark"name="innovation" style="margin:5px" type="submit" >Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
@@ -176,7 +176,15 @@
                 </ul>
             </div>
             
+        <br>
+            <div class="mb-4">
+                <div class="small mb-3">View assigned projects</div>
+                <form method="get">
+                 <button type="submit" name ="assigned" class="btn btn-danger"> Projects Assigned to You </button>
+                 </form>
+                </div>
         </div> 
+        
         
         <div class="col-lg-9">
             <div class="d-flex flex-column flex-md-row mb-3 mb-md-0">
@@ -189,7 +197,9 @@
                 </nav>
                 <div role="toolbar" class="btn-toolbar">
                 
-                    <div role="group" class="mr-auto mr-md-2 btn-group"><a class="align-self-center btn btn-secondary" id="tooltipShowList" href="list"><i class="fa-fw fa fa-bars"></i></a><a class="align-self-center btn btn-secondary active" id="tooltipShowGrid" href="" aria-current="page"><i class="fa-fw fa fa-th-large"></i></a></div>
+                    <div role="group" class="mr-auto mr-md-2 btn-group">
+                    <a class="align-self-center btn btn-secondary" id="tooltipShowList" href="list"><i class="fa-fw fa fa-bars"></i> </a>
+                    <a class="align-self-center btn btn-secondary active" id="tooltipShowGrid" href="" aria-current="page"><i class="fa-fw fa fa-th-large"></i> </a></div>
                     
                 </div>
                 

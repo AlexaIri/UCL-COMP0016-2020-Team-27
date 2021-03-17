@@ -6,8 +6,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
     <title> Home </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -67,7 +65,7 @@
             <div class="card bg-pattern">
                 <div class="card-body" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') top left repeat-y;">
                     <div class="float-right">
-                         <a href ="#"> <button type="button" class="btn btn-primary btn-xs  mt-1 mb-1 ml-1"> 
+                         <a href ="{% url 'underreviewprojects' %}"> <button type="button" class="btn btn-primary btn-xs  mt-1 mb-1 ml-1"> 
                               
                                 <i class="fa fa-archive fa-xs"></i> 
                                 View 
@@ -347,35 +345,35 @@
 <div class = "text-right">
     {% if projects.has_other_pages %}
     <div class="btn-group" role="group">
-        <a class="btn btn-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-dark mb-4" href="?page=1">First</a>
 
   {% if projects.has_previous %}
-        <a class="btn btn-info mb-4" href="?page={{ projects.previous_page_number }}">Previous</a>
+        <a class="btn btn-dark mb-4" href="?page={{ projects.previous_page_number }}">Previous</a>
     {% comment %} <li><a href="?page={{ projects.previous_page_number }}">&laquo;</a></li> {% endcomment %}
   {% else %}
-    <div class="disabled"> <a class="btn btn-info mb-4 disabled"  >Previous</a></div>
+    <div class="disabled"> <a class="btn btn-dark mb-4 disabled"  >Previous</a></div>
 
   {% endif %}
 
   {% for i in projects.paginator.page_range %}
     {% if projects.number == i %}
-       <a class="btn btn-info mb-4" href="?page={{ i }}">{{ i }}</a>
+       <a class="btn btn-secondary mb-4" href="?page={{ i }}">{{ i }}</a>
 
     
      {% elif i > projects.number|add:'-3' and i < projects.number|add:'3' %}
-          <a class="btn btn-outline-info mb-4" href="?page={{ i }}">{{ i }}</a>
+          <a class="btn btn-outline-secondary mb-4" href="?page={{ i }}">{{ i }}</a>
   {% endif %}
 {% endfor %}
 
 {% if projects.has_next %}
-          <a class="btn btn-info mb-4" href="?page={{ projects.next_page_number }}">Next</a>
+          <a class="btn btn-dark mb-4" href="?page={{ projects.next_page_number }}">Next</a>
      {% else %}
     <div class="disabled">
-            <a class="btn btn-info mb-4 disabled" >Next</a></div>
+            <a class="btn btn-dark mb-4 disabled" >Next</a></div>
     {% endif %}
     
     
-     <a class="btn btn-info mb-4" href="?page={{ projects.paginator.num_pages }}">Last</a>
+     <a class="btn btn-dark mb-4" href="?page={{ projects.paginator.num_pages }}">Last</a>
 </div>
 
  {% endif %}

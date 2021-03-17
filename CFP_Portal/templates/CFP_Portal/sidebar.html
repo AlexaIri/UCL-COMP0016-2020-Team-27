@@ -9,7 +9,7 @@
                                 <meta content="yes" name="apple-mobile-web-app-capable">
                                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
                                 {% comment %} <meta name='viewport' content='width=device-width, initial-scale=1'> {% endcomment %}
-                                <title>Snippet - BBBootstrap</title>
+                                <title>CFP Portal Engine </title>
                                 <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
                                 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
                                  <link rel="stylesheet" href="{% static 'CFP_Portal/sidebar.css' %}">
@@ -66,7 +66,7 @@
                      <li> <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" style="color:rgb(0,70,177)"><i class="fa fa-folder-open" style="color:light gray"></i>  &nbsp;Project Proposals</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
                     <li> <a href="{% url 'projects' %}" style="color:rgb(0,70,177)">All submissions</a> </li>
-                    <li> <a href="#" style="color:rgb(0,70,177)"> Under Review </a> </li>
+                    <li> <a href="{% url 'underreviewprojects' %}" style="color:rgb(0,70,177)"> Under Review </a> </li>
                     <li> <a href="{% url 'acceptedprojects' %}" style="color:rgb(0,70,177)"> Completed and Approved</a> </li>
                      <li> <a href="{% url 'rejectedprojects' %}" style="color:rgb(0,70,177)"> Rejected</a> </li>
 
@@ -84,7 +84,7 @@
 
             <li> <a href= "{% url 'profile' %}" style="color:rgb(0,70,177)"><i class="fa fa-user-circle-o" style="color:light gray"></i>  &nbsp;User Profile</a> </li>
            
-            <li> <a href= "{% url 'trial' %}" style="color:rgb(0,70,177)"><i class="fa fa-wpforms" style="color:light gray"></i>  &nbsp;Leave Feedback</a> </li>
+            <li> <a href= "{% url 'feedback' %}" style="color:rgb(0,70,177)"><i class="fa fa-wpforms" style="color:light gray"></i>  &nbsp;Leave Feedback</a> </li>
 
 
         </ul>
@@ -107,7 +107,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"> <a class="nav-link" href="{% url 'blog-home' %}">Home <span class="sr-only">(current)</span></a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="#">About</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="{% url 'about' %}">About</a> </li>
                     <li class="nav-item"> <a class="nav-link"href="{% url 'profile' %}">Profile</a> </li>
                     <li class="nav-item"> <a class="nav-link" href="{% url 'logout' %}">Logout</a> </li>
                 </ul>
