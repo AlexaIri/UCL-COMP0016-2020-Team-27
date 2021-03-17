@@ -78,7 +78,7 @@ def about(request):
 
 
 @login_required
-@user_passes_test(is_reviewer)
+@user_passes_test(is_user)
 def viewdetailsproject(request):
 
     project = Person.objects.latest('id')
