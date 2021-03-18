@@ -103,7 +103,7 @@ class Person(models.Model):
     
     tags = TaggableManager()
     statusType = (
-        ('Accepeted', 'Accepted'),
+        ('Accepted', 'Accepted'),
         ('Rejected', 'Rejected'),
         ('Under Review', 'Under Review'),
         ('Submitted', 'Submitted'),
