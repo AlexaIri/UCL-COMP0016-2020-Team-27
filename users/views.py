@@ -40,6 +40,7 @@ def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance= request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance= request.user.profile)
+        print(p_form.errors)
         if u_form.is_valid() and p_form.is_valid():
 
             u_form.save()
