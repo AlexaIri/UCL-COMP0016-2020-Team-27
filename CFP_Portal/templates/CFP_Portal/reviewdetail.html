@@ -47,7 +47,7 @@
                     <div class="media mt-0 m-b-30" > 
 
                         <div class="media-body" style="margin-left:10px">
-                            {% comment %} <h5 class="media-heading mb-0 mt-0" style="text-align:right">  {{project.name}}  {{project.surname}}</h5><br> {% endcomment %}
+                            
                              <h3 class="m-b-20" style="text-align:left">{{project.project_title }}</h3>
                              {% if project.priority == "High"%}
                                <span class="badge badge-danger"  style="text-align:justify">{{project.priority}} Priority</span></div>
@@ -64,10 +64,7 @@
 
                             {% endif %}
                            
-                            {% comment %} <div class="m-b-20" style="vertical-align: text-bottom">
-                           <a href ="#"> <button type="button" class="btn btn-success btn-xs  ">    Edit   </button></a>
-                            <a href ="#"> <button type="button" class="btn btn-danger btn-xs  ">  Delete    </button></a>
-                           </div> {% endcomment %}
+                            
                 
                                
                            
@@ -79,11 +76,11 @@
                     <br>
                     
 
-                    {% comment %} Hashtags {% endcomment %}
+                
                     
                                    <div class="card-box task-detail" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') bottom right repeat-y;">
 <div class="list-group list-group-flush font-size-sm">
-                      {% comment %} {%for comment in project.comments.all%} {% endcomment %}
+                      
                      {% if reviews.all.count == 0 %}
                       <div class="card" style="background-color:white;width:99%;height:50%;margin-left:6px; border-radius:0%; margin-top:0px;margin-bottom:-10px ">
              <div class="card-body" >
@@ -101,28 +98,14 @@
                     
                             </div>
 <br>
-{% comment %} LAST PART {% endcomment %}
+
                                    <div class="card-box task-detail" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') bottom right repeat-y;">
 
 
-{% comment %} LAST PART ENDS {% endcomment %}
 
                    
                     <div class="clearfix"></div>
-                   {% comment %} <section class="divided clearfix" style="background:#EAEAEA; height:500px; margin-top:0px; margin-left:0px">
-       
-            <div class="row py-5">
-                <div class="col ">
-                    <h4> lalla</h4>
-                </div>
-                <div class="versus">
-                
-                <h3>a;;a</h3>
-                </div>
-             
-            
-        </div>
-    </section> {% endcomment %}
+                   
      <div class="card" style="background-color:white;width:99%;height:50%;margin-left:6px; border-radius:0%; margin-top:0px;margin-bottom:0px ">
              <div class="card-body" >
        <section>
@@ -269,8 +252,7 @@
 
 <script type="text/javascript" src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1581152197/smartwizard/jquery.smartWizard.min.js"></script>
 
-{% comment %} <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> {% endcomment %}
+
 
 
       <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>

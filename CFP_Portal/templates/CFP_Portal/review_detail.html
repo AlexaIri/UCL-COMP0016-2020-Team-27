@@ -13,7 +13,7 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
 
-       {% comment %} <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css' rel='stylesheet'> {% endcomment %}
+       
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'CFP_Portal/review.css' %}">
        <style type="text/css">
@@ -1298,10 +1298,7 @@ a {
                  </div>
                </div>
                <div class="card-footer text-center">
-                 {% comment %} <a href="javascript:void()" class="btn-social btn-facebook waves-effect waves-light m-1"><i class="fa fa-facebook"></i></a>
-                 <a href="javascript:void()" class="btn-social btn-google-plus waves-effect waves-light m-1"><i class="fa fa-google-plus"></i></a>
-                 <a href="javascript:void()" class="list-inline-item btn-social btn-behance waves-effect waves-light"><i class="fa fa-behance"></i></a>
-                 <a href="javascript:void()" class="list-inline-item btn-social btn-dribbble waves-effect waves-light"><i class="fa fa-dribbble"></i></a> {% endcomment %}
+                 
                </div>
              </div>
            </div>
@@ -1328,8 +1325,7 @@ a {
                     <div class="row">
                         <div class="col-md-6">
                             <h6>Project title</h6>
-                            {% comment %} <hr style="width:30%;text-align:left;margin-left:0"> {% endcomment %}
-                            <p>
+                           
                                 {{object.project.project_title}}
                             </p>
                             <h6>Summarised Abstract</h6>
@@ -1407,35 +1403,7 @@ a {
         </div>
          </div></div>
     </div>
-                            {% comment %} <table class="table table-hover table-striped">
-                                <tbody>                                    
-                                    <tr>
-                                        <td>
-                                            <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table> {% endcomment %}
+                            
                         </div>
                     </div>
                     <!--/row-->
@@ -1517,7 +1485,7 @@ return $(this).attr("aria-valuenow") + "%";
                         <p style="color:black"> {{review.interoperabilityComments}}  </p>
                         
                                         </div>
-                                            {% comment %} <strong>Criterion #1: Standards and Interoperability</strong> joined ACME Project Team in <strong>`Collaboration`</strong> {% endcomment %}
+                                           
                                         </td>
                                     </tr>
                                     <tr>
@@ -1589,9 +1557,7 @@ return $(this).attr("aria-valuenow") + "%";
 
 
 
-{% comment %} here {% endcomment %}
 
-{% comment %} boxes {% endcomment %}
                 
                 <div class="tab-pane" id="edit">
                   <b> <h1 align="center">
@@ -1604,7 +1570,7 @@ return $(this).attr("aria-valuenow") + "%";
                        <p style="color:black;display:inline"> Marking System </p>
                        </h1>
                                                {% if review.green == True %}
-                               {% comment %} <span class="badge badge-danger"  style="text-align:justify">{{project.priority}} Priority</span></div> {% endcomment %}
+                              
  <section class="divided clearfix" style="background:#EAEAEA; height:500px; margin-top:0px; margin-left:0px">
        
             <div class="row py-5">
@@ -1630,7 +1596,7 @@ return $(this).attr("aria-valuenow") + "%";
     </section>
                             
                             {% elif review.amber == True %}
-                             {% comment %} <span class="badge badge-warning"  style="text-align:justify">{{project.priority}} Priority</span></div> {% endcomment %}
+                             
 <section class="divided clearfix" style="background:#EAEAEA; height:500px; margin-top:0px; margin-left:0px">
        
             <div class="row py-5">
@@ -1666,8 +1632,7 @@ return $(this).attr("aria-valuenow") + "%";
                 <div class="versus">
 
                   <button class="btn btn-lg btn-raised btn-wave btn-icon btn-rounded mb-2 red"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-            {% comment %} <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line> {% endcomment %}
+           
         </svg> </button>  
    
                 </div>

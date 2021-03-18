@@ -318,7 +318,7 @@ def projectreviewdetail(request, project_id):
         Person.objects.filter(id=project_id).update(status='Accepted')
         acceptedproject = AcceptedProjects(project=project)
         acceptedproject.save()
-        Display = 'Project has been successfully accepeted'
+        Display = 'Project has been successfully accepted'
         
         send_mail(
             'The waiting is over! Your project proposal is successful!',   #subject line

@@ -221,6 +221,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <!--project list-->
                               {% for project in projects %}
                                     <tr>
                                     <th scope="row">{{project.id}}</th>
@@ -260,6 +261,7 @@
                                     }
                                     )
                                     });</script>
+                                    <!--pill based on status-->
                                            {% if project.status == "Rejected"%}
                                            <div class="text-center">  <p class="mb-0" style="font-size:15px">100%<span class="float-right"></span></p></div>
                             <div class="progress mt-2" style="height: 5px;">
@@ -296,6 +298,7 @@
                             </div>
                             
                            {% endif %}
+                          
                                     </td>
 
                                     <td>{% if project.status == "Submitted"%}
@@ -304,12 +307,14 @@
                                      {% if project.status == "Under Review"%}
                                      <a class ="btn btn-dark btn-sm mt-1 mb-1 ml-auto" href ="{% url 'ReviewPortal' project.id %}">  Review this project </a>
                                      {%endif%}</td>
+                            <!--end of pill based on status-->
 
                                    
                                 </tr>
 
 
                               {% endfor %}
+                               <!--end of project list-->
                               </tbody>
                               </table>
                               </div></div></div></div></div>

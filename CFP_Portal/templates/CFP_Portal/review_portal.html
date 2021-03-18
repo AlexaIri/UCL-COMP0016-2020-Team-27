@@ -163,15 +163,12 @@ img {
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-7 py-5">
-                {% comment %} <h1 class="mb-4">{{object.project.project_title}} </h1> {% endcomment %}
+               
                 <h1 class="mb-4"> Review Page  </h1>
                 <h4 class="m-0" style="color:#8E9FC9"> Fill in the comment areas below based on the strength and quality of this project proposal. Use the anchors to the right to navigate through the page more effectively.</h4><br>
-                 {% comment %} <a href="#"><button type="button" class="btn btn-light btn-xs  mt-1 mb-1" style="border-radius:50%; width:50px;height:50px"> 
-                                <i class="fa fa-tasks" style="color:#999"></i> Visit the Project's Page
-                           </button> </a>  {% endcomment %}
+                 
                            <br><br>
-                        {% comment %} {{ form.project|as_crispy_field}} {% endcomment %}
-                           {% comment %} href ="{% url 'project-detail' review.project.id %}" {% endcomment %}
+                        
             </div>
             <div class="col-lg-5">
                 <div class="py-5 px-4 masthead-cards">
@@ -241,14 +238,7 @@ img {
             
     
                  
-                   {% comment %} <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
-                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
-                 <p class="card-description" style="color:#0046B1">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p> {% endcomment %}
+                   
 
                 
              </div>
@@ -269,14 +259,7 @@ img {
              <div class="card-body">
               {{ form.technical_and_scientific_strength_points|as_crispy_field}}
                  
-                     {% comment %} <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
-                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
-                 <p class="card-description" style="color:#0046B1">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p> {% endcomment %}
+                   
 
                 
              </div>
@@ -296,15 +279,7 @@ img {
              <div class="card-body">
              {{ form.user_centred_design_points|as_crispy_field}}
                  
-                   {% comment %} <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
-                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
-                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p> {% endcomment %}
-
+                   
                 
              </div>
       
@@ -326,13 +301,7 @@ img {
              <div class="card-body">
                   {{ form.usability_testing_points|as_crispy_field}}
 
-                {% comment %} <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
-                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
+               
                  <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p> {% endcomment %}
 
                 
@@ -355,15 +324,7 @@ img {
              <div class="card-body">
              {{ form.research_quality_points|as_crispy_field}}
                  
-                  {% comment %} <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
-                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
-                  
-                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p> {% endcomment %}
+                
               
                 
              </div>
@@ -399,7 +360,7 @@ img {
                 </div>
             </div>
         </div>
-        {% comment %} <div class="col-md-4 Services-tab item" style="margin-left:385px; margin-right:50%"> {% endcomment %}
+        
          <div class="col-md-4 Services-tab item" >
             <div class="folded-corner service_tab_1">
                 <div class="text"> <i class="fa fa-cubes fa-5x fa-icon-image"></i>
@@ -413,16 +374,7 @@ img {
              
                   {{ form.scalability_points|as_crispy_field}}
                  
-{% comment %} 
-                    <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
-                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
-                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
-                  <hr>
-                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p> {% endcomment %}
-
+{
                 
              </div>
              
@@ -470,11 +422,11 @@ img {
             <div id="collapseFiveLeftone" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
                 <div class="panel-body">
                      <div class="well">
-    {% comment %} <form accept-charset="UTF-8" action="" method="POST"> {% endcomment %}
+
     {{ form.standards_and_interoperability_comments|as_crispy_field}}
     
        
-    {% comment %} </form> {% endcomment %}
+ 
 </div>
 
                 </div> <!-- end of panel-body -->
@@ -487,12 +439,10 @@ img {
             <div id="collapseFiveLeftTwo" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
                 <div class="panel-body">
                      <div class="well">
-    {% comment %} <form accept-charset="UTF-8" action="" method="POST"> {% endcomment %}
+    
      {{ form.technical_and_scientific_strength_comments|as_crispy_field}}
    
-        {% comment %} <textarea class="form-control" id="text2" name="text2" placeholder="Type in your message" rows="3"></textarea>
-        <h6 class="pull-right" id="count_message2" color:white></h6> {% endcomment %}
-    {% comment %} </form> {% endcomment %}
+      
 </div>
 
                 </div> <!-- end of panel-body -->
@@ -506,11 +456,9 @@ img {
                 <div class="panel-body">
 
                    <div class="well">
-    {% comment %} <form accept-charset="UTF-8" action="" method="POST"> {% endcomment %}
+    
      {{ form.user_centred_design_comments|as_crispy_field}}
-        {% comment %} <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
-        <h6 class="pull-right" id="count_message" color:white></h6> {% endcomment %}
-    {% comment %} </form> {% endcomment %}
+      
 </div>
 
                 </div> <!-- end of panel-body -->
@@ -525,12 +473,10 @@ img {
                 <div class="panel-body">
 
                    <div class="well">
-    {% comment %} <form accept-charset="UTF-8" action="" method="POST"> {% endcomment %}
+    
          {{ form.usability_testing_comments|as_crispy_field}}
 
-        {% comment %} <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
-        <h6 class="pull-right" id="count_message" color:white></h6> {% endcomment %}
-    {% comment %} </form> {% endcomment %}
+      
 </div>
 
                 </div> <!-- end of panel-body -->
@@ -546,11 +492,9 @@ img {
                 <div class="panel-body">
 
                    <div class="well">
-    {% comment %} <form accept-charset="UTF-8" action="" method="POST"> {% endcomment %}
+
      {{ form.research_quality_comments|as_crispy_field}}
-        {% comment %} <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
-        <h6 class="pull-right" id="count_message" color:white></h6> {% endcomment %}
-    {% comment %} </form> {% endcomment %}
+
 </div>
 
                 </div> <!-- end of panel-body -->
@@ -565,12 +509,10 @@ img {
                 <div class="panel-body">
 
                    <div class="well">
-    {% comment %} <form accept-charset="UTF-8" action="" method="POST"> {% endcomment %}
+  
     {{ form.resilience_comments|as_crispy_field}}
     
-        {% comment %} <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
-        <h6 class="pull-right" id="count_message" color:white></h6> {% endcomment %}
-    {% comment %} </form> {% endcomment %}
+     
 </div>
 
                 </div> <!-- end of panel-body -->
@@ -585,11 +527,9 @@ img {
                 <div class="panel-body">
 
                    <div class="well">
-    {% comment %} <form accept-charset="UTF-8" action="" method="POST"> {% endcomment %}
+   
     {{ form.scalability_comments|as_crispy_field}}
-        {% comment %} <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
-        <h6 class="pull-right" id="count_message" color:white></h6> {% endcomment %}
-    {% comment %} </form> {% endcomment %}
+       
 </div>
 
                 </div> <!-- end of panel-body -->
@@ -606,17 +546,14 @@ img {
         <div class="row">
             <div class="col-md-12">
 
-             {% comment %} <button class="btn btn-lg btn-raised btn-wave btn-icon btn-rounded mb-2 green"> 
-   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
             
-        </svg> </button>  {% endcomment %}
         
     <div class="text-center">    
    <div class="col-xs-12  emphasis  mt-1 mb-1" text-center>
    <input type="radio" class="btn-check" name="options" id="option1"value="green" autocomplete="off" >
 <label class="btn btn-success btn-lg" for="option1">Green</label>
 
-<input type="radio" class="btn-check" name="options" id="option2"value="amber" autocomplete="off">
+<input type="radio"  class="btn-check" name="options" id="option2"value="amber" autocomplete="off">
 <label class="btn btn-warning btn-lg" for="option2">Amber</label> 
 
 <input type="radio" class="btn-check" name="options" id="option3"value="red" autocomplete="off" >
@@ -630,7 +567,7 @@ img {
                         <div class="timeline-icon">
                         
                     <a class="year" href="#" style="background:#28a745">   
-                                {% comment %} <i class="fa fa-tasks" style="color:#999"></i> Visit the Project's Page {% endcomment %}
+                               
                            
                          
                       </a></div>
@@ -673,8 +610,6 @@ The project is satisfactory enough, but lacks consistency.
  
   border-top-color: #AEAFB2;
   border-right-color: #AEAFB2;
-   {% comment %} border-radius: 30% !important;
-  border: 23px solid transparent;  {% endcomment %}
 
   
  
@@ -694,37 +629,14 @@ The project is satisfactory enough, but lacks consistency.
     </div>
     </div>
  
-                            {% comment %} <div class="container d-flex justify-content-center" style="background:rgba(255,255,255,0.5);  margin-top: 50px; padding: 20px 20px 20px 20px;   box-sizing: border-box; border-radius: 20px;  width: 945px"> {% endcomment %}
-  
-   
-        {% comment %} <div class="col-md-6" style="margin-left:0px; margin-right:0px;
-        width: 60%;
-  background-image: url(https://images.unsplash.com/photo-1485119584289-30ca2b38c67e?dpr=1&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=);
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  
-  justify-content: flex-end" >
-            <div class="other">
-           
-             </div>
-         </div> {% endcomment %}
+                            
         <!--col-->
         <div class="col-md-6"  style="margin-left:280px; margin-right:-280px" id = "feedback">
             <h2 class="form-title" style="color:white"> Final Feedback  </h2>
-            {% comment %} <p class="justify text-muted">Fill out the form below to give la our team.</p> {% endcomment %}
-            {% comment %} <form> {% endcomment %}
+            
             
              {{ form.comments|as_crispy_field}} 
-                {% comment %} <div class="form-group pt-2 pl-1"> <label for="exampleInputName"> Reviewer Name</label> <input type="text" class="form-control" id="exampleInputName"> </div> {% endcomment %}
-                {% comment %} <div class="form-group pl-1"> <label for="exampleInputEmail1">Reviewer Email Address</label> <input type="email" class="form-control" id="exampleInputEmail1"> </div>
-                <div class="form-group pl-1"> <label for="exampleFormControlTextarea1">Comments</label> <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea> </div> {% endcomment %}
-                {% comment %} <div class="row">
-                    <div class="col-md-3 offset-md-9"><button type="submit" class="btn btn-primary">Send</button></div>
-                </div> {% endcomment %}
-            {% comment %} </form> {% endcomment %}
+               
         </div>
         <!--col-->
    

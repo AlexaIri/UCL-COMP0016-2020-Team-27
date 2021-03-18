@@ -41,7 +41,7 @@
                     <div class="media mt-0 m-b-30" > 
 
                         <div class="media-body" style="margin-left:10px">
-                            {% comment %} <h5 class="media-heading mb-0 mt-0" style="text-align:right">  {{project.name}}  {{project.surname}}</h5><br> {% endcomment %}
+                            
                              <h3 class="m-b-20" style="text-align:left">{{project.project_title }}</h3>
                              {% if project.status == "Rejected"%}
                                <span class="badge badge-danger"  style="text-align:justify">{{project.status}} </span></div>
@@ -63,11 +63,7 @@
 
                             {% endif %}
                            
-                            {% comment %} <div class="m-b-20" style="vertical-align: text-bottom">
-                           <a href ="#"> <button type="button" class="btn btn-success btn-xs  ">    Edit   </button></a>
-                            <a href ="#"> <button type="button" class="btn btn-danger btn-xs  ">  Delete    </button></a>
-                           </div> {% endcomment %}
-                
+                       
                                
                            
                             <br>
@@ -89,7 +85,7 @@
                     <br>
                     
 
-                    {% comment %} Hashtags {% endcomment %}
+
                     
                                    <div class="card-box task-detail" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') bottom right repeat-y;">
 
@@ -99,12 +95,11 @@
                                         <td>
                                         <div class="p-5" style="margin-left:0em; align:right">
                         <h5 class="h5" style="color:#0530A2"> Submitter's Details </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                       
                         
                     
                         
-                         {% comment %} <div class="card" style="width:100%">
-             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
+                         
                         <p style="color:black"> <b>Submitter's Full Name:</b> {{project.name}} {{project.surname}} </p>
                         <p style="color:black"> <b>Submitter's Email:</b> {{project.email}} </p>
                         <p style="color:black"> <b>Submitter's Phone Number:</b> {{project.phone_number}} </p>
@@ -118,12 +113,7 @@
                                         <td>
                                         <div class="p-5" style="margin-left:0em; align:right">
                         <h5 class="h5" style="color:#0530A2"> Summarised Abstract </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
                         
-                    
-                        
-                         {% comment %} <div class="card" style="width:100%">
-             <div class="card-body text-justify" style="background:white; width:100%" > {% endcomment %}
                         <p style="color:black"> {{project.summarised_abstract}} </p>
                         
                                         </div>
@@ -135,9 +125,9 @@
 
                                         
                                         <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
-                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                         
                           <h5 class="h5" style="color:#0530A2"> Full Abstract </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
                         <p style="color: black; text-align:justify"> {{project.full_abstract}} </p>
                                         </div>
                                     </td>
@@ -148,9 +138,9 @@
 
                                         
                                         <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
-                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                         
                           <h5 class="h5" style="color:#0530A2"> Project Complexity </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
                         <p style="color: black; text-align:justify"> {{project.project_complexity}} </p>
                                         </div>
                                     </td>
@@ -161,26 +151,23 @@
 
                                         
                                         <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
-                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                        
                           <h5 class="h5" style="color:#0530A2"> Expertise and Skills </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
                         <p style="color: black; text-align:justify"> {{project.expertiseskills}} </p>
                                         </div>
                                     </td>
                                     </tr>
 
-                                        {% comment %} <td>
-                                            <h6 style="text-align:right;" ><b style= "background-color:#A2A2A1; color:#071E5E;">Expertise and Skills </b> </h6>
-                                            <h6 style="color:black" ><p>{{project.expertiseskills}}</p></h6>
-                                        </td> {% endcomment %}
+                                        
                                      <tr style="background:white">
                                         <td>
 
                                         
                                         <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
-                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                         
                           <h5 class="h5" style="color:#0530A2"> Motivations </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
                         <p style="color: black; text-align:justify"> {{project.motivations}} </p>
                                         </div>
                                     </td>
@@ -191,9 +178,9 @@
 
                                         
                                         <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
-                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                         
                           <h5 class="h5" style="color:#0530A2"> Devices and Technologies Required </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                        
                         <p style="color: black; text-align:justify"> {{project.devices}} </p>
                                         </div>
                                     </td>
@@ -203,9 +190,9 @@
 
                                         
                                         <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
-                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                        
                           <h5 class="h5" style="color:#0530A2"> NICE tier </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                       
                         <p style="color: black; text-align:justify"> {{project.NICEtier}} </p>
                                         </div>
                                     </td>
@@ -216,9 +203,9 @@
 
                                         
                                         <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
-                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+
                           <h5 class="h5" style="color:#0530A2"> Github </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                       
                         <p style="color: black; text-align:justify"> <a href="{{ project.github }}">{{project.github}}</a> </p>
                                         </div>
                                     </td>
@@ -229,9 +216,9 @@
 
                                         
                                         <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
-                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                        
                           <h5 class="h5" style="color:#0530A2"> Challenge if applicable </h5>
-                        {% comment %} <h1 class="h5 mb-5">   <span class=" font-weight-bold " style ="background-color:#071E5E; color:#EFEFEF;" > Summarised Abstract </h> </span> {% endcomment %}
+                      
                         <p style="color: black; text-align:justify"> {{project.challenge}} </p>
                                         </div>
                                     </td>
@@ -246,7 +233,7 @@
 
                                         
                                         <div class="p-5" style="margin-left:0em; margin-top:-2em; margin-bottom:-2em;align:justify">
-                         {% comment %} <h5> <span class="badge badge-dark" style="align:center">Full Abstract </span></h5> {% endcomment %}
+                        
                           <h5 class="h5" style="color:#0530A2"> Assign Reviewers </h5>
                            <p class='text-muted'>Do not assign the same reviewer multiple times. Otherwise, you will get an error.</p>
                           {% for user in project.reviewers.all %}
@@ -280,7 +267,7 @@
                             </table>
                             </div>
 <br>
-{% comment %} LAST PART {% endcomment %}
+
                                    <div class="card-box task-detail" style=" background: rgb(250, 251, 252) url('/media/sidebar/laptop.jpg') bottom right repeat-y;">
 
  <div class="container">
@@ -331,19 +318,7 @@
                     
                     <div class="row">
                           
-                       {% comment %} <div class="card" style="background-color:#DBDCE0">
-             <div class="card-body">
-                    <div class="assign-team mt-4">
-                        <h5 class="m-b-5" style="color:black;text-align:center">Assign to</h5>
-                        <div>
-                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar2.png"> </a>
-                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar3.png"> </a>
-                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar5.png"> </a>
-                            <a href="#"><img class="rounded-circle thumb-sm" alt="64x64" src="https://bootdey.com/img/Content/avatar/avatar8.png"> </a>
-                            <a href="#"><span class="add-new-plus"><i class="fa fa-plus"></i></span></a></div>
-             
-                    </div></div>
-                    </div> {% endcomment %}
+                       
 <center>
                     <div class="card" style="background-color:#DBDCE0;" text-center>
              <div class="card-body" >
@@ -353,7 +328,7 @@
                         
                         <div class="files-list" style="text-align:center">
                             
-                            {% comment %} <h6> {{ project.evidence.url|slice:":-5"}}</h6> {% endcomment %}
+                           
                             {% if project.evidence %}
                             <div class="file-box">
                                <a href="{{ project.evidence.url }}"><img src="/media/attaching.jpg" class="img-responsive img-thumbnail" width="80px" height="80px" alt="attached-img"></a>
@@ -366,15 +341,7 @@
                                 </div>
                             {% endif %}
                             
-                            {% comment %} <div class="file-box">
-                                <a href=""><img src="/media/word.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
-                                <p class="font-13 mb-1 text-muted"><small>Attachment 2</small></p>
-                            </div>
-                            <div class="file-box">
-                                <a href=""><img src="/media/pptx.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
-                                <p class="font-13 mb-1 text-muted"><small>Attachment 3</small></p>
-                            </div> {% endcomment %}
-                            {% comment %} <div class="file-box ml-3"><a href="#"><span class="add-new-plus"><i class="fa fa-plus"></i></span></a></div> {% endcomment %}
+                           
                  
                         </div></div>
                         </div>
@@ -403,7 +370,7 @@
                         {%endfor%}
                         
                         
-                        {% comment %} <div class="media m-b-20"> {% endcomment %}
+                      
                              <div class="align-self-start mr-3">
                             <form method="POST">
                             {% csrf_token %} 
