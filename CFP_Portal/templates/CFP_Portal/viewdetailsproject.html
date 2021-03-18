@@ -1,0 +1,319 @@
+{% extends "CFP_Portal/sidebar.html" %}
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    	body{
+    
+    background:#F0F8FF;
+}
+
+.timeline-page {
+    padding: 10px 0;
+    position: relative;
+    margin-top: 35px;
+}
+
+.timeline-page::after {
+    content: "";
+    height: 95%;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    background-color: #e8e8e8;
+}
+
+.timeline-item {
+    margin-bottom: 80px;
+}
+
+.timeline-page .timeline-item .date-label-left {
+    text-align: center;
+    margin-right: 20px;
+    position: relative;
+}
+
+.timeline-page .timeline-item .date-label-left::after,
+.timeline-page .timeline-item .duration-right::after {
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    content: "";
+    height: 20px;
+    position: absolute;
+    top: 20px;
+    width: 20px;
+    z-index: 1;
+}
+
+.timeline-page .timeline-item .date-label-left::after {
+    right: -45px;
+}
+
+.timeline-page .timeline-item .duration-right::after {
+    left: -45px;
+}
+
+.timeline-page .timeline-item .works-description-right {
+    text-align: left;
+    margin-left: 15px;
+    float: left;
+    border-radius: 0;
+    padding: 20px 0;
+}
+
+.timeline-page .timeline-item .duration-right {
+    text-align: center;
+    margin-left: 20px;
+    position: relative;
+}
+
+.timeline-page .timeline-item .works-description-left {
+    text-align: right;
+    margin-right: 15px;
+    float: right;
+    border-radius: 0;
+    padding: 20px 0;
+}
+
+.timeline-page h4,
+.works-description-left h4 {
+    font-size: 18px;
+    margin-top: 0;
+    text-transform: capitalize;
+}
+
+.timeline-subtitle {
+    line-height: 26px;
+    color: #666;
+}
+
+.bg-custom, .btn-custom, .timeline-page .timeline-item .date-label-left::after, .timeline-page .timeline-item .duration-right::after, .back-to-top:hover {
+    background-color: #f6576e;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-12">
+ <div class="row d-flex justify-content-center mt-200" ><a href ="{% url 'blog-home' %}"> <button type="button" class="btn btn-dark btn-xs  mt-1 mb-1 ml-1"> 
+
+                                <i class="fa fa-home fa-2x"></i> <h4 style="font-size:15px">Confirm and return home</h4>
+                                 
+                               
+                            </button></a></div>
+
+<br>
+                        <h2 class="font-300">{{project.title}}</h2>
+                        <p class="text-muted mt-4 title-subtitle mx-auto">Below there is a read-only version of the key sections from your most recently submitted project proposal. You will be able to edit some fields and resubmit your modified project proposal when it becomes available on the particular page of your project in home page.</p>
+                    </div>
+                </div>
+                <div class="timeline-page mt-5">
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="duration date-label-left">
+                                    <img src="/media/about/pic1.png" alt=""  width="200" height="200" class="rounded-circle">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="works works-description-right">
+                                    <h4>Summarised Abstract</h4>
+                                    <p class="timeline-subtitle">{{project.summarised_abstract}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="works works-description-left">
+                                    <h4>Full Abstract</h4>
+                                    <p class="timeline-subtitle"> {{project.full_abstract}}</p>
+                                     </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="duration duration-right ">
+                            		 <img src="/media/about/pic2.png" alt=""  width="200" height="200" class="rounded-circle">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="duration date-label-left">
+                                	 <img src="/media/about/skills.png" alt=""  width="200" height="200" class="rounded-circle">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="works works-description-right">
+                                    <h4>Expertise and Skills</h4>
+                                    <p class="timeline-subtitle">{{project.expertiseskills}}</p>
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                      <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="works works-description-left">
+                                    <h4>Devices</h4>
+                                    <p class="timeline-subtitle"> {{project.devices}}</p>
+                                     </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="duration duration-right ">
+                            		 <img src="/media/about/devices.png" alt=""  width="200" height="200" class="rounded-circle">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="duration date-label-left">
+                                	 <img src="/media/about/challenge.png" alt=""  width="200" height="200" class="rounded-circle">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="works works-description-right">
+                                    <h4>Is this project submitted due to a challenge?</h4>
+                                    <p class="timeline-subtitle">{{project.challenge}}</p>
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                     <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="works works-description-left">
+                                    <h4>Have you previously filled out the ethics form? </h4>
+                                    <p class="timeline-subtitle"> {{project.ethics_form}}</p>
+                                     </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="duration duration-right ">
+                            		 <img src="/media/about/pic4.png" alt=""  width="200" height="200" class="rounded-circle">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="duration date-label-left">
+                                	<img src="/media/about/motivation.png" alt=""  width="200" height="200" class="rounded-circle">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="works works-description-right">
+                                    <h4>What is the motivation behing this project proposal?</h4>
+                                    <p class="timeline-subtitle">{{project.motivations}}</p>
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="works works-description-left">
+                                    <h4>Why is your project important? </h4>
+                                    <p class="timeline-subtitle"> {{project.importance}}</p>
+                                     </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="duration duration-right ">
+                            		<img src="/media/about/importance.png" alt=""  width="200" height="200" class="rounded-circle">
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="duration date-label-left">
+                                	<img src="/media/about/complexity.png" alt=""  width="200" height="200" class="rounded-circle">
+                                  </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="works works-description-right">
+                                    <h4>What type of project complexity does your proposal have?</h4>
+                                    <p class="timeline-subtitle">{{project.project_complexity}}</p>
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="works works-description-left">
+                                    <h4>Github link </h4>
+                                    <p class="timeline-subtitle"> {{project.github}}</p>
+                                     </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="duration duration-right ">
+                            		<img src="/media/about/git.png" alt=""  width="200" height="200" class="rounded-circle">
+                               
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="duration date-label-left">
+                                	<img src="/media/about/tier.png" alt=""  width="200" height="200" class="rounded-circle">
+                               
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="works works-description-right">
+                                    <h4>NICE tier</h4>
+                                    <p class="timeline-subtitle">{{project.NICEtier}}</p>
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,156 @@
+
+{% extends "CFP_Portal/sidebar.html" %}
+{% block content %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'CFP_Portal/projects.css' %}">
+     
+ 
+    <style type="text/css">
+    
+       </style>
+       
+</head>
+<body style="margin-top:-4px">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+
+    <div class="row">
+    
+        <div class="col-lg-3">
+        <div class="mb-4">
+                
+            </div>
+            
+            <div class="mb-4">
+                <div class="small mb-3">Projects</div>
+                <ul class="nav flex-column nav-pills">
+                <form method="get">
+               
+                              
+			
+                    
+            
+		    <li><button class="btn btn-dark"name="innovation" style="margin:5px" type="submit">Innovation</button><span class="ml-auto align-self-center badge badge-secondary badge-pill"> {{innovationumber}} </span></a></li>
+            <br>
+            <li><button class="btn btn-secondary"name="scaffolding"style="margin:5px"  type="submit">Scaffolding</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{scaffoldingnumber}}</span></a></li>
+            <br>
+            <li><button class="btn btn-light"name="discovery"style="margin:5px"  type="submit">Discovery</button><span class="ml-auto align-self-center badge badge-secondary badge-pill">{{discoverynumber}}</span></a></li>
+		  </form>
+                </ul>
+            </div>
+            <div class="mb-4">
+             
+                
+                    
+                    
+                
+            </div>
+        </div>
+        
+        <div class="col-lg-9">
+            <div class="d-flex flex-column flex-md-row mb-3 mb-md-0">
+                <nav class="mr-auto d-flex align-items-center" aria-label="breadcrumb">
+                    <ol class="breadcrumb" style="margin-left:-130px">
+                        <li class="active breadcrumb-item" aria-current="page"><a href="{% url 'blog-home' %}"><i class="fa fa-home"></i></a></li>
+                        <li class="active breadcrumb-item" aria-current="page">Rejected Projects</li>
+                    </ol>
+                </nav>
+                
+                
+            </div>
+            
+           <div class="row">
+        <div class="col-lg-12">
+            <div class="card" style="margin-left:-120px; margin-right:-20px">
+                <div class="card-body">
+                    <div class="table-responsive project-list">
+                        <table class="table project-table table-centered table-nowrap">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Projects</th>
+                                    <th scope="col">Launching Date</th>
+                                    <th scope="col">Status</th>
+                                    
+                                    <th scope="col">Project Complexity</th>
+                                    <th scope="col">Acceptance Date</th>
+                                    <th scope="col">Progress</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for project in rejectedprojects %}
+                                    <tr>
+                                    <th scope="row">{{project.project.id}}</th>
+                                    <td ><a href="{% url 'project-detail' project.project.id %}"> {{project.project.project_title}} </a></td>
+                                    <td>{{project.project.launching_date}}</td>
+                                    <td>
+                                        <span class="text-danger font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i> Rejected</span>
+                                    </td>
+                                    
+                                    <td> 
+                                      {% if project.project.project_complexity == "Innovation" %}
+                            <span class="badge badge-dark"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{project.project.project_complexity}} </span>
+
+                            
+                            {% elif project.project.project_complexity == "Scaffolding" %}
+                             <span class="badge badge-secondary"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{project.project.project_complexity}} </span>
+
+                            {% elif project.project.project_complexity == "Discovery" %}
+                            <span class="badge badge-light"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{project.project.project_complexity}}  </span>
+                            {% endif %}
+                                    
+                                    </td>
+                                    <td> {{project.date_accepted}}
+                                    <td>
+                                        <!--javascript based on progress bar-->
+                                          <script type='text/javascript'>$(document).ready(function() {
+                                    $('.progress .progress-bar').css("width",
+                                    function() {
+                                    return $(this).attr("aria-valuenow") + "%";
+                                    }
+                                    )
+                                    });</script>
+                                         
+                                           <div class="text-center">  <p class="mb-0" style="font-size:15px">100%<span class="float-right"></span></p></div>
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                                    </td>
+
+                                    <td>
+                                        <div class="action">
+                                        
+                                        <div class= "row" style="margin-left:8px" >
+                                            <a href="#" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
+                                            <a href="#" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"> <i class="fa fa-remove h5 m-0"></i></a>
+                                        </div></div>
+                                    </td>
+                                </tr>
+
+
+                              {% endfor %}
+                
+               
+              {% comment %} add pagination {% endcomment %}
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+
+</script>
+</body>
+</html>
+
+{% endblock %}

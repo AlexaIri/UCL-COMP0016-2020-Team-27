@@ -1,0 +1,720 @@
+{% extends "CFP_Portal/sidebar.html" %}
+{% block content %}
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'CFP_Portal/mark_project_detail.css' %}">
+
+    <style type="text/css">
+ 
+
+img {
+    padding-top: 50px;
+    padding-left: 10px;
+    width: 75%;
+    height: 50%
+}
+
+.text-muted {
+    font-size: 13px;
+    font-weight: bold
+}
+
+.form-title {
+    font-weight: bold
+}
+
+.form-group label {
+    font-size: 11px;
+    font-weight: bold;
+    padding-left: 5px;
+    color: #828282
+}
+
+.form-control {
+    border: none;
+    border-radius: 20px;
+    background: rgba(165, 147, 69, 0.075);
+    box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.2)
+}
+
+.btn {
+   
+    font-size: 12px;
+    margin-top: 10px;
+ 
+    text-align: center;
+    border-radius: 5px
+}
+
+.form-control:focus {
+    color: #495057;
+    border-color: #fff !important;
+    outline: 0;
+    box-shadow: 0 1px 1px 1px rgba(0, 123, 255, .25) !important
+}
+.profile .panel-profile {
+    border: none;
+    margin-bottom: 0;
+    box-shadow: none;
+}
+
+.profile .panel-heading {
+    color: #585f69;
+    background: #fff;
+    padding: 7px 15px;
+    border-bottom: solid 3px #f7f7f7;
+}
+
+.overflow-h {
+    overflow: hidden;
+}
+
+.panel-heading {
+    color: #fff;
+    padding: 5px 15px;
+}
+
+.profile .panel-title {
+    font-size: 16px;
+}
+
+.profile .profile-blog {
+    padding: 20px;
+    background: #fff;
+}
+
+.profile .blog-border {
+    border: 1px solid #f0f0f0;
+}
+
+.profile .profile-blog img {
+    float: left;
+    width: 80px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.rounded-x {
+    border-radius: 50% !important;
+}
+
+.profile .name-location {
+    overflow: hidden;
+}
+
+.profile .name-location strong {
+    color: #555;
+    display: block;
+    font-size: 16px;
+}
+
+.profile .name-location span a {
+    color: #555;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.share-list {
+    margin-bottom: 0;
+}
+
+
+.list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+}
+
+.list-inline li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size:11px;
+}
+
+.share-list li i {
+    color: #72c02c;
+    margin-right: 5px;
+} 
+
+    </style>
+</head>
+<body style="margin-top:-4px">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<header class="masthead">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 py-5">
+               
+                <h1 class="mb-4"> {{review.project.project_title}} </h1>
+                <h2 class="m-0"> {{review.project.summarised_abstract}} </h2><br>
+                 <a href ="{% url 'project-detail' review.project.id %}"><button type="button" class="btn btn-dark btn-xs  mt-1 mb-1"> 
+                                <i class="fa fa-tasks" style="color:#999"></i> Visit the Project's Page
+                           </button> </a> 
+            </div>
+            <div class="col-lg-5">
+                <div class="py-5 px-4 masthead-cards">
+                    <div class="d-flex">
+                        <a href="#feedback" class="w-50 pr-3 pb-4">
+                            <div class="card border-0 border-bottom-red shadow-lg shadow-hover">
+                                <div class="card-body text-center">
+                                    <div class="text-center">
+                                        <i class="fa fa-pencil fa-4x my-2"></i>
+                                    </div>
+                                    Feedback
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#comments" class="w-50 pl-3 pb-4">
+                            <div class="card border-0 border-bottom-yellow shadow-lg shadow-hover">
+                                <div class="card-body text-center">
+                                    <div class="text-center">
+                                        <i class="fa fa-4x fa-code my-2"></i>
+                                    </div>
+                                    Comments
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="d-flex">
+                       
+                         <a href="#greenAmberRed" class="w-50 pr-3">
+                            <div class="card border-0 border-bottom-blue shadow-lg shadow-hover">
+                                <div class="card-body text-center">
+                                    <div class="text-center">
+                                        <i class="fa fa-th fa-4x my-2"></i>
+                                    </div>
+                                    Green-Amber-Red System
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#criteria" class="w-50 pl-3">
+                            <div class="card border-0 border-bottom-green shadow-lg shadow-hover">
+                                <div class="card-body text-center">
+                                    <div class="text-center">
+                                        <i class="fa fa-4x fa-list my-2"></i>
+                                    </div>
+                                    Marking Criteria
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="shape"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="container" >
+    <div class="row">
+        <div class="col-md-4 Services-tab item">
+            <div class="folded-corner service_tab_1" id = "criteria">
+                <div class="text"> <i class="fa fa-image fa-5x fa-icon-image"></i>
+                    <p class="item-title">
+                        <h3> Criterion #1: Standards and Interoperability </h3>
+                    </p><!-- /.item-title -->
+                    <p> Write in here the description of this criterion </p>
+                         <div class="card">
+             <div class="card-body">
+                 
+                   <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
+                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
+                  <hr>
+                 <p class="card-description" style="color:#0046B1">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
+
+                
+             </div>
+      
+     </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 Services-tab item">
+            <div class="folded-corner service_tab_1">
+                <div class="text"> <i class="fa fa-lightbulb-o fa-5x fa-icon-image"></i>
+                    <p class="item-title">
+                        <h3> Criterion #2: Technical and Scientific Strength</h3>
+                    </p><!-- /.item-title -->
+                    <p> Write in here the description of this criterion </p>
+                         <div class="card">
+             <div class="card-body">
+                 
+                     <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
+                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
+                  <hr>
+                 <p class="card-description" style="color:#0046B1">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
+
+                
+             </div>
+      
+     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 Services-tab item">
+            <div class="folded-corner service_tab_1">
+                <div class="text"> <i class="fa fa-user fa-5x fa-icon-image"></i>
+                    <p class="item-title">
+                        <h3> Criterion #3: User-centred Design </h3>
+                    </p>
+                    <p> Write in here the description of this criterion </p>
+                         <div class="card">
+             <div class="card-body">
+                 
+                   <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
+                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
+                  <hr>
+                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
+
+                
+             </div>
+      
+     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="row" id = "criteria">
+        <div class="col-md-4 Services-tab item">
+            <div class="folded-corner service_tab_1">
+                <div class="text"> <i class="fa fa-image fa-5x fa-icon-image"></i>
+                    <p class="item-title">
+                        <h3> Criterion #4: Usability Testing </h3>
+                    </p><!-- /.item-title -->
+                    <p> Write in here the description of this criterion (Testing Deployment)</p>
+                         <div class="card">
+             <div class="card-body">
+                 
+                <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
+                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
+                  <hr>
+                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
+
+                
+             </div>
+      
+     </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 Services-tab item">
+            <div class="folded-corner service_tab_1">
+                <div class="text"> <i class="fa fa-lightbulb-o fa-5x fa-icon-image"></i>
+                    <p class="item-title">
+                        <h3> Criterion #5: Research Quality and Documentation</h3>
+                    </p><!-- /.item-title -->
+                    <p> Write in here the description </p>
+                    <div class="row justify-content-center">
+                         <div class="card">
+             <div class="card-body">
+                 
+                  <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
+                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
+                  <hr>
+                  
+                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
+              
+                
+             </div>
+             
+      
+     </div>
+     </div>
+                </div>
+            </div>
+            
+        </div>
+        
+      
+         <div class="col-md-4 Services-tab item">
+            <div class="folded-corner service_tab_1">
+                <div class="text"> <i class="fa fa-lightbulb-o fa-5x fa-icon-image"></i>
+                    <p class="item-title">
+                        <h3> Criterion #6: Resilience</h3>
+                    </p><!-- /.item-title -->
+                    <p> Write in here the description of this criterion </p>
+                    <div class="row justify-content-center">
+                         <div class="card">
+             <div class="card-body">
+                 
+                  <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
+                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
+                  <hr>
+                  
+                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
+
+                
+             </div>
+      
+     </div>
+     </div>
+                </div>
+            </div>
+        </div>
+     
+         <div class="col-md-4 Services-tab item" >
+            <div class="folded-corner service_tab_1">
+                <div class="text"> <i class="fa fa-user fa-5x fa-icon-image"></i>
+                    <p class="item-title">
+                        <h3> Criterion #7: Scalability </h3>
+                    </p>
+                    <p> Write in here the description of this criterion </p>
+                    
+                     <div class="card" text-center>
+             <div class="card-body" style="align:center;">
+                 
+                    <label> <input type="radio" class="option-input radio" style="padding:10px 10px" size="30" name="example" checked /> </label>&emsp;&nbsp;&nbsp;
+                 <label><input type="radio" class="option-input radio" name="example" />  </label>&emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp;
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> &emsp;&nbsp; 
+                  <label> <input type="radio" class="option-input radio" name="example" />  </label> 
+                  <hr>
+                 <p class="card-description" style="color:#0530A2">&nbsp;0  &emsp;&nbsp; 1  &emsp; &nbsp;2  &emsp; &nbsp;3  &emsp; &nbsp;4  &emsp; &nbsp;5</p>
+
+                
+             </div>
+      
+     </div>
+     
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<br>
+
+<div class="container profile" id="comments">
+
+<div class="panel-body">
+            <div class="row">
+
+                <div class="col">
+                    <div class="profile-blog blog-border" style="background:rgba(0,0,0,0.7);  ">
+                        <div class="name-location">
+                            <h6 style="color:rgba(255,255,255)"><b> Comments Section </b></h6>
+                            <p class="text-muted">The sheet below is based on the above criteria. It requires filling in the text boxes under each tab with pro and cons adequate for this project proposal. </p>
+
+                        </div>
+
+                        <div class="clearfix margin-bottom-20"></div>    
+
+         
+                       
+                    </div>
+             
+
+</div>
+</div>
+</div>
+</div>
+ <div class="col accordion_one" style="margin-left:0px">
+    <div class="panel-group" id="accordionFourLeft" style=" width:100%">
+        <div class="panel panel-default" style=" width:100%">
+            <div class="panel-heading">
+                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeftone" aria-expanded="false" class="collapsed" color:black> Criterion #1: Standards and Interoperability </a> </h4>
+            </div>
+            <div id="collapseFiveLeftone" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                <div class="panel-body">
+                     <div class="well">
+    <form accept-charset="UTF-8" action="" method="POST">
+    <script>
+    var text_max = 200;
+$('#count_message').html(text_max + ' remaining');
+  $('#text').keyup(function() {
+  var text_length = $('#text').val().length;
+  var text_remaining = text_max - text_length;
+  $('#count_message').html(text_remaining + ' remaining');
+});
+    </script>
+        <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
+        <h6 class="pull-right" id="count_message" color:white></h6>
+    </form>
+</div>
+
+                </div> <!-- end of panel-body -->
+            </div>
+        </div> <!-- /.panel-default -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeftTwo" aria-expanded="false"> Criterion #2: Technical and Scientific Strength </a> </h4>
+            </div>
+            <div id="collapseFiveLeftTwo" class="panel-collapse collapse" aria-expanded="false" role="tablist" style="height: 0px;">
+                <div class="panel-body">
+                     <div class="well">
+    <form accept-charset="UTF-8" action="" method="POST">
+     <script>
+    var text_max2 = 200;
+$('#count_message2').html(text_max2 + ' remaining');
+  $('#text2').keyup(function() {
+  var text_length2 = $('#text').val().length;
+  var text_remaining2 = text_max2 - text_length2;
+  $('#count_message2').html(text_remaining2 + ' remaining');
+});
+    </script>
+        <textarea class="form-control" id="text2" name="text2" placeholder="Type in your message" rows="3"></textarea>
+        <h6 class="pull-right" id="count_message2" color:white></h6>
+    </form>
+</div>
+
+                </div> <!-- end of panel-body -->
+            </div>
+        </div> <!-- /.panel-default -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeftThree" aria-expanded="false"> Criterion #3: User-centred Design </a> </h4>
+            </div>
+            <div id="collapseFiveLeftThree" class="panel-collapse collapse" aria-expanded="false" role="tablist">
+                <div class="panel-body">
+
+                   <div class="well">
+    <form accept-charset="UTF-8" action="" method="POST">
+        <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
+        <h6 class="pull-right" id="count_message" color:white></h6>
+    </form>
+</div>
+
+                </div> <!-- end of panel-body -->
+            </div>
+        </div> <!-- /.panel-default -->
+        
+ <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeftFour" aria-expanded="false"> Criterion #4: Usability Testing</a> </h4>
+            </div>
+            <div id="collapseFiveLeftFour" class="panel-collapse collapse" aria-expanded="false" role="tablist">
+                <div class="panel-body">
+
+                   <div class="well">
+    <form accept-charset="UTF-8" action="" method="POST">
+        <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
+        <h6 class="pull-right" id="count_message" color:white></h6>
+    </form>
+</div>
+
+                </div> <!-- end of panel-body -->
+            </div>
+        </div> <!-- /.panel-default -->
+        
+
+<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeftFive" aria-expanded="false"> Criterion #5: Research Quality and Documentation </a> </h4>
+            </div>
+            <div id="collapseFiveLeftFive" class="panel-collapse collapse" aria-expanded="false" role="tablist">
+                <div class="panel-body">
+
+                   <div class="well">
+    <form accept-charset="UTF-8" action="" method="POST">
+        <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
+        <h6 class="pull-right" id="count_message" color:white></h6>
+    </form>
+</div>
+
+                </div> <!-- end of panel-body -->
+            </div>
+        </div> <!-- /.panel-default -->
+
+    <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeftSix" aria-expanded="false"> Criterion #6: Resilience </a> </h4>
+            </div>
+            <div id="collapseFiveLeftSix" class="panel-collapse collapse" aria-expanded="false" role="tablist">
+                <div class="panel-body">
+
+                   <div class="well">
+    <form accept-charset="UTF-8" action="" method="POST">
+        <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
+        <h6 class="pull-right" id="count_message" color:white></h6>
+    </form>
+</div>
+
+                </div> <!-- end of panel-body -->
+            </div>
+        </div> <!-- /.panel-default -->
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordion_oneLeft" href="#collapseFiveLeftSeven" aria-expanded="false"> Criterion #7: Scalability </a> </h4>
+            </div>
+            <div id="collapseFiveLeftSeven" class="panel-collapse collapse" aria-expanded="false" role="tablist">
+                <div class="panel-body">
+
+                   <div class="well">
+    <form accept-charset="UTF-8" action="" method="POST">
+        <textarea class="form-control" id="text" name="text" placeholder="Type in your message" rows="3"></textarea>
+        <h6 class="pull-right" id="count_message" color:white></h6>
+    </form>
+</div>
+
+                </div> <!-- end of panel-body -->
+            </div>
+        </div> <!-- /.panel-default -->
+
+
+    </div>
+    <!--end of /.panel-group-->
+</div>
+<br>
+
+
+
+<div class="container" text-center>
+ <h1 class="m-0" style="align:center; ">
+        <b>  
+                      
+        <div class="row">
+            <div class="col-md-12">
+
+           
+
+                <div class="main-timeline3" id ="greenAmberRed">
+                    <div class="timeline">
+                        <div class="timeline-icon">
+                        
+                    <a class="year" href="#" style="background:#28a745">  <h4></h4>
+                         
+                      </a></div>
+                   
+                        <div class="timeline-content">
+                            <h3 class="title">Green Button</h3>
+                            <p class="description" style="text-align:justify">
+The project is approved for further consideration.       It is conderider successful given it complies to the main guidelines and requirements.                   </p>
+                        </div>
+                       
+                    </div>
+                    <div class="timeline">
+                      <a href="#"> <div class="timeline-icon "> <span class="year" style="background:#ffc107"></span></div></a>
+         
+                        <div class="timeline-content">
+                            <h3 class="title">Amber Button</h3>
+                            <p class="description" style="text-align:justify">
+The project is satisfactory enough, but lacks consistency.    
+                        </p>
+                        </div>
+                    </div>
+                     <div class="timeline">
+                        <div class="timeline-icon"><span class="year" style="background:#dd3d31"></span></div>
+                        <div class="timeline-content">
+                            <h3 class="title">Red Button</h3>
+                            <p class="description" style="text-align:justify">
+                            The project is not considered successful because it does not comply with the required guidelines and it does not tick the necessary criteria.
+                                 </p>
+                        </div>
+                    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+                            
+        <!--col-->
+        <div class="col-md-6"  style="margin-left:280px; margin-right:-280px" id = "feedback">
+            <h2 class="form-title"> Final Feedback  </h2>
+          
+            <form>
+                <div class="form-group pt-2 pl-1"> <label for="exampleInputName"> Reviewer Name</label> <input type="text" class="form-control" id="exampleInputName"> </div>
+                <div class="form-group pl-1"> <label for="exampleInputEmail1">Reviewer Email Address</label> <input type="email" class="form-control" id="exampleInputEmail1"> </div>
+                <div class="form-group pl-1"> <label for="exampleFormControlTextarea1">Comments</label> <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea> </div>
+               
+            </form>
+        </div>
+        <!--col-->
+   
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+       <button type="submit" class="btn btn-outline-light btn-lg" value="Submit" style="width:50%"><h5 style="padding:3px">Submit the Review Form</h5></button>
+    </div>
+  </div>
+</div>
+    <svg style="pointer-events: none" class="wave" width="100%" height="50px" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 75">
+        <defs>
+            <style>
+                .a {
+                    fill: none;
+                }
+                
+                .b {
+                    clip-path: url(#a);
+                }
+                
+                .c,
+                .d {
+                    fill: #f9f9fc;
+                }
+                
+                .d {
+                    opacity: 0.5;
+                    isolation: isolate;
+                }
+            </style>
+            <clipPath id="a">
+                <rect class="a" width="1920" height="75"></rect>
+            </clipPath>
+        </defs>
+        <title>wave</title>
+        <g class="b">
+            <path class="c" d="M1963,327H-105V65A2647.49,2647.49,0,0,1,431,19c217.7,3.5,239.6,30.8,470,36,297.3,6.7,367.5-36.2,642-28a2511.41,2511.41,0,0,1,420,48"></path>
+        </g>
+        <g class="b">
+            <path class="d" d="M-127,404H1963V44c-140.1-28-343.3-46.7-566,22-75.5,23.3-118.5,45.9-162,64-48.6,20.2-404.7,128-784,0C355.2,97.7,341.6,78.3,235,50,86.6,10.6-41.8,6.9-127,10"></path>
+        </g>
+        <g class="b">
+            <path class="d" d="M1979,462-155,446V106C251.8,20.2,576.6,15.9,805,30c167.4,10.3,322.3,32.9,680,56,207,13.4,378,20.3,494,24"></path>
+        </g>
+        <g class="b">
+            <path class="d" d="M1998,484H-243V100c445.8,26.8,794.2-4.1,1035-39,141-20.4,231.1-40.1,378-45,349.6-11.6,636.7,73.8,828,150"></path>
+        </g>
+    </svg>
+</header>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+ <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{% static 'CFP_Portal/mark.js' %}"></script>
+</body>
+</html>
+
+{% endblock %}
