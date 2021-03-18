@@ -120,6 +120,24 @@ def projectdetail(request, pk):
         
         for item in request.POST.getlist('options'):
             project.reviewers.add(item)
+
+    # for user in project.reviewers.all:
+    #     email = user.email
+    #     send_mail(
+    #         'You have a project assigned to review',
+    #         'Dear Reviewer, \n The IXN CFP Portal Engine Team is reaching in order to inform you upon the most recent assignment that you have received. There is a project waiting to be reviewed and the complete list of all the projects to be reviewed can be found in the home page or in the projects grid when pressing the Projects Assigned to Me button. \n\n Thank you in advance for your cooperation! \n\n Best wishes, \n Call-for-projects Portal Team ', 
+    #         settings.EMAIL_HOST_USER,
+    #         [email],
+    #         fail_silently=True
+    #     )
+        
+        
+            # send_mail('You have a project assigned to review',   
+            # 'Dear Reviewer, \n The IXN CFP Portal Engine Team is reaching in order to inform you upon the most recent assignment that you have received. There is a project waiting to be reviewed and the complete list of all the projects to be reviewed can be found in the home page or in the projects grid when pressing the Projects Assigned to Me button. \n\n Thank you in advance for your cooperation! \n\n Best wishes, \n Call-for-projects Portal Team ',    settings.EMAIL_HOST_USER,    #from
+            # [project.reviewers.email],    #to
+            # fail_silently=True
+            # )
+            
         #Person.objects.filter(id=pk).update(reviewers=request.POST.getlist('options'))
         
     
@@ -301,6 +319,14 @@ def projectreviewdetail(request, project_id):
         acceptedproject = AcceptedProjects(project=project)
         acceptedproject.save()
         Display = 'Project has been successfully accepeted'
+        
+        send_mail(
+            'The waiting is over! Your project proposal is successful!',   #subject line
+            'Congratulations upon your successful project proposal.\n The IXN CFP reviewing committee is pleased to announce that they came to a consensus and the result is the one you were waiting for. Your project has been accepted by the majority of the reviewers in our panel and will move forward towards our partner university students. We will come back with specific details on the next stages.\n\n Best wishes, \n Call-for-projects Portal Team ',    #message
+            settings.EMAIL_HOST_USER,    #from
+            [project.email],    #to
+            fail_silently=True
+        )
     
     if request.method == 'GET' and 'reject' in request.GET:
         
@@ -308,7 +334,13 @@ def projectreviewdetail(request, project_id):
         rejectedproject = RejectedProjects(project=project)
         rejectedproject.save()
         Display = 'Project has been successfully rejected'
-    
+        send_mail(
+            'The waiting is over! Unfortunately, your project proposal is unsuccessful!',   #subject line
+            'We are sorry to announce that your project proposal is unsuccessful.\n The IXN CFP reviewing committee have debated for some time now and carefully reviewed all the key features of your project. Your project has been rejected by the majority of the reviewers in our panel and will therefore not move forward towards our partner university students. But do not get discouraged! It was just a learning experience and you have the opportunity to visualise the read-only comprehensive feedback and comments from all the reviwers. We are looking forward to seeing your ideas and projects put into place in the next round! Good luck with all your future endevours!\n\n Best wishes, \n Call-for-projects Portal Team ',    #message
+            settings.EMAIL_HOST_USER,    #from
+            [project.email],    #to
+            fail_silently=True
+        )
    
     if request.user.groups.filter(name__in=['Submitters']).exists():
         group = 'Submitters'
