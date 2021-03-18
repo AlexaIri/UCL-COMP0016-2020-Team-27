@@ -80,10 +80,14 @@ def about(request):
 @login_required
 @user_passes_test(is_user)
 def viewdetailsproject(request):
+    group =''
+    if request.user.groups.filter(name__in=['Submitters']).exists():
+        group = 'Submitters'
 
     project = Person.objects.latest('id')
     context ={
         'project': project,
+        'group' : group,
     }
     return render(request, 'CFP_Portal/viewdetailsproject.html', context)
 
