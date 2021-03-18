@@ -455,7 +455,8 @@ def acceptedprojects(request):
         response = HttpResponse(content_type ='text/csv')
         writer = csv.writer(response)
         writer.writerow(['Name', 'Phone Number', 'Email', 'Title', 'Project Title', 'Summarised Abstract', 'Full Abstract', 'Department', 'Organisation', 'Expertise Skills', 'Devices and Technologies', 'Project Complexity', 'Completion of form', 'Source type', 'Launching date', 'Motivations', 'Tags', 'Status', 'NICEtier'])
-        for project in Person.objects.all().values_list('name', 'phone_number', 'email', 'title', 'project_title', 'summarised_abstract', 'full_abstract', 'department', 'organisation', 'expertiseskills', 'devices', 'project_complexity', 'ethics_form','source_type', 'launching_date', 'motivations', 'tags__name', 'status', 'NICEtier'):
+        
+        for project in Person.objects.filter(status='Accepted').values_list('name', 'phone_number', 'email', 'title', 'project_title', 'summarised_abstract', 'full_abstract', 'department', 'organisation', 'expertiseskills', 'devices', 'project_complexity', 'ethics_form','source_type', 'launching_date', 'motivations', 'tags__name', 'status', 'NICEtier'):
              writer.writerow(project)
         response['Content-Disposition'] = 'attachment; filename ="acceptedprojects.csv"'
         return response
@@ -497,6 +498,15 @@ def underreviewprojects(request):
     if request.method == 'GET' and 'scaffolding' in request.GET:
        projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_under_review')
 
+    if request.method == 'GET' and 'approve' in request.GET:
+        response = HttpResponse(content_type ='text/csv')
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Phone Number', 'Email', 'Title', 'Project Title', 'Summarised Abstract', 'Full Abstract', 'Department', 'Organisation', 'Expertise Skills', 'Devices and Technologies', 'Project Complexity', 'Completion of form', 'Source type', 'Launching date', 'Motivations', 'Tags', 'Status', 'NICEtier'])
+        
+        for project in Person.objects.filter(status='Under Review').values_list('name', 'phone_number', 'email', 'title', 'project_title', 'summarised_abstract', 'full_abstract', 'department', 'organisation', 'expertiseskills', 'devices', 'project_complexity', 'ethics_form','source_type', 'launching_date', 'motivations', 'tags__name', 'status', 'NICEtier'):
+             writer.writerow(project)
+        response['Content-Disposition'] = 'attachment; filename ="underreviewprojects.csv"'
+        return response
     context ={
         'underreviewprojects': rejectedprojects,
         'myFilter': myFilter,
@@ -651,13 +661,7 @@ def UserDisplay(request):
    
     return render(request, 'CFP_Portal/users.html', context)
 
-@login_required
-@user_passes_test(is_reviewer)
-class ProjectsListView(ListView):
-    model = Person
-    context_object_name = 'projects'
-    
-    template_name ='CFP_Portal/projects_grid.html'
+
 
 @login_required
 @user_passes_test(is_reviewer)
@@ -667,51 +671,16 @@ class HomeProjectListView(ListView, ): # this is the former PostListView
     context_object_name = 'projects'
     #ordering = ['date_posted']
     paginate_by = 5
-@login_required
-@user_passes_test(is_reviewer)
-class PostDetailView(DetailView):
-    model = Post
+
+
 @login_required
 @user_passes_test(is_reviewer)
 class OrganisationDetailView(DetailView):
     model = Organisation
     context_object_name = 'organisations'
-@login_required
-@user_passes_test(is_reviewer)
-class ProjectDetailView(DetailView):
-    
-    model = Person
-    context_object_name = 'project'
-@login_required
-@user_passes_test(is_reviewer)  
-class ReviewDetailView(DetailView):
-    model = Review
-    context_object_name = 'review'
-@login_required
-@user_passes_test(is_reviewer)    
-class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Post
-    fields = ['title', 'content']
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-@login_required
-@user_passes_test(is_reviewer)
-class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Post
-    fields = ['title', 'content']
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
-    def test_func(self): # other users are not allowed to update the feedback forms except for the original author
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
-        #return super().test_func()
 @login_required
 @user_passes_test(is_reviewer)
 class OrganisationUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -730,18 +699,7 @@ class OrganisationUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView
         # return False
         return True
         #return super().test_func()
-@login_required
-@user_passes_test(is_reviewer)
-class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Post
-    success_url ='/'
 
-    def test_func(self): # other users are not allowed to delete the feedback forms except for the original author
-        post = self.get_object()
-        if self.request.user == post.author:
-            return True
-        return False
-        #return super().test_func()
 @login_required
 @user_passes_test(is_reviewer)
 class OrganisationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -756,17 +714,7 @@ class OrganisationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView
         return True
         #return super().test_func()
 
-@login_required
-@user_passes_test(is_reviewer)  
-class UserPostListView(ListView):
-    model = Post
-    template_name ='CFP_Portal/user_posts.html'
-    context_object_name = 'posts'
-    paginate_by = 5
 
-    def get_queryset(self):
-        user = get_object_or_404(User, username = self.kwargs.get('username'))
-        return Post.objects.filter(author = user).order_by('-date_posted')
 
 
 def SubmissionPortal(request):
@@ -817,43 +765,7 @@ def SubmissionPortal(request):
     
     return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
     
-    # def get_redirect_url(self, pk):
-    #     # article = Article.objects.get(pk=pk)
-    #     # slug = article.slug
-    #     return reverse('project', args=(pk))
-
-    # my_id_project = 0
-  
-    # if request.method == "POST":
-        
-    #     form = Proposal(request.POST)
-        
-    #     print(form.errors)
-    #     if form.is_valid():
-
-           
-    #         user = User.objects.get(pk=request.user.id)
-    #         project = form.save(commit=False)
-    #         project.status = 'Submitted'
-    #         project.department = user.profile.department
-    #         project.department = user.profile.organisation
-    #         project.user = user
-    #         project.save()
-    #         form.save_m2m()
-    #         my_id_project = project.id
-    #         print("heeeereee", project.id)
-                    
-
-            
-    #         item_list = Person.objects.all()
-    #         return redirect('CFP_Portal/')
-    #         # return get_redirect_url(project.id)
-    #         # return redirect("project", pk=project.id)
-       
-    # form = Proposal()
     
-    # return render(request, 'CFP_Portal/submission_portal.html', {"form": form})
-
     
 
  

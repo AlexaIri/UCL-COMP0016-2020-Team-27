@@ -5,26 +5,17 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from .views import (HomeProjectListView, 
-                PostDetailView,
-                PostCreateView, 
-                PostUpdateView, 
-                PostDeleteView, 
-                UserPostListView,
                 OrganisationListView,
                 OrganisationDetailView,
                 OrganisationUpdateView,
                 OrganisationDeleteView,
-                ReviewsListView, 
-                ReviewDetailView, 
-                ProjectsListView, 
-                ProjectDetailView,
+                ReviewsListView,
                 ReviewsDisplayListView,
                 Trial)
 
 
 urlpatterns = [
     path('', views.home, name = 'blog-home'),
-    path('user/<str:username>', views.UserPostListView, name='user-posts'),
     path('displayOrganisations/', views.OrganisationListView , name= 'organisations'),
     path('reviews/', views.ReviewsListView , name= 'reviews'),
     path('trial/', views.trial , name= 'trial'),
@@ -33,7 +24,7 @@ urlpatterns = [
     path('leave/feedback/', views.feedback , name= 'feedback'),
     path('reviewDisplay/', views.reviewdisplay , name= 'review-display'), #review grid
 
-    path('post/<int:pk>/', views.PostDetailView, name = 'post-detail'), # feedback sheet
+    
     # path('review/<int:review_id>/', ReviewDetailView.as_view(), name = 'review-detail'),
     path('review/<int:review_id>/', views.review, name = 'review-detail'), # VIEW ONE REVIEW
     path('reviewdetail/<int:project_id>/', views.projectreviewdetail , name= 'reviewdetail'),
@@ -47,11 +38,10 @@ urlpatterns = [
     # path('markAndReview/project/<int:pk>/', MarkProjectDetail.as_view(), name = 'mark-project-detail'),
     path('markAndReview/project/<int:pk>/', views.markprojectdetail, name = 'mark-project-detail'),
 
-    path('post/<int:pk>/update/', views.PostUpdateView, name = 'post-update'),
-    path('post/<int:pk>/delete/', views.PostDeleteView, name = 'post-delete'),
+ 
     path('organisation/<int:pk>/update/', views.OrganisationUpdateView, name = 'organisation-update'),
     path('organisation/<int:pk>/delete/', views.OrganisationDeleteView, name = 'organisation-delete'),
-    path('post/new/', views.PostCreateView, name = 'post-create'),
+
 
     path('users/', views.UserDisplay, name = 'users'),
     path('projects/', views.projectgrid, name = 'projects' ),
