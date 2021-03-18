@@ -85,6 +85,7 @@
     <div class="my_card p-3 py-4" >
         <div class="text-center"> <img src="{{ user.profile.image.url }}" width="100" height="100" class="rounded-circle">
             <h3 class="mt-2">{{ user.username }}</h3> <span class="mt-1 clearfix"><p class="text-secondary"> {{ user.profile.full_name }}</p></span> <small class="mt-4">
+         <p class="text-secondary">Email: {{ user.ema }}</p>
           <p class="text-secondary">Department: {{ user.profile.department }}</p>
 
           <p class="text-secondary">Organisation: {{ user.profile.organisation }}</p></small>
@@ -134,27 +135,11 @@
                       <h6 class="mb-0">Email:</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      {{ user.profile.email }}
+                      {{ user.email }}
                     </div>
                   </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Phone:</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      {{ user.profile.phone }}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Website:</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                     {{ user.profile.website }}
-                    </div>
-                  </div>
+                  
+                  
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
@@ -177,17 +162,10 @@
                       <h6 class="mb-0">Organisation Address:</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    {{ user.profile.address }}
+                    {{ user.profile.organisation_address }}
                     </div>
                   </div><hr>
-                   <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Organisation:</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                    {{ user.profile.organisation }}
-                    </div>
-                  </div>
+                   
                 </div>
               </div>
              
@@ -229,6 +207,7 @@
                   <h6> {{p_form.full_name|as_crispy_field}}</h6>
                     <h6> {{p_form.department|as_crispy_field}}</h6>
                       <h6> {{p_form.organisation|as_crispy_field}}</h6> 
+                      <h6> {{p_form.organisation_address|as_crispy_field}}</h6> 
 
                  {% comment %} <h6> {{p_form.organisation_address|as_crispy_field}}</h6>
                    <h6> {{p_form.about|as_crispy_field}}</h6> {% endcomment %}

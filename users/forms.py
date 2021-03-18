@@ -23,7 +23,7 @@ class ProfileRegisterForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['image', 'department', 'organisation','full_name']
+        fields = ['image', 'department', 'organisation','full_name','organisation_address']
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
@@ -36,7 +36,7 @@ class ProfileUpdateForm(forms.ModelForm):
     
     class Meta:
         model = Profile
-        fields = ['image', 'department', 'full_name', 'organisation']
+        fields = ['image', 'department', 'full_name', 'organisation','organisation_address']
 
 class Login(forms.Form):
     
