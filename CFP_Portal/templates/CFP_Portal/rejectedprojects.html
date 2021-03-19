@@ -89,6 +89,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <!--list of rejected projects-->
                               {% for project in rejectedprojects %}
                                     <tr>
                                     <th scope="row">{{project.project.id}}</th>
@@ -111,7 +112,7 @@
                             {% endif %}
                                     
                                     </td>
-                                    <td> {{project.date_accepted}}
+                                    <td> {{project.date_rejected}}
                                     <td>
                                         <!--javascript based on progress bar-->
                                           <script type='text/javascript'>$(document).ready(function() {
@@ -141,6 +142,7 @@
 
 
                               {% endfor %}
+                              <!--end of list of rejected projects-->
                 
                
               {% comment %} add pagination {% endcomment %}

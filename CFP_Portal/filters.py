@@ -2,6 +2,10 @@ import django_filters
 
 from .models import *
 
+
+# -----------------------------------------------------------
+# filters used to create multi field query in project grid / project list
+# -----------------------------------------------------------
 class ProjectFilter(django_filters.FilterSet):
     
     name = django_filters.CharFilter(lookup_expr='startswith')

@@ -2,7 +2,7 @@ from django import forms
 from CFP_Portal.models import Person, Comment, Review, User
 from django.forms import ModelChoiceField, URLField
 
-# from phonenumber_field.formfields import PhoneNumberField
+
 
 
 
@@ -10,12 +10,11 @@ from django.forms import ModelChoiceField, URLField
 class Proposal(forms.ModelForm):
     class Meta:
         model = Person
-        # fields = ['name','surname','email','phone_number','title','project_title','summarised_abstract','full_abstract','expertiseskills','devices','launching_date','motivations','importance','hashtags','tags','project_complexity','source_type','ethics_form']
+      
         exclude = ['priority','status','department','organisation','completionPercentage','submission_date','user', 'reviewers']
         widgets = {
             "name" : forms.TextInput(attrs ={'placeholder': 'Full name'}),
             "email" : forms.TextInput(attrs ={'placeholder': 'Email address'}),
-            # phone_number = PhoneNumberField()
             "phone_number" : forms.TextInput(attrs ={'placeholder': 'Phone'}),
             "title" : forms.TextInput(attrs ={'placeholder': 'Job Title'}),
             "project_title" : forms.TextInput(attrs ={'placeholder': 'Title'}),
@@ -59,14 +58,10 @@ class ReviewForm(forms.Form):
         )
 
     id = forms.IntegerField(required=False, widget=forms.HiddenInput())
-    # project = ProjectModelChoiceField(queryset=Person.objects.all())
-    
-    
-    # phone_number = PhoneNumberField()
-   
+  
 
     comments = forms.CharField(widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Write your final feedback in here...'}))
-    # widget=forms.Textarea(attrs={"rows":5, "cols":20}
+
 
     standards_and_interoperability_comments = forms.CharField(max_length=2000, widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Type in your comment...'}))
     technical_and_scientific_strength_comments = forms.CharField(max_length=2000, widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Type in your comment...'}))
@@ -100,13 +95,7 @@ class ReviewForm(forms.Form):
 
 class Feedback(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'first'}))
-    # first_name = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Wendy '}), required=False)
-    
-    # surname = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': 'Appleseed '}), required=False)
-    
-    # phone = forms.CharField(widget = forms.TextInput(attrs ={'placeholder': '(021) 456 987'}), required=False)
-    
-    # message = forms.CharField(max_length=2000, widget = forms.Textarea(attrs ={"rows":5, "cols":20, 'placeholder': 'Type in your comment...'}))
+
 
 
     def __str__(self):

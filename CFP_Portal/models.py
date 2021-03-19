@@ -5,17 +5,19 @@ from django.urls import reverse
 from PIL import Image
 from django.db.models import F
 from taggit.managers import TaggableManager
-# from phonenumber_field.modelfields import PhoneNumberField
+
 
 
 def user_directory_path(instance, filename): 
   
-    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename> 
+   
         return 'user_{0}/{1}'.format(instance.user.id, filename) 
 
-# Create your models here.
+# -----------------------------------------------------------
+# models used throughout project
+# -----------------------------------------------------------
 class Organisation(models.Model):
-
+    
     def __str__(self):
         return self.organisation_name
 
@@ -66,7 +68,7 @@ class Person(models.Model):
     
 
     
-    SHIRT_SIZES = (
+    projecttypes= (
         ('Scaffolding','Scaffolding'),
         ('Discovery','Discovery'),
         ('Innovation', 'Innovation'),
@@ -79,7 +81,7 @@ class Person(models.Model):
 
     
     
-    project_complexity = models.CharField("project complexity", max_length=20, choices=SHIRT_SIZES, default = "")
+    project_complexity = models.CharField("project complexity", max_length=20, choices=projecttypes, default = "")
 
     OPEN_OR_CLOSE = (
         ('Open Source', 'Open Source'),
@@ -220,9 +222,7 @@ class Review(models.Model):
     #     return self.points * 100/35
 
     #green-amber-red boolean system
-    green = models.BooleanField(default = False, null=True)
-    amber = models.BooleanField(default =False, null=True)
-    red = models.BooleanField(default = False, null=True)
+    
 
     comments = models.TextField("comments", default = "", null = True)
 
@@ -235,17 +235,7 @@ class Comment(models.Model):
     def __str__(self):
         return '%s' % (self.project.project_title)
 
-class Post(models.Model):
-    def __str__(self):
-        return self.title
 
-    def get_absolute_url(self):
-        return reverse("post-detail", kwargs={"pk": self.pk})
-
-    title = models.CharField(max_length = 100)
-    content = models.TextField()
-    date_posted = models.DateTimeField(default = timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class AcceptedProjects(models.Model):
     project = models.OneToOneField(
@@ -265,7 +255,7 @@ class RejectedProjects(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
-    date_accepted = models.DateTimeField(default = timezone.now)
+    date_rejected = models.DateTimeField(default = timezone.now)
     
     def __str__(self):
         return '%s' % (self.project.project_title)

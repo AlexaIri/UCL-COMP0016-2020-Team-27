@@ -22,6 +22,7 @@
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card bg-pattern">
+             <!--view for reviewers/approvers-->
              {%if  group != "Submitters"%}
             
                 
@@ -129,6 +130,7 @@
                             
                             <a href="{% url 'export'  %}"><button type="button" class="btn btn-info">   <i class="fa fa-upload fa-xs"> </i> Export Data
                                  </button></a></div><br>
+                                  <!--list of  projects-->
                               {% for project in projects %}
                               
                                     <tr>
@@ -220,6 +222,7 @@
 
 
                               {% endfor %}
+                              
                                
                                       
                                     

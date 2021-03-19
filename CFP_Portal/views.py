@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User, Group
-from .models import Organisation, Post, Person, Review, Comment, RejectedProjects, AcceptedProjects, UnderReviewProjects
+from .models import Organisation, Person, Review, Comment, RejectedProjects, AcceptedProjects, UnderReviewProjects
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import Proposal, ReviewForm, Feedback
@@ -27,10 +27,11 @@ def has_group(user, group_name):
     group = Group.objects.get(name=group_name) 
     return True if group in user.groups.all() else False
 
+# methods returning boolean of what type of user for permission handling #
 def is_user(user):
     
     return user.is_superuser or user.is_staff or user.groups.filter(name__in=['Submitters','Reviewers','Approvers']).exists()
-    # print(user.groups)
+
 
 def is_reviewer(user):
     
@@ -38,8 +39,7 @@ def is_reviewer(user):
 
 def is_submitter(user):
     return user.groups.filter(name__in=['Submitters']).exists()
-    # print(user.groups)
-   
+  
 
 def is_lead(user):  
     # print(user.groups)
@@ -56,30 +56,32 @@ def export(request):
     response['Content-Disposition'] = 'attachment; filename ="projects.csv"'
 
     return response
+
+
 @login_required
 @user_passes_test(is_reviewer)
 def index(request):
     item_list = Organisation.objects.all()
-    #template = loader.get_template('CFP_Portal/index.html')
+    
     context ={
         'item_list': item_list,
     }
-    #return HttpResponse(template.render(context, request))
+    
     return render(request, 'CFP_Portal/index.html', context)
 
+# view to send to about page #
 @login_required
 @user_passes_test(is_reviewer)
 def about(request):
     
-    #template = loader.get_template('CFP_Portal/index.html')
-
-    #return HttpResponse(template.render(context, request))
+   
     return render(request, 'CFP_Portal/about.html')
 
-
+# view showing summary of project after submission #
 @login_required
 @user_passes_test(is_user)
 def viewdetailsproject(request):
+    
     group =''
     if request.user.groups.filter(name__in=['Submitters']).exists():
         group = 'Submitters'
@@ -91,6 +93,7 @@ def viewdetailsproject(request):
     }
     return render(request, 'CFP_Portal/viewdetailsproject.html', context)
 
+# view showing showing project details #
 @login_required
 @user_passes_test(is_user)
 def projectdetail(request, pk):
@@ -101,8 +104,8 @@ def projectdetail(request, pk):
         group = 'Submitters'
     
     reviewers = User.objects.filter(groups__name__in=['Reviewers','Approvers',])
-    #reviewers = User.objects.filter(groups__name='Reviewers')
-
+    
+    # saving form details into comment model when post request sent #
     if request.method == 'POST' and 'comment' in request.POST:
         
         form = Commentform(request.POST)
@@ -116,31 +119,13 @@ def projectdetail(request, pk):
     else:
         form = Commentform()     
 
+    # assigning reviewers #    
+
     if request.method == 'POST' and 'reviewers' in request.POST:
         
         for item in request.POST.getlist('options'):
             project.reviewers.add(item)
 
-    # for user in project.reviewers.all:
-    #     email = user.email
-    #     send_mail(
-    #         'You have a project assigned to review',
-    #         'Dear Reviewer, \n The IXN CFP Portal Engine Team is reaching in order to inform you upon the most recent assignment that you have received. There is a project waiting to be reviewed and the complete list of all the projects to be reviewed can be found in the home page or in the projects grid when pressing the Projects Assigned to Me button. \n\n Thank you in advance for your cooperation! \n\n Best wishes, \n Call-for-projects Portal Team ', 
-    #         settings.EMAIL_HOST_USER,
-    #         [email],
-    #         fail_silently=True
-    #     )
-        
-        
-            # send_mail('You have a project assigned to review',   
-            # 'Dear Reviewer, \n The IXN CFP Portal Engine Team is reaching in order to inform you upon the most recent assignment that you have received. There is a project waiting to be reviewed and the complete list of all the projects to be reviewed can be found in the home page or in the projects grid when pressing the Projects Assigned to Me button. \n\n Thank you in advance for your cooperation! \n\n Best wishes, \n Call-for-projects Portal Team ',    settings.EMAIL_HOST_USER,    #from
-            # [project.reviewers.email],    #to
-            # fail_silently=True
-            # )
-            
-        #Person.objects.filter(id=pk).update(reviewers=request.POST.getlist('options'))
-        
-    
 
     common_tags = project.tags.all()
     commentslist = Comment.objects.all()
@@ -154,6 +139,7 @@ def projectdetail(request, pk):
     }
     return render(request, 'CFP_Portal/person_detail.html', context)
 
+# method assigning reviewers #  
 @login_required
 @user_passes_test(is_reviewer)
 def markprojectdetail(request, pk):
@@ -162,16 +148,12 @@ def markprojectdetail(request, pk):
     context_object_name = 'review'
     context = {
         'review': review,
-        # 'comments': commentslist,
-        # 'form': form
+       
     }
     return render(request, 'CFP_Portal/mark_project_detail.html', context)
 
-# class MarkProjectDetail(DetailView):
-#     model = Review
-#     context_object_name = 'review'
 
-
+# home page #  
     
 @login_required
 @user_passes_test(is_user)
@@ -196,6 +178,8 @@ def home(request):
     if request.user.groups.filter(name__in=['Submitters']).exists():
         group = 'Submitters'
 
+    #---- back end for submitter view ---#  
+    
     individualprojects = Person.objects.filter(user=request.user)
     individualaccepted= Person.objects.filter(user=request.user, status='Accepted').count()
     individualrejected= Person.objects.filter(user=request.user, status='Rejected').count()
@@ -207,8 +191,7 @@ def home(request):
         search_term = request.GET['search']
         projects = Person.objects.all().filter(project_title__icontains=search_term).order_by('-submission_date')
     
-    
-         
+      
     if request.method == 'GET' and 'allprojects' in request.GET:
         
         projects = Person.objects.all()
@@ -217,9 +200,7 @@ def home(request):
     if request.method == 'GET' and 'assigned' in request.GET:
         projects = Person.objects.filter(reviewers=request.user)
     
-   
-    
-    #return HttpResponse('<h1> Blog Home </h1>')
+
     totalnumber = Person.objects.all().count()
     
     context = {
@@ -231,31 +212,32 @@ def home(request):
         'group' : group, 
         'individualaccepted' : individualaccepted,
         'individualpending' : individualpending
-        # 'all_projects':all_projects,
-        # 'order_by': order_by
+       
     }
-    # table = PeopleTable(projects)
-    # table.paginate(page=request.GET.get("page", 1), per_page=5)
+    
    
     return render(request, 'CFP_Portal/home.html', context)
 
 
 
 
-
+#---- project grid showing list of projects ---#  
 @login_required
 @user_passes_test(is_reviewer)
 def projectgrid(request):
-      #template = loader.get_template('CFP_Portal/index.html')
+    
     projects = Person.objects.order_by('-submission_date')
    
     
+    # filtering and querying projects #  
 
     myFilter = ProjectFilter(request.GET, queryset = projects)
     projects = myFilter.qs
     innovationnumber = Person.objects.filter(project_complexity='Innovation').count()
     scaffoldingnumber = Person.objects.filter(project_complexity='Scaffolding').count()
     discoverynumber = Person.objects.filter(project_complexity='Discovery').count()
+
+    
 
     if request.method == 'GET' and 'innovation' in request.GET:
         projects = Person.objects.filter(project_complexity='Innovation').order_by('-submission_date')
@@ -280,6 +262,7 @@ def projectgrid(request):
     #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/projects_grid.html', context)
 
+ # showing review details #  
 @login_required
 @user_passes_test(is_reviewer)
 def detail(request, project_id, review_id):
@@ -287,10 +270,12 @@ def detail(request, project_id, review_id):
     review = get_object_or_404(Review, pk = review_id)
     return render(request, 'CFP_Portal/detail.html', {'project': project, 'review':review, 'reviews': Review.objects.filter(project_id=project_id)})
 
+
+ # showing review details #  
 @login_required
 @user_passes_test(is_user)
 def review(request, review_id):
-    # project = get_object_or_404(Person, pk=project_id)
+    
     group = ''
     if request.user.groups.filter(name__in=['Submitters']).exists():
         group = 'Submitters'
@@ -304,6 +289,7 @@ def review(request, review_id):
     
     return render(request, 'CFP_Portal/review.html', context)
 
+ # review details and approve/reject UI handling #  
 @login_required
 @user_passes_test(is_user)
 def projectreviewdetail(request, project_id):
@@ -314,12 +300,14 @@ def projectreviewdetail(request, project_id):
     if request.user.groups.filter(name__in=['Approvers']).exists():
         group = 'Approvers'
 
+    # add project to accepted projects if approve button pressed #  
     if request.method == 'GET' and 'approve' in request.GET:
         Person.objects.filter(id=project_id).update(status='Accepted')
         acceptedproject = AcceptedProjects(project=project)
         acceptedproject.save()
         Display = 'Project has been successfully accepted'
         
+        # send mail to applicant # 
         send_mail(
             'The waiting is over! Your project proposal is successful!',   #subject line
             'Congratulations upon your successful project proposal.\n The IXN CFP reviewing committee is pleased to announce that they came to a consensus and the result is the one you were waiting for. Your project has been accepted by the majority of the reviewers in our panel and will move forward towards our partner university students. We will come back with specific details on the next stages.\n\n Best wishes, \n Call-for-projects Portal Team ',    #message
@@ -328,12 +316,15 @@ def projectreviewdetail(request, project_id):
             fail_silently=True
         )
     
+    # add project to rejected projects if reject button pressed # 
     if request.method == 'GET' and 'reject' in request.GET:
         
         Person.objects.filter(id=project_id).update(status='Rejected')
         rejectedproject = RejectedProjects(project=project)
         rejectedproject.save()
         Display = 'Project has been successfully rejected'
+
+        # send mail to applicant # 
         send_mail(
             'The waiting is over! Unfortunately, your project proposal is unsuccessful!',   #subject line
             'We are sorry to announce that your project proposal is unsuccessful.\n The IXN CFP reviewing committee have debated for some time now and carefully reviewed all the key features of your project. Your project has been rejected by the majority of the reviewers in our panel and will therefore not move forward towards our partner university students. But do not get discouraged! It was just a learning experience and you have the opportunity to visualise the read-only comprehensive feedback and comments from all the reviwers. We are looking forward to seeing your ideas and projects put into place in the next round! Good luck with all your future endevours!\n\n Best wishes, \n Call-for-projects Portal Team ',    #message
@@ -355,12 +346,16 @@ def projectreviewdetail(request, project_id):
 
     return render(request, 'CFP_Portal/reviewdetail.html', context)
 
+
+# alternate list view for showing projects # 
+
 @login_required
 @user_passes_test(is_reviewer)
 def projectlistview(request):
-    #template = loader.get_template('CFP_Portal/index.html')
+   
     projects = Person.objects.order_by('-submission_date')
 
+    # filtering and querying projects # 
     myFilter = ProjectFilter(request.GET, queryset = projects)
     projects = myFilter.qs
     innovationnumber = Person.objects.filter(project_complexity='Innovation').count()
@@ -385,14 +380,14 @@ def projectlistview(request):
         'scaffoldingnumber': scaffoldingnumber
     }
     
-    #return HttpResponse(template.render(context, request))
     return render(request, 'CFP_Portal/project_listview.html', context)
 
+# view showing rejected projects # 
 @login_required
 @user_passes_test(is_reviewer)
 def rejectedprojects(request):
-    #template = loader.get_template('CFP_Portal/index.html')
-    rejectedprojects = RejectedProjects.objects.order_by('-date_accepted')
+    
+    rejectedprojects = RejectedProjects.objects.order_by('-date_rejected')
 
     myFilter = ProjectFilter(request.GET, queryset = rejectedprojects)
     projects = myFilter.qs
@@ -402,13 +397,13 @@ def rejectedprojects(request):
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation').order_by('-date_accepted')
+        projects = Person.objects.filter(project_complexity='Innovation').order_by('-date_rejected')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery').order_by('-date_accepted')
+        projects = Person.objects.filter(project_complexity='Discovery').order_by('-date_rejected')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_accepted')
+       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_rejected')
 
     context ={
         'rejectedprojects': rejectedprojects,
@@ -418,13 +413,14 @@ def rejectedprojects(request):
         'scaffoldingnumber': scaffoldingnumber
     }
     
-    #return HttpResponse(template.render(context, request))
+   
     return render(request, 'CFP_Portal/rejectedprojects.html', context)
 
+# view showing accepted projects # 
 @login_required
 @user_passes_test(is_reviewer)
 def acceptedprojects(request):
-    #template = loader.get_template('CFP_Portal/index.html')
+  
     acceptedprojects = AcceptedProjects.objects.order_by('-date_accepted')
 
 
@@ -474,14 +470,15 @@ def acceptedprojects(request):
         'acceptedprojects_page': acceptedprojects_page
     }
     
-    #return HttpResponse(template.render(context, request))
+  
     return render(request, 'CFP_Portal/acceptedprojects.html', context)
 
 
+# view showing under review projects # 
 @login_required
 @user_passes_test(is_reviewer)
 def underreviewprojects(request):
-    #template = loader.get_template('CFP_Portal/index.html')
+   
     underreviewprojects = UnderReviewProjects.objects.order_by('-date_under_review')
 
 
@@ -539,18 +536,15 @@ class ReviewsListView(ListView):
     template_name = 'CFP_Portal/reviews.html'
     context_object_name = 'reviews'
 
-@login_required
-@user_passes_test(is_reviewer)
-class  ReviewsDisplayListView(ListView):
-    model = Person
-    template_name = 'CFP_Portal/review_display.html'
-    context_object_name = 'projects'
 
+
+# review portal shwoing projects to review# 
 @login_required
 @user_passes_test(is_reviewer)
 def reviewdisplay(request):
     projects = Person.objects.filter(reviewers=request.user).order_by('-submission_date')
    
+   #  querying  results based on button pressed # 
     if request.method == 'GET' and 'projects' in request.GET:
         projects = Person.objects.filter(reviewers=request.user, status__in=['Submitted','Under Review']).order_by('-submission_date')
  
@@ -563,8 +557,7 @@ def reviewdisplay(request):
     context = {
         'projects' : projects
 
-        # 'comments': commentslist,
-        # 'form': form
+       
     }
    
     return render(request, 'CFP_Portal/review_display.html', context)
@@ -581,15 +574,14 @@ class  Trial(ListView):
 def  trial(request):
     model = Person
     projects = Person.objects.all()
-    # template_name = 'CFP_Portal/trial.html'
+   
     context_object_name = 'projects'
     context={
         'projects': projects
-
     }
     return render(request, 'CFP_Portal/trial.html', context)
 
-
+#  saving feedback form details # 
 @login_required
 @user_passes_test(is_reviewer)
 def  feedback(request):
@@ -598,17 +590,16 @@ def  feedback(request):
         form = Feedback(request.POST)
         
         if form.is_valid:
-        #    save_it = form.save(commit = False)
-        #    save_it.save()
+       
 
            message_firstname = request.POST['message-firstname']
            message_surname = request.POST['message-surname']
-           # message_email = request.POST['message-email']
+           
            message_phone = request.POST['message-phone']
-           # message = request.POST['message']
+           
            message = request.POST.get('message', '')
            message_email = request.POST.get('message-email', '')
-        #    from_email = save_it.email
+       
         
         send_mail(
             'Get in touch - Leave us a feeback',   #subject line
@@ -623,21 +614,15 @@ def  feedback(request):
     else:
         form = Feedback()
         return render(request, 'CFP_Portal/feedback.html')
-    # model = Person
-    # projects = Person.objects.all()
-    # context_object_name = 'projects'
-    # context={
-    #     'projects': projects
-
-    # }
+    
    
-
+#  user display showing list of users # 
 @login_required
 @user_passes_test(is_reviewer)
 def UserDisplay(request):
     users = User.objects.all()
     title = 'All Users'
-
+ #  querying  results based on button pressed # 
     if request.method == 'GET' and 'reviewers' in request.GET:
         users = User.objects.filter(groups__name='Reviewers')
         title = 'Reviewers'
@@ -667,14 +652,7 @@ def UserDisplay(request):
 
 
 
-@login_required
-@user_passes_test(is_reviewer)
-class HomeProjectListView(ListView, ): # this is the former PostListView
-    model = Person # for the project
-    template_name ='CFP_Portal/home.html'
-    context_object_name = 'projects'
-    #ordering = ['date_posted']
-    paginate_by = 5
+
 
 
 @login_required
@@ -720,36 +698,27 @@ class OrganisationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView
 
 
 
-
+ #  submission portal saving form details to model # 
 def SubmissionPortal(request):
 
     if request.method == "POST":
         
-        form = Proposal(request.POST, request.FILES)
-        print(form.errors)
+        form = Proposal(request.POST, request.FILES) # saves form details and files from post request
+        
         if form.is_valid():
 
            
-            user = User.objects.get(pk=request.user.id)
+            user = User.objects.get(pk=request.user.id) # assigns user
             project = form.save(commit=False)
             project.status = 'Submitted'
             project.department = user.profile.department
             project.organisation = user.profile.organisation
             project.user = user
             project.save()
-            form.save_m2m()
-            # item_list = Person.objects.all()
-            # return redirect("/CFP_Portal/project/", pk=project.id)
-                    
+            form.save_m2m() # saves tags as well as the model
            
-            # message_firstname = request.POST['message-firstname']
-            # message_surname = request.POST['message-surname']
-            # # message_email = request.POST['message-email']
-            # message_phone = request.POST['message-phone']
-            # message = request.POST['message']
-            # message = request.POST.get('message', '')
             message_email = request.POST.get('message-email', '')
-            #    from_email = save_it.email
+            
         
             send_mail(
                 'Thank you! We successfully received your project proposal!',   #subject line
@@ -771,7 +740,7 @@ def SubmissionPortal(request):
     
     
     
-
+ # view saving details from feedback form # 
  
 @login_required
 @user_passes_test(is_reviewer)
@@ -781,7 +750,7 @@ def ReviewPortal(request, project_id):
 
     if request.method == "POST":
 
-        # project =  get_object_or_404(Person, pk=project_id)
+        
         data = {
         'id': project_id,
         'project': Person.objects.all(),
@@ -793,12 +762,9 @@ def ReviewPortal(request, project_id):
             model = Person
             context_object_name = 'project'
 
-            # project = Person.objects.get(pk=**kwargs['intervention_pk'])
-
-            # results2 = Person()
             
             results.project = projects
-            # results.project = form.cleaned_data['project']
+            
             
             results.project.status = "Reviewed"
             results.reviewer_name = request.user.profile.full_name
@@ -825,7 +791,7 @@ def ReviewPortal(request, project_id):
             Person.objects.filter(id=project_id).update(status='Under Review')
             
              
-            # results2.status = 'Reviewed'
+           
 
             results.save() 
             item_list = Review.objects.all()
@@ -835,12 +801,12 @@ def ReviewPortal(request, project_id):
 
     model = Review
     context_object_name = 'review'
-    # review = get_object_or_404(Review, project_id=project_id)
+    
    
     context = {
         'review': review,
         'form': form,        
-        # 'project': Person.objects.filter(pk=project_id) # there will be exactly one project with that project_id 
+        
 
     }
     
