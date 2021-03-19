@@ -521,21 +521,6 @@ def underreviewprojects(request):
 
 
 
-@login_required
-@user_passes_test(is_reviewer)  
-class OrganisationListView(ListView):
-    model = Organisation
-    template_name ='CFP_Portal/organisation_list.html'
-    context_object_name = 'organisations'
-    paginate_by = 5
-
-@login_required
-@user_passes_test(is_reviewer)  
-class ReviewsListView(ListView):
-    model = Review
-    template_name = 'CFP_Portal/reviews.html'
-    context_object_name = 'reviews'
-
 
 
 # review portal shwoing projects to review# 
@@ -562,24 +547,9 @@ def reviewdisplay(request):
    
     return render(request, 'CFP_Portal/review_display.html', context)
     
-@login_required
-@user_passes_test(is_reviewer)
-class  Trial(ListView):
-    model = Person
-    template_name = 'CFP_Portal/trial.html'
-    context_object_name = 'projects'
 
-@login_required
-@user_passes_test(is_reviewer)
-def  trial(request):
-    model = Person
-    projects = Person.objects.all()
-   
-    context_object_name = 'projects'
-    context={
-        'projects': projects
-    }
-    return render(request, 'CFP_Portal/trial.html', context)
+
+
 
 #  saving feedback form details # 
 @login_required
@@ -652,49 +622,6 @@ def UserDisplay(request):
 
 
 
-
-
-
-@login_required
-@user_passes_test(is_reviewer)
-class OrganisationDetailView(DetailView):
-    model = Organisation
-    context_object_name = 'organisations'
-
-
-
-@login_required
-@user_passes_test(is_reviewer)
-class OrganisationUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Organisation
-    fields = ['organisation_name', 'overview', 'organisation_address']
-
-    def form_valid(self, form):
-        organisation = self.get_object()
-        form.instance.IXN_lead = self.organisation.IXN_lead #todo: change here to update!!!
-        return super().form_valid(form)
-
-    def test_func(self): # other IXN_leads are not allowed to update the organisation details except for the original lead
-        organisation = self.get_object()
-        # if self.request.user == organisation.IXN_lead:
-        #     return True
-        # return False
-        return True
-        #return super().test_func()
-
-@login_required
-@user_passes_test(is_reviewer)
-class OrganisationDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = Organisation
-    success_url ='/'
-
-    def test_func(self): # other users are not allowed to delete the feedback forms except for the original author
-        organisation = self.get_object()
-        # if self.request.user == organisation.IXN_lead:
-        #     return True
-        # return False
-        return True
-        #return super().test_func()
 
 
 
