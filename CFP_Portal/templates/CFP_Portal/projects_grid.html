@@ -236,16 +236,7 @@
                                      {%endif%}
                         <div class="mb-2"><a href="{% url 'project-detail' project.id %}" class="mr-2">
                         
-                         <div class="align-self-center ml-auto btn-group">
-                            <button type="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle btn btn-link btn-sm"><i class="fa fa-gear"></i></button>
-                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-folder-open mr-2"></i>View</button>
-                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-ticket mr-2"></i>Add Task</button>
-                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-paperclip mr-2"></i>Add Files</button>
-                                <div tabindex="-1" class="dropdown-divider"></div>
-                                <button type="button" tabindex="0" class="dropdown-item"><i class="fa fa-fw fa-trash mr-2"></i>Delete</button>
-                            </div>
-                        </div>
+                         
 
                         </a><a href="{% url 'project-detail' project.id %}">{{project.project_title}}</a></div><span><b>Submitter Name: </b><br>{{project.name}} <br> <hr><b> Submission date: </b> <br>{{project.submission_date}} <br> <b> Launching date: </b> <br>{{project.launching_date}} <hr> <b>Tags:</b> {% for mt in project.tags.all %}
                     <a href="#" class="badge badge-primary">{{mt}}</a>

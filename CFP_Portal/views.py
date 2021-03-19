@@ -397,13 +397,13 @@ def rejectedprojects(request):
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation').order_by('-date_rejected')
+        rejectedprojects = RejectedProjects.objects.filter(project__project_complexity='Innovation').order_by('-date_rejected')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery').order_by('-date_rejected')
+        rejectedprojects = RejectedProjects.objects.filter(project__project_complexity='Discovery').order_by('-date_rejected')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_rejected')
+       rejectedprojects = RejectedProjects.objects.filter(project__project_complexity='Scaffolding').order_by('-date_rejected')
 
     context ={
         'rejectedprojects': rejectedprojects,
@@ -443,13 +443,13 @@ def acceptedprojects(request):
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation').order_by('-date_accepted')
+        acceptedprojects = AcceptedProjects.objects.filter(project__project_complexity='Innovation')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery').order_by('-date_accepted')
+        acceptedprojects = AcceptedProjects.objects.filter(project__project_complexity='Discovery')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_accepted')
+       acceptedprojects = AcceptedProjects.objects.filter(project__project_complexity='Scaffolding')
 
     if request.method == 'GET' and 'approve' in request.GET:
         response = HttpResponse(content_type ='text/csv')
@@ -491,13 +491,13 @@ def underreviewprojects(request):
 
 
     if request.method == 'GET' and 'innovation' in request.GET:
-        projects = Person.objects.filter(project_complexity='Innovation').order_by('-date_under_review')
+        underreviewprojects = UnderReviewProjects.objects.filter(project__project_complexity='Innovation').order_by('-date_under_review')
 
     if request.method == 'GET' and 'discovery' in request.GET:
-        projects = Person.objects.filter(project_complexity='Discovery').order_by('-date_under_review')
+        underreviewprojects = UnderReviewProjects.objects.filter(project__project_complexity='Discovery').order_by('-date_under_review')
 
     if request.method == 'GET' and 'scaffolding' in request.GET:
-       projects = Person.objects.filter(project_complexity='Scaffolding').order_by('-date_under_review')
+       underreviewprojects = UnderReviewProjects.objects.filter(project__project_complexity='Scaffolding').order_by('-date_under_review')
 
     if request.method == 'GET' and 'approve' in request.GET:
         response = HttpResponse(content_type ='text/csv')
