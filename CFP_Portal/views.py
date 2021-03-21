@@ -383,7 +383,38 @@ def projectlistview(request):
     return render(request, 'CFP_Portal/project_listview.html', context)
 
 # view showing rejected projects # 
-@login_required
+@login_required@login_required
+@user_passes_test(is_reviewer)
+def rejectedprojects(request):
+    
+    rejectedprojects = RejectedProjects.objects.order_by('-date_rejected')
+
+    myFilter = ProjectFilter(request.GET, queryset = rejectedprojects)
+    projects = myFilter.qs
+    innovationnumber = RejectedProjects.objects.filter(project__project_complexity='Innovation').count()
+    scaffoldingnumber = RejectedProjects.objects.filter(project__project_complexity='Scaffolding').count()
+    discoverynumber = RejectedProjects.objects.filter(project__project_complexity='Discovery').count()
+
+
+    if request.method == 'GET' and 'innovation' in request.GET:
+        rejectedprojects = RejectedProjects.objects.filter(project__project_complexity='Innovation').order_by('-date_rejected')
+
+    if request.method == 'GET' and 'discovery' in request.GET:
+        rejectedprojects = RejectedProjects.objects.filter(project__project_complexity='Discovery').order_by('-date_rejected')
+
+    if request.method == 'GET' and 'scaffolding' in request.GET:
+       rejectedprojects = RejectedProjects.objects.filter(project__project_complexity='Scaffolding').order_by('-date_rejected')
+
+    context ={
+        'rejectedprojects': rejectedprojects,
+        'myFilter': myFilter,
+        'innovationumber': innovationnumber,
+        'discoverynumber': discoverynumber,
+        'scaffoldingnumber': scaffoldingnumber
+    }
+    
+   
+    return render(request, 'CFP_Portal/rejectedprojects.html', context)
 @user_passes_test(is_reviewer)
 def rejectedprojects(request):
     
