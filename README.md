@@ -2,6 +2,27 @@ Deployment details are contained in the deployment folder of the repository.
 
 Deployment details are also listed below.
 
+Running Django implementation locally
+--------------------------------------------------------------------------------------------------------
+1. Cloning repository
+```
+$ git clone https://github.com/AlexaIri/UCL-COMP0016-2020-Team-27.git
+```
+1. Setting up django libraries 
+```
+$ python -m pip install Django
+$ pip install django-crispy-forms
+$ pip install django-filter
+$ pip install django-taggit
+```
+
+2. Running the application
+```
+$ python manage.py makemigrations
+$ python manage.py migrate
+$ python manage.py runserver
+```
+
 Sharepoint Deployment
 --------------------------------------------------------------------------------------------------------
 
