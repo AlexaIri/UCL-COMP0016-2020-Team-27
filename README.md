@@ -8,9 +8,6 @@ The CFP Portal engine, is a system that aids fluid project proposal collection a
 
 We have developed two implementations, a SharePoint based one and a Django implementation. This repository contains the code for the Django based solution. 
 
-
-
-
 Running Django implementation locally
 --------------------------------------------------------------------------------------------------------
 **Cloning repository** 
