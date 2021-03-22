@@ -13,11 +13,11 @@ We have developed two implementations, a SharePoint based one and a Django imple
 
 Running Django implementation locally
 --------------------------------------------------------------------------------------------------------
-** Cloning repository ** 
+**Cloning repository** 
 ```
 $ git clone https://github.com/AlexaIri/UCL-COMP0016-2020-Team-27.git
 ```
-**   Setting up django libraries ** 
+**Setting up django libraries** 
 ```
 $ python -m pip install Django
 $ pip install django-crispy-forms
@@ -25,7 +25,7 @@ $ pip install django-filter
 $ pip install django-taggit
 ```
 
-**  Running the application ** 
+**Running the application** 
 ```
 $ python manage.py makemigrations
 $ python manage.py migrate
