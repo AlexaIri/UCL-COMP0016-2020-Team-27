@@ -2,13 +2,22 @@ Deployment details are contained in the deployment folder of the repository.
 
 Deployment details are also listed below.
 
+Project Overview
+--------------------------------------------------------------------------------------------------------
+The CFP Portal engine, is a system that aids fluid project proposal collection and distribution, so projects can be appropriately categorised and organised within an appropriate database. The system allows a company or reviewing committee to review projects with a RAG level and give feedback regarding the projects based on specific criteria. These projects can be accepted or rejected based on this feedback, which can be sent to universities to develop. 
+
+We have developed two implementations, a SharePoint based one and a Django implementation. This repository contains the code for the Django based solution. 
+
+
+
+
 Running Django implementation locally
 --------------------------------------------------------------------------------------------------------
-1. Cloning repository
+** Cloning repository ** 
 ```
 $ git clone https://github.com/AlexaIri/UCL-COMP0016-2020-Team-27.git
 ```
-1. Setting up django libraries 
+**   Setting up django libraries ** 
 ```
 $ python -m pip install Django
 $ pip install django-crispy-forms
@@ -16,7 +25,7 @@ $ pip install django-filter
 $ pip install django-taggit
 ```
 
-2. Running the application
+**  Running the application ** 
 ```
 $ python manage.py makemigrations
 $ python manage.py migrate
