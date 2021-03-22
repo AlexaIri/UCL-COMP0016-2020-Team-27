@@ -27,7 +27,7 @@ Sharepoint value)
 Remove-SPOSiteDesign -Identity $siteDesignId
 
 The site script file is contained in the google drive link below, as well as the relevant power automate flows and some videos guiding you through the set up. There are three flows exported as zips: the project proposal flow, the feedback flow and the approval flow. The videos will guide you to import these flows as well as set up the site. The site script will create the lists for you, however the styling of the site must be done by you afterwards.
-
+You should watch the 'setting up the site' video first, and then the set up the flows.
 https://drive.google.com/drive/folders/1qwu_olDBiciilCAbnHcX4YiU-SN6IpJV?usp=sharing
 
 Link to duplicate form: https://forms.office.com/Pages/ShareFormPage.aspx?id=_oivH5ipW0yTySEKEdmlwuaS2kBwR75BhHpYlnK_ZSNUOTMzSEY2WVlMVTZNTk9WM0kwQzBMREU5Si4u&sharetoken=uxspDoRNmVON9e0RaLUW
