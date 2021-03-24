@@ -48,11 +48,11 @@ def is_lead(user):
 def export(request):
     response = HttpResponse(content_type ='text/csv')
     writer = csv.writer(response)
-    writer.writerow(['Name', 'Phone Number', 'Email', 'Title', 'Project Title', 'Summarised Abstract', 'Full Abstract', 'Department', 'Organisation', 'Expertise Skills', 'Devices and Technologies', 'Project Complexity', 'Completion of form', 'Source type', 'Launching date', 'Motivations', 'Tags', 'Status', 'NICEtier'])
+    writer.writerow(['ID','Name', 'Phone Number', 'Email', 'Title', 'Project Title', 'Summarised Abstract', 'Full Abstract', 'Department', 'Organisation', 'Expertise Skills', 'Devices and Technologies', 'Project Complexity', 'Completion of form', 'Source type', 'Launching date', 'Motivations', 'Tags', 'Status', 'NICEtier'])
 
+    for project in Person.objects.all().values_list('id','name', 'phone_number', 'email', 'title', 'project_title', 'summarised_abstract', 'full_abstract', 'department', 'organisation', 'expertiseskills', 'devices', 'project_complexity', 'ethics_form','source_type', 'launching_date', 'motivations', 'tags__name', 'status', 'NICEtier'):
+       writer.writerow(project)
 
-    for project in Person.objects.all().values_list('name', 'phone_number', 'email', 'title', 'project_title', 'summarised_abstract', 'full_abstract', 'department', 'organisation', 'expertiseskills', 'devices', 'project_complexity', 'ethics_form','source_type', 'launching_date', 'motivations', 'tags__name', 'status', 'NICEtier'):
-        writer.writerow(project)
     response['Content-Disposition'] = 'attachment; filename ="projects.csv"'
 
     return response
@@ -383,7 +383,7 @@ def projectlistview(request):
     return render(request, 'CFP_Portal/project_listview.html', context)
 
 # view showing rejected projects # 
-@login_required@login_required
+@login_required
 @user_passes_test(is_reviewer)
 def rejectedprojects(request):
     
