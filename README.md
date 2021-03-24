@@ -75,7 +75,8 @@ Set up a LINODE account (we used Linode for our cloud computing and�
 
 The IP address of the REMOTE website can be found in the Network tab under the IP addresses or via the SSH Access.
 
-We will use Ubuntu for the operating system needed to deploy the web portal. The series of instructions and their explanations are provided step-by-step in the Django Deployment Manual.
+We will use Ubuntu for the operating system needed to deploy the web portal.The series of instructions and their explanations are provided step-by-step in the 
+Django Deployment Manual.
 
 
 Link to django depoloyment manual: https://drive.google.com/file/d/1HE7sEck8U8Ettj-MG44KTRZqdjaGRs6M/view?usp=sharing
