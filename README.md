@@ -73,7 +73,7 @@ In order to deploy the Django web portal properly, open two bash terminals (one 
 
  Set up a LINODE account (we used Linode for our cloud computing and web hosting service). The IP address of the REMOTE website can be found in the Network tab under the IP addresses or via the SSH Access.
 
-We will use Ubuntu for the operating system needed to deploy the web portal. The series of instructions and their explanations are provided step-by-step in the Django Deployment Manual that can be found in the Appendices section.
+We will use Ubuntu for the operating system needed to deploy the web portal. The series of instructions and their explanations are provided step-by-step in the Django Deployment Manual.
 
 
 Link to django depoloyment manual: https://drive.google.com/file/d/1HE7sEck8U8Ettj-MG44KTRZqdjaGRs6M/view?usp=sharing
